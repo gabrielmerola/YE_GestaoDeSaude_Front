@@ -24,7 +24,7 @@ export default function Login({ navigation }) {
           secureTextEntry={true}
         />
       </Box>
-      <Buton onPress={() => navigation.navigate('Tabs')}>Entrar</Buton>
+      <Buton >Entrar</Buton>
 
       <Link href='' mt={2}>
         Esqueceu sua senha?
