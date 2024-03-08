@@ -1,9 +1,6 @@
 ## Tecnologias Utilizadas <picture><source srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9be/512.webp" type="image/webp"><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9be/512.gif" alt="🦾" width="32" height="32"></picture>
 
 <ul>
-  <li>
-    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-native-wordmark.svg" alt="react" width="40" height="40"/>  React
-  </li>
   <br>
   <li>
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/> + <img src="https://swc.rs/logo.png" alt="swc" width="80" height="40"/> TypeScript + SWC
@@ -15,10 +12,6 @@
   <br>
   <li>
     <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmiguelmachado.dev%2Fassets%2Fimg%2F1_3adbbrn3gotbz72xqfo96g.png&f=1&nofb=1&ipt=815bdc1a92129a989194fc10b59209968b7cb74bd6273ab809a219462fffe4e8&ipo=images" alt="ESLint" width="80" height="40"/> +  <img src="https://prettier.io/icon.png" alt="Prettier" width="40" height="40"/> ESLint + Prettier
-  </li>
-  <br>
-  <li>
-    <img src="https://github.com/alexZ7000/Aplicativo-C.A-Frontend/assets/78627928/aae943d6-98e3-4b75-821e-0fdcedc68be3" alt="husky" width="90" height="40"> Husky
   </li>
 </ul>
 
