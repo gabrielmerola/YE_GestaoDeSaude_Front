@@ -1,6 +1,6 @@
 import { Image, Text, Box, Checkbox, ScrollView } from 'native-base'
 import { useState } from 'react';
-import Logo from '../../../assets/logo_verde.png'
+import Logo from '../../../assets/Header.png'
 import { Buton } from '../../components/Button';
 import { InputField } from '../../components/InputField';
 import { Title } from '../../components/Title';
@@ -23,7 +23,7 @@ export default function Register() {
   }
 
   return (
-    <ScrollView flex={1}  p={5}>
+    <ScrollView flex={1}  p={5} mt={15}>
       <Image source={Logo} alt="Logo Voll" alignSelf="center"/>
 
       <Title color="green.500">

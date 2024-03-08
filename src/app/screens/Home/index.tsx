@@ -1,5 +1,5 @@
 import { View } from "native-base"
-import Logo from '../../../assets/logo_verde.png'
+import Logo from '../../../assets/Header.png'
 import { TouchableOpacity, Text, StyleSheet, Image } from "react-native"
 import { Title } from "../../components/Title"
 
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: 56,
         paddingRight: 56,
-        paddingTop: 180,
+        paddingTop: 120,
         gap: 32,
         backgroundColor:'#D9D9D9',
         flex: 1
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     text: {
         color: '#127856',
         textAlign: 'center',
-        fontFamily: 'PoppinsRegular',
+        fontFamily: 'Jomolhari',
         fontSize: 16,
         fontWeight: '400',
     },

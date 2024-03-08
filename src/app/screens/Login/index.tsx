@@ -1,6 +1,6 @@
 import { VStack, Image, Text, Box, Link, View } from 'native-base'
 import { TouchableOpacity } from 'react-native';
-import Logo from '../../../assets/logo_verde.png'
+import Logo from '../../../assets/Header.png'
 import { Buton } from '../../components/Button';
 import { InputField } from '../../components/InputField';
 import { Title } from '../../components/Title';
@@ -10,7 +10,7 @@ export default function Login({ navigation }: any) {
   return (
     <>
       <VStack flex={1} alignItems="center" justifyContent="center" p={5} >
-        <Image source={Logo} alt="Logo" w="25%" h="11%" />
+        <Image source={Logo} alt="Logo"  />
 
         <Title color="green.500">
           YE GESTÃO DE SAÚDE
@@ -39,10 +39,20 @@ export default function Login({ navigation }: any) {
               Faça seu cadastro!
             </Text>
           </TouchableOpacity>
+
         </Box>
 
       </VStack>
-      <Footer />
+
+
+      <Box w="100%" height="8%" flexDirection='row-reverse' alignItems='center' justifyContent="end" bgColor='#739489'>
+            <TouchableOpacity onPress={() => navigation.navigate('About')}>
+                <Text color="white" mr={7} fontSize='14'>
+                    Sobre Nós
+                </Text>
+            </TouchableOpacity>
+        </Box>
+
     </>
 
   );
