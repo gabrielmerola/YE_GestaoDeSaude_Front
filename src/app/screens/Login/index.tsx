@@ -57,5 +57,3 @@ export default function Login({ navigation }: any) {
 
   );
 }
-
-
