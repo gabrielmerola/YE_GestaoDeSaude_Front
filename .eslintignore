@@ -1,0 +1,11 @@
+/.expo
+node_modules
+/scripts
+/config
+/pnpm-lock.yaml
+/pnpm-workspace.yaml
+/package.json
+/tsconfig.json
+**/*.md
+*.config.js
+.eslintrc.mjs
