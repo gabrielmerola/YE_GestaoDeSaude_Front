@@ -1,5 +1,5 @@
 import { View } from "native-base";
-import Logo from "../../../assets/Header.png";
+import Logo from "../../../assets/Logo.png";
 import { TouchableOpacity, Text, StyleSheet, Image } from "react-native";
 import { Title } from "../../components/Title";
 

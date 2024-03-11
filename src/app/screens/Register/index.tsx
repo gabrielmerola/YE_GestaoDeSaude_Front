@@ -1,5 +1,5 @@
 import { Image, Text, Box, Checkbox, ScrollView } from "native-base";
-import Logo from "../../../assets/Header.png";
+import Logo from "../../../assets/Logo.png";
 import { Buton } from "../../components/Button";
 import { InputField } from "../../components/InputField";
 import { Title } from "../../components/Title";

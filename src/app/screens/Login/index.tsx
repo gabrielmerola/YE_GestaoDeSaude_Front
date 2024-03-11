@@ -1,10 +1,9 @@
 import { VStack, Image, Text, Box, Link, View } from "native-base";
 import { TouchableOpacity } from "react-native";
-import Logo from "../../../assets/Header.png";
+import Logo from "../../../assets/Logo.png";
 import { Buton } from "../../components/Button";
 import { InputField } from "../../components/InputField";
 import { Title } from "../../components/Title";
-import { Footer } from "../../components/Footer";
 
 export default function Login({ navigation }: any) {
     return (
