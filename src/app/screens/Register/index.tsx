@@ -1,5 +1,4 @@
 import { Image, Text, Box, Checkbox, ScrollView } from "native-base";
-import Logo from "../../../assets/Logo.png";
 import { Buton } from "../../components/Button";
 import { InputField } from "../../components/InputField";
 import { Title } from "../../components/Title";
@@ -23,7 +22,7 @@ export default function Register() {
 
     return (
         <ScrollView flex={1} p={5}>
-            <Image source={Logo} alt="Logo" alignSelf="center" />
+            <Image alt="Logo" alignSelf="center" />
 
             <Title color="green.500">{sections[numberSection].title}</Title>
             <Box>

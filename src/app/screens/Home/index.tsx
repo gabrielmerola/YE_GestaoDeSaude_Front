@@ -1,12 +1,12 @@
 import { View } from "native-base";
-import Logo from "../../../assets/Logo.png";
+
 import { TouchableOpacity, Text, StyleSheet, Image } from "react-native";
 import { Title } from "../../components/Title";
 
 export default function Home({ navigation }: any) {
     return (
         <View style={styles.contentContainer}>
-            <Image source={Logo} alt="Logo" />
+            <Image alt="Logo" />
             <Title>Boas-Vindas!</Title>
             <Text style={styles.subTitle}>YE Gestão de Saúde</Text>
             <Text style={styles.text}>
