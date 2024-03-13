@@ -1,13 +1,13 @@
 import { View } from "native-base"
-import Logo from '../../../assets/Header.png'
 import { TouchableOpacity, Text, StyleSheet, Image } from "react-native"
-import { Title } from "../../components/Title"
+import { Title } from '@components/Title/Title'
+
 
 
 export default function Home({ navigation }: any) {
     return (
         <View style={styles.contentContainer}>
-            <Image source={Logo} alt="Logo" />
+            <Image  alt="Logo" />
             <Title>Boas-Vindas!</Title>
             <Text style={styles.subTitle}>YE Gestão de Saúde</Text>
             <Text style={styles.text} >Gerencie sua saúde com facilidade!Use nosso aplicativo para conferência de exames, receba resultados em tempo real e lembretes personalizados para seus medicamentos!</Text>

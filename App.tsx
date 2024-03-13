@@ -1,6 +1,6 @@
 import { NativeBaseProvider, StatusBar } from "native-base";
 import Routes from "./src/app/routes/stack.routes";
-import { THEMES } from "./src/styles/themes";
+import { THEMES } from "./src/app/theme";
 
 export default function App() {
     return (
