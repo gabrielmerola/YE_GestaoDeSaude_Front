@@ -18,6 +18,8 @@
     "@react-navigation/native-stack": "^6.9.22",
     "@react-navigation/stack": "^6.3.25",
     "expo": "~50.0.8",
+    "expo-app-loading": "^2.1.1",
+    "expo-font": "~11.10.3",
     "expo-status-bar": "~1.11.1",
     "native-base": "^3.4.28",
     "react": "18.2.0",
@@ -27,7 +29,7 @@
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@babel/core": "^7.24.0",
     "@types/react": "~18.2.45",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "babel-plugin-module-resolver": "^5.0.0",
@@ -43,10 +45,10 @@
     "eslint-plugin-react-native": "^4.1.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
+    "metro-react-native-babel-preset": "^0.77.0",
     "prettier": "^3.2.5",
     "typescript": "^5.4.0"
   },
-
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
