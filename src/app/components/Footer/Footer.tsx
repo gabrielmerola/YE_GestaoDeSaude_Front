@@ -1,6 +1,9 @@
-import { Text, Box } from "native-base";
-import { TouchableOpacity } from "react-native";
+import { Container, Txt } from "./styles";
 
-export function Footer({ navigation }: any) {
-    return <></>;
+export function Footer() {
+    return (
+        <Container>
+            <Txt>Sobre Nós</Txt>
+        </Container>
+    );
 }

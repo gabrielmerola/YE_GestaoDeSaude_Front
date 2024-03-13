@@ -1,13 +1,19 @@
 import { NativeBaseProvider, StatusBar } from "native-base";
-
-import Routes from "./src/app/routes/stack.routes";
-import { THEMES } from "./src/app/theme";
+import Routes from "@routes/stack.routes";
+import theme from "./src/app/theme";
+import { ThemeProvider } from "styled-components";
 
 export default function App() {
     return (
-        <NativeBaseProvider theme={THEMES}>
-            <StatusBar backgroundColor={THEMES.colors.blue[800]} />
-            <Routes />
+        <NativeBaseProvider>
+            <ThemeProvider theme={theme}>
+                <StatusBar
+                    barStyle="light-content"
+                    backgroundColor="transparent"
+                    translucent
+                />
+                <Routes />
+            </ThemeProvider>
         </NativeBaseProvider>
     );
 }

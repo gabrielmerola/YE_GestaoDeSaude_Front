@@ -1,5 +1,6 @@
 import { Button, IButtonProps } from "native-base";
 import { ReactNode } from "react";
+import theme from "src/app/theme";
 
 interface ButtonProps extends IButtonProps {
     children: ReactNode;
@@ -16,7 +17,7 @@ export function Buton({
     return (
         <Button
             w={autoSize ? "auto" : "100%"}
-            bg={color || "green.800"}
+            bg={theme.COLORS.GREEN_700}
             mt={10}
             borderRadius="lg"
             _text={{ color: "white" }}
