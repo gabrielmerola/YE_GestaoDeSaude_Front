@@ -14,6 +14,8 @@ export default {
       GRAY_400: '#BABABA',
       GRAY_300: '#D9D9D9',
 
+      BLUE_100: '#459EB1'
+
     },
     FONT_FAMILY: {
       REGULAR: 'Jost_400Regular',
