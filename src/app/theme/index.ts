@@ -6,7 +6,7 @@ export default {
       GREEN_500: '#127856',
       GREEN_300: '#459B7E',
 
-      RED_100: '#BC5252',
+      RED_100: '#AD2A2A',
   
       GRAY_700: '#000000',
       GRAY_600: '#919191',
@@ -16,8 +16,8 @@ export default {
 
     },
     FONT_FAMILY: {
-      REGULAR: 'Roboto_400Regular',
-      BOLD: 'Roboto_700Bold'
+      REGULAR: 'Jost_400Regular',
+      BOLD: 'Jost_700Bold'
     },
     FONT_SIZE: {
       SM: 14,
