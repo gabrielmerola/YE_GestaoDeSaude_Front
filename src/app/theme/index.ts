@@ -10,8 +10,9 @@ export default {
   
       GRAY_700: '#000000',
       GRAY_600: '#919191',
-      GRAY_500: '#BABABA',
-      GRAY_400: '#D9D9D9',
+      GRAY_500: '#8D8D99',
+      GRAY_400: '#BABABA',
+      GRAY_300: '#D9D9D9',
 
     },
     FONT_FAMILY: {

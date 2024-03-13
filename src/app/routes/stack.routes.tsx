@@ -1,4 +1,3 @@
-import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -6,6 +5,7 @@ import Register from "../screens/Register"
 import Login from "../screens/Login";
 import Home from "../screens/Home";
 import About from "../screens/About";
+import Main from "@screens/Main";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +34,10 @@ export default function Routes() {
         <Stack.Screen
           name='Register'
           component={Register}
+        />
+        <Stack.Screen
+          name='Main'
+          component={Main}
         />
       </Stack.Navigator>
     </NavigationContainer>
