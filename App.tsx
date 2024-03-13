@@ -1,12 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Routes } from './src/app/routes';
+import { NativeBaseProvider, StatusBar } from "native-base";
+import Routes from "./src/app/routes/stack.routes";
+import { THEMES } from "./src/app/theme";
 
 export default function App() {
-  return (
-    <View style={{flex:1}}>
-      <StatusBar style="auto" />
-      <Routes/>
-    </View>
-  );
+    return (
+        <NativeBaseProvider theme={THEMES}>
+            <StatusBar backgroundColor={THEMES.colors.blue[800]} />
+            <Routes />
+        </NativeBaseProvider>
+    );
 }
