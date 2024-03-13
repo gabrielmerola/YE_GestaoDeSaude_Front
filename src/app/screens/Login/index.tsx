@@ -4,13 +4,14 @@ import { Buton } from '@components/Button/Button';
 import { InputField } from '@components/InputField/InputField';
 import { Title } from '@components/Title/Title';
 
+
 export default function Login({ navigation }: any) {
   return (
     <>
       <VStack flex={1} alignItems="center" justifyContent="center" p={5} >
-        <Image  alt="Logo"  />
+        <Image alt="Logo"  />
 
-        <Title color="green.500">
+        <Title>
           YE GESTÃO DE SAÚDE
         </Title>
         <Box>

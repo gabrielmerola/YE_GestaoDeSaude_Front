@@ -4,6 +4,7 @@ import { Buton } from '@components/Button/Button';
 import { InputField } from '@components/InputField/InputField';
 import { Title } from '@components/Title/Title';
 import { sections } from '../../utils/registerInputText';
+import theme from 'src/app/theme';
 
 export default function Register() {
     const [numberSection, setNumSection] = useState(0);
@@ -24,7 +25,7 @@ export default function Register() {
         <ScrollView flex={1} p={5}>
             <Image alt="Logo Voll" alignSelf="center" />
 
-            <Title color="green.500">{sections[numberSection].title}</Title>
+            <Title>{sections[numberSection].title}</Title>
             <Box>
                 {sections[numberSection]?.inputText?.map((input) => {
                     return (
@@ -39,7 +40,7 @@ export default function Register() {
 
             <Box>
                 <Text
-                    color="green.500"
+                    color={theme.COLORS.GREEN_300}
                     fontWeight="bold"
                     fontSize="md"
                     mt={2}
