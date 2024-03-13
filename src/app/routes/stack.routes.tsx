@@ -6,6 +6,7 @@ import Login from "../screens/Login";
 import Home from "../screens/Home";
 import About from "../screens/About";
 import Main from "@screens/Main";
+import Pressure from "@screens/Pressure";
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,10 @@ export default function Routes() {
         <Stack.Screen
           name='Main'
           component={Main}
+        />
+        <Stack.Screen
+          name='Pressure'
+          component={Pressure}
         />
       </Stack.Navigator>
     </NavigationContainer>
