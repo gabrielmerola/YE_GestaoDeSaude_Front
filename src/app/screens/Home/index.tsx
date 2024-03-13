@@ -1,11 +1,9 @@
-import { TouchableOpacity, Text, StyleSheet, Image } from "react-native"
+import { StyleSheet, Image } from "react-native"
 import { Title } from '@components/Title/Title'
 import { Button, ButtonText, Container, SubTitle, Txt } from "./styles"
 
-
-
-
 export default function Home({ navigation }: any) {
+
     return (
         <Container>
             <SubTitle>YE Gestão de Saúde</SubTitle>
