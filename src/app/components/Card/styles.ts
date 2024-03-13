@@ -15,7 +15,7 @@ export const Container = styled.View`
 `;
 
 export const SecContainer = styled.View`
-    width: 140px;
+    width: 200px;
     gap: 10px;    
 `;
 
