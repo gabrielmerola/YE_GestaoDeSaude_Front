@@ -1,6 +1,6 @@
 import { Box, Image, Text, VStack } from "native-base";
 import { TouchableOpacity, View } from "react-native";
-import Logo from '../../../assets/logo_verde.png'
+
 
 
 export default function About() {

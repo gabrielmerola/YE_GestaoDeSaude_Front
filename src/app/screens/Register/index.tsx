@@ -1,10 +1,10 @@
 import { Image, Text, Box, Checkbox, ScrollView } from 'native-base'
 import { useState } from "react";
 import Logo from '../../../assets/Header.png'
-import { Buton } from '../../components/Button';
-import { InputField } from '../../components/InputField';
-import { Title } from '../../components/Title';
-import { sections } from '../../../utils/registerInputText';
+import { Buton } from '@components/Button/Button';
+import { InputField } from '@components/InputField/InputField';
+import { Title } from '@components/Title/Title';
+import { sections } from '../../utils/registerInputText';
 
 export default function Register() {
     const [numberSection, setNumSection] = useState(0);
