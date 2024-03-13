@@ -1,24 +1,26 @@
-import { View } from "native-base"
 import { TouchableOpacity, Text, StyleSheet, Image } from "react-native"
 import { Title } from '@components/Title/Title'
+import { Button, ButtonText, Container, SubTitle, Txt } from "./styles"
+
 
 
 
 export default function Home({ navigation }: any) {
     return (
-        <View style={styles.contentContainer}>
+        <Container>
+            <SubTitle>YE Gestão de Saúde</SubTitle>
             <Image  alt="Logo" />
-            <Title>Boas-Vindas!</Title>
-            <Text style={styles.subTitle}>YE Gestão de Saúde</Text>
-            <Text style={styles.text} >Gerencie sua saúde com facilidade!Use nosso aplicativo para conferência de exames, receba resultados em tempo real e lembretes personalizados para seus medicamentos!</Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
-                <Text style={styles.buttonText}>Login</Text>
-            </TouchableOpacity>
+            <Title color='white'>Boas-Vindas!</Title>
+            <Txt>Gerencie sua saúde com facilidade!Use nosso aplicativo para conferência de exames, receba resultados em tempo real e lembretes personalizados para seus medicamentos!</Txt>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Register')}>
-                <Text style={styles.buttonText}>Cadastro</Text>
-            </TouchableOpacity>     
-        </View>
+            <Button onPress={() => navigation.navigate('Login')}>
+                <ButtonText>Login</ButtonText>
+            </Button>
+
+            <Button onPress={() => navigation.navigate('Register')}>
+                <ButtonText>Cadastro</ButtonText>
+            </Button>
+        </Container>
 
 
     )
