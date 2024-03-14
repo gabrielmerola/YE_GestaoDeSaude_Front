@@ -1,9 +1,3 @@
-
-
 export default function Pressure() {
-    return (
-        <>
-        
-        </>
-    )
+    return <></>;
 }

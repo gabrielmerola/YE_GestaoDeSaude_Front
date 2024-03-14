@@ -1,5 +1,11 @@
-import { View } from 'native-base';
-import { BoldText, Container, SecContainer, ThirdContainer, Txt } from './styles';
+import { View } from "native-base";
+import {
+    BoldText,
+    Container,
+    SecContainer,
+    ThirdContainer,
+    Txt
+} from "./styles";
 
 interface CardProps {
     title: string;
@@ -32,5 +38,5 @@ export function Card({
                 </View>
             </ThirdContainer>
         </Container>
-    )
+    );
 }
