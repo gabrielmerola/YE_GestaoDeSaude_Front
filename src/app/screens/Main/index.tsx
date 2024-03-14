@@ -18,6 +18,7 @@ export default function Main({ navigation }: any) {
                         subTitle="Ultima medida"
                         secDescription="150x100"
                         subDescription="Alta"
+                        color='red'
                     />
                 </TouchableOpacity>
 
@@ -28,6 +29,7 @@ export default function Main({ navigation }: any) {
                         subTitle="Ultima medida"
                         secDescription="85mg/Dl"
                         subDescription="Normal"
+                        color='blue'
                     />
                 </TouchableOpacity>
 
@@ -38,6 +40,7 @@ export default function Main({ navigation }: any) {
                         subTitle="Ultima medida"
                         secDescription="31,14"
                         subDescription="Obesidade II"
+                        color='green'
                     />
 
                 </TouchableOpacity>

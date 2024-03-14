@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 
 
-export const Container = styled.View`
+export const Container = styled.View<{$color?: string;}>`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -10,8 +10,8 @@ export const Container = styled.View`
     padding: 15px;
     margin: 25px;
     border-radius: 18px;    
-    background-color: ${({ theme }) => theme.COLORS.RED_100};
     gap: 90px;
+    background-color: ${props => props.$color == 'red' ? ({ theme }: any) => theme.COLORS.RED_100 : props => props.$color == 'blue' ? ({ theme }: any) => theme.COLORS.BLUE_100 :  ({ theme }: any) => theme.COLORS.GREEN_300};
 `;
 
 export const SecContainer = styled.View`
