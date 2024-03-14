@@ -1,8 +1,8 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native'
 
 export const Container = styled.View`
     align-items: center;
-    background-color: ${({ theme }) => theme.COLORS.GREEN_700};
+    background-color:  ${({ theme }) => theme.COLORS.GREEN_700};
     padding-right: 56px;
     padding-left: 56px;
     gap: 32px;
