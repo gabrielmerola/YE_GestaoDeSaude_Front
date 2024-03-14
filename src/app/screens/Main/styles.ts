@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
@@ -13,5 +14,6 @@ export const Header = styled.View`
     align-items: center;
     justify-content: center;
     background-color: ${({ theme }) => theme.COLORS.GREEN_700};
+    ${Platform.OS === 'ios' ? 'padding-top: 100px;' : ''}
 `;
 

@@ -7,6 +7,7 @@ interface CardProps {
     subTitle: string;
     secDescription: string;
     subDescription: string;
+    color: string;
 }
 
 export function Card({
@@ -14,10 +15,11 @@ export function Card({
     description,
     subTitle,
     secDescription,
-    subDescription
+    subDescription,
+    color
 }: CardProps) {
     return (
-        <Container>
+        <Container $color={color}>
             <SecContainer>
                 <Txt>{title}</Txt>
                 <Txt>{description}</Txt>
