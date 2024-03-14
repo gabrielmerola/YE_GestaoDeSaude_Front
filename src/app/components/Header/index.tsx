@@ -6,17 +6,11 @@ import { Container, styles, Txt } from "@components/Header/styles";
 
 interface HeaderProps {
     text?: string;
-    fodasse?: () => void;
     isBackPress?: boolean;
     isOptionMenu?: boolean;
 }
 
-export const Header = ({
-    text,
-    isBackPress,
-    isOptionMenu,
-    fodasse
-}: HeaderProps) => {
+export const Header = ({ text, isBackPress, isOptionMenu }: HeaderProps) => {
     const navigation = useNavigation();
     return (
         <Container>
@@ -38,7 +32,7 @@ export const Header = ({
             )}
 
             {isOptionMenu && (
-                <Button variant={"unstyled"} onPress={() => fodasse}>
+                <Button variant={"unstyled"}>
                     <View style={styles.container}>
                         <ChevronLeftIcon
                             name="chevron-left"
