@@ -1,8 +1,8 @@
-import styled from 'styled-components/native'
+import styled from "styled-components/native";
 
 export const Container = styled.View`
     align-items: center;
-    background-color:  ${({ theme }) => theme.COLORS.GREEN_700};
+    background-color: ${({ theme }) => theme.COLORS.GREEN_700};
     padding-right: 56px;
     padding-left: 56px;
     gap: 32px;
@@ -26,7 +26,7 @@ export const Button = styled.TouchableOpacity`
     border-radius: 8px;
     background-color: ${({ theme }) => theme.COLORS.WHITE};
     padding: 10px;
-    width: 200px;
+    width: 300px;
     align-self: center;
 `;
 

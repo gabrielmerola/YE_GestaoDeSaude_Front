@@ -17,8 +17,8 @@ export function Buton({
     return (
         <Button
             w={autoSize ? "auto" : "100%"}
-            bg={theme.COLORS.GREEN_700}
             mt={10}
+            bg={theme.COLORS.GREEN_700}
             borderRadius="lg"
             _text={{ color: "white" }}
             {...rest}
