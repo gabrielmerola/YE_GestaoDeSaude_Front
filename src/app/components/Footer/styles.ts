@@ -15,4 +15,3 @@ export const Txt = styled.Text`
     font-size: ${({ theme }) => theme.FONT_SIZE.SM};
     margin-right: 25px;
 `;
-

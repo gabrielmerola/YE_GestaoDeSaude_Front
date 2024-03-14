@@ -7,7 +7,5 @@ export function Footer() {
                     Sobre Nós
                 </Txt>
         </Container>
-
     )
 }
-

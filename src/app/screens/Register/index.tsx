@@ -1,10 +1,10 @@
-import { Image, Text, Box, Checkbox, ScrollView } from 'native-base'
+import { Image, Text, Box, Checkbox, ScrollView } from "native-base";
 import { useState } from "react";
-import { Buton } from '@components/Button/Button';
-import { InputField } from '@components/InputField/InputField';
-import { Title } from '@components/Title/Title';
-import { sections } from '../../utils/registerInputText';
-import theme from 'src/app/theme';
+import { Buton } from "@components/Button/Button";
+import { InputField } from "@components/InputField/InputField";
+import { Title } from "@components/Title/Title";
+import { sections } from "../../utils/registerInputText";
+import theme from "src/app/theme";
 
 export default function Register() {
     const [numberSection, setNumSection] = useState(0);
@@ -15,11 +15,11 @@ export default function Register() {
         }
     }
 
-  function backSection() {
-    if (numberSection > 0) {
-      setNumSection(numberSection - 1)
+    function backSection() {
+        if (numberSection > 0) {
+            setNumSection(numberSection - 1);
+        }
     }
-  }
 
     return (
         <ScrollView flex={1} p={5}>
