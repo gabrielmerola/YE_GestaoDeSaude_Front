@@ -13,48 +13,24 @@ import IMC from "@screens/IMC";
 const Stack = createNativeStackNavigator();
 
 export default function Routes() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerTitle: '',
-          headerShown: false
-        }}
-      >
-        <Stack.Screen
-          name='Home'
-          component={Home}
-        />
-        <Stack.Screen
-          name='About'
-          component={About}
-        />
-        <Stack.Screen
-          name='Login'
-          component={Login}
-        />
-        <Stack.Screen
-          name='Register'
-          component={Register}
-        />
-        <Stack.Screen
-          name='Main'
-          component={Main}
-        />
-        <Stack.Screen
-          name='Pressure'
-          component={Pressure}
-        />
-        <Stack.Screen
-          name='Glucose'
-          component={Glucose}
-        />
-        <Stack.Screen
-          name='IMC'
-          component={IMC}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
+    return (
+        <NavigationContainer>
+            <Stack.Navigator
+                initialRouteName="Home"
+                screenOptions={{
+                    headerTitle: "",
+                    headerShown: false
+                }}
+            >
+                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="About" component={About} />
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Register" component={Register} />
+                <Stack.Screen name="Main" component={Main} />
+                <Stack.Screen name="Pressure" component={Pressure} />
+                <Stack.Screen name="Glucose" component={Glucose} />
+                <Stack.Screen name="IMC" component={IMC} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }

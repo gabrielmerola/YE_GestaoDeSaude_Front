@@ -17,5 +17,5 @@ export const Header = styled.View`
     align-items: center;
     justify-content: center;
     background-color: ${({ theme }) => theme.COLORS.GREEN_700};
-    ${Platform.OS === 'ios' ? 'padding-top: 100px;' : ''}
+    ${Platform.OS === "ios" ? "padding-top: 100px;" : ""}
 `;
