@@ -1,3 +1,9 @@
+import { Header } from "@components/Header";
+
 export default function IMC() {
-    return <></>;
+    return (
+        <>
+            <Header text={"IMC"} isBackPress={true} />
+        </>
+    );
 }

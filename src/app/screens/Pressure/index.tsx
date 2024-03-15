@@ -1,3 +1,9 @@
+import { Header } from "@components/Header";
+
 export default function Pressure() {
-    return <></>;
+    return (
+        <>
+            <Header text={"PRESSÃO"} isBackPress={true} />
+        </>
+    );
 }

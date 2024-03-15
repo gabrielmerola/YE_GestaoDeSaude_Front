@@ -32,8 +32,8 @@ export default function Routes() {
                 <Stack.Screen name="Pressure" component={Pressure} />
                 <Stack.Screen name="Glucose" component={Glucose} />
                 <Stack.Screen name="IMC" component={IMC} />
-                <Stack.Screen name={"Medicines"} component={Medicines} />
-                <Stack.Screen name={"NewMedicine"} component={NewMedicine} />
+                <Stack.Screen name="Medicines" component={Medicines} />
+                <Stack.Screen name="NewMedicine" component={NewMedicine} />
             </Stack.Navigator>
         </NavigationContainer>
     );

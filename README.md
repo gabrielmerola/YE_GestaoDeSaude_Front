@@ -91,4 +91,5 @@ We thank the following people who developed for this project:
 
 ## 📝 Licence
 
-This project is under license. Open the file [LICENCE](LICENSE.md) for more details
+This project is under license. Open the file [LICENCE](LICENSE.md) for more
+details
