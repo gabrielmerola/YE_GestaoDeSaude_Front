@@ -1,7 +1,35 @@
-import { Box, Image, Text, VStack } from "native-base";
-import { TouchableOpacity, View } from "react-native";
+import { Box, FlatList, Text } from "native-base";
+import { View } from "react-native";
+import {
+    Container,
+    Logon,
+    SecTxt,
+    SecTxtCont,
+    SubTxt,
+    ThirdTxt,
+    Txt
+} from "./styles";
+import Logo from "../../../../assets/logo.png";
 
 export default function About() {
+    const data = [
+        { key: "item1", text: "Colocar lembretes de suas consultas;" },
+        { key: "item2", text: "Colocar um resumo delas;" },
+        {
+            key: "item3",
+            text: "Definir os horários de suas medicações com apenas quatro informações;"
+        },
+        {
+            key: "item4",
+            text: "Organizar os resultados de seus exames, bem como armazenar uma copia deles e muito mais."
+        }
+    ];
+
+    const renderItem = ({ item }: any) => (
+        <SubTxt>
+            {"\u2022"} {item.text}
+        </SubTxt>
+    );
     return (
         <>
             <Box
@@ -18,31 +46,22 @@ export default function About() {
                 </Text>
             </Box>
             <View style={{ alignItems: "center" }}>
-                <Box
-                    w="80%"
-                    h="80%"
-                    alignItems="center"
-                    justifyContent="center"
-                    bgColor="#D9D9D9"
-                    p={5}
-                    mt={20}
-                >
-                    <Text mb={3} fontSize="18">
+                <Container>
+                    <Txt>
                         Nos somos o Minha Saúde em Dia, um aplicativo
                         desenvolvido para melhorar a gestão da sua propria saúde
                         e melhorar sua qualidade de vida.
-                    </Text>
+                    </Txt>
 
-                    <Text mb={5} fontSize="18">
-                        Nele você pode colocar lembretes de suas consultas,
-                        colocar um resumo delas, definir os horários de suas
-                        medicções com apenas quatro informações, organizar os
-                        resultados de seus exames, bem como armazenar uma copia
-                        deles e muito mais.
-                    </Text>
+                    <SecTxtCont>
+                        <SecTxt>Nele você pode:</SecTxt>
+                    </SecTxtCont>
 
-                    <Text fontSize="20">Sua saúde em suas mãos!</Text>
-                </Box>
+                    <FlatList data={data} renderItem={renderItem} />
+
+                    <ThirdTxt>Sua saúde em suas mãos!</ThirdTxt>
+                    <Logon source={Logo} />
+                </Container>
             </View>
         </>
     );

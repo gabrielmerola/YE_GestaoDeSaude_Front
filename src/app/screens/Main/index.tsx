@@ -1,4 +1,4 @@
-import { Footer } from "@components/Footer/Footer";
+import { Footer } from "@components/Footer";
 import { Container, Header } from "./styles";
 import { TouchableOpacity } from "react-native";
 import { Card } from "@components/Card";

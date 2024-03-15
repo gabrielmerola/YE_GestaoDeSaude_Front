@@ -26,7 +26,7 @@ export const Button = styled.TouchableOpacity`
     border-radius: 8px;
     background-color: ${({ theme }) => theme.COLORS.WHITE};
     padding: 10px;
-    width: 200px;
+    width: 300px;
     align-self: center;
 `;
 

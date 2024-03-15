@@ -1,16 +1,16 @@
 import { VStack, Image, Text, Box, Link } from "native-base";
 import { TouchableOpacity } from "react-native";
-import { Buton } from "@components/Button/Button";
-import { InputField } from "@components/InputField/InputField";
+import { Buton } from "@components/Button";
+import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
-import { Footer } from "@components/Footer/Footer";
+import { Footer } from "@components/Footer";
+import Logo from "../../../../assets/logo.png";
 
 export default function Login({ navigation }: any) {
     return (
         <>
             <VStack flex={1} alignItems="center" justifyContent="center" p={5}>
-                <Image alt="Logo" />
-
+                <Image source={Logo} alt="Logo" />
                 <Title>YE GESTÃO DE SAÚDE</Title>
                 <Box>
                     <InputField
@@ -37,7 +37,7 @@ export default function Login({ navigation }: any) {
                     justifyContent="center"
                     mt={8}
                 >
-                    <Text>Ainda não tem cadastro?</Text>
+                    <Text>Ainda não tem cadastro?</Text>{" "}
                     <TouchableOpacity
                         onPress={() => navigation.navigate("Register")}
                     >
@@ -45,7 +45,6 @@ export default function Login({ navigation }: any) {
                     </TouchableOpacity>
                 </Box>
             </VStack>
-
             <TouchableOpacity onPress={() => navigation.navigate("About")}>
                 <Footer />
             </TouchableOpacity>
