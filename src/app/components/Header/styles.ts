@@ -13,7 +13,7 @@ export const Container = styled.View`
 
 export const Txt = styled.Text`
     color: ${({ theme }) => theme.COLORS.WHITE};
-    font-size: ${({ theme }) => theme.FONT_SIZE.SM};
+    font-size: ${({ theme }) => theme.FONT_SIZE.XL};
     margin-right: 70px;
 `;
 
