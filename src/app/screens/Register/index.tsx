@@ -4,9 +4,9 @@ import { Buton } from "@components/Button";
 import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
 import { sections } from "../../utils/registerInputText";
-
 import { Footer } from "@components/Footer";
 import { TouchableOpacity } from "react-native";
+import Logo from "../../../../assets/logo.png";
 
 export default function Register({ navigation }: any) {
     const [numberSection, setNumSection] = useState(0);
@@ -25,8 +25,12 @@ export default function Register({ navigation }: any) {
 
     return (
         <>
-            <ScrollView flex={1} p={5} mt={20}>
-                <Image alt="Logo Voll" alignSelf="center" />
+            <ScrollView flex={1} p={5} mt={10}>
+                <Image
+                    source={Logo}
+                    alt="Logo"
+                    style={{ alignSelf: "center" }}
+                />
 
                 <Title>{sections[numberSection].title}</Title>
                 <Box>

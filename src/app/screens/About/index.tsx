@@ -10,6 +10,7 @@ import {
     Txt
 } from "./styles";
 import Logo from "../../../../assets/logo.png";
+import { Header } from "@components/Header";
 
 export default function About() {
     const data = [
@@ -32,19 +33,7 @@ export default function About() {
     );
     return (
         <>
-            <Box
-                w="100%"
-                height="12%"
-                alignItems="center"
-                justifyContent="center"
-                flexDirection="row"
-                bgColor="#739489"
-                p={5}
-            >
-                <Text color="white" fontSize="22">
-                    YE Gestão de Saúde
-                </Text>
-            </Box>
+            <Header text={"YE GESTÃO SAÚDE"} isBackPress={true} />
             <View style={{ alignItems: "center" }}>
                 <Container>
                     <Txt>
@@ -57,7 +46,15 @@ export default function About() {
                         <SecTxt>Nele você pode:</SecTxt>
                     </SecTxtCont>
 
-                    <FlatList data={data} renderItem={renderItem} />
+                    <FlatList
+                        data={data}
+                        renderItem={({ item }) => (
+                            <SubTxt>
+                                {"\u2022"} {item.text}
+                            </SubTxt>
+                        )}
+                        scrollEnabled={false}
+                    />
 
                     <ThirdTxt>Sua saúde em suas mãos!</ThirdTxt>
                     <Logon source={Logo} />

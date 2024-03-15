@@ -1,12 +1,11 @@
 import { Footer } from "@components/Footer";
-import { Container, Header } from "./styles";
+import { Container } from "./styles";
 import { TouchableOpacity } from "react-native";
 import { Card } from "@components/Card";
 
 export default function Main({ navigation }: any) {
     return (
         <>
-            <Header></Header>
             <Container>
                 <TouchableOpacity
                     onPress={() => navigation.navigate("Pressure")}

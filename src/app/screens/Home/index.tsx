@@ -10,7 +10,7 @@ export default function Home({ navigation }: any) {
             <Image source={Logo1} alt="Logo" />
             <Title color="white">Boas-Vindas!</Title>
             <Txt>
-                Gerencie sua saúde com facilidade!Use nosso aplicativo para
+                Gerencie sua saúde com facilidade! Use nosso aplicativo para
                 conferência de exames, receba resultados em tempo real e
                 lembretes personalizados para seus medicamentos!
             </Txt>
