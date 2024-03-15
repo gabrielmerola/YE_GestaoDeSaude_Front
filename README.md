@@ -1,6 +1,6 @@
-# Aplicativo YE GESTÃO DE SAÚDE Frontend <picture><source srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f48e/512.webp" type="image/webp"><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f48e/512.gif" alt="💎" width="32" height="32"></picture>
+# YE GESTÃO DE SAÚDE Frontend App <picture><source srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f48e/512.webp" type="image/webp"><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f48e/512.gif" alt="💎" width="32" height="32"></picture>
 
-## Tecnologias Utilizadas <picture><source srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9be/512.webp" type="image/webp"><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9be/512.gif" alt="🦾" width="32" height="32"></picture>
+## Tech Stack <picture><source srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9be/512.webp" type="image/webp"><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9be/512.gif" alt="🦾" width="32" height="32"></picture>
 
 <ul>
   <li>
@@ -24,9 +24,9 @@
   </li>
 </ul>
 
-## 🤝 Colaboradores
+## 🤝 Colaborators
 
-Agradecemos às seguintes pessoas que contribuíram para este projeto:
+We thank the following people who developed for this project:
 
 <table>
   <tr>
@@ -89,7 +89,6 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
   </tr>
 </table>
 
-## 📝 Licença
+## 📝 Licence
 
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais
-detalhes
+This project is under license. Open the file [LICENCE](LICENSE.md) for more details

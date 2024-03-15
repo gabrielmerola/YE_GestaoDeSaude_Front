@@ -9,6 +9,8 @@ import Main from "@screens/Main";
 import Pressure from "@screens/Pressure";
 import Glucose from "@screens/Glucose";
 import IMC from "@screens/IMC";
+import Medicines from "@screens/Medicines";
+import NewMedicine from "@screens/NewMedicine";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +32,8 @@ export default function Routes() {
                 <Stack.Screen name="Pressure" component={Pressure} />
                 <Stack.Screen name="Glucose" component={Glucose} />
                 <Stack.Screen name="IMC" component={IMC} />
+                <Stack.Screen name={"Medicines"} component={Medicines} />
+                <Stack.Screen name={"NewMedicine"} component={NewMedicine} />
             </Stack.Navigator>
         </NavigationContainer>
     );
