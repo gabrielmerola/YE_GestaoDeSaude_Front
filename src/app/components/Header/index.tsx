@@ -1,8 +1,8 @@
+import { Container, styles, Txt } from "@components/Header/styles";
+import { useNavigation } from "@react-navigation/native";
+import { Button, ChevronLeftIcon } from "native-base";
 import React from "react";
 import { View } from "react-native";
-import { Button, ChevronLeftIcon } from "native-base";
-import { useNavigation } from "@react-navigation/native";
-import { Container, styles, Txt } from "@components/Header/styles";
 
 interface HeaderProps {
     text?: string;
@@ -15,32 +15,29 @@ export const Header = ({ text, isBackPress, isOptionMenu }: HeaderProps) => {
     return (
         <Container>
             {isBackPress && (
-                <Button
-                    variant={"unstyled"}
-                    onPress={() => navigation.goBack()}
-                >
+                <Button variant="unstyled" onPress={() => navigation.goBack()}>
                     <View style={styles.container}>
                         <ChevronLeftIcon
                             name="chevron-left"
                             type="FontAwesome5"
                             style={styles.icon}
-                            size={"lg"}
+                            size="lg"
                         />
-                        <View style={styles.ball}></View>
+                        <View style={styles.ball} />
                     </View>
                 </Button>
             )}
 
             {isOptionMenu && (
-                <Button variant={"unstyled"}>
+                <Button variant="unstyled">
                     <View style={styles.container}>
                         <ChevronLeftIcon
                             name="chevron-left"
                             type="FontAwesome5"
                             style={styles.icon}
-                            size={"lg"}
+                            size="lg"
                         />
-                        <View style={styles.ball}></View>
+                        <View style={styles.ball} />
                     </View>
                 </Button>
             )}

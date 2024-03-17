@@ -1,7 +1,8 @@
-import { Footer } from "@components/Footer";
-import { Container } from "./styles";
-import { TouchableOpacity } from "react-native";
 import { Card } from "@components/Card";
+import { Footer } from "@components/Footer";
+import { TouchableOpacity } from "react-native";
+
+import { Container } from "./styles";
 
 export default function Main({ navigation }: any) {
     return (

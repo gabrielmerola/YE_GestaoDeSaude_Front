@@ -1,5 +1,6 @@
-import { Image } from "react-native";
 import { Title } from "@components/Title/Title";
+import { Image } from "react-native";
+
 import { Button, ButtonText, Container, SubTitle, Txt } from "./styles";
 import Logo1 from "../../../../assets/logo-verde.png";
 

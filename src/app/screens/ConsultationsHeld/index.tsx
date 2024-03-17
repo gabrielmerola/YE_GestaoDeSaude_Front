@@ -1,32 +1,30 @@
-import { Header } from "@components/Header";
-import React from "react";
-import MedicinesAndButton from "@components/MedicinesAndButton";
 import BottomAddButton from "@components/BottomAddButton";
-import { styles } from "./styles";
+import { Header } from "@components/Header";
+import MedicinesAndButton from "@components/MedicinesAndButton";
+import React from "react";
 import { View } from "react-native";
+
+import { styles } from "./styles";
 
 export default function ConsultationsHeld({ navigation }: any) {
     return (
         <>
-            <Header text={"Consultas Realizadas"} isBackPress={true} />
+            <Header text="Consultas Realizadas" isBackPress />
             <View style={styles.container}>
                 <MedicinesAndButton
-                    text={"Clínico Geral"}
-                    chevron={true}
+                    text="Clínico Geral"
+                    chevron
                     navigation={navigation}
-                    screenName={"ListConsultationsHeld"}
+                    screenName="ListConsultationsHeld"
                 />
                 <MedicinesAndButton
-                    text={"Ginecologista"}
-                    chevron={true}
+                    text="Ginecologista"
+                    chevron
                     navigation={navigation}
-                    screenName={"ListConsultationsHeld"}
+                    screenName="ListConsultationsHeld"
                 />
             </View>
-            <BottomAddButton
-                screenName={"NewMedicine"}
-                navigation={navigation}
-            />
+            <BottomAddButton screenName="NewMedicine" navigation={navigation} />
         </>
     );
 }

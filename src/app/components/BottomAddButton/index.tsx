@@ -1,6 +1,7 @@
-import { styles } from "./styles";
-import { Text, TouchableOpacity } from "react-native";
 import React from "react";
+import { Text, TouchableOpacity } from "react-native";
+
+import { styles } from "./styles";
 
 interface BottomAddButtonProps {
     navigation: any;

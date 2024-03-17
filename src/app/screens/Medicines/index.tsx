@@ -1,39 +1,40 @@
-import { Header } from "@components/Header";
-import React from "react";
-import MedicinesAndButton from "@components/MedicinesAndButton";
 import BottomAddButton from "@components/BottomAddButton";
-import { styles } from "./styles";
+import { Header } from "@components/Header";
+import MedicinesAndButton from "@components/MedicinesAndButton";
+import React from "react";
 import { View } from "react-native";
+
+import { styles } from "./styles";
 
 export default function Medicines({ navigation }: any) {
     return (
         <>
-            <Header text={"Medicamentos"} isBackPress={true} />
+            <Header text="Medicamentos" isBackPress />
             <View style={styles.container}>
                 <MedicinesAndButton
-                    text={"Losartana"}
-                    text2={"08:00"}
-                    chevron={true}
+                    text="Losartana"
+                    text2="08:00"
+                    chevron
                     navigation={navigation}
-                    screenName={"Login"}
+                    screenName="Login"
                 />
                 <MedicinesAndButton
-                    text={"Hidrocolorotiazida"}
-                    text2={"08:00"}
-                    chevron={true}
+                    text="Hidrocolorotiazida"
+                    text2="08:00"
+                    chevron
                     navigation={navigation}
-                    screenName={"Login"}
+                    screenName="Login"
                 />
                 <MedicinesAndButton
-                    text={"Pantoprazol"}
-                    text2={"12:00"}
-                    chevron={true}
+                    text="Pantoprazol"
+                    text2="12:00"
+                    chevron
                     navigation={navigation}
-                    screenName={"Login"}
+                    screenName="Login"
                 />
             </View>
             <BottomAddButton
-                addButtonScreen={"NewMedicine"}
+                addButtonScreen="NewMedicine"
                 navigation={navigation}
             />
         </>

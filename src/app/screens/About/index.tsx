@@ -1,5 +1,7 @@
+import { Header } from "@components/Header";
 import { Box, FlatList, Text } from "native-base";
 import { View } from "react-native";
+
 import {
     Container,
     Logon,
@@ -10,7 +12,6 @@ import {
     Txt
 } from "./styles";
 import Logo from "../../../../assets/logo.png";
-import { Header } from "@components/Header";
 
 export default function About() {
     const data = [
@@ -33,7 +34,7 @@ export default function About() {
     );
     return (
         <>
-            <Header text={"YE GESTÃO SAÚDE"} isBackPress={true} />
+            <Header text="YE GESTÃO SAÚDE" isBackPress />
             <View style={{ alignItems: "center" }}>
                 <Container>
                     <Txt>
