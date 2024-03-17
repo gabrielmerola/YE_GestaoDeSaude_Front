@@ -5,35 +5,26 @@ import BottomAddButton from "@components/BottomAddButton";
 import { styles } from "./styles";
 import { View } from "react-native";
 
-export default function Medicines({ navigation }: any) {
+export default function ConsultationsHeld({ navigation }: any) {
     return (
         <>
-            <Header text={"Medicamentos"} isBackPress={true} />
+            <Header text={"Consultas Realizadas"} isBackPress={true} />
             <View style={styles.container}>
                 <MedicinesAndButton
-                    text={"Losartana"}
-                    text2={"08:00"}
+                    text={"Clínico Geral"}
                     chevron={true}
                     navigation={navigation}
-                    screenName={"Login"}
+                    screenName={"ListConsultationsHeld"}
                 />
                 <MedicinesAndButton
-                    text={"Hidrocolorotiazida"}
-                    text2={"08:00"}
+                    text={"Ginecologista"}
                     chevron={true}
                     navigation={navigation}
-                    screenName={"Login"}
-                />
-                <MedicinesAndButton
-                    text={"Pantoprazol"}
-                    text2={"12:00"}
-                    chevron={true}
-                    navigation={navigation}
-                    screenName={"Login"}
+                    screenName={"ListConsultationsHeld"}
                 />
             </View>
             <BottomAddButton
-                addButtonScreen={"NewMedicine"}
+                screenName={"NewMedicine"}
                 navigation={navigation}
             />
         </>

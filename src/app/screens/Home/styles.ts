@@ -3,9 +3,9 @@ import styled from "styled-components/native";
 export const Container = styled.View`
     align-items: center;
     background-color: ${({ theme }) => theme.COLORS.GREEN_700};
-    gap: 32px;
+    gap: 16px;
     flex: 1;
-    padding: 100px 56px 0 56px;
+    padding: 60px 56px 0 56px;
 `;
 
 export const SubTitle = styled.Text`
