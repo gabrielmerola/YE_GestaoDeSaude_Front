@@ -33,10 +33,7 @@ export default function Medicines({ navigation }: any) {
                     screenName="Login"
                 />
             </View>
-            <BottomAddButton
-                addButtonScreen="NewMedicine"
-                navigation={navigation}
-            />
+            <BottomAddButton screenName="NewMedicine" navigation={navigation} />
         </>
     );
 }
