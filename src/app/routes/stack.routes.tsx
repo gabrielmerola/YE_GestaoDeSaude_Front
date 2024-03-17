@@ -1,21 +1,22 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Register from "../screens/Register";
-import Login from "../screens/Login";
-import Home from "../screens/Home";
-import About from "../screens/About";
-import Main from "@screens/Main";
-import Pressure from "@screens/Pressure";
-import Glucose from "@screens/Glucose";
-import IMC from "@screens/IMC";
-import Medicines from "@screens/Medicines";
-import NewMedicine from "@screens/NewMedicine";
 import ConsultationsHeld from "@screens/ConsultationsHeld";
-import ListConsultationsHeld from "@screens/ListConsultationsHeld";
 import DetailsConsultationsHeld from "@screens/DetailsConsultationsHeld";
-import ExamsHistory from "@screens/ExamsHistory";
 import ExamsDetected from "@screens/ExamsDetected";
 import ExamsHeld from "@screens/ExamsHeld";
+import ExamsHistory from "@screens/ExamsHistory";
+import Glucose from "@screens/Glucose";
+import IMC from "@screens/IMC";
+import ListConsultationsHeld from "@screens/ListConsultationsHeld";
+import Main from "@screens/Main";
+import Medicines from "@screens/Medicines";
+import NewMedicine from "@screens/NewMedicine";
+import Pressure from "@screens/Pressure";
+
+import About from "../screens/About";
+import Home from "../screens/Home";
+import Login from "../screens/Login";
+import Register from "../screens/Register";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +24,7 @@ export default function Routes() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="ExamsHistory"
+                initialRouteName="Home"
                 screenOptions={{
                     headerTitle: "",
                     headerShown: false

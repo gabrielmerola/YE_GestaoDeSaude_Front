@@ -1,7 +1,8 @@
-import { styles } from "./styles";
 import { Button } from "native-base";
-import { Text, View } from "react-native";
 import React from "react";
+import { Text, View } from "react-native";
+
+import { styles } from "./styles";
 
 interface CancelAndSaveButtonProps {
     navigation?: any;
@@ -13,14 +14,14 @@ export default function CancelAndSaveButton({
     return (
         <View style={styles.buttons}>
             <Button
-                variant={"unstyled"}
+                variant="unstyled"
                 style={{ width: "50%" }}
                 onPress={() => navigation.goBack()}
             >
                 <Text style={styles.buttonText}> Cancelar</Text>
             </Button>
             <Button
-                variant={"unstyled"}
+                variant="unstyled"
                 style={{ width: "50%", marginLeft: 2 }}
                 onPress={() => navigation.goBack()}
             >

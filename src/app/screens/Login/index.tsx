@@ -1,9 +1,10 @@
-import { VStack, Image, Text, Box, Link } from "native-base";
-import { TouchableOpacity } from "react-native";
 import { Buton } from "@components/Button";
+import { Footer } from "@components/Footer";
 import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
-import { Footer } from "@components/Footer";
+import { VStack, Image, Text, Box, Link } from "native-base";
+import { TouchableOpacity } from "react-native";
+
 import Logo from "../../../../assets/logo.png";
 
 export default function Login({ navigation }: any) {
@@ -20,7 +21,7 @@ export default function Login({ navigation }: any) {
                     <InputField
                         label="Senha"
                         placeholder="Insira sua senha"
-                        secureTextEntry={true}
+                        secureTextEntry
                     />
                 </Box>
                 <Buton onPress={() => navigation.navigate("Main")}>

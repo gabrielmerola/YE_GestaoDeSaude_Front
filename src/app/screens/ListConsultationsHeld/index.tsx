@@ -1,39 +1,40 @@
-import { Header } from "@components/Header";
-import React from "react";
-import MedicinesAndButton from "@components/MedicinesAndButton";
 import BottomAddButton from "@components/BottomAddButton";
-import { styles } from "./styles";
+import { Header } from "@components/Header";
+import MedicinesAndButton from "@components/MedicinesAndButton";
+import React from "react";
 import { View } from "react-native";
+
+import { styles } from "./styles";
 
 export default function ListConsultationsHeld({ navigation }: any) {
     return (
         <>
-            <Header text={"Consultas Realizadas"} isBackPress={true} />
+            <Header text="Consultas Realizadas" isBackPress />
             <View style={styles.container}>
                 <MedicinesAndButton
-                    text={"Próxima consulta"}
-                    text2={"17/08/2023"}
-                    chevron={true}
+                    text="Próxima consulta"
+                    text2="17/08/2023"
+                    chevron
                     navigation={navigation}
-                    screenName={"Login"}
+                    screenName="Login"
                 />
                 <MedicinesAndButton
-                    text={"17/02/2023"}
-                    chevron={true}
+                    text="17/02/2023"
+                    chevron
                     navigation={navigation}
-                    screenName={"Login"}
+                    screenName="Login"
                 />
                 <MedicinesAndButton
-                    text={"25/05/2022"}
-                    chevron={true}
+                    text="25/05/2022"
+                    chevron
                     navigation={navigation}
-                    screenName={"Login"}
+                    screenName="Login"
                 />
                 <MedicinesAndButton
-                    text={"04/01/2022"}
-                    chevron={true}
+                    text="04/01/2022"
+                    chevron
                     navigation={navigation}
-                    screenName={"Login"}
+                    screenName="Login"
                 />
             </View>
         </>

@@ -1,14 +1,15 @@
-import { NativeBaseProvider, StatusBar } from "native-base";
-import Routes from "@routes/stack.routes";
-import theme from "./src/app/theme";
-import { ThemeProvider } from "styled-components";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Loading } from "@components/Loading";
 import {
     useFonts,
     Jost_400Regular,
     Jost_700Bold
 } from "@expo-google-fonts/jost";
-import { Loading } from "@components/Loading";
+import Routes from "@routes/stack.routes";
+import { NativeBaseProvider, StatusBar } from "native-base";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { ThemeProvider } from "styled-components";
+
+import theme from "./src/app/theme";
 
 export default function App() {
     const [fontsLoaded] = useFonts({ Jost_400Regular, Jost_700Bold });
