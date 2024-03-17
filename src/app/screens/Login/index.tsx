@@ -24,7 +24,7 @@ export default function Login({ navigation }: any) {
                         secureTextEntry
                     />
                 </Box>
-                <Buton onPress={() => navigation.navigate("Main")}>
+                <Buton onPress={() => navigation.navigate("Drawer")}>
                     Entrar
                 </Buton>
 

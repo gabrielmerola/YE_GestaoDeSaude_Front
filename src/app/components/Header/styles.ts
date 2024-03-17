@@ -9,6 +9,9 @@ export const Container = styled.View`
     justify-content: center;
     background-color: ${({ theme }) => theme.COLORS.GREEN_700};
     padding: 0 15px 0 15px;
+    ${Platform.OS === "ios" &&
+    `
+        margin-top: 30px;`}
 `;
 
 export const Txt = styled.Text`
