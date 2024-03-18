@@ -1,4 +1,9 @@
-import { Container, styles, Txt } from "@components/Header/styles";
+import {
+    Container,
+    ContainerTxt,
+    styles,
+    Txt
+} from "@components/Header/styles";
 import { useNavigation } from "@react-navigation/native";
 import { Button, ChevronLeftIcon } from "native-base";
 import React from "react";
@@ -41,10 +46,9 @@ export const Header = ({ text, isBackPress, isOptionMenu }: HeaderProps) => {
                     </View>
                 </Button>
             )}
-            <Container>
+            <ContainerTxt>
                 <Txt>{text}</Txt>
-            </Container>
-            <View style={{ flex: 1 }} />
+            </ContainerTxt>
         </Container>
     );
 };
