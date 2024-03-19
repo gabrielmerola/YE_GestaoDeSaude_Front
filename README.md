@@ -4,11 +4,11 @@
 
 <ul>
   <li>
-    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/>  React
+    <img src="https://www.onu.ro/wp/wp-content/uploads/2020/03/react-native-logo-768x890.png" alt="react" width="40" />  React Native
   </li>
   <br>
   <li>
-    <img src="https://github.com/alexZ7000/UsinaEcoCultural/assets/78627928/b82095b6-48ad-42c2-90a3-a2d0ea890da1" alt="vite" width="40" height="40"/> Vite
+    <img src="https://github.com/Titans07/YE_GestaoDeSaude_Front/assets/78627928/92b8afd8-e2a5-4ab4-83ef-cda55dbb2ca9" alt="vite" width="40" height="40"/> Styled Components
   </li>
   <br>
   <li>
