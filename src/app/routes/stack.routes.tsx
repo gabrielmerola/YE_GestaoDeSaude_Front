@@ -24,7 +24,7 @@ export default function Routes() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Home"
+                initialRouteName="Medicines"
                 screenOptions={{
                     headerTitle: "",
                     headerShown: false

@@ -1,9 +1,8 @@
-import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
 
-export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-        backgroundColor: "#F5F5F5"
-    }
-});
+export const Container = styled.View`
+    //isso é apenas um exemplo pra não ficar sem nada no código
+    flex: 1;
+    padding: 16px;
+    background-color: white;
+`;

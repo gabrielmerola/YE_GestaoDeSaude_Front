@@ -4,6 +4,7 @@ export default {
 
         GREEN_700: "#739489",
         GREEN_500: "#127856",
+        GREEN_400: "#508473",
         GREEN_300: "#459B7E",
 
         RED_100: "#AD2A2A",
@@ -13,6 +14,7 @@ export default {
         GRAY_500: "#8D8D99",
         GRAY_400: "#BABABA",
         GRAY_300: "#D9D9D9",
+        GRAY_200: "#CCCCCCFF",
 
         BLUE_100: "#459EB1"
     },

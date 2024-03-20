@@ -1,16 +1,13 @@
-import BottomAddButton from "@components/BottomAddButton";
 import { Header } from "@components/Header";
 import MedicinesAndButton from "@components/MedicinesAndButton";
+import { View } from "@screens/ListConsultationsHeld/styles";
 import React from "react";
-import { View } from "react-native";
-
-import { styles } from "./styles";
 
 export default function ListConsultationsHeld({ navigation }: any) {
     return (
         <>
             <Header text="Consultas Realizadas" isBackPress />
-            <View style={styles.container}>
+            <View>
                 <MedicinesAndButton
                     text="Próxima consulta"
                     text2="17/08/2023"

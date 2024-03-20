@@ -1,16 +1,14 @@
 import BottomAddButton from "@components/BottomAddButton";
 import { Header } from "@components/Header";
 import MedicinesAndButton from "@components/MedicinesAndButton";
+import { View } from "@screens/ConsultationsHeld/styles";
 import React from "react";
-import { View } from "react-native";
-
-import { styles } from "./styles";
 
 export default function ConsultationsHeld({ navigation }: any) {
     return (
         <>
             <Header text="Consultas Realizadas" isBackPress />
-            <View style={styles.container}>
+            <View>
                 <MedicinesAndButton
                     text="Clínico Geral"
                     chevron
@@ -23,8 +21,11 @@ export default function ConsultationsHeld({ navigation }: any) {
                     navigation={navigation}
                     screenName="ListConsultationsHeld"
                 />
+                <BottomAddButton
+                    screenName="NewMedicine"
+                    navigation={navigation}
+                />
             </View>
-            <BottomAddButton screenName="NewMedicine" navigation={navigation} />
         </>
     );
 }

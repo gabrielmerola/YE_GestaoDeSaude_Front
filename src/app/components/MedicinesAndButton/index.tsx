@@ -1,8 +1,11 @@
-import { Button, ChevronRightIcon, Input } from "native-base";
+import {
+    MedicineButton,
+    MedicineView,
+    Txt,
+    Input
+} from "@components/MedicinesAndButton/styles";
+import { ChevronRightIcon } from "native-base";
 import React from "react";
-import { Text, View } from "react-native";
-
-import { styles } from "./styles";
 
 interface MedicineAndButtonProps {
     text: string;
@@ -22,20 +25,16 @@ export default function MedicinesAndButton({
     input
 }: MedicineAndButtonProps) {
     return (
-        <Button
-            variant="unstyled"
-            style={styles.medicineItem}
-            onPress={() => navigation.navigate(screenName)}
-        >
-            <View style={styles.medicineView}>
-                <Text style={{ fontSize: 18 }}>
+        <MedicineButton onPress={() => navigation.navigate(screenName)}>
+            <MedicineView>
+                <Txt>
                     {text} {text2 && `: ${text2}`}
-                </Text>
+                </Txt>
                 {input && (
                     <Input placeholder="Digite o nome do medicamento..." />
                 )}
                 {chevron && <ChevronRightIcon />}
-            </View>
-        </Button>
+            </MedicineView>
+        </MedicineButton>
     );
 }
