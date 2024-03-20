@@ -1,5 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import DrawerRoutes from "@routes/drawer.routes";
 import ConsultationsHeld from "@screens/ConsultationsHeld";
 import DetailsConsultationsHeld from "@screens/DetailsConsultationsHeld";
 import ExamsDetected from "@screens/ExamsDetected";
@@ -8,9 +9,9 @@ import ExamsHistory from "@screens/ExamsHistory";
 import Glucose from "@screens/Glucose";
 import IMC from "@screens/IMC";
 import ListConsultationsHeld from "@screens/ListConsultationsHeld";
-import Main from "@screens/Main";
 import Medicines from "@screens/Medicines";
 import NewMedicine from "@screens/NewMedicine";
+import Perfil from "@screens/Perfil";
 import Pressure from "@screens/Pressure";
 
 import About from "../screens/About";
@@ -24,7 +25,7 @@ export default function Routes() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Medicines"
+                initialRouteName="Home"
                 screenOptions={{
                     headerTitle: "",
                     headerShown: false
@@ -34,7 +35,8 @@ export default function Routes() {
                 <Stack.Screen name="About" component={About} />
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Register" component={Register} />
-                <Stack.Screen name="Main" component={Main} />
+                <Stack.Screen name="Perfil" component={Perfil} />
+                <Stack.Screen name="Drawer" component={DrawerRoutes} />
                 <Stack.Screen name="Pressure" component={Pressure} />
                 <Stack.Screen name="Glucose" component={Glucose} />
                 <Stack.Screen name="IMC" component={IMC} />

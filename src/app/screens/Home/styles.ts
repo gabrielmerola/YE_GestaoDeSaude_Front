@@ -9,6 +9,7 @@ export const Container = styled.View`
 `;
 
 export const SubTitle = styled.Text`
+    margin-top: 50px;
     color: ${({ theme }) => theme.COLORS.WHITE};
     font-size: 32px;
 `;
