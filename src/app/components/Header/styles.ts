@@ -22,6 +22,7 @@ export const ContainerTxt = styled.View`
 export const Txt = styled.Text`
     color: ${({ theme }) => theme.COLORS.WHITE};
     font-size: ${({ theme }) => theme.FONT_SIZE.XL};
+    font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
 `;
 
 export const styles = StyleSheet.create({
