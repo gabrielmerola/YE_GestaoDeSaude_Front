@@ -1,16 +1,13 @@
 import BottomAddButton from "@components/BottomAddButton";
-import CancelAndSaveButton from "@components/CancelAndSaveButton";
 import { Header } from "@components/Header";
 import MedicinesAndButton from "@components/MedicinesAndButton";
-import { View } from "react-native";
-
-import { styles } from "./styles";
+import { View } from "@screens/ExamsHistory/styles";
 
 export default function ExamsHistory({ navigation }: any) {
     return (
         <>
             <Header text="Histórico de Exames" isBackPress />
-            <View style={styles.container}>
+            <View>
                 <MedicinesAndButton
                     text="Hemograma"
                     chevron

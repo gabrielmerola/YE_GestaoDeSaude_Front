@@ -1,10 +1,6 @@
-import BottomAddButton from "@components/BottomAddButton";
 import { Header } from "@components/Header";
-import MedicinesAndButton from "@components/MedicinesAndButton";
 import React from "react";
-import { Text, View } from "react-native";
-
-import { styles } from "./styles";
+import { Text } from "react-native";
 
 export default function DetailsConsultationsHeld({ navigation }: any) {
     return (

@@ -1,16 +1,14 @@
 import BottomAddButton from "@components/BottomAddButton";
 import { Header } from "@components/Header";
 import MedicinesAndButton from "@components/MedicinesAndButton";
+import { View } from "@screens/Medicines/styles";
 import React from "react";
-import { View } from "react-native";
-
-import { styles } from "./styles";
 
 export default function Medicines({ navigation }: any) {
     return (
         <>
             <Header text="Medicamentos" isBackPress />
-            <View style={styles.container}>
+            <View>
                 <MedicinesAndButton
                     text="Losartana"
                     text2="08:00"

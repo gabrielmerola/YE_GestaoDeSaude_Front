@@ -1,7 +1,9 @@
+import {
+    AddButton,
+    ButtonText,
+    PlusText
+} from "@components/BottomAddButton/styles";
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
-
-import { styles } from "./styles";
 
 interface BottomAddButtonProps {
     navigation: any;
@@ -13,13 +15,10 @@ export default function BottomAddButton({
     screenName
 }: BottomAddButtonProps) {
     return (
-        <TouchableOpacity
-            style={styles.addButton}
-            onPress={() => navigation.navigate(screenName)}
-        >
-            <Text style={styles.buttonText}>
-                <Text style={styles.plusText}>+</Text> Adicionar
-            </Text>
-        </TouchableOpacity>
+        <AddButton onPress={() => navigation.navigate(screenName)}>
+            <ButtonText>
+                <PlusText>+</PlusText> Adicionar
+            </ButtonText>
+        </AddButton>
     );
 }

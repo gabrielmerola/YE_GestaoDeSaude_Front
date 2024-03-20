@@ -1,16 +1,14 @@
 import CancelAndSaveButton from "@components/CancelAndSaveButton";
 import { Header } from "@components/Header";
 import MedicinesAndButton from "@components/MedicinesAndButton";
+import { View } from "@screens/NewMedicine/styles";
 import React from "react";
-import { View } from "react-native";
-
-import { styles } from "./styles";
 
 export default function NewMedicine({ navigation }: any) {
     return (
         <>
             <Header text="Novo Medicamento" isBackPress />
-            <View style={styles.container}>
+            <View>
                 <MedicinesAndButton
                     text="Nome: "
                     navigation={navigation}
