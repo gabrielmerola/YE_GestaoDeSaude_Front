@@ -69,7 +69,10 @@ export default function DrawerRoutes({ navigation }: any) {
                     ),
                     headerTransparent: true,
                     title: "",
-                    headerShown: false
+                    headerShown: false,
+                    gestureHandlerProps: {
+                        enabled: false
+                    }
                 }}
             />
             <Drawer.Screen
@@ -86,6 +89,9 @@ export default function DrawerRoutes({ navigation }: any) {
                     ),
                     headerTransparent: true,
                     title: "",
+                    gestureHandlerProps: {
+                        enabled: false
+                    },
                     headerShown: false
                 }}
             />
@@ -103,6 +109,9 @@ export default function DrawerRoutes({ navigation }: any) {
                     ),
                     headerTransparent: true,
                     title: "",
+                    gestureHandlerProps: {
+                        enabled: false
+                    },
                     headerShown: false
                 }}
             />
