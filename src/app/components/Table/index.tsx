@@ -1,10 +1,4 @@
-import {
-    Cell,
-    CellColor,
-    CellText,
-    Container,
-    Separator
-} from "@components/Table/styles";
+import { Cell, CellText, Container, Separator } from "@components/Table/styles";
 import React from "react";
 
 type Props = {
@@ -14,7 +8,7 @@ type Props = {
 export function Table({ rows }: Props) {
     return (
         <>
-            {rows.map((row, index) => (
+            {rows.map((row) => (
                 <Container>
                     <Cell type="gray">
                         <CellText type="gray">{row.data}</CellText>
