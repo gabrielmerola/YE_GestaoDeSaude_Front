@@ -20,7 +20,7 @@ export const Cell = styled.View<Props>`
     justify-content: center;
     padding: 24px 0;
     background-color: ${({ theme, type }) =>
-        type === "gray" ? theme.COLORS.GRAY_400 : theme.COLORS.GREEN_700};
+        type === "gray" ? theme.COLORS.GRAY_300 : theme.COLORS.GREEN_700};
     border-bottom: 10px green;
 `;
 export const CellText = styled.Text<Props>`
@@ -34,5 +34,5 @@ export const CellText = styled.Text<Props>`
 
 export const Separator = styled.View`
     height: 1px;
-    background-color: white; /* Adjust as needed */
+    background-color: white;
 `;

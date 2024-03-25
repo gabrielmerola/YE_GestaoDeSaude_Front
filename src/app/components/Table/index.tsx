@@ -8,30 +8,24 @@ import {
 import React from "react";
 
 type Props = {
-    rows: string[][];
-    type?: CellColor;
+    rows: [object];
 };
 
-export function Table({ rows, type = "gray" }: Props) {
+export function Table({ rows }: Props) {
     return (
         <>
             {rows.map((row, index) => (
-                <React.Fragment key={index}>
-                    <Container>
-                        {row.map((cellText, cellIndex) => (
-                            <Cell
-                                key={cellIndex}
-                                type={cellIndex % 2 === 0 ? type : "green"}
-                            >
-                                <CellText
-                                    type={cellIndex % 2 === 0 ? type : "green"}
-                                >
-                                    {cellText}
-                                </CellText>
-                            </Cell>
-                        ))}
-                    </Container>
-                </React.Fragment>
+                <Container>
+                    <Cell type="gray">
+                        <CellText type="gray">{row.data}</CellText>
+                    </Cell>
+                    <Cell type="green">
+                        <CellText type="green">{row.medida}</CellText>
+                    </Cell>
+                    <Cell type="gray">
+                        <CellText type="gray">{row.nivel}</CellText>
+                    </Cell>
+                </Container>
             ))}
             <Separator />
         </>
