@@ -13,6 +13,7 @@ import Medicines from "@screens/Medicines";
 import NewMedicine from "@screens/NewMedicine";
 import Perfil from "@screens/Perfil";
 import Pressure from "@screens/Pressure";
+import Settings from "@screens/Settings";
 
 import About from "../screens/About";
 import Home from "../screens/Home";
@@ -25,7 +26,7 @@ export default function Routes() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Home"
+                initialRouteName="Settings"
                 screenOptions={{
                     headerTitle: "",
                     headerShown: false
@@ -36,6 +37,7 @@ export default function Routes() {
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Register" component={Register} />
                 <Stack.Screen name="Perfil" component={Perfil} />
+                <Stack.Screen name="Settings" component={Settings} />
                 <Stack.Screen name="Drawer" component={DrawerRoutes} />
                 <Stack.Screen name="Pressure" component={Pressure} />
                 <Stack.Screen name="Glucose" component={Glucose} />
