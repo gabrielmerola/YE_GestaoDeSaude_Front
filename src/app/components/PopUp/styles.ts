@@ -1,16 +1,15 @@
-import {
-    Modal,
-    TouchableOpacity,
-    ModalProps,
-    KeyboardAvoidingView,
-    Platform
-} from "react-native";
+import { Modal, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 
 export type ButtonColor = "ADD" | "CANCEL";
+export type InputSize = "SMALL" | "LARGE";
 
 type ButtonProps = {
     type: ButtonColor;
+};
+
+type InputProps = {
+    size: InputSize;
 };
 
 export const Container = styled(Modal).attrs({
@@ -98,9 +97,11 @@ export const ButtonText = styled.Text<ButtonProps>`
 export const Input = styled.TextInput.attrs(({ theme }) => ({
     placeholderTextColor: theme.COLORS.GRAY_400,
     fontFamily: theme.FONT_FAMILY.REGULAR,
-    cursorColor: "black"
-}))`
-    width: 50%;
+    cursorColor: "black",
+    keyboardType: "numeric"
+}))<InputProps>`
+    width: ${({ size }) => (size === "SMALL" ? "21%" : "50%")};
+    font-size: ${({ theme }) => theme.FONT_SIZE.LG};
     height: 40px;
     border: 1px solid black;
     border-radius: 8px;
