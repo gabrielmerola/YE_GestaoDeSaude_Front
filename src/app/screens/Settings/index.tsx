@@ -1,39 +1,49 @@
 import { Header } from "@components/Header";
 import { VStack } from "native-base";
+import React from "react";
 
-import {
-    Button,
-    ButtonText,
-    Txt,
-    ImageData,
-    Image,
-    TextContact,
-    Container,
-    SecContainer,
-    ImageIcon
-} from "./styles";
+import { Txt, ImageData, TextContact, Container, SecContainer } from "./styles";
+import ConfigButtons from "../../components/ConfigButtons";
 
-export default function Settings({ navigation }: any) {
+const Settings = ({ navigation }: any) => {
+    const buttons = [
+        {
+            text: "Notificações",
+            iconSource: require("assets/notificacao.png"),
+            screenName: "Login"
+        },
+        {
+            text: "Suporte",
+            iconSource: require("assets/suporte.png"),
+            screenName: "Login"
+        },
+        {
+            text: "Perfil",
+            iconSource: require("assets/perfil.png"),
+            screenName: "Perfil"
+        },
+        {
+            text: "Idioma",
+            iconSource: require("assets/Idioma.png"),
+            screenName: "Login"
+        }
+    ];
+
+    const handleNavigation = (screenName: string) => {
+        navigation.navigate(screenName);
+    };
+
     return (
         <VStack>
             <Header text="Configurações" isBackPress />
-            <Button onPress={() => navigation.navigate("Login")}>
-                <ButtonText>Notificações</ButtonText>
-                <ImageIcon source={require("assets/Sino.png")} />
-            </Button>
-            <Button onPress={() => navigation.navigate("Login")}>
-                <ButtonText>Suporte</ButtonText>
-                <ImageIcon source={require("assets/Ferramenta.png")} />
-            </Button>
-            <Button onPress={() => navigation.navigate("Perfil")}>
-                <ButtonText>Conta</ButtonText>
-                <Image source={require("assets/perfill.png")} />
-            </Button>
-            <Button onPress={() => navigation.navigate("Login")}>
-                <ButtonText>Idioma</ButtonText>
-                <Image source={require("assets/Idioma.png")} />
-            </Button>
-
+            {buttons.map((button, index) => (
+                <ConfigButtons
+                    key={index}
+                    onPress={() => handleNavigation(button.screenName)}
+                    text={button.text}
+                    iconSource={button.iconSource}
+                />
+            ))}
             <Container>
                 <Txt>Dados para contato:</Txt>
                 <SecContainer>
@@ -47,4 +57,6 @@ export default function Settings({ navigation }: any) {
             </Container>
         </VStack>
     );
-}
+};
+
+export default Settings;
