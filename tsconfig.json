@@ -10,7 +10,7 @@
             "@screens/*": ["./src/app/screens/*"],
             "@utils/*": ["./src/app/utils/*"],
             "@services/*": ["./src/app/services/*"],
-            "@contexts/*": ["./src/app/contexts/*"],
+            "@contexts/*": ["./src/app/contexts/*"]
         }
     },
     "extends": "expo/tsconfig.base"
