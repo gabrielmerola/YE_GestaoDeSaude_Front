@@ -3,7 +3,6 @@ import { Footer } from "@components/Footer";
 import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
 import { registerClient } from "@services/clientServices";
-import { AppError } from "@utils/appError";
 import { Image, Box, ScrollView, useToast } from "native-base";
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
@@ -27,10 +26,10 @@ export default function Register({ navigation }: any) {
             phone: data.phone,
             cpf: data.cpf
         });
-
-        if (!response) {
+        // console.log(response);
+        if (response.status === 201) {
             toast.show({
-                title: "Cadastro realizado com sucesso",
+                title: response.message,
                 description: "Você já pode fazer login",
                 backgroundColor: "green.500",
                 placement: "top"
@@ -38,19 +37,12 @@ export default function Register({ navigation }: any) {
             navigation.replace("Login");
         } else {
             toast.show({
-                title: "Erro ao cadastrar",
+                title: response.message,
                 description: "Verifique os dados e tente novamente",
                 backgroundColor: "red.500",
                 placement: "top"
             });
         }
-        // const isAppError = error instanceof AppError;
-        // const title = isAppError ? error.message : 'Não foi possível criar a conta. Tente novamente mais tarde.'
-        // toast.show({
-        //     title,
-        //     placement: 'top',
-        //     bgColor: 'red.500'
-        // })
     }
 
     return (

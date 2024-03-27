@@ -1,27 +1,30 @@
-import { AppError } from "@utils/appError";
-import { useToast } from "native-base";
+import { AxiosError, AxiosResponse } from "axios";
 
 import { api } from "./api";
 import { FormDataProps } from "../interfaces/client";
 
-export async function registerClient(user: FormDataProps) {
-    // const toast = useToast();
-    if (!user) return null;
-
+interface Props {
+    status: number | undefined;
+    message: string | undefined;
+}
+export async function registerClient(user: FormDataProps): Promise<Props> {
     try {
-        const result = await api.post("/client/", user);
-        console.log(user);
-        console.log(result.data);
-        return result.data;
-    } catch (error) {
-        console.log("Erro", error);
-        return null;
-        // const isAppError = error instanceof AppError;
-        // const title = isAppError ? error.message : 'Não foi possível criar a conta. Tente novamente mais tarde.'
-        // toast.show({
-        //     title,
-        //     placement: 'top',
-        //     bgColor: 'red.500'
-        // })
+        if (!user) {
+            return {
+                status: 422,
+                message: "Preencha todos os campos"
+            };
+        }
+
+        const response: AxiosResponse = await api.post("/client", user);
+        return {
+            status: response.status,
+            message: response.data
+        };
+    } catch (error: AxiosError | any) {
+        return {
+            status: error.response.status,
+            message: error.response.data.message
+        };
     }
 }
