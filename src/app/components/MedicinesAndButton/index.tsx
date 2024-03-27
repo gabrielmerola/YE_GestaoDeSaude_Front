@@ -11,8 +11,7 @@ interface MedicineAndButtonProps {
     text: string;
     text2?: string;
     chevron?: boolean;
-    navigation: any;
-    screenName: string;
+    modalFunction: () => void;
     input?: boolean;
 }
 
@@ -20,12 +19,11 @@ export default function MedicinesAndButton({
     text,
     text2,
     chevron,
-    navigation,
-    screenName,
+    modalFunction,
     input
 }: MedicineAndButtonProps) {
     return (
-        <MedicineButton onPress={() => navigation.navigate(screenName)}>
+        <MedicineButton onPress={() => modalFunction}>
             <MedicineView>
                 <Txt>
                     {text} {text2 && `: ${text2}`}
