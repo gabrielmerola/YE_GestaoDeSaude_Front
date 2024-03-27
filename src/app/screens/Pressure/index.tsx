@@ -61,7 +61,7 @@ export default function Pressure() {
 
     return (
         <>
-            <Header text="Pressão Arterial" isBackPress />
+            <Header text="Pressão" isBackPress />
 
             <FlatList
                 data={data}
