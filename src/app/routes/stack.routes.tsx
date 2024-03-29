@@ -8,6 +8,7 @@ import ExamsHeld from "@screens/ExamsHeld";
 import ExamsHistory from "@screens/ExamsHistory";
 import Glucose from "@screens/Glucose";
 import IMC from "@screens/IMC";
+import Language from "@screens/Language";
 import ListConsultationsHeld from "@screens/ListConsultationsHeld";
 import Medicines from "@screens/Medicines";
 import NewMedicine from "@screens/NewMedicine";
@@ -26,7 +27,7 @@ export default function Routes() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Home"
+                initialRouteName="Language"
                 screenOptions={{
                     headerTitle: "",
                     headerShown: false
@@ -38,6 +39,7 @@ export default function Routes() {
                 <Stack.Screen name="Register" component={Register} />
                 <Stack.Screen name="Perfil" component={Perfil} />
                 <Stack.Screen name="Settings" component={Settings} />
+                <Stack.Screen name="Language" component={Language} />
                 <Stack.Screen name="Drawer" component={DrawerRoutes} />
                 <Stack.Screen name="Pressure" component={Pressure} />
                 <Stack.Screen name="Glucose" component={Glucose} />
