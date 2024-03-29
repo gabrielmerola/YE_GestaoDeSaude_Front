@@ -1,9 +1,13 @@
+import { TouchableOpacity } from "react-native";
+
 import { Container, Txt } from "./styles";
 
-export function Footer() {
+export function Footer({ navigation }: any) {
     return (
-        <Container>
-            <Txt>Sobre Nós</Txt>
-        </Container>
+        <TouchableOpacity onPress={() => navigation.navigate("About")}>
+            <Container>
+                <Txt>Sobre Nós</Txt>
+            </Container>
+        </TouchableOpacity>
     );
 }

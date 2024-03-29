@@ -46,7 +46,7 @@ export default function Main({ navigation }: any) {
                 </TouchableOpacity>
             </Container>
             <TouchableOpacity onPress={() => navigation.navigate("About")}>
-                <Footer />
+                <Footer navigation={navigation} />
             </TouchableOpacity>
         </>
     );

@@ -1,15 +1,22 @@
 import { Cell, CellText, Container, Separator } from "@components/Table/styles";
 import React from "react";
 
+interface Row {
+    id: number;
+    data: string;
+    medida: string;
+    nivel: string;
+}
+
 type Props = {
-    rows: [object];
+    rows: Row[];
 };
 
 export function Table({ rows }: Props) {
     return (
         <>
             {rows.map((row) => (
-                <Container>
+                <Container key={row.id}>
                     <Cell type="gray">
                         <CellText type="gray">{row.data}</CellText>
                     </Cell>

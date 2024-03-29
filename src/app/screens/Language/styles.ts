@@ -7,10 +7,12 @@ export const Txt = styled.Text`
     margin-left: 18px;
     margin-top: 27px;
     margin-right: 18px;
+    text-align: center;
 `;
 
 export const Container = styled.View`
     width: 100%;
+    height: 100%;
 `;
 
 export const Input = styled.TextInput`
@@ -36,10 +38,7 @@ export const ButtonConfirm = styled.TouchableOpacity`
     padding: 6px 12px 12px 12px;
     border-radius: 15px;
     width: 35%;
-    margin-left: 200px;
-    margin-bottom: 12px;
-    margin-top: 60px;
-    bottom: 0;
+    margin: auto auto;
     border-color: black;
     border-width: 1px;
 `;
@@ -50,10 +49,6 @@ export const ButtonText = styled.Text`
     font-size: ${({ theme }) => theme.FONT_SIZE.LG};
     text-align: center;
     justify-content: center;
-`;
-
-export const ViewWrapper = styled.View`
-    flex: 1;
 `;
 
 export const View = styled.View`

@@ -1,7 +1,7 @@
 import { Title } from "@components/Title/Title";
 import { Image } from "react-native";
 
-import { Button, ButtonText, Container, SubTitle, Txt } from "./styles";
+import { View, Button, ButtonText, Container, SubTitle, Txt } from "./styles";
 import Logo1 from "../../../../assets/logo-verde.png";
 
 export default function Home({ navigation }: any) {
@@ -16,13 +16,15 @@ export default function Home({ navigation }: any) {
                 lembretes personalizados para seus medicamentos!
             </Txt>
 
-            <Button onPress={() => navigation.navigate("Login")}>
-                <ButtonText>Login</ButtonText>
-            </Button>
+            <View>
+                <Button onPress={() => navigation.navigate("Login")}>
+                    <ButtonText>Login</ButtonText>
+                </Button>
 
-            <Button onPress={() => navigation.navigate("Register")}>
-                <ButtonText>Cadastro</ButtonText>
-            </Button>
+                <Button onPress={() => navigation.navigate("Register")}>
+                    <ButtonText>Cadastro</ButtonText>
+                </Button>
+            </View>
         </Container>
     );
 }

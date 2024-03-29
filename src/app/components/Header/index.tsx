@@ -41,7 +41,6 @@ export const Header = ({ text, isBackPress, isOptionMenu }: HeaderProps) => {
                 </Button>
             )}
             <Txt>{text}</Txt>
-            <View style={{ flex: 1 }} />
         </Container>
     );
 };

@@ -1,10 +1,8 @@
-import BottomAddButton from "@components/BottomAddButton";
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import { Checkbox, Stack, Icon } from "native-base";
-import { Children, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View, Modal } from "react-native";
-import { styled } from "styled-components";
+import { useState } from "react";
+import { Text, Modal } from "react-native";
 
 import {
     TextTitle,
@@ -79,11 +77,3 @@ export default function Perfil() {
         </ViewContainer>
     );
 }
-
-const styles = StyleSheet.create({
-    text: {
-        fontWeight: "600",
-        fontSize: 16,
-        color: "white"
-    }
-});

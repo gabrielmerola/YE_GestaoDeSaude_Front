@@ -4,7 +4,6 @@ import {
     Button
 } from "@components/CancelAndSaveButton/styles";
 import React from "react";
-import { Text } from "react-native";
 
 interface CancelAndSaveButtonProps {
     navigation?: any;

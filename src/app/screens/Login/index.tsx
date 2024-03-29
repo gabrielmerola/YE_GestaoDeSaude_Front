@@ -3,14 +3,20 @@ import { Footer } from "@components/Footer";
 import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
 import { VStack, Image, Text, Box, Link } from "native-base";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
 import Logo from "../../../../assets/logo.png";
 
 export default function Login({ navigation }: any) {
     return (
         <>
-            <VStack flex={1} alignItems="center" justifyContent="center" p={5}>
+            <VStack
+                flex={1}
+                alignItems="center"
+                mt={-20}
+                justifyContent="center"
+                p={5}
+            >
                 <Image source={Logo} alt="Logo" />
                 <Title>YE GESTÃO DE SAÚDE</Title>
                 <Box>
@@ -46,9 +52,7 @@ export default function Login({ navigation }: any) {
                     </TouchableOpacity>
                 </Box>
             </VStack>
-            <TouchableOpacity onPress={() => navigation.navigate("About")}>
-                <Footer />
-            </TouchableOpacity>
+            <Footer navigation={navigation} />
         </>
     );
 }

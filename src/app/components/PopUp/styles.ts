@@ -67,6 +67,7 @@ export const Txt = styled.Text`
         font-family: ${theme.FONT_FAMILY.REGULAR};
     `}
     width: auto;
+    height: 26px;
     color: black;
     margin-right: 10px;
     margin-bottom: 32px;

@@ -4,13 +4,14 @@ export const Container = styled.View`
     align-items: center;
     background-color: ${({ theme }) => theme.COLORS.GREEN_700};
     gap: 16px;
+    justify-content: space-between;
     flex: 1;
-    padding: 60px 56px 0 56px;
+    padding: 0 56px 0 56px;
 `;
 
 export const SubTitle = styled.Text`
-    margin-top: 50px;
     color: ${({ theme }) => theme.COLORS.WHITE};
+    margin-top: 10px;
     font-size: 32px;
 `;
 
@@ -23,11 +24,14 @@ export const Txt = styled.Text`
 
 export const Button = styled.TouchableOpacity`
     border-radius: 8px;
-    background-color: ${({ theme }) => theme.COLORS.WHITE};
     padding: 10px;
+    background-color: ${({ theme }) => theme.COLORS.WHITE};
     width: 300px;
+    margin-bottom: 10px;
     align-self: center;
 `;
+
+export const View = styled.View``;
 
 export const ButtonText = styled.Text`
     color: ${({ theme }) => theme.COLORS.GREEN_300};

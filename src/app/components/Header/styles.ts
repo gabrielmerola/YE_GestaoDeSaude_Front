@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
     width: 100%;
-    height: 56px;
+    height: auto;
     flex-direction: row;
     align-items: center;
     background-color: ${({ theme }) => theme.COLORS.GREEN_700};
@@ -16,15 +16,16 @@ export const Container = styled.View`
 export const Txt = styled.Text`
     color: ${({ theme }) => theme.COLORS.WHITE};
     font-size: ${({ theme }) => theme.FONT_SIZE.XL};
-    margin-right: 60px;
+    text-align: center;
+    padding-right: 90px;
+    width: 100%;
 `;
 
 export const View = styled.View`
-    width: 100%;
     flex: 1;
+    width: 100%;
     align-items: center;
     justify-content: center;
-    margin-right: 50px;
     left: 0;
 `;
 

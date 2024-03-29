@@ -33,7 +33,7 @@ const json = [
 ];
 
 export default function Pressure() {
-    const [data, setData] = useState([{}]);
+    const [data, setData] = useState<any[]>([]);
     const [showPopUp, setShowPopUp] = useState(false);
 
     const handleOpenPopUp = () => {

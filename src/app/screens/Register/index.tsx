@@ -2,12 +2,12 @@ import { Buton } from "@components/Button";
 import { Footer } from "@components/Footer";
 import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
+import { sections } from "@utils/registerInputText";
 import { Image, Box, Checkbox, ScrollView, Text } from "native-base";
 import { useState } from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
 import Logo from "../../../../assets/logo.png";
-import { sections } from "../../utils/registerInputText";
 
 export default function Register({ navigation }: any) {
     const [numberSection, setNumSection] = useState(0);
@@ -45,7 +45,6 @@ export default function Register({ navigation }: any) {
                         );
                     })}
                 </Box>
-
                 <Box>
                     <Text>{sections[numberSection].subTitle}</Text>
                     {sections[numberSection].checkbox.map((checkbox) => {
@@ -56,7 +55,6 @@ export default function Register({ navigation }: any) {
                         );
                     })}
                 </Box>
-
                 {numberSection > 0 && (
                     <Buton onPress={() => backSection()} bgColor="gray.400">
                         Voltar
@@ -67,10 +65,7 @@ export default function Register({ navigation }: any) {
                     {numberSection == 2 ? "Finalizar" : "Avancar"}
                 </Buton>
             </ScrollView>
-
-            <TouchableOpacity onPress={() => navigation.navigate("About")}>
-                <Footer />
-            </TouchableOpacity>
+            <Footer navigation={navigation} />
         </>
     );
 }
