@@ -3,7 +3,7 @@ import { View } from "@screens/ListConsultationsHeld/styles";
 import React from "react";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 
-export default function ListConsultationsHeld({ navigation }: any) {
+export default function ListConsultationsHeld() {
     return (
         <>
             <Header text="Consultas Realizadas" isBackPress />

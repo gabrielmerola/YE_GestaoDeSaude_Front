@@ -1,4 +1,3 @@
-import BottomAddButton from "@components/BottomAddButton";
 import CancelAndSaveButton from "@components/CancelAndSaveButton";
 import { Header } from "@components/Header";
 import { PopUpAddButton } from "@components/PopUpAddButton";
@@ -10,7 +9,7 @@ import {
 import React, { useState } from "react";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 
-export default function ConsultationsHeld({ navigation }: any) {
+export default function ConsultationsHeld() {
     const [showConsultationsData, setShowConsultationsData] = useState(false);
 
     return (
