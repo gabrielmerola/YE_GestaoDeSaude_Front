@@ -1,39 +1,39 @@
 import CancelAndSaveButton from "@components/CancelAndSaveButton";
 import { Header } from "@components/Header";
-import MedicinesAndButton from "@components/MedicinesAndButton";
 import { View } from "@screens/NewMedicine/styles";
 import React from "react";
+import ListInteractableItem from "src/app/components/ListInteractableItem";
 
 export default function NewMedicine({ navigation }: any) {
     return (
         <>
             <Header text="Novo Medicamento" isBackPress />
             <View>
-                <MedicinesAndButton
+                <ListInteractableItem
                     text="Nome: "
                     navigation={navigation}
                     screenName="Login"
                     input
                 />
-                <MedicinesAndButton
+                <ListInteractableItem
                     text="Horário"
                     text2="09:00"
                     navigation={navigation}
                     screenName="Login"
                 />
-                <MedicinesAndButton
+                <ListInteractableItem
                     text="Período"
                     text2="7 dias"
                     navigation={navigation}
                     screenName="Login"
                 />
-                <MedicinesAndButton
+                <ListInteractableItem
                     text="Intervalo"
                     text2="8hs"
                     navigation={navigation}
                     screenName="Login"
                 />
-                <MedicinesAndButton
+                <ListInteractableItem
                     text="Quantidade"
                     text2="1"
                     navigation={navigation}
