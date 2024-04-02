@@ -2,7 +2,8 @@ import { Buton } from "@components/Button";
 import { Footer } from "@components/Footer";
 import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
-import { Image, Box, Checkbox, ScrollView, Text } from "native-base";
+import { registerClient } from "@services/clientServices";
+import { Image, Box, ScrollView, useToast } from "native-base";
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
 
@@ -10,17 +11,37 @@ import Logo from "../../../../assets/logo.png";
 import { sections } from "../../utils/registerInputText";
 
 export default function Register({ navigation }: any) {
-    const [numberSection, setNumSection] = useState(0);
+    const [data, setData] = useState({} as any);
+    const toast = useToast();
 
-    function advanceSection() {
-        if (numberSection < sections.length - 1) {
-            setNumSection(numberSection + 1);
-        }
+    function updateData(id: string, value: string) {
+        setData({ ...data, [id]: value });
     }
 
-    function backSection() {
-        if (numberSection > 0) {
-            setNumSection(numberSection - 1);
+    async function SignUp() {
+        const response = await registerClient({
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            phone: data.phone,
+            cpf: data.cpf
+        });
+        // console.log(response);
+        if (response.status === 201) {
+            toast.show({
+                title: response.message,
+                description: "Você já pode fazer login",
+                backgroundColor: "green.500",
+                placement: "top"
+            });
+            navigation.replace("Login");
+        } else {
+            toast.show({
+                title: response.message,
+                description: "Verifique os dados e tente novamente",
+                backgroundColor: "red.500",
+                placement: "top"
+            });
         }
     }
 
@@ -33,38 +54,26 @@ export default function Register({ navigation }: any) {
                     style={{ alignSelf: "center" }}
                 />
 
-                <Title>{sections[numberSection].title}</Title>
+                <Title>{sections.title}</Title>
                 <Box>
-                    {sections[numberSection]?.inputText?.map((input) => {
+                    {sections.inputText?.map((input) => {
                         return (
                             <InputField
                                 label={input.label}
                                 placeholder={input.placeholder}
                                 key={input.id}
+                                secureTextEntry={input.label.includes("senha")}
+                                onChangeText={(text) =>
+                                    updateData(input.name, text)
+                                }
+                                value={data[input.name]}
                             />
                         );
                     })}
                 </Box>
 
-                <Box>
-                    <Text>{sections[numberSection].subTitle}</Text>
-                    {sections[numberSection].checkbox.map((checkbox) => {
-                        return (
-                            <Checkbox key={checkbox.id} value={checkbox.value}>
-                                {checkbox.value}
-                            </Checkbox>
-                        );
-                    })}
-                </Box>
-
-                {numberSection > 0 && (
-                    <Buton onPress={() => backSection()} bgColor="gray.400">
-                        Voltar
-                    </Buton>
-                )}
-
-                <Buton onPress={() => advanceSection()} mt={4} mb={20}>
-                    {numberSection == 2 ? "Finalizar" : "Avancar"}
+                <Buton onPress={() => SignUp()} mt={10}>
+                    Criar e acessar
                 </Buton>
             </ScrollView>
 

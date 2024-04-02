@@ -1,11 +1,12 @@
 import "react-native-gesture-handler";
 import { Loading } from "@components/Loading";
+import { AuthContext, AuthContextProvider } from "@contexts/authContext";
 import {
     useFonts,
     Jost_400Regular,
     Jost_700Bold
 } from "@expo-google-fonts/jost";
-import Routes from "@routes/stack.routes";
+import Routes from "@routes/index";
 import { NativeBaseProvider, StatusBar } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemeProvider } from "styled-components";
@@ -24,7 +25,9 @@ export default function App() {
                         backgroundColor="transparent"
                         translucent
                     />
-                    {fontsLoaded ? <Routes /> : <Loading />}
+                    <AuthContextProvider>
+                        {fontsLoaded ? <Routes /> : <Loading />}
+                    </AuthContextProvider>
                 </ThemeProvider>
             </NativeBaseProvider>
         </SafeAreaView>
