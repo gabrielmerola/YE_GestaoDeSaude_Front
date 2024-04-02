@@ -4,18 +4,14 @@ import { View } from "@screens/ExamsDetected/styles";
 import React from "react";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 
-export default function ExamsDetected({ navigation }: any) {
+export default function ExamsDetected() {
     return (
         <>
             <Header text="Exames Detectados" isBackPress />
             <View>
-                <ListInteractableItem
-                    text="Hemograma"
-                    screenName=""
-                    navigation={navigation}
-                />
+                <ListInteractableItem text="Hemograma" />
             </View>
-            <CancelAndSaveButton navigation={navigation} />
+            <CancelAndSaveButton />
         </>
     );
 }

@@ -1,4 +1,3 @@
-import BottomAddButton from "@components/BottomAddButton";
 import CancelAndSaveButton from "@components/CancelAndSaveButton";
 import { Header } from "@components/Header";
 import { PopUpAddButton } from "@components/PopUpAddButton";
@@ -7,7 +6,7 @@ import { View, ButtonContainer } from "@screens/ExamsHistory/styles";
 import React, { useState } from "react";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 
-export default function ExamsHistory({ navigation }: any) {
+export default function ExamsHistory() {
     const [showExamsDetected, setShowExamsDetected] = useState(false);
     const [showExamsData, setShowExamsData] = useState(false);
 

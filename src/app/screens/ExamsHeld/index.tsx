@@ -3,7 +3,7 @@ import { View } from "@screens/ExamsHeld/styles";
 import React from "react";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 
-export default function ExamsHeld({ navigation }: any) {
+export default function ExamsHeld() {
     return (
         <>
             <Header text="Exames Realizados" isBackPress />
