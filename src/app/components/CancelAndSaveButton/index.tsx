@@ -4,21 +4,20 @@ import {
     Button
 } from "@components/CancelAndSaveButton/styles";
 import React from "react";
-import { Text } from "react-native";
 
 interface CancelAndSaveButtonProps {
-    navigation?: any;
+    onPress: () => void;
 }
 
 export default function CancelAndSaveButton({
-    navigation
+    onPress
 }: CancelAndSaveButtonProps) {
     return (
         <Container>
-            <Button onPress={() => navigation.goBack()}>
+            <Button onPress={onPress}>
                 <ButtonText> Cancelar</ButtonText>
             </Button>
-            <Button onPress={() => navigation.goBack()}>
+            <Button onPress={onPress}>
                 <ButtonText> Salvar</ButtonText>
             </Button>
         </Container>

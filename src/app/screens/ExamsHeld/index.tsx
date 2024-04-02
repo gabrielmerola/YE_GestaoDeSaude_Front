@@ -1,19 +1,14 @@
 import { Header } from "@components/Header";
-import MedicinesAndButton from "@components/MedicinesAndButton";
 import { View } from "@screens/ExamsHeld/styles";
 import React from "react";
+import ListInteractableItem from "src/app/components/ListInteractableItem";
 
-export default function ExamsHeld({ navigation }: any) {
+export default function ExamsHeld() {
     return (
         <>
             <Header text="Exames Realizados" isBackPress />
             <View>
-                <MedicinesAndButton
-                    text="Glicose"
-                    screenName=""
-                    navigation={navigation}
-                    chevron
-                />
+                <ListInteractableItem text="Glicose" />
             </View>
         </>
     );

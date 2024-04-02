@@ -1,21 +1,17 @@
 import CancelAndSaveButton from "@components/CancelAndSaveButton";
 import { Header } from "@components/Header";
-import MedicinesAndButton from "@components/MedicinesAndButton";
 import { View } from "@screens/ExamsDetected/styles";
 import React from "react";
+import ListInteractableItem from "src/app/components/ListInteractableItem";
 
-export default function ExamsDetected({ navigation }: any) {
+export default function ExamsDetected() {
     return (
         <>
             <Header text="Exames Detectados" isBackPress />
             <View>
-                <MedicinesAndButton
-                    text="Hemograma"
-                    screenName=""
-                    navigation={navigation}
-                />
+                <ListInteractableItem text="Hemograma" />
             </View>
-            <CancelAndSaveButton navigation={navigation} />
+            <CancelAndSaveButton />
         </>
     );
 }
