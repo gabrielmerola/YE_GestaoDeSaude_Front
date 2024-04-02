@@ -56,7 +56,7 @@ export const Header = ({
             )}
 
             {isModal && (
-                <Button variant="unstyled" onPress={() => onModalClose}>
+                <Button variant="unstyled" onPress={onModalClose}>
                     <View>
                         <ChevronLeftIcon
                             style={{ color: "#fff" }}
