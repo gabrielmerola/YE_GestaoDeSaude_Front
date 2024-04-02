@@ -4,7 +4,6 @@ import {
     Button
 } from "@components/CancelAndSaveButton/styles";
 import React from "react";
-import { Text } from "react-native";
 
 interface CancelAndSaveButtonProps {
     onPress: () => void;
@@ -15,10 +14,10 @@ export default function CancelAndSaveButton({
 }: CancelAndSaveButtonProps) {
     return (
         <Container>
-            <Button onPress={() => onPress}>
+            <Button onPress={onPress}>
                 <ButtonText> Cancelar</ButtonText>
             </Button>
-            <Button onPress={() => onPress}>
+            <Button onPress={onPress}>
                 <ButtonText> Salvar</ButtonText>
             </Button>
         </Container>
