@@ -13,13 +13,12 @@ import NewMedicine from "@screens/NewMedicine";
 import Perfil from "@screens/Perfil";
 import Pressure from "@screens/Pressure";
 
-import AuthRoutes from "./auth.routes";
-
 const Stack = createNativeStackNavigator();
 
 export default function StackRoutes() {
     return (
         <Stack.Navigator
+            initialRouteName="Drawer"
             screenOptions={{
                 headerTitle: "",
                 headerShown: false

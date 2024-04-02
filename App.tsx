@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import { Loading } from "@components/Loading";
-import { AuthContext } from "@contexts/authContext";
+import { AuthContext, AuthContextProvider } from "@contexts/authContext";
 import {
     useFonts,
     Jost_400Regular,
@@ -25,16 +25,9 @@ export default function App() {
                         backgroundColor="transparent"
                         translucent
                     />
-                    <AuthContext.Provider
-                        value={{
-                            id: "1",
-                            name: "Lucao",
-                            email: "joao@gmail.com",
-                            phone: "11987654321"
-                        }}
-                    >
+                    <AuthContextProvider>
                         {fontsLoaded ? <Routes /> : <Loading />}
-                    </AuthContext.Provider>
+                    </AuthContextProvider>
                 </ThemeProvider>
             </NativeBaseProvider>
         </SafeAreaView>

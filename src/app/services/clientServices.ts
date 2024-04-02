@@ -24,7 +24,34 @@ export async function registerClient(user: FormDataProps): Promise<Props> {
     } catch (error: AxiosError | any) {
         return {
             status: error.response.status,
-            message: error.response.data.message
+            message: error.response.data
         };
     }
 }
+
+// export async function doLogin(email: string, password: string) {
+//     try {
+//         if (!email || !password) {
+//             return {
+//                 status: 422,
+//                 message: "Preencha todos os campos",
+//                 token: "Token inválida "
+//             };
+//         }
+//         const result: AxiosResponse = await api.post('/auth', {
+//             "email": email,
+//             "password": password
+//         })
+//         console.log(result.data);
+//         return {
+//             status: result.status,
+//             token: result.data.token
+//         }
+//     }
+//     catch (error: AxiosError | any) {
+//         return {
+//             status: error.result.status,
+//             token: error.result.data
+//         };
+//     }
+// }

@@ -1,17 +1,10 @@
-import { AuthContext } from "@contexts/authContext";
-import { NavigationContainer } from "@react-navigation/native";
-import { useContext } from "react";
-
 import AuthRoutes from "./auth.routes";
-import StackRoutes from "./stack.routes";
+import { useAuth } from "../../app/hooks/useAuth";
 
 export default function Routes() {
-    const contextData = useContext(AuthContext);
-    console.log("USUÁRIO LOGADO =>", contextData);
+    const { user } = useAuth();
 
-    return (
-        <NavigationContainer>
-            <AuthRoutes />
-        </NavigationContainer>
-    );
+    console.log("USUÁRIO LOGADO =>", user);
+
+    return <AuthRoutes />;
 }
