@@ -1,5 +1,4 @@
 import CancelAndSaveButton from "@components/CancelAndSaveButton";
-import DrawerItemsModal from "@components/DrawerItemsModal";
 import { Header } from "@components/Header";
 import { PopUpAddButton } from "@components/PopUpAddButton";
 import {
@@ -37,7 +36,7 @@ const json = [
 //         />
 //     </View>
 
-export default function Medicines({ navigation }: any) {
+export default function Medicines() {
     const [showNewMedicines, setShowNewMedicines] = useState(false);
     const [showMedicineData, setShowMedicineData] = useState(false);
 
