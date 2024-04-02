@@ -7,11 +7,13 @@ import ExamsHeld from "@screens/ExamsHeld";
 import ExamsHistory from "@screens/ExamsHistory";
 import Glucose from "@screens/Glucose";
 import IMC from "@screens/IMC";
+import Language from "@screens/Language";
 import ListConsultationsHeld from "@screens/ListConsultationsHeld";
 import Medicines from "@screens/Medicines";
 import NewMedicine from "@screens/NewMedicine";
 import Perfil from "@screens/Perfil";
 import Pressure from "@screens/Pressure";
+import Settings from "@screens/Settings";
 
 const Stack = createNativeStackNavigator();
 

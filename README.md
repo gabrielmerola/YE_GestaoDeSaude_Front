@@ -86,6 +86,14 @@ We thank the following people who developed for this project:
         </sub>
       </a>
     </td>
+    <td align="center">
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/125588055?v=4" width="100px;" alt="era uma foto daora"/><br>
+        <sub>
+          <p><b><i>Lucca Oliveira:</i></b> <a href="https://github.com/luckfero"><i>Lucca Oliveira</i></a></p>
+        </sub>
+      </a>
+    </td>
   </tr>
 </table>
 
