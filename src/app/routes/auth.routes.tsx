@@ -4,6 +4,7 @@ import About from "@screens/About";
 import Home from "@screens/Home";
 import Login from "@screens/Login";
 import Register from "@screens/Register";
+import Settings from "@screens/Settings";
 
 import DrawerRoutes from "./drawer.routes";
 import StackRoutes from "./stack.routes";
