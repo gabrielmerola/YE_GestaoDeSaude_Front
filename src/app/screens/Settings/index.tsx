@@ -1,30 +1,40 @@
 import { Header } from "@components/Header";
-import { VStack } from "native-base";
+import { VStack, HStack, Center } from "native-base";
 import React from "react";
 
-import { Txt, ImageData, TextContact, Container, SecContainer } from "./styles";
+import { FooterContact, TextData, Text } from "./styles";
 import ConfigButtons from "../../components/ConfigButtons";
 
-const Settings = ({ navigation }: any) => {
+export default function Settings({ navigation }: any) {
     const buttons = [
         {
             text: "Notificações",
             iconSource: require("assets/notificacao.png"),
-            screenName: "Login"
+            screenName: "About"
         },
         {
             text: "Suporte",
             iconSource: require("assets/suporte.png"),
-            screenName: "Login"
+            screenName: "Pressure"
         },
         {
             text: "Perfil",
             iconSource: require("assets/perfil.png"),
             screenName: "Perfil"
         },
-        {
+        /*{
             text: "Idioma",
             iconSource: require("assets/Idioma.png"),
+            screenName: "Language"
+        },*/
+        {
+            text: "Supervisão",
+            iconSource: require("assets/Supervisao.png"),
+            screenName: "Home"
+        },
+        {
+            text: "Segurança",
+            iconSource: require("assets/Seguranca.png"),
             screenName: "Login"
         }
     ];
@@ -44,19 +54,14 @@ const Settings = ({ navigation }: any) => {
                     iconSource={button.iconSource}
                 />
             ))}
-            <Container>
-                <Txt>Dados para contato:</Txt>
-                <SecContainer>
-                    <ImageData source={require("assets/Telefone.png")} />
-                    <TextContact>(00) 00000-0000</TextContact>
-                </SecContainer>
-                <SecContainer>
-                    <ImageData source={require("assets/Email.png")} />
-                    <TextContact>abcdef@xxxx.com</TextContact>
-                </SecContainer>
-            </Container>
+            <FooterContact>
+                <Center>
+                    <HStack space={1}>
+                        <Text>Dados para contato:</Text>
+                        <TextData>abcdef@xxxx.com/(00) 00000-0000</TextData>
+                    </HStack>
+                </Center>
+            </FooterContact>
         </VStack>
     );
-};
-
-export default Settings;
+}
