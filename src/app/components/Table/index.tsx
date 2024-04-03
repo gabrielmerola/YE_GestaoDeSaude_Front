@@ -1,5 +1,4 @@
 import { Cell, CellText, Container, Separator } from "@components/Table/styles";
-import React from "react";
 
 type Props = {
     rows: [object];
@@ -17,7 +16,13 @@ export function Table({ rows }: Props) {
                         <CellText type="green">{row.medida}</CellText>
                     </Cell>
                     <Cell type="gray">
-                        <CellText type="gray">{row.nivel}</CellText>
+                        <CellText
+                            adjustsFontSizeToFit
+                            numberOfLines={1}
+                            type="gray"
+                        >
+                            {row.nivel}
+                        </CellText>
                     </Cell>
                 </Container>
             ))}
