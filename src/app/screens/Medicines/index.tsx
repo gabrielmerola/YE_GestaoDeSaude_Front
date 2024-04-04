@@ -69,13 +69,6 @@ export default function Medicines() {
             </ButtonContainer>
 
             {showNewMedicines ? (
-                // <DrawerItemsModal
-                //     headerTxt="Novo Medicamento"
-                //     onModalClose={() => setShowNewMedicines(false)}
-                //     rows={json}
-                //     isCancelAndSave
-                // />
-
                 <ModalContainer>
                     <Header
                         text="Novo Medicamento"
@@ -88,6 +81,7 @@ export default function Medicines() {
                             isButton={false}
                             inputType="TEXT"
                             inputTxt="Digite o nome do medicamento..."
+                            sizeType="LARGE"
                         />
                         <ListInteractableItem
                             text="Horário:"

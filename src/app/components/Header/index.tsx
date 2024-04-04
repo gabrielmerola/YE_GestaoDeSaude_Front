@@ -28,7 +28,13 @@ export const Header = ({
     return (
         <Container>
             {isBackPress && (
-                <Button variant="unstyled" onPress={() => navigation.goBack()}>
+                <Button
+                    variant="unstyled"
+                    onPress={() => {
+                        navigation.goBack();
+                        onModalClose?.();
+                    }}
+                >
                     <View>
                         <ChevronLeftIcon
                             style={{ color: "#fff" }}
