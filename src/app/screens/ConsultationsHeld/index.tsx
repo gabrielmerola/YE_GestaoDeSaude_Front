@@ -5,7 +5,6 @@ import { PopUpAddButton } from "@components/PopUpAddButton";
 import { Table } from "@components/Table";
 import { Separator } from "@components/Table/styles";
 import {
-    BigInput,
     ButtonContainer,
     ConsultationsDataHeader,
     ConsultationsDataHeaderTitle,
