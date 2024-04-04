@@ -13,6 +13,7 @@ import Medicines from "@screens/Medicines";
 import NewMedicine from "@screens/NewMedicine";
 import Perfil from "@screens/Perfil";
 import Pressure from "@screens/Pressure";
+import Security from "@screens/Security";
 import Settings from "@screens/Settings";
 
 const Stack = createNativeStackNavigator();
@@ -34,6 +35,7 @@ export default function StackRoutes() {
             <Stack.Screen name="Settings" component={Settings} />
             <Stack.Screen name="Medicines" component={Medicines} />
             <Stack.Screen name="NewMedicine" component={NewMedicine} />
+            <Stack.Screen name="Security" component={Security} />
             <Stack.Screen
                 name="ConsultationsHeld"
                 component={ConsultationsHeld}
