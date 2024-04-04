@@ -1,7 +1,7 @@
 import { css } from "styled-components";
 import styled from "styled-components/native";
 
-export type CellColor = "green" | "gray";
+export type CellColor = "green" | "gray" | "dark-gray";
 
 type Props = {
     type: CellColor;
@@ -18,10 +18,13 @@ export const Cell = styled.View<Props>`
     align-items: center;
     display: inline-block;
     justify-content: center;
-    padding: 24px 0;
+    height: 76px;
     background-color: ${({ theme, type }) =>
-        type === "gray" ? theme.COLORS.GRAY_300 : theme.COLORS.GREEN_700};
-    border-bottom: 10px green;
+        type === "gray"
+            ? theme.COLORS.GRAY_300
+            : type === "green"
+              ? theme.COLORS.GREEN_700
+              : theme.COLORS.GRAY_400};
 `;
 export const CellText = styled.Text<Props>`
     ${({ theme }) => css`
