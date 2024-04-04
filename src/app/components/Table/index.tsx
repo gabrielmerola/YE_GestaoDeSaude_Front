@@ -1,5 +1,4 @@
 import { Cell, CellText, Container, Separator } from "@components/Table/styles";
-import React from "react";
 
 type Props = {
     rows: [object];
