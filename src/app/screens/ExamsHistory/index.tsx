@@ -1,14 +1,25 @@
 import CancelAndSaveButton from "@components/CancelAndSaveButton";
 import { Header } from "@components/Header";
 import { PopUpAddButton } from "@components/PopUpAddButton";
-import { ModalContainer } from "@screens/ConsultationsHeld/styles";
-import { View, ButtonContainer } from "@screens/ExamsHistory/styles";
+import { Table } from "@components/Table";
+import {
+    View,
+    ButtonContainer,
+    ModalContainer
+} from "@screens/ExamsHistory/styles";
 import React, { useState } from "react";
+import Collapsible from "react-native-collapsible";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 
 export default function ExamsHistory() {
     const [showExamsDetected, setShowExamsDetected] = useState(false);
     const [showExamsData, setShowExamsData] = useState(false);
+
+    const [isCollapsed, setIsCollapsed] = useState(true);
+
+    const toggleCollapsible = () => {
+        setIsCollapsed(!isCollapsed);
+    };
 
     return (
         <>
@@ -66,21 +77,26 @@ export default function ExamsHistory() {
                         onModalClose={() => setShowExamsData(false)}
                     />
                     <View>
-                        <ListInteractableItem text="Glicose" isButton />
+                        <ListInteractableItem
+                            text="Glicose"
+                            downChevron
+                            changeIcon={isCollapsed}
+                            isButton
+                            modalFunction={toggleCollapsible}
+                        />
+
+                        <Collapsible collapsed={isCollapsed} align="center">
+                            <Table
+                                rows={[
+                                    {
+                                        date: "17/02/2023",
+                                        especialty: "79 mg/dl"
+                                    }
+                                ]}
+                            />
+                        </Collapsible>
                     </View>
-                    {/*<View>*/}
-                    {/*    <ListItem.Accordion*/}
-                    {/*        content={*/}
-                    {/*            <>*/}
-                    {/*                <Icon name="place" size={30} />*/}
-                    {/*                <ListItem.Content>*/}
-                    {/*                    <ListItem.Title>List Accordion</ListItem.Title>*/}
-                    {/*                </ListItem.Content>*/}
-                    {/*            </>*/}
-                    {/*        }*/}
-                    {/*    >*/}
-                    {/*    </ListItem.Accordion>*/}
-                    {/*</View>*/}
+
                     <CancelAndSaveButton
                         onPress={() => setShowExamsData(false)}
                     />
