@@ -13,8 +13,11 @@ export const ModalContainer = styled(Modal).attrs({
 })``;
 
 export const ButtonContainer = styled.View`
-    flex: 1;
     flex-direction: column-reverse;
     justify-content: space-between;
     background-color: white;
+`;
+
+export const FlatListStyled = styled.FlatList`
+    max-height: 256px;
 `;

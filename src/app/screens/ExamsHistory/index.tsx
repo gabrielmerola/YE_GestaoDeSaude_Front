@@ -5,7 +5,8 @@ import { Table } from "@components/Table";
 import {
     View,
     ButtonContainer,
-    ModalContainer
+    ModalContainer,
+    FlatListStyled
 } from "@screens/ExamsHistory/styles";
 import React, { useState } from "react";
 import Collapsible from "react-native-collapsible";
@@ -13,30 +14,161 @@ import ListInteractableItem from "src/app/components/ListInteractableItem";
 
 export default function ExamsHistory() {
     const [showExamsDetected, setShowExamsDetected] = useState(false);
-    const [showExamsData, setShowExamsData] = useState(false);
 
-    const [isCollapsed, setIsCollapsed] = useState(true);
+    type ItemName = "glucose" | "hemogram" | "cholesterol" | "ast" | "alt";
 
-    const toggleCollapsible = () => {
-        setIsCollapsed(!isCollapsed);
+    const [collapsedItems, setCollapsedItems] = useState({
+        glucose: true,
+        hemogram: true,
+        cholesterol: true,
+        ast: true,
+        alt: true
+    });
+
+    const toggleCollapsible = (itemName: ItemName) => {
+        setCollapsedItems({
+            ...collapsedItems,
+            [itemName]: !collapsedItems[itemName]
+        });
     };
 
     return (
         <>
-            <Header text="Histórico de Exames" isBackPress />
+            <Header
+                text="Histórico de Exames"
+                isBackPress
+                onModalClose={() =>
+                    setCollapsedItems({
+                        glucose: true,
+                        hemogram: true,
+                        cholesterol: true,
+                        ast: true,
+                        alt: true
+                    })
+                }
+            />
             <View>
-                <ListInteractableItem text="Hemograma" isButton />
-                <ListInteractableItem text="Colesterol Total" isButton />
+                <ListInteractableItem
+                    text="Hemograma"
+                    downChevron
+                    changeIcon={collapsedItems.hemogram}
+                    isButton
+                    modalFunction={() => toggleCollapsible("hemogram")}
+                />
+
+                <Collapsible collapsed={collapsedItems.hemogram} align="center">
+                    <FlatListStyled
+                        data={[
+                            {
+                                date: "17/02/2023",
+                                especialty: "4.500.000/mm³"
+                            }
+                        ]}
+                        keyExtractor={(item) => item.date}
+                        renderItem={({ item }) => <Table rows={[item]} />}
+                    />
+                </Collapsible>
+
+                <ListInteractableItem
+                    text="Colesterol Total"
+                    downChevron
+                    changeIcon={collapsedItems.cholesterol}
+                    isButton
+                    modalFunction={() => toggleCollapsible("cholesterol")}
+                />
+
+                <Collapsible
+                    collapsed={collapsedItems.cholesterol}
+                    align="center"
+                >
+                    <FlatListStyled
+                        data={[
+                            {
+                                date: "17/02/2023",
+                                especialty: "25 U/L"
+                            }
+                        ]}
+                        keyExtractor={(item) => item.date}
+                        renderItem={({ item }) => <Table rows={[item]} />}
+                    />
+                </Collapsible>
+
                 <ListInteractableItem
                     text="Glicose"
+                    downChevron
+                    changeIcon={collapsedItems.glucose}
                     isButton
-                    modalFunction={() => setShowExamsData(true)}
+                    modalFunction={() => toggleCollapsible("glucose")}
                 />
-                <ListInteractableItem text="TGO" isButton />
-                <ListInteractableItem text="TGP" isButton />
+
+                <Collapsible collapsed={collapsedItems.glucose} align="center">
+                    <FlatListStyled
+                        data={[
+                            {
+                                date: "17/02/2023",
+                                especialty: "79 mg/dl"
+                            }
+                        ]}
+                        keyExtractor={(item) => item.date}
+                        renderItem={({ item }) => <Table rows={[item]} />}
+                    />
+                </Collapsible>
+
+                <ListInteractableItem
+                    text="TGO"
+                    downChevron
+                    changeIcon={collapsedItems.ast}
+                    isButton
+                    modalFunction={() => toggleCollapsible("ast")}
+                />
+
+                <Collapsible collapsed={collapsedItems.ast} align="center">
+                    <FlatListStyled
+                        data={[
+                            {
+                                date: "17/02/2023",
+                                especialty: "25 U/L"
+                            }
+                        ]}
+                        keyExtractor={(item) => item.date}
+                        renderItem={({ item }) => <Table rows={[item]} />}
+                    />
+                </Collapsible>
+
+                <ListInteractableItem
+                    text="TGP"
+                    downChevron
+                    changeIcon={collapsedItems.alt}
+                    isButton
+                    modalFunction={() => toggleCollapsible("alt")}
+                />
+
+                <Collapsible collapsed={collapsedItems.alt} align="center">
+                    <FlatListStyled
+                        data={[
+                            {
+                                date: "17/02/2023",
+                                especialty: "28 U/L"
+                            }
+                        ]}
+                        keyExtractor={(item) => item.date}
+                        renderItem={({ item }) => <Table rows={[item]} />}
+                    />
+                </Collapsible>
             </View>
             <ButtonContainer>
-                <PopUpAddButton onOpen={() => setShowExamsDetected(true)} />
+                <PopUpAddButton
+                    onOpen={() => {
+                        setShowExamsDetected(true);
+                        setCollapsedItems({
+                            glucose: true,
+                            hemogram: true,
+                            cholesterol: true,
+                            ast: true,
+                            alt: true
+                        });
+                    }}
+                />
             </ButtonContainer>
 
             {showExamsDetected ? (
@@ -44,61 +176,161 @@ export default function ExamsHistory() {
                     <Header
                         text="Exames Detectados"
                         isModal
-                        onModalClose={() => setShowExamsDetected(false)}
+                        onModalClose={() => {
+                            setShowExamsDetected(false);
+                            setCollapsedItems({
+                                glucose: true,
+                                hemogram: true,
+                                cholesterol: true,
+                                ast: true,
+                                alt: true
+                            });
+                        }}
                     />
                     <View>
-                        <ListInteractableItem text="Hemograma" isButton />
+                        <ListInteractableItem
+                            text="Hemograma"
+                            downChevron
+                            changeIcon={collapsedItems.hemogram}
+                            isButton
+                            modalFunction={() => toggleCollapsible("hemogram")}
+                        />
+
+                        <Collapsible
+                            collapsed={collapsedItems.hemogram}
+                            align="center"
+                        >
+                            <FlatListStyled
+                                data={[
+                                    {
+                                        date: "17/02/2023",
+                                        especialty: "4.500.000/mm³"
+                                    }
+                                ]}
+                                keyExtractor={(item) => item.date}
+                                renderItem={({ item }) => (
+                                    <Table rows={[item]} />
+                                )}
+                            />
+                        </Collapsible>
+
                         <ListInteractableItem
                             text="Colesterol Total"
+                            downChevron
+                            changeIcon={collapsedItems.cholesterol}
                             isButton
+                            modalFunction={() =>
+                                toggleCollapsible("cholesterol")
+                            }
                         />
-                        <ListInteractableItem
-                            text="Glicose"
-                            isButton
-                            modalFunction={() => setShowExamsData(true)}
-                        />
-                        <ListInteractableItem text="TGO" isButton />
-                        <ListInteractableItem text="TGP" isButton />
-                    </View>
-                    <CancelAndSaveButton
-                        onPress={() => setShowExamsDetected(false)}
-                    />
-                </ModalContainer>
-            ) : (
-                <></>
-            )}
 
-            {showExamsData ? (
-                // Usar ListItem.Accordion para exibir os dados do exame
-                <ModalContainer>
-                    <Header
-                        text="Exames Realizados"
-                        isModal
-                        onModalClose={() => setShowExamsData(false)}
-                    />
-                    <View>
+                        <Collapsible
+                            collapsed={collapsedItems.cholesterol}
+                            align="center"
+                        >
+                            <FlatListStyled
+                                data={[
+                                    {
+                                        date: "17/02/2023",
+                                        especialty: "25 U/L"
+                                    }
+                                ]}
+                                keyExtractor={(item) => item.date}
+                                renderItem={({ item }) => (
+                                    <Table rows={[item]} />
+                                )}
+                            />
+                        </Collapsible>
+
                         <ListInteractableItem
                             text="Glicose"
                             downChevron
-                            changeIcon={isCollapsed}
+                            changeIcon={collapsedItems.glucose}
                             isButton
-                            modalFunction={toggleCollapsible}
+                            modalFunction={() => toggleCollapsible("glucose")}
                         />
 
-                        <Collapsible collapsed={isCollapsed} align="center">
-                            <Table
-                                rows={[
+                        <Collapsible
+                            collapsed={collapsedItems.glucose}
+                            align="center"
+                        >
+                            <FlatListStyled
+                                data={[
                                     {
                                         date: "17/02/2023",
                                         especialty: "79 mg/dl"
                                     }
                                 ]}
+                                keyExtractor={(item) => item.date}
+                                renderItem={({ item }) => (
+                                    <Table rows={[item]} />
+                                )}
+                            />
+                        </Collapsible>
+
+                        <ListInteractableItem
+                            text="TGO"
+                            downChevron
+                            changeIcon={collapsedItems.ast}
+                            isButton
+                            modalFunction={() => toggleCollapsible("ast")}
+                        />
+
+                        <Collapsible
+                            collapsed={collapsedItems.ast}
+                            align="center"
+                        >
+                            <FlatListStyled
+                                data={[
+                                    {
+                                        date: "17/02/2023",
+                                        especialty: "25 U/L"
+                                    }
+                                ]}
+                                keyExtractor={(item) => item.date}
+                                renderItem={({ item }) => (
+                                    <Table rows={[item]} />
+                                )}
+                            />
+                        </Collapsible>
+
+                        <ListInteractableItem
+                            text="TGP"
+                            downChevron
+                            changeIcon={collapsedItems.alt}
+                            isButton
+                            modalFunction={() => toggleCollapsible("alt")}
+                        />
+
+                        <Collapsible
+                            collapsed={collapsedItems.alt}
+                            align="center"
+                        >
+                            <FlatListStyled
+                                data={[
+                                    {
+                                        date: "17/02/2023",
+                                        especialty: "28 U/L"
+                                    }
+                                ]}
+                                keyExtractor={(item) => item.date}
+                                renderItem={({ item }) => (
+                                    <Table rows={[item]} />
+                                )}
                             />
                         </Collapsible>
                     </View>
-
                     <CancelAndSaveButton
-                        onPress={() => setShowExamsData(false)}
+                        onPress={() => {
+                            setShowExamsDetected(false);
+                            setCollapsedItems({
+                                glucose: true,
+                                hemogram: true,
+                                cholesterol: true,
+                                ast: true,
+                                alt: true
+                            });
+                        }}
                     />
                 </ModalContainer>
             ) : (
