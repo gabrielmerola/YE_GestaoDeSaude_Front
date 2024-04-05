@@ -1,7 +1,7 @@
 import { Header } from "@components/Header";
-import { VStack } from "native-base";
-import React, { useState } from "react";
-import { Alert } from "react-native";
+import { VStack, useToast } from "native-base";
+import { useState } from "react";
+import { TouchableOpacity } from "react-native";
 
 import {
     Text,
@@ -16,7 +16,9 @@ import {
     TextNewPassword,
     InputNewPassword,
     TextPasswordRestricion,
-    TextRestricion
+    TextRestricion,
+    Image,
+    ContainerInput
 } from "./styles";
 
 export default function Security() {
@@ -24,42 +26,68 @@ export default function Security() {
     const [newPassword, setNewPassword] = useState("");
     const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
     const [isValidationPassed, setIsValidationPassed] = useState(false);
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+        useState(false);
+    const toast = useToast();
     const restricion = [
         { id: "1", text: "No mínimo 6 caracteres" },
         { id: "2", text: "Ao menos uma letra maiúscula" },
         { id: "3", text: "Ao menos uma letra minúscula" },
         { id: "4", text: "Ao menos um caractere especial." }
-        // Adicione mais itens conforme necessário
     ];
 
     const validateInput = () => {
         const emailRegex = /\S+@\S+\.\S+/;
         if (!emailRegex.test(email)) {
-            Alert.alert(
-                "Erro",
-                "Por favor, insira um endereço de email válido."
-            );
+            toast.show({
+                title: "Erro",
+                description: "Por favor, insira um endereço de email válido.",
+                duration: 4000,
+                placement: "top"
+            });
             return;
         }
 
         setIsValidationPassed(true);
-        Alert.alert("Sucesso", "Dados encontrados e validados!");
+        toast.show({
+            title: "Sucesso",
+            description: "Dados encontrados e validados!",
+            duration: 4000,
+            placement: "top"
+        });
     };
 
     const handleNewPasswordConfirmation = () => {
         if (newPassword !== newPasswordConfirm) {
-            Alert.alert("Erro", "As senhas não coincidem.");
+            toast.show({
+                title: "Erro",
+                description: "As senhas não coincidem.",
+                duration: 4000,
+                placement: "top"
+            });
             return;
         }
 
         const passwordRegex =
             /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
         if (!passwordRegex.test(newPassword)) {
-            Alert.alert("Erro", "A senha é inválida.");
+            toast.show({
+                title: "Erro",
+                description: "A senha é inválida.",
+                duration: 4000,
+                placement: "top"
+            });
             return;
         }
 
-        Alert.alert("Sucesso", "A senha foi atualizada com êxito!");
+        toast.show({
+            title: "Sucesso",
+            description: "A senha foi atualizada com êxito!",
+            duration: 4000,
+            placement: "top"
+        });
+
         setEmail("");
         setNewPassword("");
         setNewPasswordConfirm("");
@@ -72,19 +100,55 @@ export default function Security() {
             {isValidationPassed ? (
                 <ContainerNewPassword>
                     <TextNewPassword>Nova Senha:</TextNewPassword>
-                    <InputNewPassword
-                        placeholder="Digite aqui..."
-                        value={newPassword}
-                        onChangeText={setNewPassword}
-                    />
+                    <ContainerInput>
+                        <InputNewPassword
+                            placeholder="Digite aqui..."
+                            value={newPassword}
+                            onChangeText={setNewPassword}
+                            secureTextEntry={!isPasswordVisible}
+                        />
+                        <TouchableOpacity
+                            onPress={() =>
+                                setIsPasswordVisible(!isPasswordVisible)
+                            }
+                        >
+                            <Image
+                                source={
+                                    isPasswordVisible
+                                        ? require("../../../../assets/Visualizar.png")
+                                        : require("../../../../assets/Ocultar.png")
+                                }
+                            />
+                        </TouchableOpacity>
+                    </ContainerInput>
                     <TextNewPasswordConfirm>
                         Confirmar Nova Senha:
                     </TextNewPasswordConfirm>
-                    <InputNewPasswordConfirm
-                        placeholder="Digite aqui..."
-                        value={newPasswordConfirm}
-                        onChangeText={setNewPasswordConfirm}
-                    />
+
+                    <ContainerInput>
+                        <InputNewPasswordConfirm
+                            placeholder="Digite aqui..."
+                            value={newPasswordConfirm}
+                            onChangeText={setNewPasswordConfirm}
+                            secureTextEntry={!isConfirmPasswordVisible}
+                        />
+                        <TouchableOpacity
+                            onPress={() =>
+                                setIsConfirmPasswordVisible(
+                                    !isConfirmPasswordVisible
+                                )
+                            }
+                        >
+                            <Image
+                                source={
+                                    isConfirmPasswordVisible
+                                        ? require("../../../../assets/Visualizar.png")
+                                        : require("../../../../assets/Ocultar.png")
+                                }
+                            />
+                        </TouchableOpacity>
+                    </ContainerInput>
+
                     <TextPasswordRestricion>
                         A senha deve conter:{" "}
                     </TextPasswordRestricion>
