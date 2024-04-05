@@ -22,7 +22,7 @@ export default function AuthRoutes() {
     return (
         <NavigationContainer>
             <AuthStack.Navigator
-                initialRouteName="Security"
+                initialRouteName="Home"
                 screenOptions={{
                     headerTitle: "",
                     headerShown: false
@@ -31,7 +31,6 @@ export default function AuthRoutes() {
                 <AuthStack.Screen name="Home" component={Home} />
                 <AuthStack.Screen name="About" component={About} />
                 <AuthStack.Screen name="Login" component={Login} />
-                <AuthStack.Screen name="Security" component={Security} />
                 <AuthStack.Screen name="Register" component={Register} />
                 <AuthStack.Screen name="StackRoutes" component={StackRoutes} />
             </AuthStack.Navigator>
