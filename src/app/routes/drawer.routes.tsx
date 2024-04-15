@@ -3,6 +3,7 @@ import ConsultationsHeld from "@screens/ConsultationsHeld";
 import ExamsHistory from "@screens/ExamsHistory";
 import Main from "@screens/Main";
 import Medicines from "@screens/Medicines";
+import Settings from "@screens/Settings";
 import { Image } from "native-base";
 import { TouchableOpacity } from "react-native";
 
@@ -104,6 +105,26 @@ export default function DrawerRoutes({ navigation }: any) {
                         <Image
                             source={require("../../../assets/medicamentos.png")}
                             alt="Medicamentos"
+                            style={{ width: 24, height: 24 }}
+                        />
+                    ),
+                    headerTransparent: true,
+                    title: "",
+                    gestureHandlerProps: {
+                        enabled: false
+                    },
+                    headerShown: false
+                }}
+            />
+            <Drawer.Screen
+                name="Settings"
+                component={Settings}
+                options={{
+                    drawerLabel: "Configurações",
+                    drawerIcon: () => (
+                        <Image
+                            source={require("../../../assets/configurações.png")}
+                            alt="Configurações"
                             style={{ width: 24, height: 24 }}
                         />
                     ),
