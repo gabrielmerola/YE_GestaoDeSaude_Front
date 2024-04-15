@@ -10,12 +10,12 @@ export default function Settings({ navigation }: any) {
         {
             text: "Notificações",
             iconSource: require("assets/notificacao.png"),
-            screenName: "About"
+            screenName: "Notification"
         },
         {
             text: "Suporte",
             iconSource: require("assets/suporte.png"),
-            screenName: "Pressure"
+            screenName: "Suport"
         },
         {
             text: "Perfil",
@@ -30,12 +30,12 @@ export default function Settings({ navigation }: any) {
         {
             text: "Supervisão",
             iconSource: require("assets/Supervisao.png"),
-            screenName: "Home"
+            screenName: "Supervision"
         },
         {
             text: "Segurança",
             iconSource: require("assets/Seguranca.png"),
-            screenName: "Login"
+            screenName: "Security"
         }
     ];
 
