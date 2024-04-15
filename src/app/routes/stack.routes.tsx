@@ -11,10 +11,13 @@ import Language from "@screens/Language";
 import ListConsultationsHeld from "@screens/ListConsultationsHeld";
 import Medicines from "@screens/Medicines";
 import NewMedicine from "@screens/NewMedicine";
+import Notification from "@screens/Notification";
 import Perfil from "@screens/Perfil";
 import Pressure from "@screens/Pressure";
 import Security from "@screens/Security";
 import Settings from "@screens/Settings";
+import Supervision from "@screens/Supervision";
+import Suporte from "@screens/Suport";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +39,9 @@ export default function StackRoutes() {
             <Stack.Screen name="Medicines" component={Medicines} />
             <Stack.Screen name="NewMedicine" component={NewMedicine} />
             <Stack.Screen name="Security" component={Security} />
+            <Stack.Screen name="Supervision" component={Supervision} />
+            <Stack.Screen name="Suport" component={Suporte} />
+            <Stack.Screen name="Notification" component={Notification} />
             <Stack.Screen
                 name="ConsultationsHeld"
                 component={ConsultationsHeld}
