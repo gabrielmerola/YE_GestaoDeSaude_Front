@@ -3,9 +3,12 @@ import {
     MedicineView,
     Txt,
     Input,
-    ButtonView
+    ButtonView,
+    sizeType,
+    InputTxt,
+    InputView
 } from "@components/ListInteractableItem/styles";
-import { ChevronRightIcon } from "native-base";
+import { ChevronRightIcon, ChevronDownIcon, ChevronUpIcon } from "native-base";
 import React from "react";
 
 export type InputType = "TEXT" | "TIME" | "NUMBER" | "DATE";
@@ -17,6 +20,11 @@ interface MedicineAndButtonProps {
     modalFunction?: () => void;
     inputTxt?: string;
     inputType?: InputType;
+    sizeType?: sizeType;
+    onChangeText?: (text: string) => void;
+    inputValue?: string;
+    downChevron?: boolean;
+    changeIcon?: boolean;
 }
 
 export default function ListInteractableItem({
@@ -25,43 +33,66 @@ export default function ListInteractableItem({
     modalFunction,
     inputTxt,
     isButton,
-    inputType
+    inputType,
+    sizeType,
+    onChangeText,
+    inputValue,
+    downChevron,
+    changeIcon
 }: MedicineAndButtonProps) {
     if (isButton) {
         return (
-            <MedicineButton onPress={modalFunction}>
+            <MedicineButton
+                onPress={() => {
+                    modalFunction?.();
+                }}
+            >
                 <ButtonView>
                     <Txt>
                         {text} {text2 && `: ${text2}`}
                     </Txt>
-                    <ChevronRightIcon color="black" />
+                    {downChevron ? (
+                        changeIcon ? (
+                            <ChevronDownIcon color="black" />
+                        ) : (
+                            <ChevronUpIcon color="black" />
+                        )
+                    ) : (
+                        <ChevronRightIcon color="black" />
+                    )}
                 </ButtonView>
             </MedicineButton>
         );
     } else if (inputType) {
         return (
             <MedicineView>
-                <Txt>{`${text} `}</Txt>
+                <InputTxt>{`${text} `}</InputTxt>
                 {inputType === "TEXT" ? (
-                    <Input placeholder={inputTxt} sizeType={inputType} />
+                    <InputView sizeType={sizeType}>
+                        <Input
+                            placeholder={inputTxt}
+                            onChangeText={onChangeText}
+                            value={inputValue}
+                        />
+                    </InputView>
                 ) : inputType === "DATE" ? (
-                    <Input
-                        keyboardType="numeric"
-                        placeholder={inputTxt}
-                        sizeType={inputType}
-                    />
+                    <InputView sizeType="SMALL">
+                        <Input
+                            keyboardType="numeric"
+                            placeholder="XX/XX/XXXX"
+                            onChangeText={onChangeText}
+                            value={inputValue}
+                            maxLength={10}
+                        />
+                    </InputView>
                 ) : inputType === "NUMBER" ? (
-                    <Input
-                        keyboardType="numeric"
-                        placeholder={inputTxt}
-                        sizeType={inputType}
-                    />
+                    <InputView sizeType="SMALL">
+                        <Input keyboardType="numeric" placeholder={inputTxt} />
+                    </InputView>
                 ) : inputType === "TIME" ? (
-                    <Input
-                        keyboardType="numeric"
-                        placeholder={inputTxt}
-                        sizeType={inputType}
-                    />
+                    <InputView sizeType="SMALL">
+                        <Input keyboardType="numeric" placeholder={inputTxt} />
+                    </InputView>
                 ) : (
                     <></>
                 )}
