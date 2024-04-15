@@ -1,34 +1,20 @@
-import { Input, FormControl } from "native-base";
+import { Input, FormControl, IInputProps } from "native-base";
 
-interface InputProps {
+type InputProps = IInputProps & {
     label?: string;
-    placeholder: string;
-    secureTextEntry?: boolean;
-    leftIcon?: React.ReactNode;
-    onChangeText?: (value: string) => void;
-    value?: string;
-}
+};
 
-export function InputField({
-    label,
-    placeholder,
-    secureTextEntry = false,
-    onChangeText,
-    value
-}: InputProps): JSX.Element {
+export function InputField({ label, ...rest }: InputProps): JSX.Element {
     return (
         <FormControl mt={3}>
             {label && <FormControl.Label>{label}</FormControl.Label>}
             <Input
-                placeholder={placeholder}
                 size="lg"
                 w="100%"
                 borderRadius="lg"
                 bgColor="gray.100"
-                secureTextEntry={secureTextEntry}
                 shadow={3}
-                onChangeText={onChangeText}
-                value={value}
+                {...rest}
             />
         </FormControl>
     );

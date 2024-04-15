@@ -24,21 +24,9 @@ const sections = {
         {
             id: 4,
             label: "Confirme sua senha:",
-            placeholder: "Confirme sua senha",
+            placeholder: "Insira sua senha",
             secureTextEntry: true,
-            name: "passwor_confirm"
-        },
-        {
-            id: 5,
-            label: "Celular:",
-            placeholder: "(00)00000-0000",
-            name: "phone"
-        },
-        {
-            id: 6,
-            label: "CPF:",
-            placeholder: "___.___.___-__",
-            name: "cpf"
+            name: "password_confirm"
         }
     ]
 };

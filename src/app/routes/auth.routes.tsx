@@ -6,7 +6,6 @@ import Login from "@screens/Login";
 import Register from "@screens/Register";
 import Security from "@screens/Security";
 
-import DrawerRoutes from "./drawer.routes";
 import StackRoutes from "./stack.routes";
 
 type AuthRoutes = {
