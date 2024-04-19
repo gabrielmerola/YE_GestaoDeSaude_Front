@@ -50,24 +50,7 @@ export const InputView = styled.View<InputProps>`
     justify-content: space-between;
 `;
 
-export const Input = styled(InputField).attrs(({ theme }) => ({
-    placeholderTextColor: theme.COLORS.GRAY_400,
-    fontFamily: theme.FONT_FAMILY.REGULAR,
-    cursorColor: "black"
-}))`
+export const Input = styled(InputField)`
     font-size: ${({ theme }) => theme.FONT_SIZE.MD};
     padding: 0 8px;
 `;
-
-// export const Input = styled.TextInput.attrs(({ theme }) => ({
-//     placeholderTextColor: theme.COLORS.GRAY_400,
-//     fontFamily: theme.FONT_FAMILY.REGULAR,
-//     cursorColor: "black"
-// }))<InputProps>`
-//     width: ${({ sizeType }) => (sizeType === "LARGE" ? "75%" : "50%")};
-//     font-size: ${({ theme }) => theme.FONT_SIZE.SM};
-//     border: 1px solid black;
-//     border-radius: 8px;
-//     padding: 0 8px;
-//     background-color: ${({ theme }) => theme.COLORS.WHITE};
-// `;
