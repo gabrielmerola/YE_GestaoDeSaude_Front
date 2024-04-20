@@ -13,9 +13,12 @@ import {
 } from "@components/PopUp/styles";
 import { useState } from "react";
 
+export type popUpType = "PRESSURE" | "GLUCOSE" | "IMC";
+
 interface Props {
     onClose: () => void;
-    onPost: (data: string, medida: string) => void;
+    onPost: (list: string[]) => void;
+    popUpType: popUpType;
 }
 
 export const formatDate = (inputDate: string): string => {
@@ -105,7 +108,7 @@ export const formatDate = (inputDate: string): string => {
     return formattedInput;
 };
 
-export default function PopUp({ onClose, onPost }: Props) {
+export default function PopUp({ onClose, onPost, popUpType }: Props) {
     const [date, setDate] = useState<string>("");
     const [firstMeasure, setFirstMeasure] = useState<string>("");
     const [secondMeasure, setSecondMeasure] = useState<string>("");
@@ -113,15 +116,19 @@ export default function PopUp({ onClose, onPost }: Props) {
     const handleDate = (inputDate: string) => {
         setDate(formatDate(inputDate));
     };
-
     const handlePost = () => {
         if (
             date.length === 10 &&
+            /^([0-3])(0[1-9]|[12][0-9]|3[01])([01])(0[1-9]|[12][0-9]|3[01])(20[2-9]|21[0-9])$/.test(
+                date
+            ) &&
             firstMeasure.length >= 2 &&
-            secondMeasure.length >= 2
+            secondMeasure.length >= 2 &&
+            popUpType === "PRESSURE"
         ) {
             const measure = `${firstMeasure} x ${secondMeasure}`;
-            onPost(date, measure);
+            const list = [date, measure];
+            onPost(list);
             onClose();
         } else {
             alert("Preencha os campos corretamente");
@@ -144,24 +151,74 @@ export default function PopUp({ onClose, onPost }: Props) {
                                 size="LARGE"
                             />
                         </TextInputContainer>
-                        <TextInputContainer>
-                            <Txt>Medida:</Txt>
-                            <Input
-                                placeholder="120"
-                                onChangeText={(text) => setFirstMeasure(text)}
-                                value={firstMeasure}
-                                maxLength={3}
-                                size="SMALL"
-                            />
-                            <Txt> x</Txt>
-                            <Input
-                                placeholder="80"
-                                onChangeText={(text) => setSecondMeasure(text)}
-                                value={secondMeasure}
-                                maxLength={3}
-                                size="SMALL"
-                            />
-                        </TextInputContainer>
+                        {popUpType === "PRESSURE" ? (
+                            <TextInputContainer>
+                                <Txt>Medida:</Txt>
+                                <Input
+                                    placeholder="120"
+                                    onChangeText={(text) =>
+                                        setFirstMeasure(text)
+                                    }
+                                    value={firstMeasure}
+                                    maxLength={3}
+                                    size="SMALL"
+                                />
+                                <Txt> x</Txt>
+                                <Input
+                                    placeholder="80"
+                                    onChangeText={(text) =>
+                                        setSecondMeasure(text)
+                                    }
+                                    value={secondMeasure}
+                                    maxLength={3}
+                                    size="SMALL"
+                                />
+                            </TextInputContainer>
+                        ) : popUpType === "GLUCOSE" ? (
+                            <TextInputContainer>
+                                <Txt>Medida:</Txt>
+                                <Input
+                                    placeholder="120"
+                                    onChangeText={(text) =>
+                                        setFirstMeasure(text)
+                                    }
+                                    value={firstMeasure}
+                                    maxLength={3}
+                                    size="SMALL"
+                                />
+                                <Txt> mg/dL</Txt>
+                            </TextInputContainer>
+                        ) : (
+                            <>
+                                <TextInputContainer>
+                                    <Txt>Altura:</Txt>
+                                    <Input
+                                        placeholder="175"
+                                        onChangeText={(text) =>
+                                            setFirstMeasure(text)
+                                        }
+                                        value={firstMeasure}
+                                        maxLength={3}
+                                        size="SMALL"
+                                    />
+                                    <Txt> cm</Txt>
+                                </TextInputContainer>
+                                <TextInputContainer>
+                                    <Txt>Peso:</Txt>
+                                    <Input
+                                        placeholder="70"
+                                        onChangeText={(text) =>
+                                            setFirstMeasure(text)
+                                        }
+                                        value={firstMeasure}
+                                        maxLength={3}
+                                        size="SMALL"
+                                    />
+                                    <Txt> kgs</Txt>
+                                </TextInputContainer>
+                            </>
+                        )}
+
                         <BottomContainer>
                             <ButtonsContainer>
                                 <Button type="CANCEL" onPress={onClose}>

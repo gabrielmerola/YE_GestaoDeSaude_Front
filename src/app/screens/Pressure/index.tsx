@@ -44,11 +44,11 @@ export default function Pressure() {
         setShowPopUp(false);
     };
 
-    const handlePost = (date: string, measure: string) => {
+    const handlePost = (list: string[]) => {
         json.push({
             id: json.findLastIndex((value) => value.id) + 1,
-            data: date,
-            medida: measure,
+            data: list[0],
+            medida: list[1],
             nivel: "Normal"
         });
     };
@@ -72,7 +72,11 @@ export default function Pressure() {
             <PopUpAddButton onOpen={handleOpenPopUp} />
 
             {showPopUp ? (
-                <PopUp onClose={handleClosePopUp} onPost={handlePost} />
+                <PopUp
+                    onClose={handleClosePopUp}
+                    onPost={handlePost}
+                    popUpType="PRESSURE"
+                />
             ) : (
                 <></>
             )}

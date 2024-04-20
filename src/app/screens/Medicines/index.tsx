@@ -6,16 +6,34 @@ import {
     ModalContainer,
     View
 } from "@screens/Medicines/styles";
-import React, { useState } from "react";
+import { FlatList } from "native-base";
+import React, { useEffect, useState } from "react";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 
 const json = [
     {
+        id: 1,
         name: "Losartana",
         hour: "08:00",
         period: "7",
         hour_interval: "8",
         quantity: "1"
+    },
+    {
+        id: 2,
+        name: "Hidroclorotiazida",
+        hour: "08:00",
+        period: "14",
+        hour_interval: "6",
+        quantity: "0.5"
+    },
+    {
+        id: 3,
+        name: "Pantoprazol",
+        hour: "12:00",
+        period: "30",
+        hour_interval: "24",
+        quantity: "2"
     }
 ];
 //         <ListInteractableItem
@@ -39,29 +57,32 @@ const json = [
 export default function Medicines() {
     const [showNewMedicines, setShowNewMedicines] = useState(false);
     const [showMedicineData, setShowMedicineData] = useState(false);
+    const [showMedicineDataIndex, setShowMedicineDataIndex] = useState(0);
 
-    const [json, setJson] = useState([]);
+    const [data, setData] = useState([{}]);
+
+    useEffect(() => {
+        setData(json);
+    }, []);
 
     return (
         <>
             <Header text="Medicamentos" isBackPress />
-            {/*Esses botões devem ser criados com os valores do banco, use o componente Table como referência*/}
             <View>
-                <ListInteractableItem
-                    text="Losartana"
-                    text2="08:00"
-                    isButton
-                    modalFunction={() => setShowMedicineData(true)}
-                />
-                <ListInteractableItem
-                    text="Hidrocolorotiazida"
-                    text2="08:00"
-                    isButton
-                />
-                <ListInteractableItem
-                    text="Pantoprazol"
-                    text2="12:00"
-                    isButton
+                <FlatList
+                    data={data}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                        <ListInteractableItem
+                            text={item.name}
+                            text2={item.hour}
+                            isButton
+                            modalFunction={() => {
+                                setShowMedicineData(true);
+                                setShowMedicineDataIndex(item.id);
+                            }}
+                        />
+                    )}
                 />
             </View>
             <ButtonContainer>
@@ -92,7 +113,7 @@ export default function Medicines() {
                         <ListInteractableItem
                             text="Período:"
                             isButton={false}
-                            inputType="NUMBER"
+                            inputType="DATE"
                             inputTxt="... dias"
                         />
                         <ListInteractableItem
@@ -126,27 +147,63 @@ export default function Medicines() {
                     <View>
                         <ListInteractableItem
                             text="Nome: "
-                            text2="Losartana"
+                            text2={
+                                json[
+                                    json.findIndex(
+                                        (value) =>
+                                            value.id === showMedicineDataIndex
+                                    )
+                                ].name
+                            }
                             isButton={false}
                         />
                         <ListInteractableItem
                             text="Horário:"
-                            text2="08:00"
+                            text2={
+                                json[
+                                    json.findIndex(
+                                        (value) =>
+                                            value.id === showMedicineDataIndex
+                                    )
+                                ].hour
+                            }
                             isButton={false}
                         />
                         <ListInteractableItem
                             text="Período:"
-                            text2="7 dias"
+                            text2={
+                                json[
+                                    json.findIndex(
+                                        (value) =>
+                                            value.id === showMedicineDataIndex
+                                    )
+                                ].period + " dias"
+                            }
                             isButton={false}
                         />
                         <ListInteractableItem
                             text="Intervalo:"
-                            text2="8 horas"
+                            text2={
+                                json[
+                                    json.findIndex(
+                                        (value) =>
+                                            value.id === showMedicineDataIndex
+                                    )
+                                ].hour_interval + " horas"
+                            }
                             isButton={false}
                         />
                         <ListInteractableItem
                             text="Quantidade:"
-                            text2="1 mg"
+                            text2={
+                                json[
+                                    json.findIndex(
+                                        (value) =>
+                                            value.id === showMedicineDataIndex
+                                    )
+                                ].quantity +
+                                (showMedicineDataIndex === 1 ? " mg" : " mgs")
+                            }
                             isButton={false}
                         />
                     </View>
