@@ -58,7 +58,7 @@ export const Title = styled.Text`
         font-family: ${theme.FONT_FAMILY.REGULAR};
     `}
     color: black;
-    margin-bottom: 40px;
+    margin-bottom: 16px;
 `;
 
 export const Txt = styled.Text`
@@ -70,7 +70,6 @@ export const Txt = styled.Text`
     width: auto;
     color: black;
     margin-right: 10px;
-    margin-bottom: 32px;
 `;
 
 export const Button = styled(TouchableOpacity)<ButtonProps>`
