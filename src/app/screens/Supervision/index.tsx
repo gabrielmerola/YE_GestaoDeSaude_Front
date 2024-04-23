@@ -1,12 +1,9 @@
 import { Header } from "@components/Header";
-import { VStack, ScrollView, View, Box, Input } from "native-base";
-import { Linking, TouchableOpacity } from "react-native";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import { VStack, ScrollView, View, Input } from "native-base";
 import Icons from "react-native-vector-icons/FontAwesome6";
 
 import {
     TextTitle,
-    TextSubtitle,
     TextSubtitleWhite,
     TextNotificationWhite,
     Button,

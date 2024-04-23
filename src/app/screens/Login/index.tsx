@@ -100,9 +100,7 @@ export default function Login({ navigation }: any) {
                     </TouchableOpacity>
                 </Box>
             </VStack>
-            <TouchableOpacity onPress={() => navigation.navigate("About")}>
-                <Footer />
-            </TouchableOpacity>
+            <Footer navigation={navigation} />
         </>
     );
 }

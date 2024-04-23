@@ -6,7 +6,7 @@ export const Container = styled.View<{ $color?: string }>`
     justify-content: space-around;
     width: 380px;
     height: 100px;
-    padding: 15px;
+    padding: 15px 30px;
     margin: 25px;
     border-radius: 18px;
     gap: 90px;
@@ -22,10 +22,12 @@ export const Container = styled.View<{ $color?: string }>`
 export const SecContainer = styled.View`
     width: 200px;
     gap: 10px;
+    align-self: center;
 `;
 
 export const ThirdContainer = styled.View`
     gap: 10px;
+    align-self: center;
 `;
 
 export const BoldText = styled.Text`

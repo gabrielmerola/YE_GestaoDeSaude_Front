@@ -1,7 +1,6 @@
 import { Header } from "@components/Header";
 import { VStack, ScrollView, View, Input } from "native-base";
-import { Linking, TouchableOpacity } from "react-native";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import { Linking } from "react-native";
 import Icons from "react-native-vector-icons/FontAwesome5";
 
 import {
@@ -61,6 +60,7 @@ export default function Suporte() {
                     borderRadius="lg"
                     bgColor="gray.300"
                     shadow={3}
+                    textAlignVertical="top"
                     alignSelf="center"
                     editable
                     multiline
@@ -68,7 +68,7 @@ export default function Suporte() {
                     maxLength={1000}
                 />
             </VStack>
-            <View flexDir="row-reverse">
+            <View mb={4} flexDir="row-reverse">
                 <Button>
                     <ButtonTextWhite>Enviar Mensagem</ButtonTextWhite>
                 </Button>

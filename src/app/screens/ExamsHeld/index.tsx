@@ -8,7 +8,7 @@ export default function ExamsHeld() {
         <>
             <Header text="Exames Realizados" isBackPress />
             <View>
-                <ListInteractableItem text="Glicose" />
+                <ListInteractableItem isButton={false} text="Glicose" />
             </View>
         </>
     );

@@ -66,6 +66,7 @@ export const Txt = styled.Text`
         font-size: ${theme.FONT_SIZE.XL};
         font-family: ${theme.FONT_FAMILY.REGULAR};
     `}
+    height: 27px;
     width: auto;
     color: black;
     margin-right: 10px;
@@ -75,7 +76,6 @@ export const Txt = styled.Text`
 export const Button = styled(TouchableOpacity)<ButtonProps>`
     flex: 1;
     min-height: 56px;
-    max-height: 56px;
     border: black;
     background-color: ${({ theme, type }) =>
         type === "ADD" ? theme.COLORS.GREEN_700 : theme.COLORS.GRAY_400};

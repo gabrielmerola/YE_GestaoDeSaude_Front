@@ -3,18 +3,8 @@ import styled from "styled-components/native";
 export const TextTitle = styled.Text`
     font-weight: normal;
     font-size: 22px;
-    margin-bottom: 12px;
-    margin: 30px;
-    margin-top: 40px;
+    margin: 40px 30px 12px 30px;
     align-self: flex-start;
-`;
-
-export const TextSubtitle = styled.Text`
-    font-weight: normal;
-    color: black;
-    font-size: 20px;
-    margin-bottom: 40px;
-    margin-top: 40px;
 `;
 
 export const TextSubtitleWhite = styled.Text`
@@ -31,16 +21,6 @@ export const TextNotificationWhite = styled.Text`
     font-size: 14px;
     align-self: center;
     margin-bottom: 10px;
-`;
-
-export const TextNormal = styled.Text`
-    font-weight: normal;
-    font-size: 20px;
-    color: black;
-    margin-left: 25px;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    margin-right: 25px;
 `;
 
 export const ViewCard = styled.View`

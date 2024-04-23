@@ -3,15 +3,13 @@ import styled from "styled-components/native";
 export const TextTitle = styled.Text`
     font-weight: bold;
     font-size: 26px;
-    margin-bottom: 12px;
-    margin: 30px;
-    margin-top: 40px;
+    margin: 40px 30px 12px 30px;
     align-self: flex-start;
 `;
 
 export const TextSubtitle = styled.Text`
     font-weight: normal;
-    color: ${({ theme }) => theme.COLORS.BLACK};
+    color: black;
     font-size: 20px;
     align-self: flex-start;
     margin-left: 25px;
@@ -24,10 +22,7 @@ export const TextNormal = styled.Text`
     font-size: 20px;
     color: black;
     align-self: flex-start;
-    margin-left: 25px;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    margin-right: 25px;
+    margin: 20px 25px 40px 25px;
 `;
 
 export const Icon = styled.Text`
