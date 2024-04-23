@@ -12,6 +12,16 @@ import React, { useState } from "react";
 import Collapsible from "react-native-collapsible";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 
+interface Exams {
+    date: string;
+    especiality: string;
+}
+
+type Row = {
+    [key: string]: string;
+};
+
+// TODO: fazer o map que acabe com os códigos repetidos
 export default function ExamsHistory() {
     const [showExamsDetected, setShowExamsDetected] = useState(false);
 
@@ -61,11 +71,21 @@ export default function ExamsHistory() {
                         data={[
                             {
                                 date: "17/02/2023",
-                                especialty: "4.500.000/mm³"
+                                especiality: "4.500.000/mm³"
                             }
                         ]}
-                        keyExtractor={(item) => item.date}
-                        renderItem={({ item }) => <Table rows={[item]} />}
+                        keyExtractor={(item) => {
+                            const examItem = item as Exams;
+                            return examItem.date;
+                        }}
+                        renderItem={({ item }) => {
+                            const examItem = item as Exams;
+                            const row: Row = {
+                                date: examItem.date,
+                                especiality: examItem.especiality
+                            };
+                            return <Table rows={[row]} />;
+                        }}
                     />
                 </Collapsible>
 
@@ -85,11 +105,21 @@ export default function ExamsHistory() {
                         data={[
                             {
                                 date: "17/02/2023",
-                                especialty: "25 U/L"
+                                especiality: "25 U/L"
                             }
                         ]}
-                        keyExtractor={(item) => item.date}
-                        renderItem={({ item }) => <Table rows={[item]} />}
+                        keyExtractor={(item) => {
+                            const examItem = item as Exams;
+                            return examItem.date;
+                        }}
+                        renderItem={({ item }) => {
+                            const examItem = item as Exams;
+                            const row: Row = {
+                                date: examItem.date,
+                                especiality: examItem.especiality
+                            };
+                            return <Table rows={[row]} />;
+                        }}
                     />
                 </Collapsible>
 
@@ -106,11 +136,21 @@ export default function ExamsHistory() {
                         data={[
                             {
                                 date: "17/02/2023",
-                                especialty: "79 mg/dl"
+                                especiality: "79 mg/dl"
                             }
                         ]}
-                        keyExtractor={(item) => item.date}
-                        renderItem={({ item }) => <Table rows={[item]} />}
+                        keyExtractor={(item) => {
+                            const examItem = item as Exams;
+                            return examItem.date;
+                        }}
+                        renderItem={({ item }) => {
+                            const examItem = item as Exams;
+                            const row: Row = {
+                                date: examItem.date,
+                                especiality: examItem.especiality
+                            };
+                            return <Table rows={[row]} />;
+                        }}
                     />
                 </Collapsible>
 
@@ -127,11 +167,21 @@ export default function ExamsHistory() {
                         data={[
                             {
                                 date: "17/02/2023",
-                                especialty: "25 U/L"
+                                especiality: "25 U/L"
                             }
                         ]}
-                        keyExtractor={(item) => item.date}
-                        renderItem={({ item }) => <Table rows={[item]} />}
+                        keyExtractor={(item) => {
+                            const examItem = item as Exams;
+                            return examItem.date;
+                        }}
+                        renderItem={({ item }) => {
+                            const examItem = item as Exams;
+                            const row: Row = {
+                                date: examItem.date,
+                                especiality: examItem.especiality
+                            };
+                            return <Table rows={[row]} />;
+                        }}
                     />
                 </Collapsible>
 
@@ -148,11 +198,21 @@ export default function ExamsHistory() {
                         data={[
                             {
                                 date: "17/02/2023",
-                                especialty: "28 U/L"
+                                especiality: "28 U/L"
                             }
                         ]}
-                        keyExtractor={(item) => item.date}
-                        renderItem={({ item }) => <Table rows={[item]} />}
+                        keyExtractor={(item) => {
+                            const examItem = item as Exams;
+                            return examItem.date;
+                        }}
+                        renderItem={({ item }) => {
+                            const examItem = item as Exams;
+                            const row: Row = {
+                                date: examItem.date,
+                                especiality: examItem.especiality
+                            };
+                            return <Table rows={[row]} />;
+                        }}
                     />
                 </Collapsible>
             </View>
@@ -204,13 +264,21 @@ export default function ExamsHistory() {
                                 data={[
                                     {
                                         date: "17/02/2023",
-                                        especialty: "4.500.000/mm³"
+                                        especiality: "4.500.000/mm³"
                                     }
                                 ]}
-                                keyExtractor={(item) => item.date}
-                                renderItem={({ item }) => (
-                                    <Table rows={[item]} />
-                                )}
+                                keyExtractor={(item) => {
+                                    const examItem = item as Exams;
+                                    return examItem.date;
+                                }}
+                                renderItem={({ item }) => {
+                                    const examItem = item as Exams;
+                                    const row: Row = {
+                                        date: examItem.date,
+                                        especiality: examItem.especiality
+                                    };
+                                    return <Table rows={[row]} />;
+                                }}
                             />
                         </Collapsible>
 
@@ -232,13 +300,21 @@ export default function ExamsHistory() {
                                 data={[
                                     {
                                         date: "17/02/2023",
-                                        especialty: "25 U/L"
+                                        especiality: "25 U/L"
                                     }
                                 ]}
-                                keyExtractor={(item) => item.date}
-                                renderItem={({ item }) => (
-                                    <Table rows={[item]} />
-                                )}
+                                keyExtractor={(item) => {
+                                    const examItem = item as Exams;
+                                    return examItem.date;
+                                }}
+                                renderItem={({ item }) => {
+                                    const examItem = item as Exams;
+                                    const row: Row = {
+                                        date: examItem.date,
+                                        especiality: examItem.especiality
+                                    };
+                                    return <Table rows={[row]} />;
+                                }}
                             />
                         </Collapsible>
 
@@ -258,13 +334,21 @@ export default function ExamsHistory() {
                                 data={[
                                     {
                                         date: "17/02/2023",
-                                        especialty: "79 mg/dl"
+                                        especiality: "79 mg/dl"
                                     }
                                 ]}
-                                keyExtractor={(item) => item.date}
-                                renderItem={({ item }) => (
-                                    <Table rows={[item]} />
-                                )}
+                                keyExtractor={(item) => {
+                                    const examItem = item as Exams;
+                                    return examItem.date;
+                                }}
+                                renderItem={({ item }) => {
+                                    const examItem = item as Exams;
+                                    const row: Row = {
+                                        date: examItem.date,
+                                        especiality: examItem.especiality
+                                    };
+                                    return <Table rows={[row]} />;
+                                }}
                             />
                         </Collapsible>
 
@@ -284,13 +368,21 @@ export default function ExamsHistory() {
                                 data={[
                                     {
                                         date: "17/02/2023",
-                                        especialty: "25 U/L"
+                                        especiality: "25 U/L"
                                     }
                                 ]}
-                                keyExtractor={(item) => item.date}
-                                renderItem={({ item }) => (
-                                    <Table rows={[item]} />
-                                )}
+                                keyExtractor={(item) => {
+                                    const examItem = item as Exams;
+                                    return examItem.date;
+                                }}
+                                renderItem={({ item }) => {
+                                    const examItem = item as Exams;
+                                    const row: Row = {
+                                        date: examItem.date,
+                                        especiality: examItem.especiality
+                                    };
+                                    return <Table rows={[row]} />;
+                                }}
                             />
                         </Collapsible>
 
@@ -310,13 +402,21 @@ export default function ExamsHistory() {
                                 data={[
                                     {
                                         date: "17/02/2023",
-                                        especialty: "28 U/L"
+                                        especiality: "28 U/L"
                                     }
                                 ]}
-                                keyExtractor={(item) => item.date}
-                                renderItem={({ item }) => (
-                                    <Table rows={[item]} />
-                                )}
+                                keyExtractor={(item) => {
+                                    const examItem = item as Exams;
+                                    return examItem.date;
+                                }}
+                                renderItem={({ item }) => {
+                                    const examItem = item as Exams;
+                                    const row: Row = {
+                                        date: examItem.date,
+                                        especiality: examItem.especiality
+                                    };
+                                    return <Table rows={[row]} />;
+                                }}
                             />
                         </Collapsible>
                     </View>

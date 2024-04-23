@@ -37,7 +37,7 @@ export default function Main({ navigation }: any) {
                 <TouchableOpacity onPress={() => navigation.navigate("IMC")}>
                     <Card
                         title="Verificação do IMC"
-                        description="Verifique e adicione sua altura e peso para checar o seu IMC "
+                        description="Verifique seu IMC com base na sua altura e peso"
                         subTitle="Ultima medida"
                         secDescription="31,14"
                         subDescription="Obesidade II"
@@ -45,9 +45,7 @@ export default function Main({ navigation }: any) {
                     />
                 </TouchableOpacity>
             </Container>
-            <TouchableOpacity onPress={() => navigation.navigate("About")}>
-                <Footer />
-            </TouchableOpacity>
+            <Footer navigation={navigation} />
         </>
     );
 }

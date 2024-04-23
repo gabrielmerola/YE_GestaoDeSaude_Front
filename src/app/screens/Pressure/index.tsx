@@ -5,6 +5,14 @@ import { FlatList } from "native-base";
 import React, { useEffect, useState } from "react";
 import PopUp from "src/app/components/PopUp";
 
+interface Pressure {
+    [key: string]: string | number;
+    id: number;
+    data: string;
+    medida: string;
+    nivel: string;
+}
+
 const json = [
     {
         id: 1,
@@ -33,7 +41,7 @@ const json = [
 ];
 
 export default function Pressure() {
-    const [data, setData] = useState([{}]);
+    const [data, setData] = useState<Pressure[]>([]);
     const [showPopUp, setShowPopUp] = useState(false);
 
     const handleOpenPopUp = () => {
@@ -65,7 +73,9 @@ export default function Pressure() {
 
             <FlatList
                 data={data}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) =>
+                    "Pressure FlatList " + item.id.toString()
+                }
                 renderItem={({ item }) => <Table rows={[item]} />}
             />
 

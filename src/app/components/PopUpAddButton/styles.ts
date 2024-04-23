@@ -21,7 +21,6 @@ export const Button = styled(TouchableOpacity)`
     max-height: 56px;
     min-width: 168px;
     max-width: 168px;
-    border: black;
     background-color: ${({ theme }) => theme.COLORS.GREEN_700};
     border-radius: 10px;
     justify-content: center;

@@ -1,5 +1,5 @@
 import { Header } from "@components/Header";
-import { Box, FlatList, Text } from "native-base";
+import { FlatList } from "native-base";
 import { View } from "react-native";
 
 import {

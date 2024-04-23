@@ -9,38 +9,29 @@ export default function NewMedicine({ navigation }: any) {
         <>
             <Header text="Novo Medicamento" isBackPress />
             <View>
-                <ListInteractableItem
-                    text="Nome: "
-                    navigation={navigation}
-                    screenName="Login"
-                    input
-                />
+                <ListInteractableItem text="Nome: " isButton={false} />
                 <ListInteractableItem
                     text="Horário"
                     text2="09:00"
-                    navigation={navigation}
-                    screenName="Login"
+                    isButton={false}
                 />
                 <ListInteractableItem
                     text="Período"
                     text2="7 dias"
-                    navigation={navigation}
-                    screenName="Login"
+                    isButton={false}
                 />
                 <ListInteractableItem
                     text="Intervalo"
                     text2="8hs"
-                    navigation={navigation}
-                    screenName="Login"
+                    isButton={false}
                 />
                 <ListInteractableItem
                     text="Quantidade"
                     text2="1"
-                    navigation={navigation}
-                    screenName="Login"
+                    isButton={false}
                 />
             </View>
-            <CancelAndSaveButton navigation={navigation} />
+            <CancelAndSaveButton onPress={navigation.goBack()} />
         </>
     );
 }

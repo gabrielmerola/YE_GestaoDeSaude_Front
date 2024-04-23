@@ -3,14 +3,13 @@ import { Footer } from "@components/Footer";
 import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
 import { registerClient } from "@services/clientServices";
+import { sections } from "@utils/registerInputText";
 import { Image, Box, ScrollView, useToast, Text, View } from "native-base";
 import React, { useState } from "react";
-import { TouchableOpacity } from "react-native";
 import MaskInput from "react-native-mask-input";
 
 import Logo from "../../../../assets/logo.png";
 import { FormDataProps } from "../../interfaces/client";
-import { sections } from "../../utils/registerInputText";
 
 export default function Register({ navigation }: any) {
     const [data, setData] = useState({} as any);
@@ -160,13 +159,11 @@ export default function Register({ navigation }: any) {
                         />
                     </View>
                 </Box>
-                <Buton onPress={() => SignUp()} mt={10}>
+                <Buton onPress={() => SignUp()} mt={10} mb={10}>
                     Criar e acessar
                 </Buton>
             </ScrollView>
-            <TouchableOpacity onPress={() => navigation.navigate("About")}>
-                <Footer />
-            </TouchableOpacity>
+            <Footer navigation={navigation} />
         </>
     );
 }

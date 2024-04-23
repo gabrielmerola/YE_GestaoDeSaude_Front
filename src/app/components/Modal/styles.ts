@@ -7,15 +7,9 @@ export const TextTitle = styled.Text`
     align-self: center;
 `;
 
-export const TextSubtitle = styled.Text`
-    font-weight: bold;
-    color: ${({ theme }) => theme.COLORS.BLACK};
-    font-size: 16px;
-`;
-
 export const Text = styled.Text`
     font-weight: bold;
-    font-size: 16;
+    font-size: 16px;
     color: ${({ theme }) => theme.COLORS.WHITE};
 `;
 

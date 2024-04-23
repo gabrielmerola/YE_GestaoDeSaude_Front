@@ -42,17 +42,11 @@ export const CellText = styled.Text<Props>`
         type === "gray" ? "black" : theme.COLORS.WHITE};
 `;
 
-export const Separator = styled.View`
-    height: 1px;
-    background-color: black;
-`;
-
 export const HeaderCell = styled.View`
     justify-content: center;
     background-color: ${({ theme }) => theme.COLORS.GRAY_300};
     border-bottom: 10px;
     padding: 4%;
-    border-radius: 10% 10% 0% 0%;
 `;
 
 export const DataCell = styled.View<Props>`
@@ -64,14 +58,4 @@ export const DataCell = styled.View<Props>`
     background-color: ${({ theme, type }) =>
         type === "gray" ? theme.COLORS.GRAY_300 : theme.COLORS.GREEN_700};
     border-bottom: 10px green;
-    ${({ radiusPosition }) =>
-        radiusPosition === "right"
-            ? "border-radius: 0% 0% 0% 10%;"
-            : radiusPosition === "left"
-              ? "border-radius: 0% 0% 10% 0%;"
-              : ""}
-`;
-
-export const DatePickerContainer = styled.View`
-    flex: 1;
-`;
+`; // error while updating property 'borderTopRightRadius' of a view managed by RCTView

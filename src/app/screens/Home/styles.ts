@@ -2,14 +2,16 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
     align-items: center;
+    justify-content: center;
     background-color: ${({ theme }) => theme.COLORS.GREEN_700};
     gap: 16px;
     flex: 1;
-    padding: 60px 56px 0 56px;
+    padding: 0 56px;
 `;
 
 export const SubTitle = styled.Text`
     margin-top: 50px;
+    text-align: center;
     color: ${({ theme }) => theme.COLORS.WHITE};
     font-size: 32px;
 `;
@@ -25,7 +27,7 @@ export const Button = styled.TouchableOpacity`
     border-radius: 8px;
     background-color: ${({ theme }) => theme.COLORS.WHITE};
     padding: 10px;
-    width: 300px;
+    width: 100%;
     align-self: center;
 `;
 

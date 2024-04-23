@@ -1,9 +1,8 @@
 import { Header } from "@components/Header";
-import { VStack, ScrollView, View, Checkbox } from "native-base";
+import { VStack, ScrollView, View } from "native-base";
 
 import {
     TextTitle,
-    TextSubtitle,
     TextSubtitleWhite,
     TextNotificationWhite,
     TextSubtitleWhiteHour,

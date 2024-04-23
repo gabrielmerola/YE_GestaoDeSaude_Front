@@ -19,6 +19,16 @@ import { FlatList } from "native-base";
 import React, { useEffect, useState } from "react";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 
+interface Consultation {
+    id: number;
+    especialty: string;
+    date: string;
+    hour: string;
+    resume: string;
+    return: string;
+    reminder: string;
+}
+
 const json = [
     {
         id: 1,
@@ -36,8 +46,7 @@ export default function ConsultationsHeld() {
         useState(false);
     const [showConsultationsData, setShowConsultationsData] = useState(false);
     const [showNewConsultation, setShowNewConsultation] = useState(false);
-    const [data, setData] = useState([{}]);
-
+    const [data, setData] = useState<Consultation[]>([]);
     const [date, setDate] = useState<string>("");
     const [returnDate, setReturnDate] = useState<string>("");
     const [resumeText, setResumeText] = useState("");
@@ -113,8 +122,11 @@ export default function ConsultationsHeld() {
                     <TableContainer>
                         <FlatList
                             data={data}
-                            keyExtractor={(item) => item.id}
-                            renderItem={({ item }) => (
+                            keyExtractor={(item) =>
+                                "ConsultationsHeld FlatList " +
+                                item.id.toString()
+                            }
+                            renderItem={({ item }: { item: Consultation }) => (
                                 <>
                                     <Table
                                         rows={[

@@ -8,20 +8,11 @@ export const TextTitle = styled.Text`
     align-self: center;
 `;
 
-export const TextSubtitle = styled.Text`
-    font-weight: normal;
-    color: black;
-    font-size: 20px;
-    margin-bottom: 40px;
-    margin-top: 40px;
-`;
-
 export const TextSubtitleWhite = styled.Text`
     font-weight: normal;
     color: white;
     font-size: 16px;
-    margin: 10px 20px;
-    margin-right: 50px;
+    margin: 10px 50px 10px 20px;
     align-self: flex-start;
 `;
 
@@ -38,16 +29,6 @@ export const TextNotificationWhite = styled.Text`
     font-size: 14px;
     align-self: flex-start;
     margin: 10px 20px 5px;
-`;
-
-export const TextNormal = styled.Text`
-    font-weight: normal;
-    font-size: 20px;
-    color: black;
-    margin-left: 25px;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    margin-right: 25px;
 `;
 
 export const ViewCard = styled.View`
