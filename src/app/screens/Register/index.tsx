@@ -2,14 +2,14 @@ import { Buton } from "@components/Button";
 import { Footer } from "@components/Footer";
 import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
-import { registerClient } from "@services/clientServices";
-import { sections } from "@utils/registerInputText";
 import { Image, Box, ScrollView, useToast, Text, View } from "native-base";
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import MaskInput from "react-native-mask-input";
+import { FormDataProps } from "src/app/api/repositories/auth_repository_http";
+import { AuthContext } from "src/app/context/auth_context";
 
 import Logo from "../../../../assets/logo.png";
-import { FormDataProps } from "../../interfaces/client";
+import { sections } from "../../utils/registerInputText";
 
 export default function Register({ navigation }: any) {
     const [data, setData] = useState({} as any);
@@ -18,8 +18,10 @@ export default function Register({ navigation }: any) {
     const [phoneValue, setPhoneValue] = useState("");
     const [cpfValue, setCpfValue] = useState("");
 
+    const { signUp, signUpError } = useContext(AuthContext);
+
     function updateData(id: string, value: string) {
-        setData({ ...data, [id]: value });
+        setData({ ...data, [id]: value, phone: phoneValue, cpf: cpfValue });
     }
 
     async function SignUp() {
@@ -34,19 +36,14 @@ export default function Register({ navigation }: any) {
             });
             return;
         }
+        console.log(data.cpf);
 
-        const response = await registerClient({
-            name: data.name,
-            email: data.email,
-            password: data.password,
-            phone: data.phone,
-            cpf: data.cpf
-        });
+        const response = await signUp(data);
         // console.log("Response: "+JSON.stringify(response));
 
-        if (response.status === 201) {
+        if (response !== undefined) {
             toast.show({
-                title: response.message,
+                title: response.data.message,
                 description: "Você já pode fazer login",
                 backgroundColor: "green.500",
                 placement: "top"
@@ -54,7 +51,7 @@ export default function Register({ navigation }: any) {
             navigation.replace("Login");
         } else {
             toast.show({
-                title: response.message,
+                title: signUpError,
                 description: "Verifique os dados e tente novamente",
                 backgroundColor: "red.500",
                 placement: "top"
@@ -138,7 +135,7 @@ export default function Register({ navigation }: any) {
                             value={cpfValue}
                             onChangeText={(masked, unmasked) => {
                                 // console.log(masked)
-                                setCpfValue(masked);
+                                setCpfValue(unmasked);
                             }}
                             mask={[
                                 /\d/,
