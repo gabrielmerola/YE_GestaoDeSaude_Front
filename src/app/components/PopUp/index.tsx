@@ -17,7 +17,7 @@ export type popUpType = "PRESSURE" | "GLUCOSE" | "IMC";
 
 interface Props {
     onClose: () => void;
-    onPost: (list: string[]) => void;
+    onPost: (list: object) => void;
     popUpType: popUpType;
 }
 
@@ -118,19 +118,40 @@ export default function PopUp({ onClose, onPost, popUpType }: Props) {
     };
     const handlePost = () => {
         if (
+            popUpType === "PRESSURE" &&
             date.length === 10 &&
             /^([0-3])(0[1-9]|[12][0-9]|3[01])([01])(0[1-9]|[12][0-9]|3[01])(20[2-9]|21[0-9])$/.test(
                 date
             ) &&
             firstMeasure.length >= 2 &&
-            secondMeasure.length >= 2 &&
-            popUpType === "PRESSURE"
+            secondMeasure.length >= 2
         ) {
             const measure = `${firstMeasure} x ${secondMeasure}`;
-            const list = [date, measure];
+            const list = {
+                date,
+                measure
+            };
+            onPost(list);
+            onClose();
+        } else if (
+            popUpType === "GLUCOSE" &&
+            date.length === 10 &&
+            // /^([0-3])(0[1-9]|[12][0-9]|3[01])([01])(0[1-9]|[12][0-9]|3[01])(20[2-9]|21[0-9])$/.test(
+            //     date
+            // ) &&
+            firstMeasure.length >= 2
+        ) {
+            const measure = parseInt(firstMeasure);
+            const newDate = date.split("/").reverse().join("-");
+            const list = {
+                date: newDate,
+                measure
+            };
+            console.log(list);
             onPost(list);
             onClose();
         } else {
+            //criar um toast
             alert("Preencha os campos corretamente");
         }
     };
@@ -226,8 +247,8 @@ export default function PopUp({ onClose, onPost, popUpType }: Props) {
                                         Cancelar
                                     </ButtonText>
                                 </Button>
-                                <Button type="ADD">
-                                    <ButtonText type="ADD" onPress={handlePost}>
+                                <Button type="ADD" onPress={handlePost}>
+                                    <ButtonText type="ADD">
                                         Confirmar
                                     </ButtonText>
                                 </Button>
