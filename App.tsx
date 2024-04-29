@@ -8,6 +8,7 @@ import {
 import Routes from "@routes/index";
 import { NativeBaseProvider, StatusBar } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { AuthContextProvider } from "src/app/context/auth_context";
 import { ThemeProvider } from "styled-components";
 
 import theme from "./src/app/theme";
@@ -24,7 +25,9 @@ export default function App() {
                         backgroundColor="transparent"
                         translucent
                     />
-                    {fontsLoaded ? <Routes /> : <Loading />}
+                    <AuthContextProvider>
+                        {fontsLoaded ? <Routes /> : <Loading />}
+                    </AuthContextProvider>
                 </ThemeProvider>
             </NativeBaseProvider>
         </SafeAreaView>

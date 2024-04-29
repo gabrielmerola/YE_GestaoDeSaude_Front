@@ -13,11 +13,9 @@ module.exports = function (api) {
                         "@routes": "./src/app/routes",
                         "@screens": "./src/app/screens",
                         "@utils": "./src/app/utils",
-                        "@services": "./src/app/services",
-                        "@contexts": "./src/app/contexts",
+                        "@context": "./src/app/context",
                         "@interfaces": "./src/app/interfaces",
-                        "@dtos": "./src/app/dtos",
-                        "@hooks": "./src/app/hooks"
+                        "@api": "./src/app/api"
                     }
                 }
             ]
