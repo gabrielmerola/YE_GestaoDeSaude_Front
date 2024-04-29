@@ -3,10 +3,10 @@ import { Footer } from "@components/Footer";
 import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { doLogin } from "@services/clientServices";
 import { VStack, Image, Text, Box, Link, useToast } from "native-base";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
+import { AuthContext } from "src/app/context/auth_context";
 
 import Logo from "../../../../assets/logo.png";
 
@@ -14,9 +14,10 @@ export default function Login({ navigation }: any) {
     const [email, setEmail] = useState(""); //armazena os valores
     const [password, setPassword] = useState("");
     const toast = useToast();
+    const { login } = useContext(AuthContext);
 
     useEffect(() => {
-        // AsyncStorage.removeItem("token");
+        AsyncStorage.removeItem("token");
         async function loginVerify() {
             if (await AsyncStorage.getItem("token")) {
                 navigation.navigate("StackRoutes");
@@ -26,9 +27,9 @@ export default function Login({ navigation }: any) {
     });
 
     async function SignIn() {
-        const result = await doLogin(email, password);
+        const result = await login(email, password);
         console.log(result);
-        if (result.status === 200) {
+        if (result != undefined) {
             const { token } = result;
             console.log(token);
 
