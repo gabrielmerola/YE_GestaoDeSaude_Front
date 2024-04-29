@@ -1,8 +1,9 @@
 import { Header } from "@components/Header";
 import { PopUpAddButton } from "@components/PopUpAddButton";
 import { Table } from "@components/Table";
+import { GlucoseContext } from "@context/glucose_context";
 import { FlatList } from "native-base";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PopUp from "src/app/components/PopUp";
 
 const json = [
@@ -32,9 +33,17 @@ const json = [
     }
 ];
 
+interface Glucose {
+    id: number;
+    data: string;
+    measure: string;
+    level: string;
+}
+
 export default function Glucose() {
-    const [data, setData] = useState([{}]);
+    const [data, setData] = useState<Glucose[]>([]);
     const [showPopUp, setShowPopUp] = useState(false);
+    const { getGlucose, postGlucose } = useContext(GlucoseContext);
 
     const handleOpenPopUp = () => {
         setShowPopUp(true);
@@ -44,19 +53,20 @@ export default function Glucose() {
         setShowPopUp(false);
     };
 
-    const handlePost = (list: string[]) => {
-        json.push({
-            id: json.findLastIndex((value) => value.id) + 1,
-            data: list[0],
-            medida: list[1],
-            nivel: "Normal"
+    const handlePost = (list: object) => {
+        const response = postGlucose(list);
+        response.then((json) => {
+            console.log(json);
         });
     };
 
     json.findLastIndex((value) => value.id);
 
     useEffect(() => {
-        setData(json);
+        const data = getGlucose();
+        data.then((data) => {
+            setData(data);
+        });
     }, []);
 
     return (
@@ -69,13 +79,21 @@ export default function Glucose() {
                 renderItem={({ item }) => <Table rows={[item]} />}
             />
 
+            {/* <FlatList
+                data={data}
+                keyExtractor={(item) =>
+                    "Pressure FlatList " + item.id.toString()
+                }
+                renderItem={({ item }) => <Table rows={[item]} />}
+            /> */}
+
             <PopUpAddButton onOpen={handleOpenPopUp} />
 
             {showPopUp ? (
                 <PopUp
                     onClose={handleClosePopUp}
                     onPost={handlePost}
-                    popUpType="IMC"
+                    popUpType="GLUCOSE"
                 />
             ) : (
                 <></>
