@@ -6,34 +6,8 @@ import { FlatList } from "native-base";
 import React, { useContext, useEffect, useState } from "react";
 import PopUp from "src/app/components/PopUp";
 
-const json = [
-    {
-        id: 1,
-        data: "Data",
-        medida: "Medida",
-        nivel: "Nível"
-    },
-    {
-        id: 2,
-        data: "05/04/2023",
-        medida: "80",
-        nivel: "Normal"
-    },
-    {
-        id: 3,
-        data: "06/04/2023",
-        medida: "150",
-        nivel: "Alta"
-    },
-    {
-        id: 4,
-        data: "07/04/2023",
-        medida: "100",
-        nivel: "Normal"
-    }
-];
-
 interface Glucose {
+    [key: string]: string | number;
     id: number;
     data: string;
     measure: string;
@@ -43,7 +17,8 @@ interface Glucose {
 export default function Glucose() {
     const [data, setData] = useState<Glucose[]>([]);
     const [showPopUp, setShowPopUp] = useState(false);
-    const { getGlucose, postGlucose } = useContext(GlucoseContext);
+    const { getGlucose, postGlucose, deleteGlucose } =
+        useContext(GlucoseContext);
 
     const handleOpenPopUp = () => {
         setShowPopUp(true);
@@ -60,7 +35,12 @@ export default function Glucose() {
         });
     };
 
-    json.findLastIndex((value) => value.id);
+    const handleDelete = (id: number) => {
+        const response = deleteGlucose(id);
+        response.then((json) => {
+            console.log(json);
+        });
+    };
 
     useEffect(() => {
         const data = getGlucose();
@@ -75,19 +55,11 @@ export default function Glucose() {
 
             <FlatList
                 data={data}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => <Table rows={[item]} />}
             />
 
-            {/* <FlatList
-                data={data}
-                keyExtractor={(item) =>
-                    "Pressure FlatList " + item.id.toString()
-                }
-                renderItem={({ item }) => <Table rows={[item]} />}
-            /> */}
-
-            <PopUpAddButton onOpen={handleOpenPopUp} />
+            <PopUpAddButton onOpen={handleOpenPopUp} onDelete={() => {}} />
 
             {showPopUp ? (
                 <PopUp

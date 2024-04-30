@@ -34,7 +34,7 @@ export class GlucoseRepositoryHttp {
         }
     }
 
-    async deleteGlucose(id: string) {
+    async deleteGlucose(id: number) {
         try {
             const response = await api.delete(`/glucose?id=${id}`, {
                 headers: {
@@ -42,13 +42,13 @@ export class GlucoseRepositoryHttp {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            return response;
+            return response.data;
         } catch (error: AxiosError | any) {
             return error.response;
         }
     }
 
-    async getGlucoseById(id: string) {
+    async getGlucoseById(id: number) {
         try {
             const response = await api.get(`/glucose/${id}`, {
                 headers: {
@@ -56,7 +56,7 @@ export class GlucoseRepositoryHttp {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            return response;
+            return response.data;
         } catch (error: AxiosError | any) {
             return error.response;
         }
@@ -70,7 +70,7 @@ export class GlucoseRepositoryHttp {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            return response;
+            return response.data;
         } catch (error: AxiosError | any) {
             return error.response;
         }

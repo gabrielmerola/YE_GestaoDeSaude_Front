@@ -5,9 +5,9 @@ import { PropsWithChildren, createContext, useState } from "react";
 type GlucoseContextType = {
     getGlucose: () => Promise<[] | undefined>;
     postGlucose: (data: object) => Promise<AxiosResponse | undefined>;
-    deleteGlucose: (id: string) => void;
-    getGlucoseById: (id: string) => void;
-    getGlucoseLatest: () => void;
+    deleteGlucose: (id: number) => Promise<AxiosResponse | undefined>;
+    getGlucoseById: (id: number) => Promise<object | undefined>;
+    getGlucoseLatest: () => Promise<object | undefined>;
 };
 
 const defaultGlucoseContext: GlucoseContextType = {
@@ -17,9 +17,15 @@ const defaultGlucoseContext: GlucoseContextType = {
     postGlucose: async (data: object) => {
         return undefined;
     },
-    deleteGlucose: (id: string) => {},
-    getGlucoseById: (id: string) => {},
-    getGlucoseLatest: () => {}
+    deleteGlucose: async (id: number) => {
+        return undefined;
+    },
+    getGlucoseById: async (id: number) => {
+        return {};
+    },
+    getGlucoseLatest: async () => {
+        return {};
+    }
 };
 
 export const GlucoseContext = createContext<GlucoseContextType>(
@@ -47,16 +53,16 @@ export function GlucoseContextProvider({ children }: PropsWithChildren) {
         }
     }
 
-    async function deleteGlucose(id: string) {
+    async function deleteGlucose(id: number) {
         try {
-            await glucoseRepository.deleteGlucose(id);
-            getGlucose();
+            const response = await glucoseRepository.deleteGlucose(id);
+            return response;
         } catch (error: any) {
             console.log(error);
         }
     }
 
-    async function getGlucoseById(id: string) {
+    async function getGlucoseById(id: number) {
         try {
             const response = await glucoseRepository.getGlucoseById(id);
             return response;
