@@ -7,7 +7,7 @@ type MedicineContextType = {
     getAllMedicines: () => Promise<object[] | undefined>;
     getMedicineByID: (id: number) => Promise<object | undefined>;
     createMedicine: (data: object) => Promise<AxiosResponse | undefined>;
-    deleteMedicineByID: (id: number) => Promise<object> | undefined;
+    deleteMedicineByID: (id: number) => Promise<AxiosResponse> | undefined;
     medicineError: string;
     setMedicineError: (error: string) => void;
 };
@@ -16,7 +16,7 @@ const token = AsyncStorage.getItem("token");
 
 const defaultMedicineContext: MedicineContextType = {
     getAllMedicines: async () => {
-        return await medicineRepository.getAllMedicines(await token);
+        return await medicineRepository.getAllMedicines();
     },
     getMedicineByID: async (id: number) => {
         return {};
@@ -25,7 +25,7 @@ const defaultMedicineContext: MedicineContextType = {
         return undefined;
     },
     deleteMedicineByID: async (id: number) => {
-        return {};
+        return await medicineRepository.deleteMedicineByID(id);
     },
     medicineError: "",
     setMedicineError: (error: string) => {}
@@ -40,7 +40,7 @@ export function MedicineContextProvider({ children }: PropsWithChildren) {
 
     async function getAllMedicines() {
         try {
-            return await medicineRepository.getAllMedicines(await token);
+            return await medicineRepository.getAllMedicines();
         } catch (error: any) {
             setMedicineError(error.message);
             console.error("Error fetching medicines:", error);
