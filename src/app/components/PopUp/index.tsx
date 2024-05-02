@@ -11,6 +11,7 @@ import {
     Input,
     TextInputContainer
 } from "@components/PopUp/styles";
+import { useToast } from "native-base";
 import { useState } from "react";
 
 export type popUpType = "PRESSURE" | "GLUCOSE" | "IMC";
@@ -89,11 +90,10 @@ export const formatDate = (inputDate: string): string => {
         case 8:
             const yearEnd = parseInt(formattedInput.slice(6, 8));
             if (
-                (/^(20[2-9][4-9]|21[0-9][0-9])/.test(
+                /^(20[2-9][4-9]|21[0-9][0-9])/.test(
                     formattedInput.slice(4, 8)
                 ) &&
-                    formattedInput.slice(0, 2) !== "29") ||
-                yearEnd % 4 === 0
+                (formattedInput.slice(0, 2) !== "29" || yearEnd % 4 === 0)
             ) {
                 formattedInput = `${formattedInput.slice(0, 2)}/${formattedInput.slice(2, 4)}/${formattedInput.slice(4)}`;
             } else {
@@ -112,33 +112,64 @@ export default function PopUp({ onClose, onPost, popUpType }: Props) {
     const [date, setDate] = useState<string>("");
     const [firstMeasure, setFirstMeasure] = useState<string>("");
     const [secondMeasure, setSecondMeasure] = useState<string>("");
+    const toast = useToast();
+    const id = "warning-toast";
+    const idSuccess = "success-toast";
+
+    function postToast() {
+        if (!toast.isActive(idSuccess)) {
+            toast.show({
+                id: idSuccess,
+                title: "Medida adicionada com sucesso!",
+                variant: "top-accent",
+                backgroundColor: "green.500",
+                placement: "top",
+                style: { borderRadius: 10 }
+            });
+        }
+    }
 
     const handleDate = (inputDate: string) => {
         setDate(formatDate(inputDate));
     };
     const handlePost = () => {
         if (
-            popUpType === "PRESSURE" &&
+            (popUpType === "PRESSURE" || popUpType === "IMC") &&
             date.length === 10 &&
-            /^([0-3])(0[1-9]|[12][0-9]|3[01])([01])(0[1-9]|[12][0-9]|3[01])(20[2-9]|21[0-9])$/.test(
+            /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(20[2-9][4-9]|21[0-9][0-9])$/.test(
                 date
             ) &&
             firstMeasure.length >= 2 &&
             secondMeasure.length >= 2
         ) {
-            const measure = `${firstMeasure} x ${secondMeasure}`;
-            const list = {
-                date,
-                measure
-            };
+            const newDate = date.split("/").reverse().join("-");
+            let list = {};
+            if (popUpType === "PRESSURE") {
+                const measure = `${firstMeasure}x${secondMeasure}`;
+                list = {
+                    date: newDate,
+                    measure
+                };
+            }
+            if (popUpType === "IMC") {
+                const height = parseInt(firstMeasure);
+                const weight = parseInt(secondMeasure);
+                list = {
+                    date: newDate,
+                    height,
+                    weight
+                };
+            }
+
             onPost(list);
+            postToast();
             onClose();
         } else if (
             popUpType === "GLUCOSE" &&
             date.length === 10 &&
-            // /^([0-3])(0[1-9]|[12][0-9]|3[01])([01])(0[1-9]|[12][0-9]|3[01])(20[2-9]|21[0-9])$/.test(
-            //     date
-            // ) &&
+            /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(20[2-9][4-9]|21[0-9][0-9])$/.test(
+                date
+            ) &&
             firstMeasure.length >= 2
         ) {
             const measure = parseInt(firstMeasure);
@@ -147,12 +178,21 @@ export default function PopUp({ onClose, onPost, popUpType }: Props) {
                 date: newDate,
                 measure
             };
-            console.log(list);
             onPost(list);
+            postToast();
             onClose();
         } else {
-            //criar um toast
-            alert("Preencha os campos corretamente");
+            if (!toast.isActive(id)) {
+                toast.show({
+                    id,
+                    title: "Erro ao adicionar medida.",
+                    variant: "top-accent",
+                    description: "Preencha os campos corretamente.",
+                    backgroundColor: "red.500",
+                    placement: "top",
+                    style: { borderRadius: 10 }
+                });
+            }
         }
     };
 
@@ -231,7 +271,7 @@ export default function PopUp({ onClose, onPost, popUpType }: Props) {
                                         onChangeText={(text) =>
                                             setFirstMeasure(text)
                                         }
-                                        value={firstMeasure}
+                                        value={secondMeasure}
                                         maxLength={3}
                                         size="SMALL"
                                     />
