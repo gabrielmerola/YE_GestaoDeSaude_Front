@@ -23,7 +23,6 @@ export const Container = styled(Modal).attrs({
 
 export const ModalContainer = styled.View`
     flex: 1;
-    background-color: rgba(0, 0, 0, 0.5);
     padding: 16px;
     justify-content: center;
 `;
@@ -66,10 +65,10 @@ export const Txt = styled.Text`
         font-size: ${theme.FONT_SIZE.XL};
         font-family: ${theme.FONT_FAMILY.REGULAR};
     `}
-    height: 27px;
     width: auto;
     color: black;
     margin-right: 10px;
+    margin-bottom: 32px;
 `;
 
 export const Button = styled(TouchableOpacity)<ButtonProps>`
