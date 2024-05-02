@@ -21,7 +21,7 @@ export default function AuthRoutes() {
     return (
         <NavigationContainer>
             <AuthStack.Navigator
-                initialRouteName="StackRoutes"
+                initialRouteName="Home"
                 screenOptions={{
                     headerTitle: "",
                     headerShown: false

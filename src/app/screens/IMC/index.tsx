@@ -3,6 +3,7 @@ import { PopUpAddButton } from "@components/PopUpAddButton";
 import { Container, Separator } from "@components/Table/styles";
 import { useState } from "react";
 import { View } from "react-native";
+import RNPickerSelect from "react-native-picker-select";
 import PopUp from "src/app/components/PopUp";
 
 import { Cell, CellText, DataCell, HeaderCell, Txt } from "./styles";
@@ -74,7 +75,21 @@ export default function () {
                     </View>
 
                     <HeaderCell>
-                        <CellText type="gray">Data:10/02/2024</CellText>
+                        <RNPickerSelect
+                            style={{ inputAndroid: { width: "50%" } }}
+                            placeholder={{
+                                label: "Selecione a Data",
+                                value: null
+                            }}
+                            onValueChange={(value) => console.log(value)}
+                            items={[
+                                { label: "09/01/2024", value: "09/01/2024" },
+                                { label: "09/01/2024", value: "09/01/2024" },
+                                { label: "09/01/2024", value: "09/01/2024" },
+                                { label: "09/01/2024", value: "09/01/2024" },
+                                { label: "09/01/2024", value: "09/01/2024" }
+                            ]}
+                        />
                     </HeaderCell>
                     <Separator />
                     <Container>
