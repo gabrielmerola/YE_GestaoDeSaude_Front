@@ -1,14 +1,10 @@
-import BottomAddButton from "@components/BottomAddButton";
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
-import { Checkbox, Stack, Icon } from "native-base";
-import { Children, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View, Modal } from "react-native";
-import { styled } from "styled-components";
+import { Stack } from "native-base";
+import { useState } from "react";
+import { Modal } from "react-native";
 
 import {
     TextTitle,
-    TextSubtitle,
     ViewContainer,
     ViewContent,
     ViewCard,
@@ -33,33 +29,9 @@ export default function Perfil() {
             >
                 <ViewContent>
                     <ViewCard>
-                        <TextTitle>Adicionar um plano?</TextTitle>
-                        <TextSubtitle>Selecione os planos:</TextSubtitle>
-                        <Checkbox colorScheme="green" value="Sulamerica">
-                            Sulamerica
-                        </Checkbox>
-                        <Checkbox colorScheme="green" value="Unimed">
-                            Unimed
-                        </Checkbox>
-                        <Checkbox colorScheme="green" value="Bradesco">
-                            Bradesco
-                        </Checkbox>
-                        <Checkbox colorScheme="green" value="Amil">
-                            Amil
-                        </Checkbox>
-                        <Checkbox colorScheme="green" value="Biosaude">
-                            Biosaúde
-                        </Checkbox>
-                        <Checkbox colorScheme="green" value="Biovida">
-                            Biovida
-                        </Checkbox>
-                        <Checkbox colorScheme="green" value="Outros">
-                            Outros
-                        </Checkbox>
-                        <Checkbox colorScheme="green" value="None">
-                            Não tenho plano
-                        </Checkbox>
-
+                        <TextTitle>
+                            Você tem certeza que deseja deletar sua conta?
+                        </TextTitle>
                         <Stack direction="row">
                             <Button onPress={() => setOpenModal(false)}>
                                 <ButtonTextBlack>Cancelar</ButtonTextBlack>
@@ -72,18 +44,8 @@ export default function Perfil() {
                 </ViewContent>
             </Modal>
             <ButtonAdd onPress={() => setOpenModal(true)}>
-                <Text>
-                    <Icon as={Ionicons} name="add" size="lg" color="white" />
-                </Text>
+                <ButtonTextWhite>Deletar conta</ButtonTextWhite>
             </ButtonAdd>
         </ViewContainer>
     );
 }
-
-const styles = StyleSheet.create({
-    text: {
-        fontWeight: "600",
-        fontSize: 16,
-        color: "white"
-    }
-});

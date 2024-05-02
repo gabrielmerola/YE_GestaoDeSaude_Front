@@ -42,11 +42,6 @@ export const CellText = styled.Text<Props>`
         type === "gray" ? "black" : theme.COLORS.WHITE};
 `;
 
-export const Separator = styled.View`
-    height: 1px;
-    background-color: black;
-`;
-
 export const HeaderCell = styled.View`
     justify-content: center;
     background-color: ${({ theme }) => theme.COLORS.GRAY_300};

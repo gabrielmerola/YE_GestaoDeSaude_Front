@@ -23,7 +23,6 @@ export const Container = styled(Modal).attrs({
 
 export const ModalContainer = styled.View`
     flex: 1;
-    background-color: rgba(0, 0, 0, 0.5);
     padding: 16px;
     justify-content: center;
 `;
@@ -58,7 +57,7 @@ export const Title = styled.Text`
         font-family: ${theme.FONT_FAMILY.REGULAR};
     `}
     color: black;
-    margin-bottom: 40px;
+    margin-bottom: 16px;
 `;
 
 export const Txt = styled.Text`
@@ -75,7 +74,6 @@ export const Txt = styled.Text`
 export const Button = styled(TouchableOpacity)<ButtonProps>`
     flex: 1;
     min-height: 56px;
-    max-height: 56px;
     border: black;
     background-color: ${({ theme, type }) =>
         type === "ADD" ? theme.COLORS.GREEN_700 : theme.COLORS.GRAY_400};

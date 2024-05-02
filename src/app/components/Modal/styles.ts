@@ -7,16 +7,9 @@ export const TextTitle = styled.Text`
     align-self: center;
 `;
 
-export const TextSubtitle = styled.Text`
-    font-weight: bold;
-    color: ${({ theme }) => theme.COLORS.GREEN_400};
-    font-size: 16px;
-    margin-bottom: 12px;
-`;
-
 export const Text = styled.Text`
     font-weight: bold;
-    font-size: 16;
+    font-size: 16px;
     color: ${({ theme }) => theme.COLORS.WHITE};
 `;
 
@@ -42,45 +35,51 @@ export const ViewCard = styled.View`
 
 export const Button = styled.TouchableOpacity`
     width: 48%;
-    background-color:
-        rgba 0,
-        0,
-        0,
-        0.1;
+    background-color: ${({ theme }) => theme.COLORS.GRAY_300};
     margin-right: 5px;
-    margin-top: 24px;
+    margin-top: 20px;
     justify-content: center;
     align-items: center;
-    height: 40px;
-    border-radius: 50px;
+    height: 50px;
+    border-radius: 10px;
 `;
 
 export const ButtonConfirm = styled.TouchableOpacity`
     width: 48%;
-    background-color: ${({ theme }) => theme.COLORS.GREEN_400};
+    background-color: ${({ theme }) => theme.COLORS.RED_100};
     justify-content: center;
     align-items: center;
     margin-left: 5px;
-    margin-top: 24px;
-    height: 40px;
-    border-radius: 50px;
+    margin-top: 20px;
+    height: 50px;
+    border-radius: 10px;
 `;
 
 export const ButtonAdd = styled.TouchableOpacity`
-    width: 50px;
-    background-color: #739489;
+    flex: 1;
+    min-height: 50px;
+    max-height: 50px;
+    min-width: 150px;
+    max-width: 150px;
+    background-color: ${({ theme }) => theme.COLORS.RED_100};
+    border-radius: 10px;
     justify-content: center;
     align-items: center;
-    height: 50px;
-    border-radius: 50px;
+    margin: 0 8px;
 `;
 
 export const ButtonTextWhite = styled.Text`
-    color: white;
-    font-size: ${({ theme }) => theme.FONT_SIZE.LG};
+    ${({ theme }) => `
+        font-size: ${theme.FONT_SIZE.LG};
+        font-family: ${theme.FONT_FAMILY.REGULAR};
+        color: ${theme.COLORS.WHITE};
+    `}
 `;
 
 export const ButtonTextBlack = styled.Text`
-    color: black;
-    font-size: ${({ theme }) => theme.FONT_SIZE.LG};
+    ${({ theme }) => `
+        font-size: ${theme.FONT_SIZE.LG};
+        font-family: ${theme.FONT_FAMILY.REGULAR};
+        color: ${theme.COLORS.BLACK};
+    `}
 `;

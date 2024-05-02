@@ -11,11 +11,15 @@ import {
     Input,
     TextInputContainer
 } from "@components/PopUp/styles";
+import { useToast } from "native-base";
 import { useState } from "react";
+
+export type popUpType = "PRESSURE" | "GLUCOSE" | "IMC";
 
 interface Props {
     onClose: () => void;
-    onPost: (data: string, medida: string) => void;
+    onPost: (list: object) => void;
+    popUpType: popUpType;
 }
 
 export const formatDate = (inputDate: string): string => {
@@ -86,11 +90,10 @@ export const formatDate = (inputDate: string): string => {
         case 8:
             const yearEnd = parseInt(formattedInput.slice(6, 8));
             if (
-                (/^(20[2-9][4-9]|21[0-9][0-9])/.test(
+                /^(20[2-9][4-9]|21[0-9][0-9])/.test(
                     formattedInput.slice(4, 8)
                 ) &&
-                    formattedInput.slice(0, 2) !== "29") ||
-                yearEnd % 4 === 0
+                (formattedInput.slice(0, 2) !== "29" || yearEnd % 4 === 0)
             ) {
                 formattedInput = `${formattedInput.slice(0, 2)}/${formattedInput.slice(2, 4)}/${formattedInput.slice(4)}`;
             } else {
@@ -105,26 +108,91 @@ export const formatDate = (inputDate: string): string => {
     return formattedInput;
 };
 
-export default function PopUp({ onClose, onPost }: Props) {
+export default function PopUp({ onClose, onPost, popUpType }: Props) {
     const [date, setDate] = useState<string>("");
     const [firstMeasure, setFirstMeasure] = useState<string>("");
     const [secondMeasure, setSecondMeasure] = useState<string>("");
+    const toast = useToast();
+    const id = "warning-toast";
+    const idSuccess = "success-toast";
+
+    function postToast() {
+        if (!toast.isActive(idSuccess)) {
+            toast.show({
+                id: idSuccess,
+                title: "Medida adicionada com sucesso!",
+                variant: "top-accent",
+                backgroundColor: "green.500",
+                placement: "top",
+                style: { borderRadius: 10 }
+            });
+        }
+    }
 
     const handleDate = (inputDate: string) => {
         setDate(formatDate(inputDate));
     };
-
     const handlePost = () => {
         if (
+            (popUpType === "PRESSURE" || popUpType === "IMC") &&
             date.length === 10 &&
+            /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(20[2-9][4-9]|21[0-9][0-9])$/.test(
+                date
+            ) &&
             firstMeasure.length >= 2 &&
             secondMeasure.length >= 2
         ) {
-            const measure = `${firstMeasure} x ${secondMeasure}`;
-            onPost(date, measure);
+            const newDate = date.split("/").reverse().join("-");
+            let list = {};
+            if (popUpType === "PRESSURE") {
+                const measure = `${firstMeasure}x${secondMeasure}`;
+                list = {
+                    date: newDate,
+                    measure
+                };
+            }
+            if (popUpType === "IMC") {
+                const height = parseInt(firstMeasure);
+                const weight = parseInt(secondMeasure);
+                list = {
+                    date: newDate,
+                    height,
+                    weight
+                };
+            }
+
+            onPost(list);
+            postToast();
+            onClose();
+        } else if (
+            popUpType === "GLUCOSE" &&
+            date.length === 10 &&
+            /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(20[2-9][4-9]|21[0-9][0-9])$/.test(
+                date
+            ) &&
+            firstMeasure.length >= 2
+        ) {
+            const measure = parseInt(firstMeasure);
+            const newDate = date.split("/").reverse().join("-");
+            const list = {
+                date: newDate,
+                measure
+            };
+            onPost(list);
+            postToast();
             onClose();
         } else {
-            alert("Preencha os campos corretamente");
+            if (!toast.isActive(id)) {
+                toast.show({
+                    id,
+                    title: "Erro ao adicionar medida.",
+                    variant: "top-accent",
+                    description: "Preencha os campos corretamente.",
+                    backgroundColor: "red.500",
+                    placement: "top",
+                    style: { borderRadius: 10 }
+                });
+            }
         }
     };
 
@@ -144,24 +212,74 @@ export default function PopUp({ onClose, onPost }: Props) {
                                 size="LARGE"
                             />
                         </TextInputContainer>
-                        <TextInputContainer>
-                            <Txt>Medida:</Txt>
-                            <Input
-                                placeholder="120"
-                                onChangeText={(text) => setFirstMeasure(text)}
-                                value={firstMeasure}
-                                maxLength={3}
-                                size="SMALL"
-                            />
-                            <Txt> x</Txt>
-                            <Input
-                                placeholder="80"
-                                onChangeText={(text) => setSecondMeasure(text)}
-                                value={secondMeasure}
-                                maxLength={3}
-                                size="SMALL"
-                            />
-                        </TextInputContainer>
+                        {popUpType === "PRESSURE" ? (
+                            <TextInputContainer>
+                                <Txt>Medida:</Txt>
+                                <Input
+                                    placeholder="120"
+                                    onChangeText={(text) =>
+                                        setFirstMeasure(text)
+                                    }
+                                    value={firstMeasure}
+                                    maxLength={3}
+                                    size="SMALL"
+                                />
+                                <Txt> x</Txt>
+                                <Input
+                                    placeholder="80"
+                                    onChangeText={(text) =>
+                                        setSecondMeasure(text)
+                                    }
+                                    value={secondMeasure}
+                                    maxLength={3}
+                                    size="SMALL"
+                                />
+                            </TextInputContainer>
+                        ) : popUpType === "GLUCOSE" ? (
+                            <TextInputContainer>
+                                <Txt>Medida:</Txt>
+                                <Input
+                                    placeholder="120"
+                                    onChangeText={(text) =>
+                                        setFirstMeasure(text)
+                                    }
+                                    value={firstMeasure}
+                                    maxLength={3}
+                                    size="SMALL"
+                                />
+                                <Txt> mg/dL</Txt>
+                            </TextInputContainer>
+                        ) : (
+                            <>
+                                <TextInputContainer>
+                                    <Txt>Altura:</Txt>
+                                    <Input
+                                        placeholder="175"
+                                        onChangeText={(text) =>
+                                            setFirstMeasure(text)
+                                        }
+                                        value={firstMeasure}
+                                        maxLength={3}
+                                        size="SMALL"
+                                    />
+                                    <Txt> cm</Txt>
+                                </TextInputContainer>
+                                <TextInputContainer>
+                                    <Txt>Peso:</Txt>
+                                    <Input
+                                        placeholder="70"
+                                        onChangeText={(text) =>
+                                            setFirstMeasure(text)
+                                        }
+                                        value={secondMeasure}
+                                        maxLength={3}
+                                        size="SMALL"
+                                    />
+                                    <Txt> kgs</Txt>
+                                </TextInputContainer>
+                            </>
+                        )}
+
                         <BottomContainer>
                             <ButtonsContainer>
                                 <Button type="CANCEL" onPress={onClose}>
@@ -169,8 +287,8 @@ export default function PopUp({ onClose, onPost }: Props) {
                                         Cancelar
                                     </ButtonText>
                                 </Button>
-                                <Button type="ADD">
-                                    <ButtonText type="ADD" onPress={handlePost}>
+                                <Button type="ADD" onPress={handlePost}>
+                                    <ButtonText type="ADD">
                                         Confirmar
                                     </ButtonText>
                                 </Button>

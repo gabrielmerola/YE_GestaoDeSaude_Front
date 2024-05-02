@@ -4,44 +4,52 @@ import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { VStack, Image, Text, Box, Link, useToast } from "native-base";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
+import { AuthContext } from "src/app/context/auth_context";
 
 import Logo from "../../../../assets/logo.png";
-import { useAuth } from "../../hooks/useAuth";
-
-type FormData = {
-    email: string;
-    password: string;
-};
 
 export default function Login({ navigation }: any) {
-    const { doLogin } = useAuth();
     const [email, setEmail] = useState(""); //armazena os valores
     const [password, setPassword] = useState("");
     const toast = useToast();
-    const [loading, setLoading] = useState(true);
+    const { login } = useContext(AuthContext);
 
     useEffect(() => {
         AsyncStorage.removeItem("token");
         async function loginVerify() {
-            const token = await AsyncStorage.getItem("token");
-            if (token) {
+            if (await AsyncStorage.getItem("token")) {
                 navigation.navigate("StackRoutes");
             }
-            setLoading(false);
         }
         loginVerify();
     });
 
     async function SignIn() {
-        const result = await doLogin(email, password);
+        const result = await login(email, password);
         console.log(result);
-        if (result.status === 200) {
+        if (result != undefined) {
             const { token } = result;
             console.log(token);
-            AsyncStorage.setItem("token", token);
+
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 1);
+            const formattedExpirationDate = expirationDate.toISOString();
+
+            await AsyncStorage.setItem(
+                "tokenExpiration",
+                formattedExpirationDate
+            );
+            await AsyncStorage.setItem("token", token);
+
             navigation.navigate("StackRoutes");
+            toast.show({
+                title: "Login realizado com sucesso",
+                description: "Você já pode acessar o app",
+                backgroundColor: "green.500",
+                placement: "top"
+            });
         } else {
             toast.show({
                 title: "Erro no login",
@@ -50,14 +58,6 @@ export default function Login({ navigation }: any) {
                 placement: "top"
             });
         }
-    }
-
-    if (loading) {
-        return null;
-    }
-
-    async function handleSignIn({ email, password }: FormData) {
-        await doLogin(email, password);
     }
 
     return (
@@ -80,6 +80,7 @@ export default function Login({ navigation }: any) {
                         secureTextEntry
                     />
                 </Box>
+
                 <Buton onPress={SignIn}>Entrar</Buton>
 
                 <Link href="" mt={2}>
@@ -100,9 +101,7 @@ export default function Login({ navigation }: any) {
                     </TouchableOpacity>
                 </Box>
             </VStack>
-            <TouchableOpacity onPress={() => navigation.navigate("About")}>
-                <Footer />
-            </TouchableOpacity>
+            <Footer navigation={navigation} />
         </>
     );
 }

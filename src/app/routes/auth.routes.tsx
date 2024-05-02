@@ -6,7 +6,6 @@ import Login from "@screens/Login";
 import Register from "@screens/Register";
 import Security from "@screens/Security";
 
-import DrawerRoutes from "./drawer.routes";
 import StackRoutes from "./stack.routes";
 
 type AuthRoutes = {
@@ -31,7 +30,6 @@ export default function AuthRoutes() {
                 <AuthStack.Screen name="Home" component={Home} />
                 <AuthStack.Screen name="About" component={About} />
                 <AuthStack.Screen name="Login" component={Login} />
-                <AuthStack.Screen name="Security" component={Security} />
                 <AuthStack.Screen name="Register" component={Register} />
                 <AuthStack.Screen name="StackRoutes" component={StackRoutes} />
             </AuthStack.Navigator>

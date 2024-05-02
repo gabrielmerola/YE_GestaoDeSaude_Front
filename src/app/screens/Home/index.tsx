@@ -1,4 +1,5 @@
 import { Title } from "@components/Title/Title";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Image } from "react-native";
 
 import { Button, ButtonText, Container, SubTitle, Txt } from "./styles";
@@ -23,6 +24,10 @@ export default function Home({ navigation }: any) {
             <Button onPress={() => navigation.navigate("Register")}>
                 <ButtonText>Cadastro</ButtonText>
             </Button>
+
+            {/* <Button onPress={() => AsyncStorage.removeItem("token")}>
+                <ButtonText>Remover Token</ButtonText>
+            </Button> */}
         </Container>
     );
 }

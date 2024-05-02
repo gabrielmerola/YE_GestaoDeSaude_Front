@@ -11,6 +11,7 @@ export const ContainerValidation = styled.View`
 `;
 
 export const ContainerNewPassword = styled.View`
+    align-items: center;
     margin-top: 50px;
 `;
 
@@ -53,47 +54,52 @@ export const ButtonText = styled.Text`
 
 export const TextNewPassword = styled.Text`
     margin-top: 30px;
-    padding-left: 30px;
     font-size: ${({ theme }) => theme.FONT_SIZE.LG};
+    width: 80%;
 `;
 
 export const InputNewPassword = styled.TextInput`
-    margin-left: 25px;
-    background-color: #d9d9d9;
-    margin-top: 5px;
-    margin-right: 25px;
+    width: 90%;
     font-size: 18px;
-    padding-left: 8px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    border-radius: 4px;
 `;
 
 export const TextNewPasswordConfirm = styled.TextInput`
     margin-top: 30px;
-    padding-left: 30px;
+    width: 80%;
     font-size: ${({ theme }) => theme.FONT_SIZE.LG};
 `;
 
 export const InputNewPasswordConfirm = styled.TextInput`
-    margin-left: 25px;
-    background-color: #d9d9d9;
-    margin-top: 5px;
-    margin-right: 25px;
+    width: 90%;
     font-size: 18px;
-    padding-left: 8px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    border-radius: 4px;
 `;
 
 export const TextPasswordRestricion = styled.Text`
     margin-left: 25px;
     margin-top: 8px;
     color: dimgrey;
+    width: 80%;
 `;
 
 export const TextRestricion = styled.Text`
     margin-left: 25px;
     color: dimgrey;
+    width: 80%;
+`;
+
+export const View = styled.View``;
+
+export const Image = styled.Image`
+    width: 20px;
+    height: 20px;
+`;
+
+export const ContainerInput = styled.View`
+    background-color: #d9d9d9;
+    width: 80%;
+    border-radius: 4px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px;
 `;

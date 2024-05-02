@@ -1,6 +1,5 @@
 import "react-native-gesture-handler";
 import { Loading } from "@components/Loading";
-import { AuthContext, AuthContextProvider } from "@contexts/authContext";
 import {
     useFonts,
     Jost_400Regular,
@@ -9,6 +8,7 @@ import {
 import Routes from "@routes/index";
 import { NativeBaseProvider, StatusBar } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { AuthContextProvider } from "src/app/context/auth_context";
 import { ThemeProvider } from "styled-components";
 
 import theme from "./src/app/theme";
@@ -21,7 +21,7 @@ export default function App() {
             <NativeBaseProvider>
                 <ThemeProvider theme={theme}>
                     <StatusBar
-                        barStyle="light-content"
+                        barStyle="dark-content"
                         backgroundColor="transparent"
                         translucent
                     />

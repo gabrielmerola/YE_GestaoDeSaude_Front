@@ -1,10 +1,23 @@
-import BottomAddButton from "@components/BottomAddButton";
 import { Header } from "@components/Header";
 import Modal from "@components/Modal";
 import { Title } from "@components/Title/Title";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ButtonOut, ButtonTextWhiteOut } from "@screens/Perfil/styles";
 import { VStack, Text, ScrollView, Avatar, Divider } from "native-base";
 
-export default function Perfil() {
+export default function Perfil({ navigation }: any) {
+    const logout = async () => {
+        try {
+            // Remove o token do AsyncStorage
+            await AsyncStorage.removeItem("token");
+            // Navega o usuário de volta para a tela de login
+            navigation.navigate("Login");
+        } catch (error) {
+            console.error("Erro ao sair da conta:", error);
+            // Trate o erro conforme necessário
+        }
+    };
+
     return (
         <ScrollView flex={1}>
             <VStack flex={1} alignItems="center">
@@ -37,13 +50,13 @@ export default function Perfil() {
                 <Text fontSize="md">Pantoprazol</Text>
                 <Text fontSize="md">Nimesulida</Text>
 
-                <Divider mt={7} />
-
-                <Title mt={7} mb={4}>
-                    Plano de saúde
-                </Title>
+                <Divider mt={7} mb={3} />
 
                 <Modal />
+
+                <ButtonOut onPress={logout}>
+                    <ButtonTextWhiteOut>Sair</ButtonTextWhiteOut>
+                </ButtonOut>
             </VStack>
         </ScrollView>
     );
