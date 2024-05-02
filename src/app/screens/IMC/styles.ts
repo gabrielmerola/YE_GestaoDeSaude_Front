@@ -51,8 +51,8 @@ export const HeaderCell = styled.View`
     justify-content: center;
     background-color: ${({ theme }) => theme.COLORS.GRAY_300};
     border-bottom: 10px;
-    padding: 4%;
-    border-radius: 10% 10% 0% 0%;
+    padding: 4px;
+    border-radius: 10px 10px 0px 0px;
 `;
 
 export const DataCell = styled.View<Props>`
@@ -66,9 +66,9 @@ export const DataCell = styled.View<Props>`
     border-bottom: 10px green;
     ${({ radiusPosition }) =>
         radiusPosition === "right"
-            ? "border-radius: 0% 0% 0% 10%;"
+            ? "border-radius: 0px 0px 0px 10px;"
             : radiusPosition === "left"
-              ? "border-radius: 0% 0% 10% 0%;"
+              ? "border-radius: 0px 0px 10px 0px;"
               : ""}
 `;
 
