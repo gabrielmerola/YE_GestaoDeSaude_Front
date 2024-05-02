@@ -1,8 +1,9 @@
 import { Header } from "@components/Header";
 import { PopUpAddButton } from "@components/PopUpAddButton";
 import { Table } from "@components/Table";
+import { BloodPressureContext } from "@context/blood-pressure-context";
 import { FlatList } from "native-base";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PopUp from "src/app/components/PopUp";
 
 interface Pressure {
@@ -13,36 +14,11 @@ interface Pressure {
     nivel: string;
 }
 
-const json = [
-    {
-        id: 1,
-        data: "Data",
-        medida: "Medida",
-        nivel: "Nível"
-    },
-    {
-        id: 2,
-        data: "05/04/2023",
-        medida: "120 x 80",
-        nivel: "Normal"
-    },
-    {
-        id: 3,
-        data: "06/04/2023",
-        medida: "110 x 70",
-        nivel: "Normal"
-    },
-    {
-        id: 4,
-        data: "07/04/2023",
-        medida: "150 x 100",
-        nivel: "Alta"
-    }
-];
-
 export default function Pressure() {
     const [data, setData] = useState<Pressure[]>([]);
     const [showPopUp, setShowPopUp] = useState(false);
+    const { getBloodPressure, postBloodPressure, deleteBloodPressure } =
+        useContext(BloodPressureContext);
 
     const handleOpenPopUp = () => {
         setShowPopUp(true);
@@ -52,19 +28,57 @@ export default function Pressure() {
         setShowPopUp(false);
     };
 
-    const handlePost = (list: string[]) => {
-        json.push({
-            id: json.findLastIndex((value) => value.id) + 1,
-            data: list[0],
-            medida: list[1],
-            nivel: "Normal"
+    function loadData() {
+        const fetchData = async () => {
+            try {
+                const pressureData = await getBloodPressure();
+
+                const sortedData = pressureData.sort(
+                    (a: Pressure, b: Pressure) => {
+                        const dateA = new Date(a.date + "T00:00:01");
+                        const dateB = new Date(b.date + "T00:00:01");
+                        return dateA - dateB;
+                    }
+                );
+
+                const formattedData = sortedData.map((item) => ({
+                    ...item,
+                    date: formatDate(item.date)
+                }));
+
+                setData(formattedData);
+            } catch (error) {
+                console.error("Error fetching glucose data:", error);
+            }
+        };
+        fetchData();
+    }
+
+    const handlePost = (list: object) => {
+        const response = postBloodPressure(list);
+        response.then((json) => {
+            console.log(json);
+            loadData();
+        });
+    };
+    const handleDelete = (id: number) => {
+        const response = deleteBloodPressure(id);
+        response.then((json) => {
+            console.log(json);
+            loadData();
         });
     };
 
-    json.findLastIndex((value) => value.id);
+    const formatDate = (dateString: Date) => {
+        const date = new Date(dateString + "T00:00:01");
+        const day = date.getDate().toString().padStart(2, "0"); // Get day with leading zero if needed
+        const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Get month with leading zero if needed
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    };
 
     useEffect(() => {
-        setData(json);
+        loadData();
     }, []);
 
     return (
