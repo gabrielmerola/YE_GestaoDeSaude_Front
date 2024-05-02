@@ -2,40 +2,19 @@ import CancelAndSaveButton from "@components/CancelAndSaveButton";
 import { Header } from "@components/Header";
 import { PopUpAddButton } from "@components/PopUpAddButton";
 import {
+    MedicineContext,
+    MedicineContextProvider
+} from "@context/medicine_context";
+import {
     ButtonContainer,
     ModalContainer,
     View
 } from "@screens/Medicines/styles";
+import { AxiosError } from "axios";
 import { FlatList } from "native-base";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { ActivityIndicator } from "react-native";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
-
-const json = [
-    {
-        id: 1,
-        name: "Losartana",
-        hour: "08:00",
-        period: "7",
-        hour_interval: "8",
-        quantity: "1"
-    },
-    {
-        id: 2,
-        name: "Hidroclorotiazida",
-        hour: "08:00",
-        period: "14",
-        hour_interval: "6",
-        quantity: "0.5"
-    },
-    {
-        id: 3,
-        name: "Pantoprazol",
-        hour: "12:00",
-        period: "30",
-        hour_interval: "24",
-        quantity: "2"
-    }
-];
 //         <ListInteractableItem
 //             text="Horário"
 //             text2="09:00"
@@ -54,28 +33,66 @@ const json = [
 //         />
 //     </View>
 
+export interface Medicine {
+    id: number;
+    name: string;
+    dosage: string;
+    period: number;
+    quantity: number;
+    time: string;
+}
+
 export default function Medicines() {
     const [showNewMedicines, setShowNewMedicines] = useState(false);
     const [showMedicineData, setShowMedicineData] = useState(false);
     const [showMedicineDataIndex, setShowMedicineDataIndex] = useState(0);
+    const { getAllMedicines } = useContext(MedicineContext);
 
-    const [data, setData] = useState([{}]);
+    const [medicines, setMedicines] = useState<Medicine[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        setData(json);
-    }, []);
+        const fetchMedicines = async () => {
+            try {
+                const response = await getAllMedicines();
+                if (response && Array.isArray(response)) {
+                    const parsedMedicines = response.map((med: any) => ({
+                        id: med.id,
+                        name: med.name,
+                        dosage: med.dosage,
+                        period: med.period,
+                        quantity: med.quantity,
+                        time: med.time
+                    }));
+                    setMedicines(parsedMedicines);
+                }
+            } catch (error: AxiosError | any) {
+                return console.log(
+                    "Erro ao buscar medicamentos: " + error.response
+                );
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchMedicines();
+    }, [getAllMedicines]);
 
     return (
-        <>
+        <MedicineContextProvider>
             <Header text="Medicamentos" isBackPress />
             <View>
+                {isLoading && (
+                    <ActivityIndicator size="large" color="#0000ff" />
+                )}
                 <FlatList
-                    data={data}
-                    keyExtractor={(item) => item.id}
+                    data={medicines}
+                    keyExtractor={(item) =>
+                        "All MedicinesKey " + item.id.toString()
+                    }
                     renderItem={({ item }) => (
                         <ListInteractableItem
                             text={item.name}
-                            text2={item.hour}
+                            text2={item.time}
                             isButton
                             modalFunction={() => {
                                 setShowMedicineData(true);
@@ -131,6 +148,7 @@ export default function Medicines() {
                     </View>
                     <CancelAndSaveButton
                         onPress={() => setShowNewMedicines(false)}
+                        medicineData={medicines}
                     />
                 </ModalContainer>
             ) : (
@@ -148,8 +166,8 @@ export default function Medicines() {
                         <ListInteractableItem
                             text="Nome: "
                             text2={
-                                json[
-                                    json.findIndex(
+                                medicines[
+                                    medicines.findIndex(
                                         (value) =>
                                             value.id === showMedicineDataIndex
                                     )
@@ -160,20 +178,20 @@ export default function Medicines() {
                         <ListInteractableItem
                             text="Horário:"
                             text2={
-                                json[
-                                    json.findIndex(
+                                medicines[
+                                    medicines.findIndex(
                                         (value) =>
                                             value.id === showMedicineDataIndex
                                     )
-                                ].hour
+                                ].time
                             }
                             isButton={false}
                         />
                         <ListInteractableItem
                             text="Período:"
                             text2={
-                                json[
-                                    json.findIndex(
+                                medicines[
+                                    medicines.findIndex(
                                         (value) =>
                                             value.id === showMedicineDataIndex
                                     )
@@ -184,20 +202,20 @@ export default function Medicines() {
                         <ListInteractableItem
                             text="Intervalo:"
                             text2={
-                                json[
-                                    json.findIndex(
+                                medicines[
+                                    medicines.findIndex(
                                         (value) =>
                                             value.id === showMedicineDataIndex
                                     )
-                                ].hour_interval + " horas"
+                                ].dosage + " horas"
                             }
                             isButton={false}
                         />
                         <ListInteractableItem
                             text="Quantidade:"
                             text2={
-                                json[
-                                    json.findIndex(
+                                medicines[
+                                    medicines.findIndex(
                                         (value) =>
                                             value.id === showMedicineDataIndex
                                     )
@@ -209,11 +227,12 @@ export default function Medicines() {
                     </View>
                     <CancelAndSaveButton
                         onPress={() => setShowMedicineData(false)}
+                        medicineData={medicines}
                     />
                 </ModalContainer>
             ) : (
                 <></>
             )}
-        </>
+        </MedicineContextProvider>
     );
 }

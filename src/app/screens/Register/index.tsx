@@ -2,6 +2,7 @@ import { Buton } from "@components/Button";
 import { Footer } from "@components/Footer";
 import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
+import { sections } from "@utils/registerInputText";
 import { Image, Box, ScrollView, useToast, Text, View } from "native-base";
 import { useContext, useState } from "react";
 import MaskInput from "react-native-mask-input";
@@ -9,7 +10,6 @@ import { FormDataProps } from "src/app/api/repositories/auth_repository_http";
 import { AuthContext } from "src/app/context/auth_context";
 
 import Logo from "../../../../assets/logo.png";
-import { sections } from "../../utils/registerInputText";
 
 export default function Register({ navigation }: any) {
     const [data, setData] = useState({} as any);
