@@ -17,7 +17,7 @@ export default function Login({ navigation }: any) {
     const { login } = useContext(AuthContext);
 
     useEffect(() => {
-        AsyncStorage.removeItem("token");
+        //AsyncStorage.removeItem("token");
         async function loginVerify() {
             if (await AsyncStorage.getItem("token")) {
                 navigation.navigate("StackRoutes");

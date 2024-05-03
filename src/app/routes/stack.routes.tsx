@@ -1,3 +1,4 @@
+import { MedicineContextProvider } from "@context/medicine_context";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import DrawerRoutes from "@routes/drawer.routes";
 import ConsultationsHeld from "@screens/ConsultationsHeld";

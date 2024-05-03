@@ -20,3 +20,14 @@ export const Button = styled.TouchableOpacity`
     width: 50%;
     margin: 10px 0 10px 0;
 `;
+
+export const ButtonModal = styled.TouchableOpacity`
+    width: 48%;
+    background-color: ${({ theme }) => theme.COLORS.GRAY_300};
+    margin-right: 5px;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-radius: 10px;
+`;
