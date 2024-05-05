@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AxiosError, AxiosResponse } from "axios";
 
 import { api } from "../http";
@@ -41,6 +42,22 @@ export class AuthRepositoryHttp {
             return response;
         } catch (error: AxiosError | any) {
             // console.log("Response 1: " + error);
+            return error.response;
+        }
+    }
+
+    async deleteClient() {
+        try {
+            const response = await api.delete(`/delete`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${AsyncStorage.getItem("token")}`
+                }
+            });
+            console.log(response);
+            return response.data;
+        } catch (error: AxiosError | any) {
+            console.log(error);
             return error.response;
         }
     }
