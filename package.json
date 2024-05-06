@@ -41,7 +41,8 @@
         "react-native-svg": "^13.14.0",
         "react-native-toast-message": "^2.2.0",
         "react-native-vector-icons": "^10.0.3",
-        "styled-components": "^6.1.8"
+        "styled-components": "^6.1.8",
+        "expo-image-picker": "~14.7.1"
     },
     "devDependencies": {
         "@babel/core": "^7.24.0",

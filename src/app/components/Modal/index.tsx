@@ -1,6 +1,9 @@
+import { AuthContext } from "@context/auth_context";
+import { useNavigation } from "@react-navigation/native";
+import Login from "@screens/Login";
 import { StatusBar } from "expo-status-bar";
-import { Stack } from "native-base";
-import { useState } from "react";
+import { Stack, useToast } from "native-base";
+import { useContext, useState } from "react";
 import { Modal } from "react-native";
 
 import {
@@ -17,6 +20,22 @@ import {
 
 export default function Perfil() {
     const [openModal, setOpenModal] = useState(false);
+    const { deleteUser } = useContext(AuthContext);
+    const navigation = useNavigation();
+    const toast = useToast();
+    function handleDelete() {
+        const response = deleteUser();
+        navigation.navigate("Login");
+        response.then((json) => {
+            console.log(json);
+            toast.show({
+                title: "Conta excluída com sucesso.",
+                description: "",
+                backgroundColor: "red.500",
+                placement: "top"
+            });
+        });
+    }
 
     return (
         <ViewContainer>
@@ -36,7 +55,7 @@ export default function Perfil() {
                             <Button onPress={() => setOpenModal(false)}>
                                 <ButtonTextBlack>Cancelar</ButtonTextBlack>
                             </Button>
-                            <ButtonConfirm onPress={() => setOpenModal(false)}>
+                            <ButtonConfirm onPress={handleDelete}>
                                 <ButtonTextWhite>Confirmar</ButtonTextWhite>
                             </ButtonConfirm>
                         </Stack>

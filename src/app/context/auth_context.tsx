@@ -7,6 +7,7 @@ type AuthContextType = {
     signUp: (data: object) => Promise<AxiosResponse | undefined>;
     signUpError: string;
     setSignUpError: (error: string) => void;
+    deleteUser: () => Promise<AxiosResponse | undefined>;
 };
 
 const defaultAuthContext: AuthContextType = {
@@ -17,7 +18,10 @@ const defaultAuthContext: AuthContextType = {
         return undefined;
     },
     signUpError: "",
-    setSignUpError: (error: string) => {}
+    setSignUpError: (error: string) => {},
+    deleteUser: async () => {
+        return undefined;
+    }
 };
 
 export const AuthContext = createContext<AuthContextType>(defaultAuthContext);
@@ -47,9 +51,18 @@ export function AuthContextProvider({ children }: PropsWithChildren) {
         }
     }
 
+    async function deleteUser() {
+        try {
+            const response = await authRepository.deleteClient();
+            return response;
+        } catch (error: any) {
+            console.log(error);
+        }
+    }
+
     return (
         <AuthContext.Provider
-            value={{ login, signUp, signUpError, setSignUpError }}
+            value={{ login, signUp, signUpError, setSignUpError, deleteUser }}
         >
             {children}
         </AuthContext.Provider>

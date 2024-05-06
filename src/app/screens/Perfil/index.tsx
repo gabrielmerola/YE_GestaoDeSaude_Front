@@ -1,9 +1,11 @@
 import { Header } from "@components/Header";
 import Modal from "@components/Modal";
 import { Title } from "@components/Title/Title";
+import { AuthContext } from "@context/auth_context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ButtonOut, ButtonTextWhiteOut } from "@screens/Perfil/styles";
 import { VStack, Text, ScrollView, Avatar, Divider } from "native-base";
+import { useContext } from "react";
 
 export default function Perfil({ navigation }: any) {
     const logout = async () => {
@@ -50,7 +52,7 @@ export default function Perfil({ navigation }: any) {
                 <Text fontSize="md">Pantoprazol</Text>
                 <Text fontSize="md">Nimesulida</Text>
 
-                <Divider mt={7} mb={3} />
+                <Divider mt={7} mb={7} />
 
                 <Modal />
 
