@@ -1,21 +1,13 @@
 import { Header } from "@components/Header";
 import { PopUpAddButton } from "@components/PopUpAddButton";
 import { Table } from "@components/Table";
-import { GlucoseContext } from "@context/glucose_context";
+import { GlucoseContext, GlucoseType } from "@context/glucose_context";
 import { FlatList } from "native-base";
 import React, { useContext, useEffect, useState } from "react";
 import PopUp from "src/app/components/PopUp";
 
-interface Glucose {
-    [key: string]: string | number;
-    id: number;
-    date: string;
-    measure: string;
-    level: string;
-}
-
 export default function Glucose() {
-    const [data, setData] = useState<Glucose[]>([]);
+    const [data, setData] = useState<GlucoseType[]>([]);
     const [showPopUp, setShowPopUp] = useState(false);
     const { getGlucose, postGlucose, deleteGlucose } =
         useContext(GlucoseContext);
@@ -33,11 +25,15 @@ export default function Glucose() {
             try {
                 const glucoseData = await getGlucose();
 
+                if (glucoseData === undefined) {
+                    return;
+                }
+
                 const sortedData = glucoseData.sort(
-                    (a: Glucose, b: Glucose) => {
+                    (a: GlucoseType, b: GlucoseType) => {
                         const dateA = new Date(a.date + "T00:00:01");
                         const dateB = new Date(b.date + "T00:00:01");
-                        return dateA - dateB;
+                        return dateA.getTime() - dateB.getTime();
                     }
                 );
 
@@ -98,7 +94,6 @@ export default function Glucose() {
                 <PopUp
                     onClose={handleClosePopUp}
                     onPost={handlePost}
-                    onUpdate={loadData}
                     popUpType="GLUCOSE"
                 />
             ) : (

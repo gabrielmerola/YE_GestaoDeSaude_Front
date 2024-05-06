@@ -37,10 +37,11 @@ export class BloodPressureRepositoryHttp {
 
     async deleteBloodPressure(id: number) {
         try {
+            const token = await AsyncStorage.getItem("token");
             const response = await api.delete(`/blood-pressure?id=${id}`, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                    Authorization: `Bearer ${token}`
                 }
             });
             return response.data;
@@ -51,10 +52,11 @@ export class BloodPressureRepositoryHttp {
 
     async getBloodPressureById(id: number) {
         try {
+            const token = await AsyncStorage.getItem("token");
             const response = await api.get(`/blood-pressure/${id}`, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                    Authorization: `Bearer ${token}`
                 }
             });
             return response.data;
@@ -65,10 +67,11 @@ export class BloodPressureRepositoryHttp {
 
     async getBloodPressureLatest() {
         try {
+            const token = await AsyncStorage.getItem("token");
             const response = await api.get("/blood-pressure/latest", {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                    Authorization: `Bearer ${token}`
                 }
             });
             return response.data;

@@ -12,8 +12,8 @@ interface CardProps {
     title: string;
     description: string;
     subTitle: string;
-    secDescription: string;
-    subDescription: string;
+    secDescription: string | undefined;
+    subDescription: string | undefined;
     color: string;
 }
 

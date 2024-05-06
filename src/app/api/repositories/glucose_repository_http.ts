@@ -36,10 +36,11 @@ export class GlucoseRepositoryHttp {
 
     async deleteGlucose(id: number) {
         try {
+            const token = await AsyncStorage.getItem("token");
             const response = await api.delete(`/glucose?id=${id}`, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                    Authorization: `Bearer ${token}`
                 }
             });
             return response.data;
@@ -50,10 +51,11 @@ export class GlucoseRepositoryHttp {
 
     async getGlucoseById(id: number) {
         try {
+            const token = await AsyncStorage.getItem("token");
             const response = await api.get(`/glucose/${id}`, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                    Authorization: `Bearer ${token}`
                 }
             });
             return response.data;
@@ -64,10 +66,11 @@ export class GlucoseRepositoryHttp {
 
     async getGlucoseLatest() {
         try {
+            const token = await AsyncStorage.getItem("token");
             const response = await api.get("/glucose/latest", {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                    Authorization: `Bearer ${token}`
                 }
             });
             return response.data;

@@ -1,21 +1,16 @@
 import { Header } from "@components/Header";
 import { PopUpAddButton } from "@components/PopUpAddButton";
 import { Table } from "@components/Table";
-import { BloodPressureContext } from "@context/blood-pressure-context";
+import {
+    BloodPressureContext,
+    PressureType
+} from "@context/blood-pressure-context";
 import { FlatList } from "native-base";
 import React, { useContext, useEffect, useState } from "react";
 import PopUp from "src/app/components/PopUp";
 
-interface Pressure {
-    [key: string]: string | number;
-    id: number;
-    data: string;
-    medida: string;
-    nivel: string;
-}
-
 export default function Pressure() {
-    const [data, setData] = useState<Pressure[]>([]);
+    const [data, setData] = useState<PressureType[]>([]);
     const [showPopUp, setShowPopUp] = useState(false);
     const { getBloodPressure, postBloodPressure, deleteBloodPressure } =
         useContext(BloodPressureContext);
@@ -33,11 +28,15 @@ export default function Pressure() {
             try {
                 const pressureData = await getBloodPressure();
 
+                if (pressureData === undefined) {
+                    return;
+                }
+
                 const sortedData = pressureData.sort(
-                    (a: Pressure, b: Pressure) => {
+                    (a: PressureType, b: PressureType) => {
                         const dateA = new Date(a.date + "T00:00:01");
                         const dateB = new Date(b.date + "T00:00:01");
-                        return dateA - dateB;
+                        return dateA.getTime() - dateB.getTime();
                     }
                 );
 
