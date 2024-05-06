@@ -9,7 +9,7 @@ import {
     InputView
 } from "@components/ListInteractableItem/styles";
 import { ChevronRightIcon, ChevronDownIcon, ChevronUpIcon } from "native-base";
-import React from "react";
+import React, { useState } from "react";
 
 export type InputType = "TEXT" | "TIME" | "NUMBER" | "DATE";
 
@@ -140,6 +140,16 @@ export default function ListInteractableItem({
     downChevron,
     changeIcon
 }: MedicineAndButtonProps) {
+    const [twoDots, setTwoDots] = useState("");
+    const twoDotsInput = (text: string) => {
+        let formattedValue = text.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
+        if (formattedValue.length > 2) {
+            formattedValue =
+                formattedValue.slice(0, 2) + ":" + formattedValue.slice(2);
+        }
+        setTwoDots(formattedValue);
+    };
+
     if (isButton) {
         return (
             <MedicineButton
@@ -179,7 +189,7 @@ export default function ListInteractableItem({
                     <InputView sizeType="SMALL">
                         <Input
                             keyboardType="numeric"
-                            placeholder="XX/XX/XXXX"
+                            placeholder="Digite o período..."
                             onChangeText={formatDate}
                             value={inputValue}
                             maxLength={10}
@@ -194,8 +204,9 @@ export default function ListInteractableItem({
                         <Input
                             keyboardType="numeric"
                             placeholder={inputTxt}
-                            maxLength={4}
-                            onChangeText={() => formatInput(text, inputType)}
+                            maxLength={5}
+                            value={twoDots}
+                            onChangeText={twoDotsInput}
                         />
                     </InputView>
                 ) : (

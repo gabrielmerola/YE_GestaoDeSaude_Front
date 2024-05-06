@@ -1,7 +1,6 @@
+import { AuthRepositoryHttp } from "@api/repositories/auth_repository_http";
 import { AxiosResponse } from "axios";
 import { PropsWithChildren, createContext, useState } from "react";
-
-import { AuthRepositoryHttp } from "../api/repositories/auth_repository_http";
 
 type AuthContextType = {
     login: (email: string, password: string) => Promise<object | undefined>;
