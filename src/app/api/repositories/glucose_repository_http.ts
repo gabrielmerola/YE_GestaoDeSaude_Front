@@ -64,10 +64,11 @@ export class GlucoseRepositoryHttp {
 
     async getGlucoseLatest() {
         try {
+            const token = await AsyncStorage.getItem("token");
             const response = await api.get("/glucose/latest", {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                    Authorization: `Bearer ${token}`
                 }
             });
             return response.data;

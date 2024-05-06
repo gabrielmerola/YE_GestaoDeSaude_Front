@@ -1,10 +1,37 @@
 import { Card } from "@components/Card";
 import { Footer } from "@components/Footer";
+import { BloodPressureContext } from "@context/blood-pressure-context";
+import { GlucoseContext } from "@context/glucose_context";
+import { useContext, useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 
 import { Container } from "./styles";
 
 export default function Main({ navigation }: any) {
+    const { getBloodPressureLatest } = useContext(BloodPressureContext);
+    const [pressure, setPressure] = useState({} as any);
+
+    const { getGlucoseLatest } = useContext(GlucoseContext);
+    const [glucose, setGlucose] = useState({} as any);
+
+    async function getGlucose() {
+        const repsonse = await getGlucoseLatest();
+        setGlucose(repsonse);
+    }
+
+    async function getPressure() {
+        const response = await getBloodPressureLatest();
+        setPressure(response);
+    }
+
+    useEffect(() => {
+        getGlucose();
+    }, []);
+
+    useEffect(() => {
+        getPressure();
+    }, []);
+
     return (
         <>
             <Container>
@@ -15,8 +42,8 @@ export default function Main({ navigation }: any) {
                         title="Aferições de Pressão"
                         description="Gerencie as suas aferições de pressão"
                         subTitle="Ultima medida"
-                        secDescription="150x100"
-                        subDescription="Alta"
+                        secDescription={pressure.measure}
+                        subDescription={pressure.level}
                         color="red"
                     />
                 </TouchableOpacity>
@@ -28,8 +55,8 @@ export default function Main({ navigation }: any) {
                         title="Aferições de Glicemia"
                         description="Gerencie as suas aferições de glicemia"
                         subTitle="Ultima medida"
-                        secDescription="85mg/Dl"
-                        subDescription="Normal"
+                        secDescription={glucose.measure}
+                        subDescription={glucose.level}
                         color="blue"
                     />
                 </TouchableOpacity>
