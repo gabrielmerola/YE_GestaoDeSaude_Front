@@ -48,10 +48,11 @@ export class AuthRepositoryHttp {
 
     async deleteClient() {
         try {
+            const token = await AsyncStorage.getItem("token");
             const response = await api.delete(`/delete`, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${AsyncStorage.getItem("token")}`
+                    Authorization: `Bearer ${token}`
                 }
             });
             console.log(response);
