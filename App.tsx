@@ -1,5 +1,7 @@
 import "react-native-gesture-handler";
 import { Loading } from "@components/Loading";
+import { GlucoseContextProvider } from "@context/glucose_context";
+import { ImcContextProvider } from "@context/imc_context";
 import {
     useFonts,
     Jost_400Regular,
@@ -25,9 +27,13 @@ export default function App() {
                         backgroundColor="transparent"
                         translucent
                     />
-                    <AuthContextProvider>
-                        {fontsLoaded ? <Routes /> : <Loading />}
-                    </AuthContextProvider>
+                    <GlucoseContextProvider>
+                        <ImcContextProvider>
+                            <AuthContextProvider>
+                                {fontsLoaded ? <Routes /> : <Loading />}
+                            </AuthContextProvider>
+                        </ImcContextProvider>
+                    </GlucoseContextProvider>
                 </ThemeProvider>
             </NativeBaseProvider>
         </SafeAreaView>

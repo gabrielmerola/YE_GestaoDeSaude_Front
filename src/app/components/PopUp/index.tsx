@@ -269,7 +269,7 @@ export default function PopUp({ onClose, onPost, popUpType }: Props) {
                                     <Input
                                         placeholder="70"
                                         onChangeText={(text) =>
-                                            setFirstMeasure(text)
+                                            setSecondMeasure(text)
                                         }
                                         value={secondMeasure}
                                         maxLength={3}
