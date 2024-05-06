@@ -14,6 +14,14 @@ export default function Main({ navigation }: any) {
     const { getGlucoseLatest } = useContext(GlucoseContext);
     const [glucose, setGlucose] = useState({} as any);
 
+    // const { getImcLatest } = useContext(ImcContext);
+    // const [imc, setImc] = useState({} as any);
+
+    // async function getImc() {
+    //     const response = await getImcLatest();
+    //     setImc(response);
+    // }
+
     async function getGlucose() {
         const repsonse = await getGlucoseLatest();
         setGlucose(repsonse);
@@ -31,6 +39,10 @@ export default function Main({ navigation }: any) {
     useEffect(() => {
         getPressure();
     }, []);
+
+    // useEffect(() => {
+    //     getImc();
+    // }, []);
 
     return (
         <>
@@ -66,8 +78,8 @@ export default function Main({ navigation }: any) {
                         title="Verificação do IMC"
                         description="Verifique seu IMC com base na sua altura e peso"
                         subTitle="Ultima medida"
-                        secDescription="31,14"
-                        subDescription="Obesidade II"
+                        secDescription=""
+                        subDescription=""
                         color="green"
                     />
                 </TouchableOpacity>

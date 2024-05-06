@@ -8,6 +8,7 @@ type AuthContextType = {
     signUpError: string;
     setSignUpError: (error: string) => void;
     deleteUser: () => Promise<AxiosResponse | undefined>;
+    getClient: () => Promise<object | undefined>;
 };
 
 const defaultAuthContext: AuthContextType = {
@@ -17,10 +18,13 @@ const defaultAuthContext: AuthContextType = {
     signUp: async (data: object) => {
         return undefined;
     },
-    signUpError: "",
+    signUpError: "Erro no Cadastro",
     setSignUpError: (error: string) => {},
     deleteUser: async () => {
         return undefined;
+    },
+    getClient: async () => {
+        return {};
     }
 };
 
@@ -60,9 +64,25 @@ export function AuthContextProvider({ children }: PropsWithChildren) {
         }
     }
 
+    async function getClient() {
+        try {
+            const response = await authRepository.getClientId();
+            return response;
+        } catch (error: any) {
+            console.log(error);
+        }
+    }
+
     return (
         <AuthContext.Provider
-            value={{ login, signUp, signUpError, setSignUpError, deleteUser }}
+            value={{
+                login,
+                signUp,
+                signUpError,
+                setSignUpError,
+                deleteUser,
+                getClient
+            }}
         >
             {children}
         </AuthContext.Provider>

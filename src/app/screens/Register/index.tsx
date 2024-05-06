@@ -25,8 +25,6 @@ export default function Register({ navigation }: any) {
     }
 
     async function SignUp() {
-        // console.log("senha: "+data.password);
-        // console.log("COnfirma: "+data.password_confirm);
         if (data.password !== data.password_confirm) {
             toast.show({
                 title: "Erro ao cadastrar",
@@ -42,8 +40,9 @@ export default function Register({ navigation }: any) {
         // console.log("Response: "+JSON.stringify(response));
 
         if (response !== undefined) {
+            console.log(response.data.message);
             toast.show({
-                title: response.data.message,
+                title: "Cadastro realizado com sucesso",
                 description: "Você já pode fazer login",
                 backgroundColor: "green.500",
                 placement: "top"
