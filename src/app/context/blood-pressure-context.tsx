@@ -79,8 +79,10 @@ export function BloodPressureContextProvider({ children }: PropsWithChildren) {
         try {
             const response =
                 await bloodPressureRepository.getBloodPressureLatest();
+            // console.log("context: " + response);
             return response;
         } catch (error: any) {
+            // console.log(error);
             console.log(error);
         }
     }

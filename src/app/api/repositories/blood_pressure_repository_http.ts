@@ -65,14 +65,17 @@ export class BloodPressureRepositoryHttp {
 
     async getBloodPressureLatest() {
         try {
+            const token = await AsyncStorage.getItem("token");
             const response = await api.get("/blood-pressure/latest", {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                    Authorization: `Bearer ${token}`
                 }
             });
+            console.log(response);
             return response.data;
         } catch (error: AxiosError | any) {
+            console.log("ERRO" + error);
             return error.response;
         }
     }
