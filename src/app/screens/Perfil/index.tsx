@@ -5,18 +5,28 @@ import { AuthContext } from "@context/auth_context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ButtonOut, ButtonTextWhiteOut } from "@screens/Perfil/styles";
 import { VStack, Text, ScrollView, Avatar, Divider } from "native-base";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function Perfil({ navigation }: any) {
+    const { getClient } = useContext(AuthContext);
+
+    const [data, setData] = useState({} as any);
+
+    async function getClientid() {
+        const response = await getClient();
+        setData(response);
+    }
+
+    useEffect(() => {
+        getClientid();
+    }, []);
+
     const logout = async () => {
         try {
-            // Remove o token do AsyncStorage
             await AsyncStorage.removeItem("token");
-            // Navega o usuário de volta para a tela de login
             navigation.navigate("Login");
         } catch (error) {
             console.error("Erro ao sair da conta:", error);
-            // Trate o erro conforme necessário
         }
     };
 
@@ -35,12 +45,12 @@ export default function Perfil({ navigation }: any) {
 
                 <Title mt={10}>Informações Pessoais</Title>
                 <Text fontSize="lg" mt={5} mb={1}>
-                    Lucca Oliveira
+                    {data.name}
                 </Text>
                 <Text fontSize="lg" mb={1}>
-                    30/07/2004
+                    {data.email}
                 </Text>
-                <Text fontSize="lg">Santo André - SP</Text>
+                <Text fontSize="lg">{data.phone}</Text>
 
                 <Divider mt={7} />
 

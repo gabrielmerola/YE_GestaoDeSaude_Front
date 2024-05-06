@@ -38,10 +38,26 @@ export class AuthRepositoryHttp {
     async registerClient(data: object) {
         try {
             const response: AxiosResponse = await api.post("/client", data);
-            // console.log("Response OK: " + response);
+            console.log("Response OK: " + response);
+            console.log(data);
             return response;
         } catch (error: AxiosError | any) {
             // console.log("Response 1: " + error);
+            return error.response;
+        }
+    }
+
+    async getClientId() {
+        try {
+            const token = await AsyncStorage.getItem("token");
+            const response = await api.get(`/client`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data;
+        } catch (error: AxiosError | any) {
             return error.response;
         }
     }
