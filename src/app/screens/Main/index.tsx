@@ -2,6 +2,7 @@ import { Card } from "@components/Card";
 import { Footer } from "@components/Footer";
 import { BloodPressureContext } from "@context/blood-pressure-context";
 import { GlucoseContext } from "@context/glucose_context";
+import { ImcContext } from "@context/imc_context";
 import { useContext, useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 
@@ -14,13 +15,13 @@ export default function Main({ navigation }: any) {
     const { getGlucoseLatest } = useContext(GlucoseContext);
     const [glucose, setGlucose] = useState({} as any);
 
-    // const { getImcLatest } = useContext(ImcContext);
-    // const [imc, setImc] = useState({} as any);
+    const { getLatestImc } = useContext(ImcContext);
+    const [imc, setImc] = useState({} as any);
 
-    // async function getImc() {
-    //     const response = await getImcLatest();
-    //     setImc(response);
-    // }
+    async function getImc() {
+        const response = await getLatestImc();
+        setImc(response);
+    }
 
     async function getGlucose() {
         const repsonse = await getGlucoseLatest();
@@ -40,9 +41,9 @@ export default function Main({ navigation }: any) {
         getPressure();
     }, []);
 
-    // useEffect(() => {
-    //     getImc();
-    // }, []);
+    useEffect(() => {
+        getImc();
+    }, []);
 
     return (
         <>
@@ -78,8 +79,8 @@ export default function Main({ navigation }: any) {
                         title="Verificação do IMC"
                         description="Verifique seu IMC com base na sua altura e peso"
                         subTitle="Ultima medida"
-                        secDescription=""
-                        subDescription=""
+                        secDescription={imc.imc}
+                        subDescription={imc.level}
                         color="green"
                     />
                 </TouchableOpacity>

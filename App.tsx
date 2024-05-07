@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
 import { Loading } from "@components/Loading";
+import { BloodPressureContextProvider } from "@context/blood-pressure-context";
 import { GlucoseContextProvider } from "@context/glucose_context";
 import { ImcContextProvider } from "@context/imc_context";
 import {
@@ -27,13 +28,16 @@ export default function App() {
                         backgroundColor="transparent"
                         translucent
                     />
-                    <GlucoseContextProvider>
-                        <ImcContextProvider>
-                            <AuthContextProvider>
-                                {fontsLoaded ? <Routes /> : <Loading />}
-                            </AuthContextProvider>
-                        </ImcContextProvider>
-                    </GlucoseContextProvider>
+
+                    <BloodPressureContextProvider>
+                        <GlucoseContextProvider>
+                            <ImcContextProvider>
+                                <AuthContextProvider>
+                                    {fontsLoaded ? <Routes /> : <Loading />}
+                                </AuthContextProvider>
+                            </ImcContextProvider>
+                        </GlucoseContextProvider>
+                    </BloodPressureContextProvider>
                 </ThemeProvider>
             </NativeBaseProvider>
         </SafeAreaView>

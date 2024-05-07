@@ -72,10 +72,10 @@ export class BloodPressureRepositoryHttp {
                     Authorization: `Bearer ${token}`
                 }
             });
-            console.log(response);
+            // console.log(response);
             return response.data;
         } catch (error: AxiosError | any) {
-            console.log("ERRO" + error);
+            // console.log("ERRO" + error);
             return error.response;
         }
     }
