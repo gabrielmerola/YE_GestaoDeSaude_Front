@@ -17,7 +17,6 @@ export default function Login({ navigation }: any) {
     const { login } = useContext(AuthContext);
 
     useEffect(() => {
-        AsyncStorage.removeItem("token");
         async function loginVerify() {
             if (await AsyncStorage.getItem("token")) {
                 navigation.navigate("StackRoutes");
@@ -32,17 +31,6 @@ export default function Login({ navigation }: any) {
         if (result != undefined) {
             const { token } = result;
             console.log(token);
-
-            const expirationDate = new Date();
-            expirationDate.setDate(expirationDate.getDate() + 1);
-            const formattedExpirationDate = expirationDate.toISOString();
-
-            await AsyncStorage.setItem(
-                "tokenExpiration",
-                formattedExpirationDate
-            );
-            await AsyncStorage.setItem("token", token);
-
             navigation.navigate("StackRoutes");
             toast.show({
                 title: "Login realizado com sucesso",

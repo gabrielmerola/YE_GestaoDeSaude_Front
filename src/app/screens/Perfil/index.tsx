@@ -14,6 +14,7 @@ export default function Perfil({ navigation }: any) {
 
     async function getClientid() {
         const response = await getClient();
+        console.log(response);
         setData(response);
     }
 
