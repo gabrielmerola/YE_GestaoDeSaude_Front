@@ -1,12 +1,12 @@
 import { api } from "@api/http";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AxiosError } from "axios";
-import { Double } from "react-native/Libraries/Types/CodegenTypes";
 
 export class ImcRepositoryHttp {
     async getLatestImc() {
         try {
             const token = await AsyncStorage.getItem("token");
+            console.log(token);
             const response = await api.get("/imc/latest", {
                 headers: {
                     "Content-Type": "application/json",
@@ -14,9 +14,8 @@ export class ImcRepositoryHttp {
                 }
             });
             return response.data;
-        } catch (error) {
-            console.log();
-            console.log(error);
+        } catch (error: AxiosError | any) {
+            return error.response;
         }
     }
 

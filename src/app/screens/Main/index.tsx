@@ -35,13 +35,7 @@ export default function Main({ navigation }: any) {
 
     useEffect(() => {
         getGlucose();
-    }, []);
-
-    useEffect(() => {
         getPressure();
-    }, []);
-
-    useEffect(() => {
         getImc();
     }, []);
 
