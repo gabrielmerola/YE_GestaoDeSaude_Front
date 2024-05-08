@@ -28,7 +28,6 @@ export default function App() {
                         backgroundColor="transparent"
                         translucent
                     />
-
                     <BloodPressureContextProvider>
                         <GlucoseContextProvider>
                             <ImcContextProvider>

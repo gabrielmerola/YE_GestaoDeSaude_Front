@@ -26,10 +26,11 @@ export default function Login({ navigation }: any) {
     });
 
     async function SignIn() {
-        const result = await login(email, password);
+        const result: any = await login(email, password);
         console.log(result);
-        if (result != undefined) {
+        if (result && result.token) {
             const { token } = result;
+            await AsyncStorage.setItem("token", token);
             console.log(token);
             navigation.navigate("StackRoutes");
             toast.show({
