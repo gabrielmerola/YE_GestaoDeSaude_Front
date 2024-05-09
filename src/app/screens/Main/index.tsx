@@ -62,7 +62,7 @@ export default function Main({ navigation }: any) {
                         title="Aferições de Glicemia"
                         description="Gerencie as suas aferições de glicemia"
                         subTitle="Ultima medida"
-                        secDescription={glucose.measure}
+                        secDescription={glucose.measure + " mg/dL"}
                         subDescription={glucose.level}
                         color="blue"
                     />
