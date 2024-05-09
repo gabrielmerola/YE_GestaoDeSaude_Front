@@ -28,15 +28,15 @@ export default function App() {
                         backgroundColor="transparent"
                         translucent
                     />
-                    <BloodPressureContextProvider>
+                    <ImcContextProvider>
                         <GlucoseContextProvider>
-                            <ImcContextProvider>
+                            <BloodPressureContextProvider>
                                 <AuthContextProvider>
                                     {fontsLoaded ? <Routes /> : <Loading />}
                                 </AuthContextProvider>
-                            </ImcContextProvider>
+                            </BloodPressureContextProvider>
                         </GlucoseContextProvider>
-                    </BloodPressureContextProvider>
+                    </ImcContextProvider>
                 </ThemeProvider>
             </NativeBaseProvider>
         </SafeAreaView>
