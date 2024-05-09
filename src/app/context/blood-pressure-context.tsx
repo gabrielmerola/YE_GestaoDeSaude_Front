@@ -2,12 +2,20 @@ import { BloodPressureRepositoryHttp } from "@api/repositories/blood_pressure_re
 import { AxiosResponse } from "axios";
 import { PropsWithChildren, createContext } from "react";
 
+export interface PressureType {
+    [key: string]: string | number;
+    id: number;
+    date: string;
+    measure: string;
+    level: string;
+}
+
 type BloodPressureContextType = {
     getBloodPressure: () => Promise<[] | undefined>;
     postBloodPressure: (data: object) => Promise<AxiosResponse | undefined>;
     deleteBloodPressure: (id: number) => Promise<AxiosResponse | undefined>;
     getBloodPressureById: (id: number) => Promise<object | undefined>;
-    getBloodPressureLatest: () => Promise<object | undefined>;
+    getBloodPressureLatest: () => Promise<PressureType | undefined>;
 };
 
 const defaultBloodPressureContext: BloodPressureContextType = {
@@ -24,7 +32,12 @@ const defaultBloodPressureContext: BloodPressureContextType = {
         return {};
     },
     getBloodPressureLatest: async () => {
-        return {};
+        return {
+            id: 0,
+            date: "",
+            measure: "",
+            level: ""
+        };
     }
 };
 
@@ -79,10 +92,8 @@ export function BloodPressureContextProvider({ children }: PropsWithChildren) {
         try {
             const response =
                 await bloodPressureRepository.getBloodPressureLatest();
-            // console.log("context: " + response);
             return response;
         } catch (error: any) {
-            // console.log(error);
             console.log(error);
         }
     }
