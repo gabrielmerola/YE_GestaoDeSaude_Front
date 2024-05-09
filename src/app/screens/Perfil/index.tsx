@@ -9,12 +9,11 @@ import { useContext, useEffect, useState } from "react";
 
 export default function Perfil({ navigation }: any) {
     const { getClient } = useContext(AuthContext);
-
     const [data, setData] = useState({} as any);
 
     async function getClientid() {
         const response = await getClient();
-        console.log(response);
+        // console.log(response);
         setData(response);
     }
 
@@ -30,6 +29,8 @@ export default function Perfil({ navigation }: any) {
             console.error("Erro ao sair da conta:", error);
         }
     };
+
+    console.log(data.name);
 
     return (
         <ScrollView flex={1}>
