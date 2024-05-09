@@ -1,9 +1,10 @@
 import CancelAndSaveButton from "@components/CancelAndSaveButton";
 import { Header } from "@components/Header";
-import { formatDate } from "@components/PopUp";
 import { PopUpAddButton } from "@components/PopUpAddButton";
 import { Table } from "@components/Table";
 import { Separator } from "@components/Table/styles";
+import { ConsultationContext } from "@context/consultation_context";
+import { useFocusEffect } from "@react-navigation/native";
 import {
     ButtonContainer,
     ConsultationsDataHeader,
@@ -13,10 +14,12 @@ import {
     ResumeContainer,
     ResumeTxt,
     TableContainer,
-    View
+    ViewContainer
 } from "@screens/ConsultationsHeld/styles";
 import { FlatList } from "native-base";
-import React, { useEffect, useState } from "react";
+import { useCallback, useContext, useState } from "react";
+import { Text, View } from "react-native";
+import MaskInput from "react-native-mask-input";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 
 interface Consultation {
@@ -44,45 +47,76 @@ const json = [
 export default function ConsultationsHeld() {
     const [showAcomplishedConsultations, setShowAcomplishedConsultations] =
         useState(false);
+    const { getAllConsultation, getConsultationById, postConsultation } =
+        useContext(ConsultationContext);
     const [showConsultationsData, setShowConsultationsData] = useState(false);
     const [showNewConsultation, setShowNewConsultation] = useState(false);
     const [data, setData] = useState<Consultation[]>([]);
-    const [date, setDate] = useState<string>("");
     const [returnDate, setReturnDate] = useState<string>("");
     const [resumeText, setResumeText] = useState("");
+    const [getAllConst, setGetAllConst] = useState([]);
+    const [getByIdConst, setGetByIdConst] = useState({});
+    const [postConst, setPostConst] = useState({});
+
+    const [date, setDate] = useState("");
 
     const handleChangeText = (inputText: string) => {
         const formattedText = inputText.replace(/[\r\n]/g, "");
         setResumeText(formattedText);
     };
-    const handleDate = (inputDate: string) => {
-        setDate(formatDate(inputDate));
-    };
 
-    const handleReturnDate = (inputDate: string) => {
-        setReturnDate(formatDate(inputDate));
-    };
+    async function getAll() {
+        const response = await getAllConsultation();
+        if (response != undefined) {
+            setGetAllConst(response);
+        }
+        console.log(response);
+    }
 
-    useEffect(() => {
-        setData(json);
-    }, []);
+    async function getById(id: number) {
+        const response = await getConsultationById(id);
+        if (response != undefined) {
+            setGetByIdConst(response);
+            setShowConsultationsData(true);
+        }
+        // console.log(response)
+    }
+
+    async function post() {
+        // const response = await postConsultation(json)
+        console.log(postConst);
+    }
+
+    function formatJson(id: string, value: any) {
+        setPostConst({ ...postConst, [id]: value });
+    }
+
+    useFocusEffect(
+        useCallback(() => {
+            getAll();
+            setData(json);
+        }, [])
+    );
 
     return (
         <>
             <Header text="Consultas" isBackPress />
-            <View>
-                <ListInteractableItem
-                    text="Clínico Geral"
-                    isButton
-                    modalFunction={() => setShowAcomplishedConsultations(true)}
-                />
-                <ListInteractableItem text="Ginecologista" isButton />
+            <ViewContainer>
+                {getAllConst.map((item) => {
+                    return (
+                        <ListInteractableItem
+                            text={item.name}
+                            isButton
+                            modalFunction={() => getById(item.id)}
+                        />
+                    );
+                })}
                 <ButtonContainer>
                     <PopUpAddButton
                         onOpen={() => setShowNewConsultation(true)}
                     />
                 </ButtonContainer>
-            </View>
+            </ViewContainer>
 
             {showAcomplishedConsultations ? (
                 <ModalContainer>
@@ -93,7 +127,7 @@ export default function ConsultationsHeld() {
                             setShowAcomplishedConsultations(false)
                         }
                     />
-                    <View>
+                    <ViewContainer>
                         <ListInteractableItem
                             text="Próxima consulta"
                             text2="17/08/2023"
@@ -107,7 +141,7 @@ export default function ConsultationsHeld() {
                         <ListInteractableItem text="25/05/2022" isButton />
                         <ListInteractableItem text="04/01/2022" isButton />
                         <ListInteractableItem text="30/09/2020" isButton />
-                    </View>
+                    </ViewContainer>
                 </ModalContainer>
             ) : (
                 <></>
@@ -115,7 +149,7 @@ export default function ConsultationsHeld() {
             {showConsultationsData ? (
                 <ModalContainer>
                     <Header
-                        text="Dados Consulta"
+                        text="Dados da Consulta"
                         isModal
                         onModalClose={() => setShowConsultationsData(false)}
                     />
@@ -132,7 +166,7 @@ export default function ConsultationsHeld() {
                                         rows={[
                                             {
                                                 nome: "Especialidade",
-                                                especialty: item.especialty
+                                                especialty: getByIdConst.name
                                             }
                                         ]}
                                     />
@@ -140,7 +174,7 @@ export default function ConsultationsHeld() {
                                         rows={[
                                             {
                                                 nome: "Data",
-                                                especialty: item.date
+                                                especialty: getByIdConst.date
                                             }
                                         ]}
                                     />
@@ -148,7 +182,7 @@ export default function ConsultationsHeld() {
                                         rows={[
                                             {
                                                 nome: "Horário",
-                                                especialty: item.hour
+                                                especialty: getByIdConst.date
                                             }
                                         ]}
                                     />
@@ -156,7 +190,8 @@ export default function ConsultationsHeld() {
                                         rows={[
                                             {
                                                 nome: "Retorno",
-                                                especialty: `${item.return} meses`
+                                                especialty:
+                                                    getByIdConst.date_return
                                             }
                                         ]}
                                     />
@@ -164,7 +199,8 @@ export default function ConsultationsHeld() {
                                         rows={[
                                             {
                                                 nome: "Lembrete para agendamento",
-                                                especialty: `${item.return} dias antes`
+                                                especialty:
+                                                    getByIdConst.date_return
                                             }
                                         ]}
                                     />
@@ -176,7 +212,9 @@ export default function ConsultationsHeld() {
                                     </ConsultationsDataHeader>
                                     <Separator />
                                     <ResumeContainer>
-                                        <ResumeTxt>{item.resume}</ResumeTxt>
+                                        <ResumeTxt>
+                                            {getByIdConst.description}
+                                        </ResumeTxt>
                                     </ResumeContainer>
                                 </>
                             )}
@@ -193,43 +231,109 @@ export default function ConsultationsHeld() {
                         isModal
                         onModalClose={() => setShowNewConsultation(false)}
                     />
-                    <View>
+                    <ViewContainer>
                         <ListInteractableItem
                             text="Especialidade:"
                             isButton={false}
                             inputType="TEXT"
                             inputTxt="Insira a especialidade..."
+                            onChangeText={(text) =>
+                                formatJson("expertise", text)
+                            }
                             sizeType="SMALL"
                         />
-                        <ListInteractableItem
-                            text="Data:"
-                            isButton={false}
-                            inputType="DATE"
-                            onChangeText={(text) => handleDate(text)}
-                            inputValue={date}
-                        />
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                                gap: 8,
+                                marginTop: 8
+                            }}
+                        >
+                            <Text>Data:</Text>
+                            <MaskInput
+                                value={date}
+                                style={{
+                                    width: "40%",
+                                    borderRadius: 8,
+                                    backgroundColor: "#f5f5f5",
+                                    borderStyle: "solid",
+                                    borderWidth: 1,
+                                    borderColor: "#d5d5d5",
+                                    padding: 4,
+                                    elevation: 4
+                                }}
+                                onChangeText={(masked) => {
+                                    setDate(masked);
+                                    formatJson("date", date);
+                                }}
+                                mask={[
+                                    /\d/,
+                                    /\d/,
+                                    "/",
+                                    /\d/,
+                                    /\d/,
+                                    "/",
+                                    /\d/,
+                                    /\d/,
+                                    /\d/,
+                                    /\d/
+                                ]}
+                            />
+                        </View>
                         <ListInteractableItem
                             text="Horário:"
                             isButton={false}
                             inputType="TIME"
                             inputTxt="00:00"
+                            onChangeText={(text) => formatJson("date", text)}
                         />
-                        <ListInteractableItem
-                            text="Retorno:"
-                            isButton={false}
-                            inputType="DATE"
-                            onChangeText={(text) => handleReturnDate(text)}
-                            inputValue={returnDate}
-                        />
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                                gap: 8,
+                                marginTop: 8
+                            }}
+                        >
+                            <Text>Data:</Text>
+                            <MaskInput
+                                value={date}
+                                style={{
+                                    width: "40%",
+                                    borderRadius: 8,
+                                    backgroundColor: "#f5f5f5",
+                                    borderStyle: "solid",
+                                    borderWidth: 1,
+                                    borderColor: "#d5d5d5",
+                                    padding: 4,
+                                    elevation: 4
+                                }}
+                                onChangeText={(masked) => {
+                                    setDate(masked);
+                                    formatJson("dateReturn", date);
+                                }}
+                                mask={[
+                                    /\d/,
+                                    /\d/,
+                                    "/",
+                                    /\d/,
+                                    /\d/,
+                                    "/",
+                                    /\d/,
+                                    /\d/,
+                                    /\d/,
+                                    /\d/
+                                ]}
+                            />
+                        </View>
                         <Input
                             placeholder="Insira o resumo da consulta..."
                             onChangeText={handleChangeText}
                             value={resumeText}
                         />
-                    </View>
-                    <CancelAndSaveButton
-                        onPress={() => setShowNewConsultation(false)}
-                    />
+                    </ViewContainer>
+                    <CancelAndSaveButton onPress={() => post()} />
                 </ModalContainer>
             ) : (
                 <></>
