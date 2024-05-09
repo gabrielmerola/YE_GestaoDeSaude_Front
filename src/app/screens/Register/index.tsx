@@ -15,7 +15,7 @@ export default function Register({ navigation }: any) {
     const [data, setData] = useState({} as any);
     const toast = useToast();
 
-    const [phoneValue, setPhoneValue] = useState("");
+    const [phoneValue, setPhoneValue] = useState({} as any);
     const [cpfValue, setCpfValue] = useState("");
 
     const { signUp, signUpError } = useContext(AuthContext);
@@ -34,12 +34,12 @@ export default function Register({ navigation }: any) {
             });
             return;
         }
-        console.log(data.cpf);
 
         const response = await signUp(data);
         // console.log("Response: "+JSON.stringify(response));
+        console.log(data);
 
-        if (response !== undefined) {
+        if (response) {
             console.log(response.data.message);
             toast.show({
                 title: "Cadastro realizado com sucesso",
@@ -97,7 +97,10 @@ export default function Register({ navigation }: any) {
                                 elevation: 4
                             }}
                             value={phoneValue}
-                            onChangeText={setPhoneValue}
+                            onChangeText={(masked, unmasked) => {
+                                // console.log(masked)
+                                setPhoneValue(unmasked);
+                            }}
                             mask={[
                                 "(",
                                 /\d/,
