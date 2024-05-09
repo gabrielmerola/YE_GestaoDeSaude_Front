@@ -2,12 +2,20 @@ import { GlucoseRepositoryHttp } from "@api/repositories/glucose_repository_http
 import { AxiosResponse } from "axios";
 import { PropsWithChildren, createContext, useState } from "react";
 
+export interface GlucoseType {
+    [key: string]: string | number;
+    id: number;
+    date: string;
+    measure: string;
+    level: string;
+}
+
 type GlucoseContextType = {
     getGlucose: () => Promise<[] | undefined>;
     postGlucose: (data: object) => Promise<AxiosResponse | undefined>;
     deleteGlucose: (id: number) => Promise<AxiosResponse | undefined>;
     getGlucoseById: (id: number) => Promise<object | undefined>;
-    getGlucoseLatest: () => Promise<object | undefined>;
+    getGlucoseLatest: () => Promise<GlucoseType | undefined>;
 };
 
 const defaultGlucoseContext: GlucoseContextType = {
@@ -24,7 +32,12 @@ const defaultGlucoseContext: GlucoseContextType = {
         return {};
     },
     getGlucoseLatest: async () => {
-        return {};
+        return {
+            id: 0,
+            date: "",
+            measure: "",
+            level: ""
+        };
     }
 };
 
