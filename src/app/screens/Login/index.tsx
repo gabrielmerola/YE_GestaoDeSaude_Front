@@ -18,6 +18,7 @@ export default function Login({ navigation }: any) {
 
     useEffect(() => {
         async function loginVerify() {
+            await AsyncStorage.removeItem("token");
             if (await AsyncStorage.getItem("token")) {
                 navigation.navigate("StackRoutes");
             }
@@ -26,9 +27,18 @@ export default function Login({ navigation }: any) {
     });
 
     async function SignIn() {
+        if (!email || !password) {
+            toast.show({
+                title: "Erro no login",
+                description: "Por favor, preencha o email e a senha.",
+                backgroundColor: "red.500",
+                placement: "top"
+            });
+            return;
+        }
         const result: any = await login(email, password);
         console.log(result);
-        if (result && result.token) {
+        if (result.token) {
             const { token } = result;
             await AsyncStorage.setItem("token", token);
             console.log(token);
