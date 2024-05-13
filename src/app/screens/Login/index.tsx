@@ -3,6 +3,7 @@ import { Footer } from "@components/Footer";
 import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { validateToken } from "@utils/validation";
 import { VStack, Image, Text, Box, Link, useToast } from "native-base";
 import { useContext, useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
@@ -18,8 +19,9 @@ export default function Login({ navigation }: any) {
 
     useEffect(() => {
         async function loginVerify() {
-            await AsyncStorage.removeItem("token");
-            if (await AsyncStorage.getItem("token")) {
+            // await AsyncStorage.removeItem("token");
+            const response = await validateToken();
+            if (response) {
                 navigation.navigate("StackRoutes");
             }
         }
