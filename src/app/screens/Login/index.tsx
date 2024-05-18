@@ -16,15 +16,15 @@ export default function Login({ navigation }: any) {
     const toast = useToast();
     const { login } = useContext(AuthContext);
 
-    useEffect(() => {
-        async function loginVerify() {
-            await AsyncStorage.removeItem("token");
-            if (await AsyncStorage.getItem("token")) {
-                navigation.navigate("StackRoutes");
-            }
-        }
-        loginVerify();
-    });
+    // useEffect(() => {
+    //     async function loginVerify() {
+    //         await AsyncStorage.removeItem("token");
+    //         if (await AsyncStorage.getItem("token")) {
+    //             navigation.navigate("StackRoutes");
+    //         }
+    //     }
+    //     loginVerify();
+    // });
 
     async function SignIn() {
         if (!email || !password) {

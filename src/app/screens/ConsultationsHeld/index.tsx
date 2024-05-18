@@ -18,7 +18,7 @@ import {
 } from "@screens/ConsultationsHeld/styles";
 import { FlatList } from "native-base";
 import { useCallback, useContext, useState } from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import MaskInput from "react-native-mask-input";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 
@@ -79,16 +79,25 @@ export default function ConsultationsHeld() {
             setGetByIdConst(response);
             setShowConsultationsData(true);
         }
-        // console.log(response)
     }
 
     async function post() {
-        // const response = await postConsultation(json)
-        console.log(postConst);
+            
+        formatJson("name", "Clinica Geral")
+        const formattedDate = date.split('/').reverse().join('-');
+        const formattedDateReturn = returnDate.split('/').reverse().join('-');
+        formatJson("dateReturn", formattedDateReturn)
+        formatJson("date", formattedDate)
+        console.log(postConst)
+        const response = await postConsultation(postConst)
+        console.log(response);
     }
 
     function formatJson(id: string, value: any) {
-        setPostConst({ ...postConst, [id]: value });
+        setPostConst( prevState => ({
+            ...prevState,
+            [id]: value
+          }) );
     }
 
     useFocusEffect(
@@ -232,13 +241,19 @@ export default function ConsultationsHeld() {
                         onModalClose={() => setShowNewConsultation(false)}
                     />
                     <ViewContainer>
+
+                        <TouchableOpacity onPress={() => post()} >
+                            <Text>salva fdp</Text>
+                        </TouchableOpacity>
+
                         <ListInteractableItem
                             text="Especialidade:"
                             isButton={false}
                             inputType="TEXT"
                             inputTxt="Insira a especialidade..."
-                            onChangeText={(text) =>
+                            onChangeText={(text) => {
                                 formatJson("expertise", text)
+                            }
                             }
                             sizeType="SMALL"
                         />
@@ -261,11 +276,12 @@ export default function ConsultationsHeld() {
                                     borderWidth: 1,
                                     borderColor: "#d5d5d5",
                                     padding: 4,
-                                    elevation: 4
+                                    elevation: 4,
+                                    marginTop: 8,
+                                    fontSize: 16,
                                 }}
                                 onChangeText={(masked) => {
                                     setDate(masked);
-                                    formatJson("date", date);
                                 }}
                                 mask={[
                                     /\d/,
@@ -286,7 +302,7 @@ export default function ConsultationsHeld() {
                             isButton={false}
                             inputType="TIME"
                             inputTxt="00:00"
-                            onChangeText={(text) => formatJson("date", text)}
+                            onChangeText={(text) => formatJson("time", text)}
                         />
                         <View
                             style={{
@@ -296,9 +312,9 @@ export default function ConsultationsHeld() {
                                 marginTop: 8
                             }}
                         >
-                            <Text>Data:</Text>
+                            <Text>Data de Retorno:</Text>
                             <MaskInput
-                                value={date}
+                            value= {returnDate}
                                 style={{
                                     width: "40%",
                                     borderRadius: 8,
@@ -310,8 +326,7 @@ export default function ConsultationsHeld() {
                                     elevation: 4
                                 }}
                                 onChangeText={(masked) => {
-                                    setDate(masked);
-                                    formatJson("dateReturn", date);
+                                    setReturnDate(masked);
                                 }}
                                 mask={[
                                     /\d/,
@@ -329,8 +344,9 @@ export default function ConsultationsHeld() {
                         </View>
                         <Input
                             placeholder="Insira o resumo da consulta..."
-                            onChangeText={handleChangeText}
-                            value={resumeText}
+                            onChangeText={(text) =>
+                                formatJson("description", text)
+                            }
                         />
                     </ViewContainer>
                     <CancelAndSaveButton onPress={() => post()} />
