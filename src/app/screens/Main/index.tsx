@@ -1,6 +1,9 @@
 import { Card } from "@components/Card";
 import { Footer } from "@components/Footer";
-import { BloodPressureContext } from "@context/blood-pressure-context";
+import {
+    BloodPressureContext,
+    PressureType
+} from "@context/blood-pressure-context";
 import { GlucoseContext } from "@context/glucose_context";
 import { ImcContext } from "@context/imc_context";
 import { useContext, useEffect, useState } from "react";
@@ -10,7 +13,7 @@ import { Container } from "./styles";
 
 export default function Main({ navigation }: any) {
     const { getBloodPressureLatest } = useContext(BloodPressureContext);
-    const [pressure, setPressure] = useState({} as any);
+    const [pressure, setPressure] = useState<PressureType>("" as any);
 
     const { getGlucoseLatest } = useContext(GlucoseContext);
     const [glucose, setGlucose] = useState({} as any);
@@ -30,7 +33,9 @@ export default function Main({ navigation }: any) {
 
     async function getPressure() {
         const response = await getBloodPressureLatest();
-        setPressure(response);
+        if (response !== undefined) {
+            setPressure(response);
+        }
     }
 
     useEffect(() => {

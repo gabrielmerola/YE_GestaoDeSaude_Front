@@ -1,10 +1,10 @@
-import { Buton } from "@components/Button";
+import { Button } from "@components/Button";
 import { Footer } from "@components/Footer";
 import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
 import { sections } from "@utils/registerInputText";
 import { Image, Box, ScrollView, useToast, Text, View } from "native-base";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MaskInput from "react-native-mask-input";
 import { FormDataProps } from "src/app/api/repositories/auth_repository_http";
 import { AuthContext } from "src/app/context/auth_context";
@@ -15,7 +15,7 @@ export default function Register({ navigation }: any) {
     const [data, setData] = useState({} as any);
     const toast = useToast();
 
-    const [phoneValue, setPhoneValue] = useState({} as any);
+    const [phoneValue, setPhoneValue] = useState("");
     const [cpfValue, setCpfValue] = useState("");
 
     const { signUp, signUpError } = useContext(AuthContext);
@@ -25,6 +25,24 @@ export default function Register({ navigation }: any) {
     }
 
     async function SignUp() {
+        const requiredFields = [
+            "email",
+            "password",
+            "password_confirm",
+            "phone",
+            "cpf"
+        ];
+        for (const field of requiredFields) {
+            if (!data[field] || data[field].trim() === "") {
+                toast.show({
+                    title: "Erro ao cadastrar",
+                    description: "Por favor, preencha todos os campos",
+                    backgroundColor: "red.500",
+                    placement: "top"
+                });
+                return;
+            }
+        }
         if (data.password !== data.password_confirm) {
             toast.show({
                 title: "Erro ao cadastrar",
@@ -36,11 +54,11 @@ export default function Register({ navigation }: any) {
         }
 
         const response = await signUp(data);
-        // console.log("Response: "+JSON.stringify(response));
-        console.log(data);
+        // console.log("Resposta " + response?.data.message);
 
         if (response) {
-            console.log(response.data.message);
+            // console.log(response.data.message);
+            console.log(data);
             toast.show({
                 title: "Cadastro realizado com sucesso",
                 description: "Você já pode fazer login",
@@ -57,6 +75,18 @@ export default function Register({ navigation }: any) {
             });
         }
     }
+
+    useEffect(() => {
+        if (phoneValue) {
+            updateData("phone", phoneValue);
+        }
+    }, [phoneValue]);
+
+    useEffect(() => {
+        if (cpfValue) {
+            updateData("cpf", cpfValue);
+        }
+    }, [cpfValue]);
 
     return (
         <>
@@ -98,7 +128,7 @@ export default function Register({ navigation }: any) {
                             }}
                             value={phoneValue}
                             onChangeText={(masked, unmasked) => {
-                                // console.log(masked)
+                                // console.log(masked);
                                 setPhoneValue(unmasked);
                             }}
                             mask={[
@@ -158,9 +188,7 @@ export default function Register({ navigation }: any) {
                         />
                     </View>
                 </Box>
-                <Buton onPress={() => SignUp()} mt={10} mb={10}>
-                    Criar e acessar
-                </Buton>
+                <Button onPress={SignUp}>Criar e acessar</Button>
             </ScrollView>
             <Footer navigation={navigation} />
         </>

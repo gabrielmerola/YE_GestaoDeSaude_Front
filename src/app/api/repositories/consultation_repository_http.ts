@@ -20,7 +20,7 @@ export class ConsultationRepositoryHttp {
     async postConsultation(json: object) {
         try {
             const token = await AsyncStorage.getItem("token");
-            console.log("token " + token)
+            console.log("token " + token);
             const response = await api.post("/consultation", json, {
                 headers: {
                     "Content-Type": "application/json",
