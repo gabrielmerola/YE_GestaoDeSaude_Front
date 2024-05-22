@@ -110,9 +110,10 @@ export default function ConsultationsHeld() {
         <>
             <Header text="Consultas" isBackPress />
             <ViewContainer>
-                {getAllConst.map((item: any) => {
+                {getAllConst.map((item: any, index) => {
                     return (
                         <ListInteractableItem
+                            key={"ConsultationListKey " + index}
                             text={item.name}
                             isButton
                             modalFunction={() => getById(item.id)}

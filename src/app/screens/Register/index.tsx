@@ -188,7 +188,9 @@ export default function Register({ navigation }: any) {
                         />
                     </View>
                 </Box>
-                <Button onPress={SignUp}>Criar e acessar</Button>
+                <View mb={10}>
+                    <Button onPress={SignUp}>Criar e acessar</Button>
+                </View>
             </ScrollView>
             <Footer navigation={navigation} />
         </>
