@@ -25,24 +25,24 @@ export class AuthRepositoryHttp {
                 email,
                 password
             });
-            console.log(result.data);
+            // console.log("teste token: ", result.data);
             return {
                 status: result.status,
                 token: result.data.token
             };
-        } catch (error: AxiosError | any) {
-            return error;
+        } catch (error: any) {
+            throw new Error(error);
         }
     }
 
     async registerClient(data: object) {
         try {
             const response: AxiosResponse = await api.post("/client", data);
-            console.log("Response OK: " + response);
-            console.log(data);
+            // console.log("Response OK: " + response);
+            console.log(response.data);
             return response;
         } catch (error: AxiosError | any) {
-            // console.log("Response 1: " + error);
+            console.log("Response 1: " + error.message);
             return error.response;
         }
     }

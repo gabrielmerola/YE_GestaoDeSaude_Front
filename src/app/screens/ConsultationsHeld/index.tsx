@@ -55,7 +55,7 @@ export default function ConsultationsHeld() {
     const [returnDate, setReturnDate] = useState<string>("");
     const [resumeText, setResumeText] = useState("");
     const [getAllConst, setGetAllConst] = useState([]);
-    const [getByIdConst, setGetByIdConst] = useState({});
+    const [getByIdConst, setGetByIdConst] = useState<any>({});
     const [postConst, setPostConst] = useState({});
 
     const [date, setDate] = useState("");
@@ -82,22 +82,21 @@ export default function ConsultationsHeld() {
     }
 
     async function post() {
-            
-        formatJson("name", "Clinica Geral")
-        const formattedDate = date.split('/').reverse().join('-');
-        const formattedDateReturn = returnDate.split('/').reverse().join('-');
-        formatJson("dateReturn", formattedDateReturn)
-        formatJson("date", formattedDate)
-        console.log(postConst)
-        const response = await postConsultation(postConst)
+        formatJson("name", "Clinica Geral");
+        const formattedDate = date.split("/").reverse().join("-");
+        const formattedDateReturn = returnDate.split("/").reverse().join("-");
+        formatJson("dateReturn", formattedDateReturn);
+        formatJson("date", formattedDate);
+        console.log(postConst);
+        const response = await postConsultation(postConst);
         console.log(response);
     }
 
     function formatJson(id: string, value: any) {
-        setPostConst( prevState => ({
+        setPostConst((prevState) => ({
             ...prevState,
             [id]: value
-          }) );
+        }));
     }
 
     useFocusEffect(
@@ -111,7 +110,7 @@ export default function ConsultationsHeld() {
         <>
             <Header text="Consultas" isBackPress />
             <ViewContainer>
-                {getAllConst.map((item) => {
+                {getAllConst.map((item: any) => {
                     return (
                         <ListInteractableItem
                             text={item.name}
@@ -169,7 +168,7 @@ export default function ConsultationsHeld() {
                                 "ConsultationsHeld FlatList " +
                                 item.id.toString()
                             }
-                            renderItem={({ item }: { item: Consultation }) => (
+                            renderItem={({ item }: { item: any }) => (
                                 <>
                                     <Table
                                         rows={[
@@ -241,8 +240,7 @@ export default function ConsultationsHeld() {
                         onModalClose={() => setShowNewConsultation(false)}
                     />
                     <ViewContainer>
-
-                        <TouchableOpacity onPress={() => post()} >
+                        <TouchableOpacity onPress={() => post()}>
                             <Text>salva fdp</Text>
                         </TouchableOpacity>
 
@@ -252,9 +250,8 @@ export default function ConsultationsHeld() {
                             inputType="TEXT"
                             inputTxt="Insira a especialidade..."
                             onChangeText={(text) => {
-                                formatJson("expertise", text)
-                            }
-                            }
+                                formatJson("expertise", text);
+                            }}
                             sizeType="SMALL"
                         />
                         <View
@@ -278,7 +275,7 @@ export default function ConsultationsHeld() {
                                     padding: 4,
                                     elevation: 4,
                                     marginTop: 8,
-                                    fontSize: 16,
+                                    fontSize: 16
                                 }}
                                 onChangeText={(masked) => {
                                     setDate(masked);
@@ -314,7 +311,7 @@ export default function ConsultationsHeld() {
                         >
                             <Text>Data de Retorno:</Text>
                             <MaskInput
-                            value= {returnDate}
+                                value={returnDate}
                                 style={{
                                     width: "40%",
                                     borderRadius: 8,

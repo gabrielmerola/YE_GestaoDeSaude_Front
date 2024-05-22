@@ -116,9 +116,7 @@ export default function () {
                         </DataCell>
                         <DataCell type="green">
                             <CellText type="green">
-                                {latestImc == undefined
-                                    ? ""
-                                    : latestImc.height / 100}{" "}
+                                {latestImc == undefined ? "" : latestImc.height}{" "}
                                 m
                             </CellText>
                         </DataCell>
@@ -128,9 +126,7 @@ export default function () {
                                 numberOfLines={1}
                                 type="gray"
                             >
-                                {(latestImc == undefined
-                                    ? ""
-                                    : latestImc.imc.toFixed(2)) +
+                                {(latestImc == undefined ? "" : latestImc.imc) +
                                     " - " +
                                     (latestImc == undefined
                                         ? ""
@@ -151,7 +147,7 @@ export default function () {
                                 value: null
                             }}
                             onValueChange={(value) => setCurrentDate(value)}
-                            items={dateItems.map((date: object) => {
+                            items={dateItems.map((date: any) => {
                                 return {
                                     label: formatDate(date.date),
                                     value: date.date
@@ -194,9 +190,7 @@ export default function () {
                         </DataCell>
                         <DataCell type="green">
                             <CellText type="green">
-                                {pickerImc == undefined
-                                    ? ""
-                                    : pickerImc.height / 100}{" "}
+                                {pickerImc == undefined ? "" : pickerImc.height}{" "}
                                 m
                             </CellText>
                         </DataCell>
@@ -206,9 +200,7 @@ export default function () {
                                 numberOfLines={1}
                                 type="gray"
                             >
-                                {(pickerImc == undefined
-                                    ? ""
-                                    : pickerImc.imc.toFixed(2)) +
+                                {(pickerImc == undefined ? "" : pickerImc.imc) +
                                     " - " +
                                     (pickerImc == undefined
                                         ? ""
