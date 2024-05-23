@@ -14,7 +14,7 @@ export default function Home({ navigation }: any) {
     };
     return (
         <Container>
-            <SubTitle>YE Gestão de Saúde</SubTitle>
+            <SubTitle>YE Gestão de Saúde!</SubTitle>
             <Image source={Logo1} alt="Logo" />
             <Title color="white">Boas-Vindas!</Title>
             <Txt>
