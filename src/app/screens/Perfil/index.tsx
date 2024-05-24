@@ -3,19 +3,125 @@ import Modal from "@components/Modal";
 import { Title } from "@components/Title/Title";
 import { AuthContext } from "@context/auth_context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MedicineContext } from "@context/medicine_context";
 import { ButtonOut, ButtonTextWhiteOut } from "@screens/Perfil/styles";
-import { VStack, Text, ScrollView, Avatar, Divider } from "native-base";
+import { VStack, Text, ScrollView, Divider } from "native-base";
 import { useContext, useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import Avatar from "../Camera/Avatar";
+import UploadModal from "../Camera/UploadModal";
+import axios from "axios";
+
+// for uploading image to backend
+// const FormData = global.FormData;
 
 export default function Perfil({ navigation }: any) {
     const { getClient } = useContext(AuthContext);
+    const [med, setMed] = useState([]);
     const [data, setData] = useState({} as any);
+    const {getAllMedicines} = useContext(MedicineContext)
+    const [modalVisible, setModalVisible] = useState(false);
+    const [image, setImage] = useState();
+
+     useEffect(() => {
+        // get data from API
+    })
+
+  const uploadImage = async (mode: any) => {
+    try {
+      let result = {};
+
+      if (mode === "gallery") {
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+        result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [1, 1],
+          quality: 1,
+        });
+      } else {
+        await ImagePicker.requestCameraPermissionsAsync();
+        result = await ImagePicker.launchCameraAsync({
+          cameraType: ImagePicker.CameraType.front,
+          allowsEditing: true,
+          aspect: [1, 1],
+          quality: 1,
+        });
+      }
+
+    } catch (error) {
+      alert("Erro em atualizar a imagem" + error);
+      setModalVisible(false);
+    }
+  };
+
+  const removeImage = async () => {
+    try {
+      saveImage(null);
+    } catch ({ message }: any) {
+      alert(message);
+      setModalVisible(false);
+    }
+  };
+
+  const saveImage = async (image: any) => {
+    try {
+      // update displayed image
+      setImage(image);
+
+      // make api call to save
+      // sendToBackend();
+
+      setModalVisible(false);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  //  const sendToBackend = async () => {
+  //    try {
+  //      const formData = new FormData();
+
+  //      formData.append("image", {
+  //        uri: image,
+  //      type: "image/png",
+  //       name: "profile-image",
+  //      });
+
+  //      const config = {
+  //      headers: {
+  //         "Content-Type": "multipart/form-data",
+  //      },
+  //        transformRequest: () => {
+  //          return formData;
+  //        },
+  //      };
+
+  //      await axios.post("https://your-api-endpoint", formData, config);
+
+  //      alert("success");
+  //    } catch (error) {
+  //      throw error;
+  //    }
+  //  };
 
     async function getClientid() {
         const response = await getClient();
         // console.log(response);
         setData(response);
     }
+
+    async function getMedicineId() {
+        const response = await getAllMedicines();
+        if (response != undefined){
+          setMed(response);
+        }
+    }
+
+    useEffect(() => {
+        getMedicineId();
+    }, []);
 
     useEffect(() => {
         getClientid();
@@ -36,14 +142,17 @@ export default function Perfil({ navigation }: any) {
         <ScrollView flex={1}>
             <VStack flex={1} alignItems="center">
                 <Header text="Seu Perfil" isBackPress />
-
-                <Avatar
-                    size="2xl"
-                    source={{
-                        uri: "https://avatars.githubusercontent.com/u/125588055?v=4"
-                    }}
-                    mt={10}
-                />
+                <Avatar onButtonPress={() => setModalVisible(true)} uri={image} />
+      
+                <UploadModal
+                modalVisible={modalVisible}
+                onBackPress={() => {
+                setModalVisible(false);
+                }}
+                onCameraPress={() => uploadImage("")}
+                onGalleryPress={() => uploadImage("gallery")}
+                onRemovePress={() => removeImage()}
+            />
 
                 <Title mt={10}>Informações Pessoais</Title>
                 <Text fontSize="lg" mt={5} mb={1}>
@@ -59,10 +168,9 @@ export default function Perfil({ navigation }: any) {
                 <Title mt={7} mb={5}>
                     Medicamentos
                 </Title>
-                <Text fontSize="md">Losartana</Text>
-                <Text fontSize="md">Hidroclorotiazida</Text>
-                <Text fontSize="md">Pantoprazol</Text>
-                <Text fontSize="md">Nimesulida</Text>
+                {med.map((item: any)=>{
+                  return (<Text fontSize="md">{item.name}</Text>)
+                })}
 
                 <Divider mt={7} mb={7} />
 
@@ -75,3 +183,21 @@ export default function Perfil({ navigation }: any) {
         </ScrollView>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+      paddingTop: 10,
+      paddingBottom: 25,
+      paddingHorizontal: 25,
+    },
+    section: {
+      borderRadius: 15,
+      overflow: "hidden",
+      marginTop: 5,
+      marginBottom: 5,
+    },
+    text: {
+      textAlign: "center",
+    },
+  });
+  
