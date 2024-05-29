@@ -4,7 +4,7 @@ import { AxiosResponse } from "axios";
 import { createContext, PropsWithChildren, useState } from "react";
 
 type MedicineContextType = {
-    getAllMedicines: () => Promise<object[] | undefined>;
+    getAllMedicines: () => Promise<[] | undefined>;
     getMedicineByID: (id: number) => Promise<object | undefined>;
     createMedicine: (data: object) => Promise<AxiosResponse | undefined>;
     deleteMedicineByID: (id: number) => Promise<AxiosResponse> | undefined;

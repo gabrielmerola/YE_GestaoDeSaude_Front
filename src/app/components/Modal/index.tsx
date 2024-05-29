@@ -18,7 +18,7 @@ import {
     ButtonTextBlack
 } from "./styles";
 
-export default function Perfil() {
+export default function Profile() {
     const [openModal, setOpenModal] = useState(false);
     const { deleteUser } = useContext(AuthContext);
     const navigation = useNavigation();
