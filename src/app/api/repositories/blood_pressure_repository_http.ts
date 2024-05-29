@@ -74,6 +74,7 @@ export class BloodPressureRepositoryHttp {
                     Authorization: `Bearer ${token}`
                 }
             });
+            // console.log("RESPONSE:" + response);
             return response.data;
         } catch (error: AxiosError | any) {
             return error.response;

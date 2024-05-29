@@ -6,6 +6,12 @@ import { Button, ButtonText, Container, SubTitle, Txt } from "./styles";
 import Logo1 from "../../../../assets/logo-verde.png";
 
 export default function Home({ navigation }: any) {
+    const handleGoToLogin = async () => {
+        await AsyncStorage.clear();
+        const token = await AsyncStorage.getItem("token");
+        console.log(token);
+        navigation.navigate("Login");
+    };
     return (
         <Container>
             <SubTitle>YE Gestão de Saúde</SubTitle>
@@ -17,7 +23,7 @@ export default function Home({ navigation }: any) {
                 lembretes personalizados para seus medicamentos!
             </Txt>
 
-            <Button onPress={() => navigation.navigate("Login")}>
+            <Button onPress={handleGoToLogin}>
                 <ButtonText>Login</ButtonText>
             </Button>
 

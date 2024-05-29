@@ -1,4 +1,4 @@
-import { Buton } from "@components/Button";
+import { Button } from "@components/Button";
 import { Footer } from "@components/Footer";
 import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
@@ -12,7 +12,7 @@ import { AuthContext } from "src/app/context/auth_context";
 import Logo from "../../../../assets/logo.png";
 
 export default function Login({ navigation }: any) {
-    const [email, setEmail] = useState(""); //armazena os valores
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const toast = useToast();
     const { login } = useContext(AuthContext);
@@ -38,12 +38,31 @@ export default function Login({ navigation }: any) {
             });
             return;
         }
+        // if (email === "" || password === "") {
+        //     toast.show({
+        //         title: "Erro no login",
+        //         description: "Por favor, preencha o email e a senha.",
+        //         backgroundColor: "red.500",
+        //         placement: "top"
+        //     });
+        //     return;
+        // }
+
+        // if (email === null && password === null) {
+        //     toast.show({
+        //         title: "Erro no login",
+        //         description: "Por favor, preencha o email e a senha.",
+        //         backgroundColor: "red.500",
+        //         placement: "top"
+        //     });
+        //     return;
+        // }
         const result: any = await login(email, password);
-        console.log(result);
+        // console.log("RESULTADO" + result);
         if (result.token) {
             const { token } = result;
             await AsyncStorage.setItem("token", token);
-            console.log(token);
+            // console.log(token);
             navigation.navigate("StackRoutes");
             toast.show({
                 title: "Login realizado com sucesso",
@@ -82,7 +101,7 @@ export default function Login({ navigation }: any) {
                     />
                 </Box>
 
-                <Buton onPress={SignIn}>Entrar</Buton>
+                <Button onPress={SignIn}>Entrar</Button>
 
                 <Link href="" mt={2}>
                     Esqueceu sua senha?

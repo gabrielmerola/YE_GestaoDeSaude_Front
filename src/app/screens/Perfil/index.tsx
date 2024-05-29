@@ -1,7 +1,9 @@
+import { MedicineFormData } from "@api/repositories/medicine_repository_http";
 import { Header } from "@components/Header";
 import Modal from "@components/Modal";
 import { Title } from "@components/Title/Title";
 import { AuthContext } from "@context/auth_context";
+import { MedicineContext } from "@context/medicine_context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MedicineContext } from "@context/medicine_context";
 import { ButtonOut, ButtonTextWhiteOut } from "@screens/Perfil/styles";
@@ -19,7 +21,6 @@ import axios from "axios";
 export default function Perfil({ navigation }: any) {
     const { getClient } = useContext(AuthContext);
     const [med, setMed] = useState([]);
-    const [data, setData] = useState({} as any);
     const {getAllMedicines} = useContext(MedicineContext)
     const [modalVisible, setModalVisible] = useState(false);
     const [image, setImage] = useState();
@@ -108,7 +109,6 @@ export default function Perfil({ navigation }: any) {
 
     async function getClientid() {
         const response = await getClient();
-        // console.log(response);
         setData(response);
     }
 
@@ -136,7 +136,31 @@ export default function Perfil({ navigation }: any) {
         }
     };
 
-    console.log(data.name);
+    const fetchMedicines = async () => {
+        try {
+            const response = await getAllMedicines();
+            if (response && Array.isArray(response)) {
+                const parsedMedicines = response.map((med: any) => ({
+                    id: med.id,
+                    name: med.name
+                }));
+                console.log(parsedMedicines);
+                setMedicines(parsedMedicines);
+            }
+        } catch (error: AxiosError | any) {
+            return console.log(
+                "Erro ao buscar medicamentos: " + error.response
+            );
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useFocusEffect(
+        React.useCallback(() => {
+            fetchMedicines();
+        }, [formData])
+    );
 
     return (
         <ScrollView flex={1}>
@@ -145,14 +169,14 @@ export default function Perfil({ navigation }: any) {
                 <Avatar onButtonPress={() => setModalVisible(true)} uri={image} />
       
                 <UploadModal
-                modalVisible={modalVisible}
-                onBackPress={() => {
-                setModalVisible(false);
-                }}
-                onCameraPress={() => uploadImage("")}
-                onGalleryPress={() => uploadImage("gallery")}
-                onRemovePress={() => removeImage()}
-            />
+                  modalVisible={modalVisible}
+                  onBackPress={() => {
+                    setModalVisible(false);
+                  }}
+                  onCameraPress={() => uploadImage("")}
+                  onGalleryPress={() => uploadImage("gallery")}
+                  onRemovePress={() => removeImage()}
+                />
 
                 <Title mt={10}>Informações Pessoais</Title>
                 <Text fontSize="lg" mt={5} mb={1}>
@@ -161,7 +185,11 @@ export default function Perfil({ navigation }: any) {
                 <Text fontSize="lg" mb={1}>
                     {data.email}
                 </Text>
-                <Text fontSize="lg">{data.phone}</Text>
+                <Text fontSize="lg">
+                    ({data.phone?.substring(0, data.phone.indexOf(8))}){" "}
+                    {data.phone?.substring(2, data.phone.indexOf(3))}-
+                    {data.phone?.substring(7)}
+                </Text>
 
                 <Divider mt={7} />
 
@@ -171,7 +199,6 @@ export default function Perfil({ navigation }: any) {
                 {med.map((item: any)=>{
                   return (<Text fontSize="md">{item.name}</Text>)
                 })}
-
                 <Divider mt={7} mb={7} />
 
                 <Modal />

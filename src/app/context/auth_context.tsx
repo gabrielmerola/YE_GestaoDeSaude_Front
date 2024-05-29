@@ -33,7 +33,7 @@ export const AuthContext = createContext<AuthContextType>(defaultAuthContext);
 export function AuthContextProvider({ children }: PropsWithChildren) {
     const authRepository = new AuthRepositoryHttp();
 
-    const [signUpError, setSignUpError] = useState("");
+    const [signUpError, setSignUpError] = useState("Erro ao Cadastrar");
 
     async function login(email: string, password: string) {
         try {
