@@ -13,6 +13,7 @@ import {
 } from "@components/PopUp/styles";
 import { useToast } from "native-base";
 import { useState } from "react";
+import styled from "styled-components";
 
 export type popUpType = "PRESSURE" | "GLUCOSE" | "IMC";
 
@@ -197,7 +198,6 @@ export default function PopUp({ onClose, onPost, popUpType }: Props) {
     };
 
     return (
-        <>
             <Container>
                 <ModalContainer>
                     <PopUpContainer>
@@ -248,7 +248,9 @@ export default function PopUp({ onClose, onPost, popUpType }: Props) {
                                     size="SMALL"
                                 />
                                 <Txt> mg/dL</Txt>
+                                
                             </TextInputContainer>
+                            
                         ) : (
                             <>
                                 <TextInputContainer>
@@ -297,6 +299,6 @@ export default function PopUp({ onClose, onPost, popUpType }: Props) {
                     </PopUpContainer>
                 </ModalContainer>
             </Container>
-        </>
     );
 }
+

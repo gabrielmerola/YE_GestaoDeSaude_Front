@@ -15,15 +15,15 @@ import Logo from "../../../../assets/logo.png";
 
 export default function About() {
     const data = [
-        { key: "item1", text: "Colocar lembretes de suas consultas;" },
-        { key: "item2", text: "Colocar um resumo delas;" },
+        { key: "item1", text: "Colocar lembretes de suas consultas." },
+        { key: "item2", text: "Colocar um resumo delas." },
         {
             key: "item3",
-            text: "Definir os horários de suas medicações com apenas quatro informações;"
+            text: "Definir os horários de suas medicações com apenas quatro informações."
         },
         {
             key: "item4",
-            text: "Organizar os resultados de seus exames, bem como armazenar uma copia deles e muito mais."
+            text: "Organizar os resultados de seus exames, bem como armazenar uma cópia deles e muito mais!"
         }
     ];
 
@@ -38,8 +38,8 @@ export default function About() {
             <View style={{ alignItems: "center" }}>
                 <Container>
                     <Txt>
-                        Nos somos o Minha Saúde em Dia, um aplicativo
-                        desenvolvido para melhorar a gestão da sua propria saúde
+                        Nós somos o Minha Saúde em Dia, um aplicativo
+                        desenvolvido para melhorar a gestão da sua própria saúde
                         e melhorar sua qualidade de vida.
                     </Txt>
 

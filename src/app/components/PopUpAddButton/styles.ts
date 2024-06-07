@@ -52,8 +52,8 @@ export const AddIconStyled = styled(AddIcon)`
 `;
 
 export const DeleteIconStyled = styled(DeleteIcon).attrs({
-    size: 10
+    size: 1
 })`
-    color: black;
+    color: whitesmoke;
     margin-left: 16px;
 `;
