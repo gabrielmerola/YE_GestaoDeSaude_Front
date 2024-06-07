@@ -23,12 +23,16 @@ export default function Main({ navigation }: any) {
 
     async function getImc() {
         const response = await getLatestImc();
-        setImc(response);
+        if (response !== undefined) {
+            setImc(response);
+        }
     }
 
     async function getGlucose() {
         const repsonse = await getGlucoseLatest();
-        setGlucose(repsonse);
+        if (repsonse !== undefined) {
+            setGlucose(repsonse);
+        }
     }
 
     async function getPressure() {

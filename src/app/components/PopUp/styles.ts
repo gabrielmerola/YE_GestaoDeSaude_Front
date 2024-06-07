@@ -25,13 +25,14 @@ export const ModalContainer = styled.View`
     flex: 1;
     padding: 16px;
     justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
 `;
 export const PopUpContainer = styled.View`
-    height: 50%;
+    height: 47%;
     background-color: ${({ theme }) => theme.COLORS.GRAY_300};
     border-radius: 8px;
     padding: 20px 16px;
-    border: black;
+   
 `;
 
 export const TextInputContainer = styled.View`
@@ -74,7 +75,6 @@ export const Txt = styled.Text`
 export const Button = styled(TouchableOpacity)<ButtonProps>`
     flex: 1;
     min-height: 56px;
-    border: black;
     background-color: ${({ theme, type }) =>
         type === "ADD" ? theme.COLORS.GREEN_700 : theme.COLORS.GRAY_400};
     border-radius: 10px;
@@ -101,7 +101,6 @@ export const Input = styled.TextInput.attrs(({ theme }) => ({
     width: ${({ size }) => (size === "SMALL" ? "21%" : "50%")};
     font-size: ${({ theme }) => theme.FONT_SIZE.LG};
     height: 40px;
-    border: 1px solid black;
     border-radius: 8px;
     padding: 0 16px;
     background-color: ${({ theme }) => theme.COLORS.WHITE};

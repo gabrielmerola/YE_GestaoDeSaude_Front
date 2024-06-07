@@ -2,10 +2,10 @@ import styled from "styled-components/native";
 
 export const ButtonOut = styled.TouchableOpacity`
     flex: 1;
-    min-height: 50px;
-    max-height: 50px;
-    min-width: 150px;
-    max-width: 150px;
+    min-height: 56px;
+    max-height: 56px;
+    min-width: 168px;
+    max-width: 168px;
     background-color: ${({ theme }) => theme.COLORS.RED_100};
     border-radius: 10px;
     justify-content: center;

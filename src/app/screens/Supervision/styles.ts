@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 export const TextTitle = styled.Text`
     font-weight: normal;
     font-size: 22px;
-    margin: 40px 30px 12px 30px;
+    margin: 40px 30px 30px 30px;
     align-self: flex-start;
 `;
 

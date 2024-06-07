@@ -1,5 +1,5 @@
 import { Header } from "@components/Header";
-import { VStack, ScrollView, View, Input } from "native-base";
+import { VStack, ScrollView, View, Input, useToast } from "native-base";
 import { Linking } from "react-native";
 import Icons from "react-native-vector-icons/FontAwesome5";
 
@@ -13,6 +13,7 @@ import {
 } from "./styles";
 
 export default function Suporte() {
+    const toast = useToast();
     return (
         <ScrollView flex={1}>
             <VStack flex={1}>
@@ -25,9 +26,9 @@ export default function Suporte() {
                         <Icons name="whatsapp" solid size={40} />
                     </Icon>
                     <TextSubtitle
-                        onPress={() => Linking.openURL(`tel:${11942263007}`)}
+                        onPress={() => Linking.openURL(`tel:${1131726800}`)}
                     >
-                        (00) 00000-0000
+                        (11) 3172-6800
                     </TextSubtitle>
                 </View>
 
@@ -39,16 +40,16 @@ export default function Suporte() {
                     <TextSubtitle
                         onPress={() =>
                             Linking.openURL(
-                                "mailto:mailto@luccaoliveira123@gmail.com?subject=abcdefg&body=body"
+                                "mailto:sac@hospitalsaocamilosp.org.br?subject=&body="
                             )
                         }
                     >
-                        abcdef@xxxx.com
+                        sac@hospitalsaocamilosp.org.br
                     </TextSubtitle>
                 </View>
 
                 <TextNormal>
-                    Deixe registrado o problema encontrado no aplicativo:
+                    Encontrou um problema no aplicativo? Descreva o problema encontrado abaixo:
                 </TextNormal>
 
                 <Input
@@ -58,7 +59,7 @@ export default function Suporte() {
                     w="90%"
                     h="250px"
                     borderRadius="lg"
-                    bgColor="gray.300"
+                    bgColor="gray.200"
                     shadow={3}
                     textAlignVertical="top"
                     alignSelf="center"

@@ -1,13 +1,11 @@
 import { Header } from "@components/Header";
-import { VStack, useToast } from "native-base";
+import { Input, VStack, useToast } from "native-base";
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
 
 import {
     Text,
     ContainerValidation,
-    TextValidationEmail,
-    InputEmail,
     ButtonConfirm,
     ButtonText,
     InputNewPasswordConfirm,
@@ -164,14 +162,22 @@ export default function Security() {
             ) : (
                 <>
                     <Text>
-                        Preencha o campo para realizar a alteração da senha:
+                        Preencha o campo abaixo para realizar a alteração da senha atual:
                     </Text>
                     <ContainerValidation>
-                        <TextValidationEmail>Email:</TextValidationEmail>
-                        <InputEmail
-                            placeholder="Digite aqui..."
+                        <Input
+                            placeholder="Insira seu e-mail"
                             value={email}
                             onChangeText={setEmail}
+                            size="lg"
+                            w="85%"
+                            h="40px"
+                            borderRadius="lg"
+                            bgColor="gray.200"
+                            shadow={3}
+                            alignSelf="center"
+                            editable
+                            maxLength={40}
                         />
                         <ButtonConfirm onPress={validateInput}>
                             <ButtonText>Confirmar</ButtonText>

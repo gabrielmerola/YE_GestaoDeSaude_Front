@@ -36,7 +36,7 @@ export default function Supervision() {
                         w="80%"
                         h="40px"
                         borderRadius="lg"
-                        bgColor="gray.300"
+                        bgColor="gray.200"
                         shadow={3}
                         alignSelf="center"
                         editable

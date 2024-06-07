@@ -6,6 +6,7 @@ import { GlucoseContext, GlucoseType } from "@context/glucose_context";
 import { FlatList } from "native-base";
 import React, { useContext, useEffect, useState } from "react";
 import PopUp from "src/app/components/PopUp";
+import KeyboardAvoidingView from "react-native"
 
 export default function Glucose() {
     const [data, setData] = useState<GlucoseType[]>([]);
@@ -60,9 +61,9 @@ export default function Glucose() {
     }, []);
 
     return (
+        
         <>
             <Header text="Glicemia" isBackPress />
-
             <FlatList
                 data={data}
                 keyExtractor={(item) => item.id.toString()}
@@ -70,7 +71,8 @@ export default function Glucose() {
             />
 
             <PopUpAddButton onOpen={handleOpenPopUp} onDelete={() => {}} />
-
+            
+            
             {showPopUp ? (
                 <PopUp
                     onClose={handleClosePopUp}

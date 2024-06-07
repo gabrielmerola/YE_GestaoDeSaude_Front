@@ -5,22 +5,23 @@ import { Title } from "@components/Title/Title";
 import { AuthContext } from "@context/auth_context";
 import { MedicineContext } from "@context/medicine_context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { MedicineContext } from "@context/medicine_context";
 import { ButtonOut, ButtonTextWhiteOut } from "@screens/Perfil/styles";
 import { VStack, Text, ScrollView, Divider } from "native-base";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Avatar from "../Camera/Avatar";
 import UploadModal from "../Camera/UploadModal";
 import axios from "axios";
+import { useFocusEffect } from "@react-navigation/native";
 
 // for uploading image to backend
 // const FormData = global.FormData;
 
 export default function Perfil({ navigation }: any) {
     const { getClient } = useContext(AuthContext);
-    const [med, setMed] = useState([]);
+    const [data, setData] = useState<any>({});
+    const [med, setMedicines] = useState([]);
     const {getAllMedicines} = useContext(MedicineContext)
     const [modalVisible, setModalVisible] = useState(false);
     const [image, setImage] = useState();
@@ -115,7 +116,7 @@ export default function Perfil({ navigation }: any) {
     async function getMedicineId() {
         const response = await getAllMedicines();
         if (response != undefined){
-          setMed(response);
+          setMedicines(response);
         }
     }
 
@@ -140,26 +141,24 @@ export default function Perfil({ navigation }: any) {
         try {
             const response = await getAllMedicines();
             if (response && Array.isArray(response)) {
-                const parsedMedicines = response.map((med: any) => ({
+                const parsedMedicines:any = response.map((med: any) => ({
                     id: med.id,
                     name: med.name
                 }));
                 console.log(parsedMedicines);
                 setMedicines(parsedMedicines);
             }
-        } catch (error: AxiosError | any) {
+        } catch (error: any) {
             return console.log(
                 "Erro ao buscar medicamentos: " + error.response
             );
-        } finally {
-            setIsLoading(false);
         }
     };
 
     useFocusEffect(
-        React.useCallback(() => {
+        useCallback(() => {
             fetchMedicines();
-        }, [formData])
+        }, [FormData])
     );
 
     return (
@@ -227,4 +226,8 @@ const styles = StyleSheet.create({
       textAlign: "center",
     },
   });
+
+function setData(response: object | undefined) {
+  throw new Error("Function not implemented.");
+}
   
