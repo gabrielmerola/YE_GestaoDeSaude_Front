@@ -45,7 +45,6 @@ export const ButtonConfirm = styled.TouchableOpacity`
     margin: 50px 8px;
     align-self: center;
     justify-content: center;
-    
 `;
 
 export const ButtonText = styled.Text`
@@ -55,8 +54,6 @@ export const ButtonText = styled.Text`
     text-align: center;
     justify-content: center;
 `;
-
-
 
 export const TextNewPassword = styled.Text`
     margin-top: 30px;

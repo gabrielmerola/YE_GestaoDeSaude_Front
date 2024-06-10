@@ -22,91 +22,90 @@ export default function Perfil({ navigation }: any) {
     const { getClient } = useContext(AuthContext);
     const [data, setData] = useState<any>({});
     const [med, setMedicines] = useState([]);
-    const {getAllMedicines} = useContext(MedicineContext)
+    const { getAllMedicines } = useContext(MedicineContext);
     const [modalVisible, setModalVisible] = useState(false);
     const [image, setImage] = useState();
 
-     useEffect(() => {
+    useEffect(() => {
         // get data from API
-    })
+    });
 
-  const uploadImage = async (mode: any) => {
-    try {
-      let result = {};
+    const uploadImage = async (mode: any) => {
+        try {
+            let result = {};
 
-      if (mode === "gallery") {
-        await ImagePicker.requestMediaLibraryPermissionsAsync();
-        result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.Images,
-          allowsEditing: true,
-          aspect: [1, 1],
-          quality: 1,
-        });
-      } else {
-        await ImagePicker.requestCameraPermissionsAsync();
-        result = await ImagePicker.launchCameraAsync({
-          cameraType: ImagePicker.CameraType.front,
-          allowsEditing: true,
-          aspect: [1, 1],
-          quality: 1,
-        });
-      }
+            if (mode === "gallery") {
+                await ImagePicker.requestMediaLibraryPermissionsAsync();
+                result = await ImagePicker.launchImageLibraryAsync({
+                    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                    allowsEditing: true,
+                    aspect: [1, 1],
+                    quality: 1
+                });
+            } else {
+                await ImagePicker.requestCameraPermissionsAsync();
+                result = await ImagePicker.launchCameraAsync({
+                    cameraType: ImagePicker.CameraType.front,
+                    allowsEditing: true,
+                    aspect: [1, 1],
+                    quality: 1
+                });
+            }
+        } catch (error) {
+            alert("Erro em atualizar a imagem" + error);
+            setModalVisible(false);
+        }
+    };
 
-    } catch (error) {
-      alert("Erro em atualizar a imagem" + error);
-      setModalVisible(false);
-    }
-  };
+    const removeImage = async () => {
+        try {
+            saveImage(null);
+        } catch ({ message }: any) {
+            alert(message);
+            setModalVisible(false);
+        }
+    };
 
-  const removeImage = async () => {
-    try {
-      saveImage(null);
-    } catch ({ message }: any) {
-      alert(message);
-      setModalVisible(false);
-    }
-  };
+    const saveImage = async (image: any) => {
+        try {
+            // update displayed image
+            setImage(image);
 
-  const saveImage = async (image: any) => {
-    try {
-      // update displayed image
-      setImage(image);
+            // make api call to save
+            // sendToBackend();
 
-      // make api call to save
-      // sendToBackend();
+            setModalVisible(false);
+        } catch (error) {
+            throw error;
+        }
+    };
 
-      setModalVisible(false);
-    } catch (error) {
-      throw error;
-    }
-  };
+    //  const sendToBackend = async () => {
+    //    try {
+    //      const formData = new FormData();
 
-  //  const sendToBackend = async () => {
-  //    try {
-  //      const formData = new FormData();
+    //      formData.append("image", {
+    //        uri: image,
+    //      type: "image/png",
+    //       name: "profile-image",
+    //      });
 
-  //      formData.append("image", {
-  //        uri: image,
-  //      type: "image/png",
-  //       name: "profile-image",
-  //      });
+    //      const config = {
+    //      headers: {
+    //         "Content-Type": "multipart/form-data",
+    //      },
+    //        transformRequest: () => {
+    //          return formData;
+    //        },
+    //      };
 
-  //      const config = {
-  //      headers: {
-  //         "Content-Type": "multipart/form-data",
-  //      },
-  //        transformRequest: () => {
-  //          return formData;
-  //        },
-  //      };
+    //      await axios.post("https://your-api-endpoint", formData, config);
 
-  //      await axios.post("https://your-api-endpoint", formData, config);
-
-  //      alert("success");
-  //    } catch (error) {
-  //      throw error;
-  //    }
-  //  };
+    //      alert("success");
+    //    } catch (error) {
+    //      throw error;
+    //    }
+    //  };
 
     async function getClientid() {
         const response = await getClient();
@@ -115,8 +114,8 @@ export default function Perfil({ navigation }: any) {
 
     async function getMedicineId() {
         const response = await getAllMedicines();
-        if (response != undefined){
-          setMedicines(response);
+        if (response != undefined) {
+            setMedicines(response);
         }
     }
 
@@ -141,7 +140,7 @@ export default function Perfil({ navigation }: any) {
         try {
             const response = await getAllMedicines();
             if (response && Array.isArray(response)) {
-                const parsedMedicines:any = response.map((med: any) => ({
+                const parsedMedicines: any = response.map((med: any) => ({
                     id: med.id,
                     name: med.name
                 }));
@@ -165,16 +164,19 @@ export default function Perfil({ navigation }: any) {
         <ScrollView flex={1}>
             <VStack flex={1} alignItems="center">
                 <Header text="Seu Perfil" isBackPress />
-                <Avatar onButtonPress={() => setModalVisible(true)} uri={image} />
-      
+                <Avatar
+                    onButtonPress={() => setModalVisible(true)}
+                    uri={image}
+                />
+
                 <UploadModal
-                  modalVisible={modalVisible}
-                  onBackPress={() => {
-                    setModalVisible(false);
-                  }}
-                  onCameraPress={() => uploadImage("")}
-                  onGalleryPress={() => uploadImage("gallery")}
-                  onRemovePress={() => removeImage()}
+                    modalVisible={modalVisible}
+                    onBackPress={() => {
+                        setModalVisible(false);
+                    }}
+                    onCameraPress={() => uploadImage("")}
+                    onGalleryPress={() => uploadImage("gallery")}
+                    onRemovePress={() => removeImage()}
                 />
 
                 <Title mt={10}>Informações Pessoais</Title>
@@ -195,8 +197,8 @@ export default function Perfil({ navigation }: any) {
                 <Title mt={7} mb={5}>
                     Medicamentos
                 </Title>
-                {med.map((item: any)=>{
-                  return (<Text fontSize="md">{item.name}</Text>)
+                {med.map((item: any) => {
+                    return <Text fontSize="md">{item.name}</Text>;
                 })}
                 <Divider mt={7} mb={7} />
 
@@ -212,22 +214,21 @@ export default function Perfil({ navigation }: any) {
 
 const styles = StyleSheet.create({
     container: {
-      paddingTop: 10,
-      paddingBottom: 25,
-      paddingHorizontal: 25,
+        paddingTop: 10,
+        paddingBottom: 25,
+        paddingHorizontal: 25
     },
     section: {
-      borderRadius: 15,
-      overflow: "hidden",
-      marginTop: 5,
-      marginBottom: 5,
+        borderRadius: 15,
+        overflow: "hidden",
+        marginTop: 5,
+        marginBottom: 5
     },
     text: {
-      textAlign: "center",
-    },
-  });
+        textAlign: "center"
+    }
+});
 
 function setData(response: object | undefined) {
-  throw new Error("Function not implemented.");
+    throw new Error("Function not implemented.");
 }
-  

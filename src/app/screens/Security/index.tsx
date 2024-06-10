@@ -162,7 +162,8 @@ export default function Security() {
             ) : (
                 <>
                     <Text>
-                        Preencha o campo abaixo para realizar a alteração da senha atual:
+                        Preencha o campo abaixo para realizar a alteração da
+                        senha atual:
                     </Text>
                     <ContainerValidation>
                         <Input

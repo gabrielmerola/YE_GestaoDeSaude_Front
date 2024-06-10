@@ -49,7 +49,8 @@ export default function Suporte() {
                 </View>
 
                 <TextNormal>
-                    Encontrou um problema no aplicativo? Descreva o problema encontrado abaixo:
+                    Encontrou um problema no aplicativo? Descreva o problema
+                    encontrado abaixo:
                 </TextNormal>
 
                 <Input

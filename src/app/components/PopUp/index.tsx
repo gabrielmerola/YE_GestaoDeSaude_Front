@@ -198,25 +198,57 @@ export default function PopUp({ onClose, onPost, popUpType }: Props) {
     };
 
     return (
-            <Container>
-                <ModalContainer>
-                    <PopUpContainer>
-                        <Title>Adicionar outra medida?</Title>
+        <Container>
+            <ModalContainer>
+                <PopUpContainer>
+                    <Title>Adicionar outra medida?</Title>
+                    <TextInputContainer>
+                        <Txt>Data:</Txt>
+                        <Input
+                            placeholder="XX/XX/XXXX"
+                            onChangeText={handleDate}
+                            value={date}
+                            maxLength={10}
+                            size="LARGE"
+                        />
+                    </TextInputContainer>
+                    {popUpType === "PRESSURE" ? (
                         <TextInputContainer>
-                            <Txt>Data:</Txt>
+                            <Txt>Medida:</Txt>
                             <Input
-                                placeholder="XX/XX/XXXX"
-                                onChangeText={handleDate}
-                                value={date}
-                                maxLength={10}
-                                size="LARGE"
+                                placeholder="120"
+                                onChangeText={(text) => setFirstMeasure(text)}
+                                value={firstMeasure}
+                                maxLength={3}
+                                size="SMALL"
+                            />
+                            <Txt> x</Txt>
+                            <Input
+                                placeholder="80"
+                                onChangeText={(text) => setSecondMeasure(text)}
+                                value={secondMeasure}
+                                maxLength={3}
+                                size="SMALL"
                             />
                         </TextInputContainer>
-                        {popUpType === "PRESSURE" ? (
+                    ) : popUpType === "GLUCOSE" ? (
+                        <TextInputContainer>
+                            <Txt>Medida:</Txt>
+                            <Input
+                                placeholder="120"
+                                onChangeText={(text) => setFirstMeasure(text)}
+                                value={firstMeasure}
+                                maxLength={3}
+                                size="SMALL"
+                            />
+                            <Txt> mg/dL</Txt>
+                        </TextInputContainer>
+                    ) : (
+                        <>
                             <TextInputContainer>
-                                <Txt>Medida:</Txt>
+                                <Txt>Altura:</Txt>
                                 <Input
-                                    placeholder="120"
+                                    placeholder="175"
                                     onChangeText={(text) =>
                                         setFirstMeasure(text)
                                     }
@@ -224,9 +256,12 @@ export default function PopUp({ onClose, onPost, popUpType }: Props) {
                                     maxLength={3}
                                     size="SMALL"
                                 />
-                                <Txt> x</Txt>
+                                <Txt> cm</Txt>
+                            </TextInputContainer>
+                            <TextInputContainer>
+                                <Txt>Peso:</Txt>
                                 <Input
-                                    placeholder="80"
+                                    placeholder="70"
                                     onChangeText={(text) =>
                                         setSecondMeasure(text)
                                     }
@@ -234,71 +269,23 @@ export default function PopUp({ onClose, onPost, popUpType }: Props) {
                                     maxLength={3}
                                     size="SMALL"
                                 />
+                                <Txt> kgs</Txt>
                             </TextInputContainer>
-                        ) : popUpType === "GLUCOSE" ? (
-                            <TextInputContainer>
-                                <Txt>Medida:</Txt>
-                                <Input
-                                    placeholder="120"
-                                    onChangeText={(text) =>
-                                        setFirstMeasure(text)
-                                    }
-                                    value={firstMeasure}
-                                    maxLength={3}
-                                    size="SMALL"
-                                />
-                                <Txt> mg/dL</Txt>
-                                
-                            </TextInputContainer>
-                            
-                        ) : (
-                            <>
-                                <TextInputContainer>
-                                    <Txt>Altura:</Txt>
-                                    <Input
-                                        placeholder="175"
-                                        onChangeText={(text) =>
-                                            setFirstMeasure(text)
-                                        }
-                                        value={firstMeasure}
-                                        maxLength={3}
-                                        size="SMALL"
-                                    />
-                                    <Txt> cm</Txt>
-                                </TextInputContainer>
-                                <TextInputContainer>
-                                    <Txt>Peso:</Txt>
-                                    <Input
-                                        placeholder="70"
-                                        onChangeText={(text) =>
-                                            setSecondMeasure(text)
-                                        }
-                                        value={secondMeasure}
-                                        maxLength={3}
-                                        size="SMALL"
-                                    />
-                                    <Txt> kgs</Txt>
-                                </TextInputContainer>
-                            </>
-                        )}
+                        </>
+                    )}
 
-                        <BottomContainer>
-                            <ButtonsContainer>
-                                <Button type="CANCEL" onPress={onClose}>
-                                    <ButtonText type="CANCEL">
-                                        Cancelar
-                                    </ButtonText>
-                                </Button>
-                                <Button type="ADD" onPress={handlePost}>
-                                    <ButtonText type="ADD">
-                                        Confirmar
-                                    </ButtonText>
-                                </Button>
-                            </ButtonsContainer>
-                        </BottomContainer>
-                    </PopUpContainer>
-                </ModalContainer>
-            </Container>
+                    <BottomContainer>
+                        <ButtonsContainer>
+                            <Button type="CANCEL" onPress={onClose}>
+                                <ButtonText type="CANCEL">Cancelar</ButtonText>
+                            </Button>
+                            <Button type="ADD" onPress={handlePost}>
+                                <ButtonText type="ADD">Confirmar</ButtonText>
+                            </Button>
+                        </ButtonsContainer>
+                    </BottomContainer>
+                </PopUpContainer>
+            </ModalContainer>
+        </Container>
     );
 }
-
