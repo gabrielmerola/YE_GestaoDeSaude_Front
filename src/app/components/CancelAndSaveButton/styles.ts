@@ -14,10 +14,11 @@ export const ButtonText = styled.Text`
     font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
     font-size: ${({ theme }) => theme.FONT_SIZE.LG};
     text-align: center;
+    align-self: center;
 `;
 
 export const Button = styled.TouchableOpacity`
-    width: 50%;
+    width: 100%;
     margin: 10px 0 10px 0;
 `;
 

@@ -1,8 +1,11 @@
-import { ConsultationRepositoryHttp } from "@api/repositories/consultation_repository_http";
+import {
+    ConsultationReponsiveType,
+    ConsultationRepositoryHttp
+} from "@api/repositories/consultation_repository_http";
 import { PropsWithChildren, createContext } from "react";
 
 type ConsultationContextType = {
-    getAllConsultation: () => Promise<[] | undefined>;
+    getAllConsultation: () => Promise<ConsultationReponsiveType[] | undefined>;
     postConsultation: (json: object) => Promise<object | undefined>;
     getConsultationById: (id: number) => Promise<object | undefined>;
     deleteConsultationById: (id: number) => Promise<object | undefined>;

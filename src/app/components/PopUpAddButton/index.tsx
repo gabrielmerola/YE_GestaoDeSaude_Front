@@ -39,14 +39,3 @@ export function PopUpAddButton({ onOpen, onDelete }: Props) {
         </Container>
     );
 }
-
-{
-    /* <Container>
-            <Button onPress={onOpen}>
-                <ButtonContainer>
-                    <AddIconStyled />
-                    <ButtonText>Adicionar</ButtonText>
-                </ButtonContainer>
-            </Button>
-        </Container> */
-}
