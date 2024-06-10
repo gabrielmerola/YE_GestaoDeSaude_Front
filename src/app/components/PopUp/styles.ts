@@ -32,7 +32,6 @@ export const PopUpContainer = styled.View`
     background-color: ${({ theme }) => theme.COLORS.GRAY_300};
     border-radius: 8px;
     padding: 20px 16px;
-   
 `;
 
 export const TextInputContainer = styled.View`
