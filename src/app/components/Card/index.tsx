@@ -5,7 +5,8 @@ import {
     Container,
     SecContainer,
     ThirdContainer,
-    Txt
+    Txt,
+    TxtSubTitle
 } from "./styles";
 
 interface CardProps {
@@ -32,7 +33,7 @@ export function Card({
                 <Txt>{description}</Txt>
             </SecContainer>
             <ThirdContainer>
-                <Txt>{subTitle}</Txt>
+                <TxtSubTitle>{subTitle}</TxtSubTitle>
                 <View>
                     <BoldText>{secDescription}</BoldText>
                     <BoldText>{subDescription}</BoldText>

@@ -28,6 +28,7 @@ export const SecContainer = styled.View`
 export const ThirdContainer = styled.View`
     gap: 10px;
     align-self: center;
+    text-align: center;
 `;
 
 export const BoldText = styled.Text`
@@ -41,4 +42,11 @@ export const Txt = styled.Text`
     font-size: ${({ theme }) => theme.FONT_SIZE.MD};
     font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
     color: ${({ theme }) => theme.COLORS.WHITE};
+`;
+
+export const TxtSubTitle = styled.Text`
+    font-size: ${({ theme }) => theme.FONT_SIZE.MD};
+    font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
+    color: ${({ theme }) => theme.COLORS.WHITE};
+    text-align: center;
 `;

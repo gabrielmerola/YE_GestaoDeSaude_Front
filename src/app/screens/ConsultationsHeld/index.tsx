@@ -7,6 +7,8 @@ import { ConsultationContext } from "@context/consultation_context";
 import { useFocusEffect } from "@react-navigation/native";
 import {
     ButtonContainer,
+    Buttons,
+    CancelButton,
     ConsultationsDataHeader,
     ConsultationsDataHeaderTitle,
     Input,
@@ -17,10 +19,12 @@ import {
     ViewContainer
 } from "@screens/ConsultationsHeld/styles";
 import { FlatList } from "native-base";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import MaskInput from "react-native-mask-input";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
+import { ConsultationReponsiveType } from "@api/repositories/consultation_repository_http";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface Consultation {
     id: number;
@@ -44,7 +48,7 @@ const json = [
     }
 ];
 
-export default function ConsultationsHeld() {
+export default function ConsultationsHeld({ navigation }: any) {
     const [showAcomplishedConsultations, setShowAcomplishedConsultations] =
         useState(false);
     const { getAllConsultation, getConsultationById, postConsultation } =
@@ -54,7 +58,9 @@ export default function ConsultationsHeld() {
     const [data, setData] = useState<Consultation[]>([]);
     const [returnDate, setReturnDate] = useState<string>("");
     const [resumeText, setResumeText] = useState("");
-    const [getAllConst, setGetAllConst] = useState([]);
+    const [getAllConst, setGetAllConst] = useState<ConsultationReponsiveType[]>(
+        []
+    );
     const [getByIdConst, setGetByIdConst] = useState<any>({});
     const [postConst, setPostConst] = useState({});
 
@@ -67,22 +73,23 @@ export default function ConsultationsHeld() {
 
     async function getAll() {
         const response = await getAllConsultation();
-        if (response != undefined) {
+        // console.log("response", response);
+        if (response !== undefined) {
             setGetAllConst(response);
         }
-        console.log(response);
     }
 
     async function getById(id: number) {
         const response = await getConsultationById(id);
-        if (response != undefined) {
+        if (response !== undefined) {
             setGetByIdConst(response);
             setShowConsultationsData(true);
         }
     }
 
     async function post() {
-        formatJson("name", "Clinica Geral");
+        formatJson("name", postConst.expertise);
+        console.log(postConst.expertise);
         const formattedDate = date.split("/").reverse().join("-");
         const formattedDateReturn = returnDate.split("/").reverse().join("-");
         formatJson("dateReturn", formattedDateReturn);
@@ -90,6 +97,9 @@ export default function ConsultationsHeld() {
         console.log(postConst);
         const response = await postConsultation(postConst);
         console.log(response);
+        setTimeout(() => {
+            setShowNewConsultation(false);
+        }, 3000);
     }
 
     function formatJson(id: string, value: any) {
@@ -105,6 +115,12 @@ export default function ConsultationsHeld() {
             setData(json);
         }, [])
     );
+
+    // useEffect(() => {
+    //     const token = AsyncStorage.getItem("token");
+    //     if (!token) console.log("Token não encontrado");
+    //     getAll();
+    // }, []);
 
     return (
         <>
@@ -191,7 +207,7 @@ export default function ConsultationsHeld() {
                                         rows={[
                                             {
                                                 nome: "Horário",
-                                                especialty: getByIdConst.date
+                                                especialty: getByIdConst.hour
                                             }
                                         ]}
                                     />
@@ -200,16 +216,7 @@ export default function ConsultationsHeld() {
                                             {
                                                 nome: "Retorno",
                                                 especialty:
-                                                    getByIdConst.date_return
-                                            }
-                                        ]}
-                                    />
-                                    <Table
-                                        rows={[
-                                            {
-                                                nome: "Lembrete para agendamento",
-                                                especialty:
-                                                    getByIdConst.date_return
+                                                    getByIdConst.dateReturn
                                             }
                                         ]}
                                     />
@@ -241,10 +248,6 @@ export default function ConsultationsHeld() {
                         onModalClose={() => setShowNewConsultation(false)}
                     />
                     <ViewContainer>
-                        <TouchableOpacity onPress={() => post()}>
-                            <Text>salva fdp</Text>
-                        </TouchableOpacity>
-
                         <ListInteractableItem
                             text="Especialidade:"
                             isButton={false}
@@ -347,7 +350,7 @@ export default function ConsultationsHeld() {
                             }
                         />
                     </ViewContainer>
-                    <CancelAndSaveButton onPress={() => post()} />
+                    <CancelAndSaveButton onPress={post} />
                 </ModalContainer>
             ) : (
                 <></>
