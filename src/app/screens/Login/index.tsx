@@ -1,3 +1,6 @@
+// web 345087403908-m5c9l6bvrfd765o8vudebat8jb9pipnf.apps.googleusercontent.com
+// 
+
 import { Button } from "@components/Button";
 import { Footer } from "@components/Footer";
 import { InputField } from "@components/InputField";
@@ -10,6 +13,7 @@ import { TouchableOpacity } from "react-native";
 import { AuthContext } from "src/app/context/auth_context";
 
 import Logo from "../../../../assets/logo.png";
+import google from "../../../../assets/google.png";
 
 export default function Login({ navigation }: any) {
     const [email, setEmail] = useState("");
@@ -120,6 +124,12 @@ export default function Login({ navigation }: any) {
                         <Text color="blue.500">Faça seu cadastro!</Text>
                     </TouchableOpacity>
                 </Box>
+                <Box alignItems="center">
+                    <TouchableOpacity>          
+                        <Image source={google} alt="Google" height={50} width={50} marginTop={10}/>
+                    </TouchableOpacity> 
+                    <Text fontSize={12} marginTop={5}>Conecte-se usando outra plataforma !</Text>
+                </Box> 
             </VStack>
             <Footer navigation={navigation} />
         </>
