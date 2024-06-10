@@ -56,7 +56,7 @@ export default function Register({ navigation }: any) {
         const response = await signUp(data);
         // console.log("Resposta " + response?.data.message);
 
-        if (response) {
+        if (response?.status === 201) {
             // console.log(response.data.message);
             console.log(data);
             toast.show({

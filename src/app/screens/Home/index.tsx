@@ -30,10 +30,6 @@ export default function Home({ navigation }: any) {
             <Button onPress={() => navigation.navigate("Register")}>
                 <ButtonText>Cadastro</ButtonText>
             </Button>
-
-            {/* <Button onPress={() => AsyncStorage.removeItem("token")}>
-                <ButtonText>Remover Token</ButtonText>
-            </Button> */}
         </Container>
     );
 }
