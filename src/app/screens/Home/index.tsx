@@ -6,12 +6,14 @@ import { Button, ButtonText, Container, SubTitle, Txt } from "./styles";
 import Logo1 from "../../../../assets/logo-verde.png";
 
 export default function Home({ navigation }: any) {
-    const handleGoToLogin = async () => {
-        await AsyncStorage.clear();
+    async function handleGoToLogin() {
         const token = await AsyncStorage.getItem("token");
-        console.log(token);
-        navigation.navigate("Login");
-    };
+        if (token) {
+            navigation.navigate("StackRoutes");
+        } else {
+            navigation.navigate("Login");
+        }
+    }
     return (
         <Container>
             <SubTitle>YE Gestão de Saúde</SubTitle>

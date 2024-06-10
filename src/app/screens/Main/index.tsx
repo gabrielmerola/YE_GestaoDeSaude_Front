@@ -58,8 +58,8 @@ export default function Main({ navigation }: any) {
                         title="Aferições de Pressão"
                         description="Gerencie as suas aferições de pressão"
                         subTitle="Ultima medida"
-                        secDescription={pressure.measure}
-                        subDescription={pressure.level}
+                        secDescription={pressure.measure ?? "Nenhuma medida"}
+                        subDescription={pressure.level ?? "- - - -"}
                         color="red"
                     />
                 </TouchableOpacity>
@@ -71,8 +71,8 @@ export default function Main({ navigation }: any) {
                         title="Aferições de Glicemia"
                         description="Gerencie as suas aferições de glicemia"
                         subTitle="Ultima medida"
-                        secDescription={glucose.measure + " mg/dL"}
-                        subDescription={glucose.level}
+                        secDescription={glucose.measure ?? "Nenhuma medida"}
+                        subDescription={glucose.level ?? "- - - -"}
                         color="blue"
                     />
                 </TouchableOpacity>
@@ -82,8 +82,8 @@ export default function Main({ navigation }: any) {
                         title="Verificação do IMC"
                         description="Verifique seu IMC com base na sua altura e peso"
                         subTitle="Ultima medida"
-                        secDescription={imc.imc}
-                        subDescription={imc.level}
+                        secDescription={imc.imc ?? "Nenhuma medida"}
+                        subDescription={imc.level ?? "- - - -"}
                         color="green"
                     />
                 </TouchableOpacity>

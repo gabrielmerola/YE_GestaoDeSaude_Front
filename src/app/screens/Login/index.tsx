@@ -38,25 +38,7 @@ export default function Login({ navigation }: any) {
             });
             return;
         }
-        // if (email === "" || password === "") {
-        //     toast.show({
-        //         title: "Erro no login",
-        //         description: "Por favor, preencha o email e a senha.",
-        //         backgroundColor: "red.500",
-        //         placement: "top"
-        //     });
-        //     return;
-        // }
 
-        // if (email === null && password === null) {
-        //     toast.show({
-        //         title: "Erro no login",
-        //         description: "Por favor, preencha o email e a senha.",
-        //         backgroundColor: "red.500",
-        //         placement: "top"
-        //     });
-        //     return;
-        // }
         const result: any = await login(email, password);
         // console.log("RESULTADO" + result);
         if (result.token) {
@@ -103,9 +85,9 @@ export default function Login({ navigation }: any) {
 
                 <Button onPress={SignIn}>Entrar</Button>
 
-                <Link href="" mt={2}>
+                {/* <Link href="" mt={2}>
                     Esqueceu sua senha?
-                </Link>
+                </Link> */}
 
                 <Box
                     w="100%"
