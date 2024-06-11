@@ -16,6 +16,7 @@ import { AxiosError } from "axios";
 import { FlatList } from "native-base";
 import React, { useContext, useState } from "react";
 import { ActivityIndicator } from "react-native";
+import Toast from "react-native-toast-message";
 import ListMedicineItem from "src/app/components/ListMedicineItem";
 
 export default function Medicines() {
@@ -66,6 +67,14 @@ export default function Medicines() {
     };
 
     const postMedicine = async () => {
+        if(medicineName === "" || medicineTime === "" || medicinePeriod === "" || medicineQuantity === "" || medicineDosage === ""){
+            Toast.show({
+                type: "error",
+                text1: "Erro ao criar medicamento",
+                text2: "Preencha todos os campos"
+            });
+            return;
+        }
         const json = {
             name: medicineName,
             time: medicineTime + ":00:00",
@@ -146,7 +155,7 @@ export default function Medicines() {
                             text="Horário:"
                             isButton={false}
                             inputType="TIME"
-                            inputTxt="00:00"
+                            inputTxt="apenas horas"
                             onChangeText={setMedicineTime}
                             inputValue={medicineTime}
                         />
