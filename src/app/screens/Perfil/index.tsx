@@ -13,6 +13,7 @@ import Avatar from "../Camera/Avatar";
 import UploadModal from "../Camera/UploadModal";
 import axios from "axios";
 import { useFocusEffect } from "@react-navigation/native";
+import { MedicineContext } from "@context/medicine_context";
 
 // for uploading image to backend
 // const FormData = global.FormData;
@@ -20,7 +21,7 @@ import { useFocusEffect } from "@react-navigation/native";
 export default function Perfil({ navigation }: any) {
     const { getClient } = useContext(AuthContext);
     const [data, setData] = useState<any>({});
-    const [med, setMedicines] = useState([]);
+    const [med, setMedicines] = useState<MedicineFormData[]>([]);
     const { getAllMedicines } = useContext(MedicineContext);
     const [modalVisible, setModalVisible] = useState(false);
     const [image, setImage] = useState();
@@ -66,13 +67,12 @@ export default function Perfil({ navigation }: any) {
     };
 
     const saveImage = async (image: any) => {
+        // eslint-disable-next-line no-useless-catch
         try {
             // update displayed image
             setImage(image);
-
             // make api call to save
             // sendToBackend();
-
             setModalVisible(false);
         } catch (error) {
             throw error;
@@ -111,15 +111,15 @@ export default function Perfil({ navigation }: any) {
         setData(response);
     }
 
-    async function getMedicineId() {
+    async function getAll() {
         const response = await getAllMedicines();
-        if (response != undefined) {
+        if (response) {
             setMedicines(response);
         }
     }
 
     useEffect(() => {
-        getMedicineId();
+        getAll();
     }, []);
 
     useEffect(() => {
@@ -135,29 +135,29 @@ export default function Perfil({ navigation }: any) {
         }
     };
 
-    const fetchMedicines = async () => {
-        try {
-            const response = await getAllMedicines();
-            if (response && Array.isArray(response)) {
-                const parsedMedicines: any = response.map((med: any) => ({
-                    id: med.id,
-                    name: med.name
-                }));
-                console.log(parsedMedicines);
-                setMedicines(parsedMedicines);
-            }
-        } catch (error: any) {
-            return console.log(
-                "Erro ao buscar medicamentos: " + error.response
-            );
-        }
-    };
+    // const fetchMedicines = async () => {
+    //     try {
+    //         const response = await getAllMedicines();
+    //         if (response && Array.isArray(response)) {
+    //             const parsedMedicines: any = response.map((med: any) => ({
+    //                 id: med.id,
+    //                 name: med.name
+    //             }));
+    //             console.log(parsedMedicines);
+    //             setMedicines(parsedMedicines);
+    //         }
+    //     } catch (error: any) {
+    //         return console.log(
+    //             "Erro ao buscar medicamentos: " + error.response
+    //         );
+    //     }
+    // };
 
-    useFocusEffect(
-        useCallback(() => {
-            fetchMedicines();
-        }, [FormData])
-    );
+    // useFocusEffect(
+    //     useCallback(() => {
+    //         fetchMedicines();
+    //     }, [FormData])
+    // );
 
     return (
         <ScrollView flex={1}>
@@ -209,25 +209,4 @@ export default function Perfil({ navigation }: any) {
             </VStack>
         </ScrollView>
     );
-}
-
-const styles = StyleSheet.create({
-    container: {
-        paddingTop: 10,
-        paddingBottom: 25,
-        paddingHorizontal: 25
-    },
-    section: {
-        borderRadius: 15,
-        overflow: "hidden",
-        marginTop: 5,
-        marginBottom: 5
-    },
-    text: {
-        textAlign: "center"
-    }
-});
-
-function setData(response: object | undefined) {
-    throw new Error("Function not implemented.");
 }

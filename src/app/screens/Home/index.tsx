@@ -9,6 +9,7 @@ export default function Home({ navigation }: any) {
     async function handleGoToLogin() {
         const token = await AsyncStorage.getItem("token");
         if (token) {
+            AsyncStorage.removeItem("token");
             navigation.navigate("StackRoutes");
         } else {
             navigation.navigate("Login");
