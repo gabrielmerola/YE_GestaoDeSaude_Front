@@ -4,18 +4,24 @@ import { Image } from "react-native";
 
 import { Button, ButtonText, Container, SubTitle, Txt } from "./styles";
 import Logo1 from "../../../../assets/logo-verde.png";
+import { useEffect } from "react";
 
 export default function Home({ navigation }: any) {
     async function handleGoToLogin() {
-        AsyncStorage.removeItem("token");
+        // await AsyncStorage.removeItem("token");
         const token = await AsyncStorage.getItem("token");
         if (token) {
-            AsyncStorage.removeItem("token");
+            // AsyncStorage.removeItem("token");
             navigation.navigate("StackRoutes");
         } else {
             navigation.navigate("Login");
         }
     }
+
+    useEffect(() => {
+        handleGoToLogin();
+    }, []);
+
     return (
         <Container>
             <SubTitle>YE Gestão de Saúde</SubTitle>

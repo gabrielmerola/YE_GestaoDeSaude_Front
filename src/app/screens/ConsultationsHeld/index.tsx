@@ -81,11 +81,17 @@ export default function ConsultationsHeld({ navigation }: any) {
     }
 
     async function post() {
-        if(postConst.expertise === "" || date === "" || postConst.time === "" || returnDate === "" || postConst.description === "") {
+        if (
+            postConst.expertise === "" ||
+            date === "" ||
+            postConst.time === "" ||
+            returnDate === "" ||
+            postConst.description === ""
+        ) {
             Toast.show({
                 type: "error",
                 text1: "Erro ao criar consulta",
-                text2: "Preencha todos os campos!",
+                text2: "Preencha todos os campos!"
             });
             return;
         }
@@ -97,19 +103,18 @@ export default function ConsultationsHeld({ navigation }: any) {
         formatJson("dateReturn", formattedDateReturn);
         formatJson("date", formattedDate);
         console.log(postConst);
-        
         await postConsultation(postConst).then((response: any) => {
-            if(response.status !== 201){
+            if (response.status !== 201) {
                 Toast.show({
                     type: "error",
                     text1: "Erro ao criar consulta",
-                    text2: response.message,
+                    text2: response.message
                 });
                 return;
             } else {
                 Toast.show({
                     type: "success",
-                    text1: "Consulta criada com sucesso!",
+                    text1: "Consulta criada com sucesso!"
                 });
                 setReturnDate("");
                 setDate("");
@@ -118,8 +123,7 @@ export default function ConsultationsHeld({ navigation }: any) {
                     getAll();
                 }, 3000);
             }
-        })
-        
+        });
     }
 
     function formatJson(id: string, value: any) {
