@@ -53,11 +53,12 @@ export function ImcContextProvider({ children }: { children: ReactNode }) {
         }
     }
 
-    async function postImc(data: object): Promise<undefined> {
+    async function postImc(data: object) {
         try {
-            await imcRepository.postNewImc(data);
+            return await imcRepository.postNewImc(data);
         } catch (error) {
             console.error("Failed to post new IMC record:", error);
+            return error;
         }
     }
 
