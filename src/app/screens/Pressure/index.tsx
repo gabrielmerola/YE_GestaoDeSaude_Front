@@ -8,10 +8,17 @@ import {
 import { FlatList } from "native-base";
 import React, { useContext, useEffect, useState } from "react";
 import PopUp from "src/app/components/PopUp";
+import {Loading} from "@components/Loading";
+import {Container, TextContainer, Txt} from "@screens/Pressure/styles";
+import {Image} from "react-native";
+import Logo from "../../../../assets/logo-verde.png";
 
 export default function Pressure() {
     const [data, setData] = useState<PressureType[]>([]);
     const [showPopUp, setShowPopUp] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isEmpty, setIsEmpty] = useState(false);
+
     const { getBloodPressure, postBloodPressure, deleteBloodPressure } =
         useContext(BloodPressureContext);
 
@@ -37,9 +44,13 @@ export default function Pressure() {
                 return firstDate.localeCompare(secondDate);
             });
 
+
             setData(pressureData);
+            setIsLoading(false);
         } catch (error) {
-            console.error("Error fetching glucose data:", error);
+            console.log("Error fetching pressure data");
+            setIsLoading(false);
+            setIsEmpty(true);
         }
     }
 
@@ -56,14 +67,6 @@ export default function Pressure() {
         });
     };
 
-    // const formatDate = (dateString: string) => {
-    //     const date = new Date(dateString + "T00:00:01");
-    //     const day = date.getDate().toString().padStart(2, "0"); // Get day with leading zero if needed
-    //     const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Get month with leading zero if needed
-    //     const year = date.getFullYear();
-    //     return `${day}/${month}/${year}`;
-    // };
-
     useEffect(() => {
         loadData();
     }, []);
@@ -71,16 +74,31 @@ export default function Pressure() {
     return (
         <>
             <Header text="Pressão" isBackPress />
+            <Container style={{ flex: 1, justifyContent: "space-between" }}>
+                {isLoading ?
+                    <Container>
+                        <Loading />
+                    </Container>
+                    :
+                    isEmpty ?
+                        <TextContainer>
+                            <Image source={Logo} alt="Logo"/>
+                            <Txt>Nenhuma aferição de glicemia encontrada.</Txt>
 
-            <FlatList
-                data={data}
-                keyExtractor={(item) =>
-                    "Pressure FlatList " + item.id.toString()
+                        </TextContainer>
+                        :
+                        <FlatList
+                            data={data}
+                            keyExtractor={(item) =>
+                                "Pressure FlatList " + item.id.toString()
+                            }
+                            renderItem={({ item }) => <Table rows={[item]} />}
+                        />
                 }
-                renderItem={({ item }) => <Table rows={[item]} />}
-            />
 
-            <PopUpAddButton onOpen={handleOpenPopUp} />
+                <PopUpAddButton onOpen={handleOpenPopUp} />
+            </Container>
+
 
             {showPopUp ? (
                 <PopUp
