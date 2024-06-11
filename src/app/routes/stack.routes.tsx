@@ -19,6 +19,7 @@ import Security from "@screens/Security";
 import Settings from "@screens/Settings";
 import Supervision from "@screens/Supervision";
 import Suporte from "@screens/Suport";
+import ExamCamera from "@screens/ExamCamera";
 
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +58,7 @@ export default function StackRoutes() {
             />
             <Stack.Screen name="ExamsHistory" component={ExamsHistory} />
             <Stack.Screen name="ExamsHeld" component={ExamsHeld} />
+            <Stack.Screen name="ExamCamera" component={ExamCamera} />
             <Stack.Screen name="ExamsDetected" component={ExamsDetected} />
         </Stack.Navigator>
     );
