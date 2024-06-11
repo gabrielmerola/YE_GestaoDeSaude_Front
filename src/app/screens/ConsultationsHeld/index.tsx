@@ -7,8 +7,6 @@ import { ConsultationContext } from "@context/consultation_context";
 import { useFocusEffect } from "@react-navigation/native";
 import {
     ButtonContainer,
-    Buttons,
-    CancelButton,
     ConsultationsDataHeader,
     ConsultationsDataHeaderTitle,
     Input,
@@ -64,7 +62,7 @@ export default function ConsultationsHeld({ navigation }: any) {
     );
     const [showNewMedicines, setShowNewMedicines] = useState(false);
     const [getByIdConst, setGetByIdConst] = useState<any>({});
-    const [postConst, setPostConst] = useState({});
+    const [postConst, setPostConst] = useState<any>({});
 
     const [date, setDate] = useState("");
 
@@ -74,7 +72,7 @@ export default function ConsultationsHeld({ navigation }: any) {
     };
 
     async function getAll() {
-        const response = await getAllConsultation();
+        const response: any = await getAllConsultation();
         // console.log("response", response);
         if (response == "") {
             setGetAllConst([]);
@@ -114,6 +112,10 @@ export default function ConsultationsHeld({ navigation }: any) {
     }
 
     async function post() {
+        if(postConst.expertise === "" || date === "" || postConst.time === "" || returnDate === "" || postConst.description === "") {
+            return alert("Preencha todos os campos!");
+        }
+
         formatJson("name", postConst.expertise);
         console.log(postConst.expertise);
         const formattedDate = date.split("/").reverse().join("-");
@@ -121,15 +123,25 @@ export default function ConsultationsHeld({ navigation }: any) {
         formatJson("dateReturn", formattedDateReturn);
         formatJson("date", formattedDate);
         console.log(postConst);
-        const response = await postConsultation(postConst);
-        console.log(response);
-        setTimeout(() => {
-            setShowNewConsultation(false);
-        }, 3000);
+        
+        await postConsultation(postConst).then((response: any) => {
+            if(response.status !== 201){
+                return alert("Erro ao criar consulta!");
+            } else {
+                alert("Consulta criada com sucesso!");
+                setReturnDate("");
+                setDate("");
+                setTimeout(() => {
+                    setShowNewConsultation(false);
+                    getAll();
+                }, 3000);
+            }
+        })
+        
     }
 
     function formatJson(id: string, value: any) {
-        setPostConst((prevState) => ({
+        setPostConst((prevState: any) => ({
             ...prevState,
             [id]: value
         }));
@@ -141,12 +153,6 @@ export default function ConsultationsHeld({ navigation }: any) {
             setData(json);
         }, [])
     );
-
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //         fetchConsultations();
-    //     }, [showNewMedicines])
-    // );
 
     return (
         <>
@@ -376,7 +382,7 @@ export default function ConsultationsHeld({ navigation }: any) {
                             }
                         />
                     </ViewContainer>
-                    <CancelAndSaveButton onPress={post} />
+                    <CancelAndSaveButton onPress={post} onBack={() => setShowNewConsultation(false)} />
                 </ModalContainer>
             ) : (
                 <></>
