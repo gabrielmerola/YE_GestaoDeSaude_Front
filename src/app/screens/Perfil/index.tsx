@@ -14,6 +14,7 @@ import Avatar from "../Camera/Avatar";
 import UploadModal from "../Camera/UploadModal";
 import axios from "axios";
 import { useFocusEffect } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
 
 // for uploading image to backend
 // const FormData = global.FormData;
@@ -51,8 +52,11 @@ export default function Perfil({ navigation }: any) {
                     quality: 1
                 });
             }
-        } catch (error) {
-            alert("Erro em atualizar a imagem" + error);
+        } catch (error: any) {
+            Toast.show({
+                type: "error",
+                text1: "Erro ao atualizar a imagem",
+            })
             setModalVisible(false);
         }
     };
@@ -61,7 +65,10 @@ export default function Perfil({ navigation }: any) {
         try {
             saveImage(null);
         } catch (message) {
-            alert(message);
+            Toast.show({
+                type: "error",
+                text1: "Erro ao remover a imagem",
+            })
             setModalVisible(false);
         }
     };
@@ -78,33 +85,6 @@ export default function Perfil({ navigation }: any) {
             throw error;
         }
     };
-
-    //  const sendToBackend = async () => {
-    //    try {
-    //      const formData = new FormData();
-
-    //      formData.append("image", {
-    //        uri: image,
-    //      type: "image/png",
-    //       name: "profile-image",
-    //      });
-
-    //      const config = {
-    //      headers: {
-    //         "Content-Type": "multipart/form-data",
-    //      },
-    //        transformRequest: () => {
-    //          return formData;
-    //        },
-    //      };
-
-    //      await axios.post("https://your-api-endpoint", formData, config);
-
-    //      alert("success");
-    //    } catch (error) {
-    //      throw error;
-    //    }
-    //  };
 
     async function getClientid() {
         const response = await getClient();
@@ -157,6 +137,7 @@ export default function Perfil({ navigation }: any) {
 
     return (
         <ScrollView flex={1}>
+            <Toast />
             <VStack flex={1} alignItems="center">
                 <Header text="Seu Perfil" isBackPress />
                 <Avatar
