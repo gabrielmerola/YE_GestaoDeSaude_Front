@@ -14,7 +14,6 @@ import UploadModal from "../Camera/UploadModal";
 import axios from "axios";
 import {MedicineContext} from "@context/medicine_context";
 import { useFocusEffect } from "@react-navigation/native";
-import { MedicineContext } from "@context/medicine_context";
 
 // for uploading image to backend
 // const FormData = global.FormData;
