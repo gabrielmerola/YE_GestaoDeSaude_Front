@@ -4,7 +4,7 @@ import About from "@screens/About";
 import Home from "@screens/Home";
 import Login from "@screens/Login";
 import Register from "@screens/Register";
-import Security from "@screens/Security";
+
 
 import StackRoutes from "./stack.routes";
 
