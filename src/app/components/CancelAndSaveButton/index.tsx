@@ -19,12 +19,14 @@ import { Button, ButtonModal, ButtonText, Container } from "./styles";
 interface CancelAndSaveButtonProps {
     medicineData?: any;
     onPress: () => void;
+    onBack?: () => void;
     isDelete?: boolean;
     idMedicine?: number;
 }
 
 const CancelAndSaveButton = ({
     onPress,
+    onBack,
     isDelete,
     medicineData,
     idMedicine
@@ -32,15 +34,6 @@ const CancelAndSaveButton = ({
     const [openModal, setOpenModal] = useState(false);
     const { deleteMedicineByID, createMedicine } = useContext(MedicineContext);
     const navigation = useNavigation();
-
-    const handleSave = async () => {
-        try {
-            navigation.goBack();
-            return await createMedicine(medicineData);
-        } catch (error) {
-            console.log("Error creating medication: ", error);
-        }
-    };
 
     const deleteMedicine = async (id: number | undefined) => {
         if (id === undefined) {
@@ -62,10 +55,10 @@ const CancelAndSaveButton = ({
         <>
             {!isDelete && (
                 <Container>
-                    {/* <Button onPress={handleSave}>
+                    <Button onPress={onBack}>
                         <ButtonText>Cancelar</ButtonText>
-                    </Button> */}
-                    <Button onPress={handleSave}>
+                    </Button>
+                    <Button onPress={onPress}>
                         <ButtonText>Salvar</ButtonText>
                     </Button>
                 </Container>

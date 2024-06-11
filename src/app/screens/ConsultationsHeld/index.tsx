@@ -7,8 +7,6 @@ import { ConsultationContext } from "@context/consultation_context";
 import { useFocusEffect } from "@react-navigation/native";
 import {
     ButtonContainer,
-    Buttons,
-    CancelButton,
     ConsultationsDataHeader,
     ConsultationsDataHeaderTitle,
     Input,
@@ -19,12 +17,13 @@ import {
     ViewContainer
 } from "@screens/ConsultationsHeld/styles";
 import { FlatList } from "native-base";
-import { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import MaskInput from "react-native-mask-input";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 import { ConsultationReponsiveType } from "@api/repositories/consultation_repository_http";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AxiosError } from "axios";
 
 interface Consultation {
     id: number;
@@ -61,8 +60,9 @@ export default function ConsultationsHeld({ navigation }: any) {
     const [getAllConst, setGetAllConst] = useState<ConsultationReponsiveType[]>(
         []
     );
+    const [showNewMedicines, setShowNewMedicines] = useState(false);
     const [getByIdConst, setGetByIdConst] = useState<any>({});
-    const [postConst, setPostConst] = useState({});
+    const [postConst, setPostConst] = useState<any>({});
 
     const [date, setDate] = useState("");
 
@@ -72,12 +72,36 @@ export default function ConsultationsHeld({ navigation }: any) {
     };
 
     async function getAll() {
-        const response = await getAllConsultation();
+        const response: any = await getAllConsultation();
         // console.log("response", response);
-        if (response !== undefined) {
+        if (response == "") {
+            setGetAllConst([]);
+        } else {
             setGetAllConst(response);
         }
     }
+
+    // const fetchConsultations = async () => {
+    //     try {
+    //         const response = await getAllConsultation();
+    //         if (response && Array.isArray(response)) {
+    //             const parsedConsultations = response.map((med: any) => ({
+    //                 id: data.id,
+    //                 especialty: data.especialty,
+    //                 date: data.date,
+    //                 hour: data.hour,
+    //                 resume: data.resume,
+    //                 return: data.return,
+    //                 reminder: data.reminder,
+    //             }));
+    //             setGetAllConst(parsedConsultations);
+    //         }
+    //     } catch (error: AxiosError | any) {
+    //         return console.log(
+    //             "Erro ao buscar medicamentos: " + error.response
+    //         );
+    //     }
+    // };
 
     async function getById(id: number) {
         const response = await getConsultationById(id);
@@ -88,6 +112,10 @@ export default function ConsultationsHeld({ navigation }: any) {
     }
 
     async function post() {
+        if(postConst.expertise === "" || date === "" || postConst.time === "" || returnDate === "" || postConst.description === "") {
+            return alert("Preencha todos os campos!");
+        }
+
         formatJson("name", postConst.expertise);
         console.log(postConst.expertise);
         const formattedDate = date.split("/").reverse().join("-");
@@ -95,15 +123,25 @@ export default function ConsultationsHeld({ navigation }: any) {
         formatJson("dateReturn", formattedDateReturn);
         formatJson("date", formattedDate);
         console.log(postConst);
-        const response = await postConsultation(postConst);
-        console.log(response);
-        setTimeout(() => {
-            setShowNewConsultation(false);
-        }, 3000);
+        
+        await postConsultation(postConst).then((response: any) => {
+            if(response.status !== 201){
+                return alert("Erro ao criar consulta!");
+            } else {
+                alert("Consulta criada com sucesso!");
+                setReturnDate("");
+                setDate("");
+                setTimeout(() => {
+                    setShowNewConsultation(false);
+                    getAll();
+                }, 3000);
+            }
+        })
+        
     }
 
     function formatJson(id: string, value: any) {
-        setPostConst((prevState) => ({
+        setPostConst((prevState: any) => ({
             ...prevState,
             [id]: value
         }));
@@ -344,7 +382,7 @@ export default function ConsultationsHeld({ navigation }: any) {
                             }
                         />
                     </ViewContainer>
-                    <CancelAndSaveButton onPress={post} />
+                    <CancelAndSaveButton onPress={post} onBack={() => setShowNewConsultation(false)} />
                 </ModalContainer>
             ) : (
                 <></>

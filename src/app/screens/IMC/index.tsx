@@ -3,7 +3,7 @@ import { Loading } from "@components/Loading";
 import { PopUpAddButton } from "@components/PopUpAddButton";
 import { Container, Separator } from "@components/Table/styles";
 import { ImcContext, ImcRecord } from "@context/imc_context";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import { View } from "react-native";
 import RNPickerSelect, { Item } from "react-native-picker-select";
 import PopUp from "src/app/components/PopUp";
@@ -22,7 +22,7 @@ export default function () {
     const [showPopUp, setShowPopUp] = useState(false);
     const [latestImc, setLatestImc] = useState<ImcRecord>();
     const [pickerImc, setPickerImc] = useState<ImcRecord>();
-    const [dateItems, setDateItems] = useState<ImcRecord[]>([]);
+    const [dateItems, setDateItems] = useState<ImcRecord[]|any>([]);
     const [currentDate, setCurrentDate] = useState<string>();
     const [isEmpty, setIsEmpty] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -54,37 +54,18 @@ export default function () {
         });
     };
 
-    const handlePost = (list: object) => {
-        const response = postImc(list);
-        response.then((json) => {
-            console.log(json);
-        });
+    const handlePost = async (list: object) => {
+        await postImc(list).then((response:any) => {
+            if(response.status !== 201){
+                console.log(response);
+            }else {
+                console.log(response.data)
+                getImc()
+                getDateImc()
+            }
+        })
     };
-    useEffect(() => {
-        const response = getLatestImc();
-
-        response.then((data: ImcRecord | null) => {
-            if (data === null) {
-                return;
-            }
-            setLatestImc(data);
-        });
-    }, []);
-    useEffect(() => {
-        const response = getAllDateImc();
-        response.then((json: ImcRecord[] | undefined) => {
-            if (json === undefined) {
-                return;
-            }
-            setDateItems(json);
-            if (json == "") {
-                console.log(dateItems);
-                setIsEmpty(true);
-            }
-            setIsLoading(false);
-        });
-    }, []);
-
+    
     function items(): Item[] {
         if (dateItems == "") {
             return [];
@@ -97,6 +78,34 @@ export default function () {
             };
         });
     }
+
+    async function getImc() {
+        await getLatestImc().then((data: any) => {
+            if (data === null) {
+                return;
+            }
+            setLatestImc(data);
+        });
+    }
+
+    async function getDateImc() {
+        await getAllDateImc().then((json: any) => {
+            if (json === undefined) {
+                return;
+            }
+            setDateItems(json);
+            if (json == "") {
+                console.log(dateItems);
+                setIsEmpty(true);
+            }
+            setIsLoading(false);
+        });
+    }
+
+    useEffect(() => {
+        getImc()
+        getDateImc()
+    }, []);
 
     return (
         <>

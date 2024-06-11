@@ -18,7 +18,7 @@ export const ButtonText = styled.Text`
 `;
 
 export const Button = styled.TouchableOpacity`
-    width: 100%;
+    width: 50%;
     margin: 10px 0 10px 0;
 `;
 

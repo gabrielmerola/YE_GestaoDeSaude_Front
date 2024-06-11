@@ -7,6 +7,7 @@ import Logo1 from "../../../../assets/logo-verde.png";
 
 export default function Home({ navigation }: any) {
     async function handleGoToLogin() {
+        AsyncStorage.removeItem("token");
         const token = await AsyncStorage.getItem("token");
         if (token) {
             AsyncStorage.removeItem("token");

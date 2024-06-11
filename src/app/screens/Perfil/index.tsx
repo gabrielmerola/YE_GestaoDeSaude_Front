@@ -3,6 +3,7 @@ import { Header } from "@components/Header";
 import Modal from "@components/Modal";
 import { Title } from "@components/Title/Title";
 import { AuthContext } from "@context/auth_context";
+import { MedicineContext } from "@context/medicine_context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ButtonOut, ButtonTextWhiteOut } from "@screens/Perfil/styles";
 import { VStack, Text, ScrollView, Divider } from "native-base";
@@ -12,7 +13,6 @@ import * as ImagePicker from "expo-image-picker";
 import Avatar from "../Camera/Avatar";
 import UploadModal from "../Camera/UploadModal";
 import axios from "axios";
-import {MedicineContext} from "@context/medicine_context";
 import { useFocusEffect } from "@react-navigation/native";
 
 // for uploading image to backend
@@ -135,44 +135,22 @@ export default function Perfil({ navigation }: any) {
         }
     };
 
-    // const fetchMedicines = async () => {
-    //     try {
-    //         const response = await getAllMedicines();
-    //         if (response && Array.isArray(response)) {
-    //             const parsedMedicines: any = response.map((med: any) => ({
-    //                 id: med.id,
-    //                 name: med.name
-    //             }));
-    //             console.log(parsedMedicines);
-    //             setMedicines(parsedMedicines);
-    //         }
-    //     } catch (error: any) {
-    //         return console.log(
-    //             "Erro ao buscar medicamentos: " + error.response
-    //         );
-    //     }
-    // };
-
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         fetchMedicines();
-    //     }, [FormData])
-    // );
-
     function formatPhone(phone: string | undefined): string {
         if (!phone) {
-            return '';
+            return "";
         }
 
-        phone = phone.replace(/\D/g, '');
+        phone = phone.replace(/\D/g, "");
 
         if (phone.length !== 10 && phone.length !== 11) {
             return phone;
         }
 
         let areaCode = phone.substring(0, 2);
-        let firstPart = phone.length === 11 ? phone.substring(2, 7) : phone.substring(2, 6);
-        let secondPart = phone.length === 11 ? phone.substring(7) : phone.substring(6);
+        let firstPart =
+            phone.length === 11 ? phone.substring(2, 7) : phone.substring(2, 6);
+        let secondPart =
+            phone.length === 11 ? phone.substring(7) : phone.substring(6);
 
         return `(${areaCode}) ${firstPart}-${secondPart}`;
     }
@@ -203,9 +181,7 @@ export default function Perfil({ navigation }: any) {
                 <Text fontSize="lg" mb={1}>
                     {data.email}
                 </Text>
-                <Text fontSize="lg">
-                    {formatPhone(data?.phone)}
-                </Text>
+                <Text fontSize="lg">{formatPhone(data?.phone)}</Text>
 
                 <Divider mt={7} />
 

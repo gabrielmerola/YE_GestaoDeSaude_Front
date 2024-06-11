@@ -6,10 +6,11 @@ import {
 } from "@context/blood-pressure-context";
 import { GlucoseContext } from "@context/glucose_context";
 import { ImcContext } from "@context/imc_context";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 
 import { Container } from "./styles";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Main({ navigation }: any) {
     const { getBloodPressureLatest } = useContext(BloodPressureContext);
@@ -42,11 +43,13 @@ export default function Main({ navigation }: any) {
         }
     }
 
-    useEffect(() => {
-        getGlucose();
-        getPressure();
-        getImc();
-    }, []);
+    useFocusEffect(
+        useCallback(() => {
+          getGlucose();
+          getPressure();
+          getImc();
+        }, [])
+      );
 
     return (
         <>

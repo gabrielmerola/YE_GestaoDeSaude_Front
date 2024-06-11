@@ -48,8 +48,9 @@ export function ConsultationContextProvider({ children }: PropsWithChildren) {
         try {
             const response = consultationRepository.postConsultation(json);
             return response;
-        } catch (error) {
+        } catch (error: any) {
             console.log(error);
+            return error;
         }
     }
 

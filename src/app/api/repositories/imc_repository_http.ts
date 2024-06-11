@@ -27,10 +27,11 @@ export class ImcRepositoryHttp {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data;
-        } catch (error) {
+            return response;
+        } catch (error:any) {
             console.log();
             console.log(error);
+            return error.response;
         }
     }
 

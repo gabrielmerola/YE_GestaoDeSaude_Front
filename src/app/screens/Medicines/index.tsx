@@ -22,7 +22,7 @@ export default function Medicines() {
     const [showNewMedicines, setShowNewMedicines] = useState(false);
     const [showMedicineData, setShowMedicineData] = useState(false);
     const [showMedicineDataIndex, setShowMedicineDataIndex] = useState(0);
-    const { getAllMedicines } = useContext(MedicineContext);
+    const { getAllMedicines, createMedicine } = useContext(MedicineContext);
 
     const [medicines, setMedicines] = useState<MedicineFormData[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -32,26 +32,6 @@ export default function Medicines() {
     const [medicinePeriod, setMedicinePeriod] = useState("");
     const [medicineQuantity, setMedicineQuantity] = useState("");
     const [medicineDosage, setMedicineDosage] = useState("");
-
-    const handleMedicineNameChange = (text: string) => {
-        setMedicineName(text);
-    };
-
-    const handleMedicineTimeChange = (text: string) => {
-        setMedicineTime(twoDotsInput(text));
-    };
-
-    const handleMedicinePeriodChange = (text: string) => {
-        setMedicinePeriod(text);
-    };
-
-    const handleMedicineQuantityChange = (text: string) => {
-        setMedicineQuantity(text);
-    };
-
-    const handleMedicineDosageChange = (text: string) => {
-        setMedicineDosage(text);
-    };
 
     const twoDotsInput = (text: string) => {
         let formattedValue = text.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
@@ -83,6 +63,31 @@ export default function Medicines() {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const postMedicine = async () => {
+        const json = {
+            name: medicineName,
+            time: medicineTime + ":00:00",
+            period: Number(medicinePeriod),
+            quantity: Number(medicineQuantity),
+            dosage: medicineDosage
+        };
+
+        console.log(json)
+        await createMedicine(json).then((response: any) => {
+            if(response.status !== 201){
+                console.log(response);
+            } else {
+                console.log(response.data)
+                setMedicineName("");
+                setMedicineTime("");
+                setMedicinePeriod("");
+                setMedicineQuantity("");
+                setMedicineDosage("");
+                setShowNewMedicines(false);
+            }
+        })
     };
 
     useFocusEffect(
@@ -134,7 +139,7 @@ export default function Medicines() {
                             inputType="TEXT"
                             inputTxt="Digite o nome do medicamento..."
                             sizeType="LARGE"
-                            onChangeText={handleMedicineNameChange}
+                            onChangeText={setMedicineName}
                             inputValue={medicineName}
                         />
                         <ListMedicineItem
@@ -142,7 +147,7 @@ export default function Medicines() {
                             isButton={false}
                             inputType="TIME"
                             inputTxt="00:00"
-                            onChangeText={handleMedicineTimeChange}
+                            onChangeText={setMedicineTime}
                             inputValue={medicineTime}
                         />
                         <ListMedicineItem
@@ -150,7 +155,7 @@ export default function Medicines() {
                             isButton={false}
                             inputType="NUMBER"
                             inputTxt="... dias"
-                            onChangeText={handleMedicinePeriodChange}
+                            onChangeText={setMedicinePeriod}
                             inputValue={medicinePeriod}
                         />
                         <ListMedicineItem
@@ -158,7 +163,7 @@ export default function Medicines() {
                             isButton={false}
                             inputType="NUMBER"
                             inputTxt="... mgs"
-                            onChangeText={handleMedicineQuantityChange}
+                            onChangeText={setMedicineQuantity}
                             inputValue={medicineQuantity}
                         />
                         <ListMedicineItem
@@ -166,12 +171,13 @@ export default function Medicines() {
                             isButton={false}
                             inputType="TEXT"
                             inputTxt="... comprimido de ... mg"
-                            onChangeText={handleMedicineDosageChange}
+                            onChangeText={setMedicineDosage}
                             inputValue={medicineDosage}
                         />
                     </View>
                     <CancelAndSaveButton
-                        onPress={() => setShowNewMedicines(false)}
+                        onPress={() => postMedicine()}
+                        onBack={() => setShowNewMedicines(false)}
                         medicineData={{
                             name: medicineName,
                             time: medicineTime + ":00",
