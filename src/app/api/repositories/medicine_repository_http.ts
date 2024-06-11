@@ -51,7 +51,7 @@ export class MedicineRespositoryHttp {
                 }
             });
             console.log("Response OK: " + response);
-            return response.data;
+            return response;
         } catch (error: AxiosError | any) {
             console.log("Response 1: " + error);
             return error.response;

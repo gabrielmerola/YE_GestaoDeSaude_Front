@@ -39,9 +39,10 @@ export class ConsultationRepositoryHttp {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data;
-        } catch (error) {
-            console.log(error);
+            return response;
+        } catch (error: any) {
+            // console.log(error);
+            return error.response;
         }
     }
 
