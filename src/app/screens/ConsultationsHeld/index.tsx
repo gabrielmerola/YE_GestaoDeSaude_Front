@@ -17,13 +17,12 @@ import {
     ViewContainer
 } from "@screens/ConsultationsHeld/styles";
 import { FlatList } from "native-base";
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { useCallback, useContext, useState } from "react";
+import { Text, View } from "react-native";
 import MaskInput from "react-native-mask-input";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 import { ConsultationReponsiveType } from "@api/repositories/consultation_repository_http";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AxiosError } from "axios";
+import Toast from "react-native-toast-message";
 
 interface Consultation {
     id: number;
@@ -56,52 +55,22 @@ export default function ConsultationsHeld({ navigation }: any) {
     const [showNewConsultation, setShowNewConsultation] = useState(false);
     const [data, setData] = useState<Consultation[]>([]);
     const [returnDate, setReturnDate] = useState<string>("");
-    const [resumeText, setResumeText] = useState("");
     const [getAllConst, setGetAllConst] = useState<ConsultationReponsiveType[]>(
         []
     );
-    const [showNewMedicines, setShowNewMedicines] = useState(false);
     const [getByIdConst, setGetByIdConst] = useState<any>({});
     const [postConst, setPostConst] = useState<any>({});
 
     const [date, setDate] = useState("");
 
-    const handleChangeText = (inputText: string) => {
-        const formattedText = inputText.replace(/[\r\n]/g, "");
-        setResumeText(formattedText);
-    };
-
     async function getAll() {
         const response: any = await getAllConsultation();
-        // console.log("response", response);
         if (response == "") {
             setGetAllConst([]);
         } else {
             setGetAllConst(response);
         }
     }
-
-    // const fetchConsultations = async () => {
-    //     try {
-    //         const response = await getAllConsultation();
-    //         if (response && Array.isArray(response)) {
-    //             const parsedConsultations = response.map((med: any) => ({
-    //                 id: data.id,
-    //                 especialty: data.especialty,
-    //                 date: data.date,
-    //                 hour: data.hour,
-    //                 resume: data.resume,
-    //                 return: data.return,
-    //                 reminder: data.reminder,
-    //             }));
-    //             setGetAllConst(parsedConsultations);
-    //         }
-    //     } catch (error: AxiosError | any) {
-    //         return console.log(
-    //             "Erro ao buscar medicamentos: " + error.response
-    //         );
-    //     }
-    // };
 
     async function getById(id: number) {
         const response = await getConsultationById(id);
@@ -113,7 +82,12 @@ export default function ConsultationsHeld({ navigation }: any) {
 
     async function post() {
         if(postConst.expertise === "" || date === "" || postConst.time === "" || returnDate === "" || postConst.description === "") {
-            return alert("Preencha todos os campos!");
+            Toast.show({
+                type: "error",
+                text1: "Erro ao criar consulta",
+                text2: "Preencha todos os campos!",
+            });
+            return;
         }
 
         formatJson("name", postConst.expertise);
@@ -126,9 +100,17 @@ export default function ConsultationsHeld({ navigation }: any) {
         
         await postConsultation(postConst).then((response: any) => {
             if(response.status !== 201){
-                return alert("Erro ao criar consulta!");
+                Toast.show({
+                    type: "error",
+                    text1: "Erro ao criar consulta",
+                    text2: response.message,
+                });
+                return;
             } else {
-                alert("Consulta criada com sucesso!");
+                Toast.show({
+                    type: "success",
+                    text1: "Consulta criada com sucesso!",
+                });
                 setReturnDate("");
                 setDate("");
                 setTimeout(() => {
@@ -274,6 +256,9 @@ export default function ConsultationsHeld({ navigation }: any) {
             )}
             {showNewConsultation ? (
                 <ModalContainer>
+                    <View style={{zIndex:10}}>
+                        <Toast />
+                    </View>
                     <Header
                         text="Nova Consulta"
                         isModal
