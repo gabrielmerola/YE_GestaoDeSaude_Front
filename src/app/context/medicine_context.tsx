@@ -62,9 +62,7 @@ export function MedicineContextProvider({ children }: PropsWithChildren) {
         try {
             return await medicineRepository.createMedicine(data);
         } catch (error: any) {
-            setMedicineError(error.message);
-            console.error("Error creating medicine:", error);
-            return undefined;
+            return error;
         }
     }
 
