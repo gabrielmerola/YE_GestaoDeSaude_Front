@@ -33,13 +33,14 @@ const CancelAndSaveButton = ({
     const { createMedicine, deleteMedicineByID } = useContext(MedicineContext);
     const navigation = useNavigation();
 
-    // const handleSave = async () => {
-    //     try {
-    //         return await createMedicine(medicineData);
-    //     } catch (error) {
-    //         console.log("Error creating medication: ", error);
-    //     }
-    // };
+    const handleSave = async () => {
+        try {
+            navigation.goBack();
+            return await createMedicine(medicineData);
+        } catch (error) {
+            console.log("Error creating medication: ", error);
+        }
+    };
 
     const deleteMedicine = async (id: number | undefined) => {
         if (id === undefined) {
@@ -64,7 +65,7 @@ const CancelAndSaveButton = ({
                     {/* <Button onPress={handleSave}>
                         <ButtonText>Cancelar</ButtonText>
                     </Button> */}
-                    <Button onPress={onPress}>
+                    <Button onPress={handleSave}>
                         <ButtonText>Salvar</ButtonText>
                     </Button>
                 </Container>

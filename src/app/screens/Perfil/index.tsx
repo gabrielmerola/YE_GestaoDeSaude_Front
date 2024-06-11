@@ -12,6 +12,7 @@ import * as ImagePicker from "expo-image-picker";
 import Avatar from "../Camera/Avatar";
 import UploadModal from "../Camera/UploadModal";
 import axios from "axios";
+import {MedicineContext} from "@context/medicine_context";
 import { useFocusEffect } from "@react-navigation/native";
 
 // for uploading image to backend
@@ -59,7 +60,7 @@ export default function Perfil({ navigation }: any) {
     const removeImage = async () => {
         try {
             saveImage(null);
-        } catch ({ message }: any) {
+        } catch (message) {
             alert(message);
             setModalVisible(false);
         }
@@ -159,6 +160,24 @@ export default function Perfil({ navigation }: any) {
         }, [FormData])
     );
 
+    function formatPhone(phone: string | undefined): string {
+        if (!phone) {
+            return '';
+        }
+
+        phone = phone.replace(/\D/g, '');
+
+        if (phone.length !== 10 && phone.length !== 11) {
+            return phone;
+        }
+
+        let areaCode = phone.substring(0, 2);
+        let firstPart = phone.length === 11 ? phone.substring(2, 7) : phone.substring(2, 6);
+        let secondPart = phone.length === 11 ? phone.substring(7) : phone.substring(6);
+
+        return `(${areaCode}) ${firstPart}-${secondPart}`;
+    }
+
     return (
         <ScrollView flex={1}>
             <VStack flex={1} alignItems="center">
@@ -186,9 +205,7 @@ export default function Perfil({ navigation }: any) {
                     {data.email}
                 </Text>
                 <Text fontSize="lg">
-                    ({data.phone?.substring(0, data.phone.indexOf(8))}){" "}
-                    {data.phone?.substring(2, data.phone.indexOf(3))}-
-                    {data.phone?.substring(7)}
+                    {formatPhone(data?.phone)}
                 </Text>
 
                 <Divider mt={7} />

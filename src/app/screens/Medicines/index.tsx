@@ -16,26 +16,7 @@ import { AxiosError } from "axios";
 import { FlatList } from "native-base";
 import React, { useContext, useState } from "react";
 import { ActivityIndicator } from "react-native";
-import ListInteractableItem, {
-    InputType
-} from "src/app/components/ListInteractableItem";
-//         <ListInteractableItem
-//             text="Horário"
-//             text2="09:00"
-//         />
-//         <ListInteractableItem
-//             text="Período"
-//             text2="7 dias"
-//         />
-//         <ListInteractableItem
-//             text="Intervalo"
-//             text2="8hs"
-//         />
-//         <ListInteractableItem
-//             text="Quantidade"
-//             text2="1"
-//         />
-//     </View>
+import ListMedicineItem from "src/app/components/ListMedicineItem";
 
 export default function Medicines() {
     const [showNewMedicines, setShowNewMedicines] = useState(false);
@@ -57,7 +38,7 @@ export default function Medicines() {
     };
 
     const handleMedicineTimeChange = (text: string) => {
-        setMedicineTime(text);
+        setMedicineTime(twoDotsInput(text));
     };
 
     const handleMedicinePeriodChange = (text: string) => {
@@ -72,23 +53,13 @@ export default function Medicines() {
         setMedicineDosage(text);
     };
 
-    const [formData, setFormData] = useState<MedicineFormData>({
-        id: 0,
-        name: "",
-        time: "",
-        period: 0,
-        quantity: 0,
-        dosage: ""
-    });
-
-    const handleInputChange = (
-        value: string | number,
-        inputType: InputType
-    ) => {
-        setFormData((prevData) => ({
-            ...prevData,
-            [inputType]: value
-        }));
+    const twoDotsInput = (text: string) => {
+        let formattedValue = text.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
+        if (formattedValue.length > 2) {
+            formattedValue =
+                formattedValue.slice(0, 2) + ":" + formattedValue.slice(2);
+        }
+        return formattedValue;
     };
 
     const fetchMedicines = async () => {
@@ -117,11 +88,11 @@ export default function Medicines() {
     useFocusEffect(
         React.useCallback(() => {
             fetchMedicines();
-        }, [formData])
+        }, [showNewMedicines])
     );
 
     return (
-        <>
+        <MedicineContextProvider>
             <Header text="Medicamentos" isBackPress />
             <View>
                 {isLoading && (
@@ -133,7 +104,7 @@ export default function Medicines() {
                         "All MedicinesKey " + item.id.toString()
                     }
                     renderItem={({ item }) => (
-                        <ListInteractableItem
+                        <ListMedicineItem
                             text={item.name}
                             text2={item.time}
                             isButton
@@ -157,7 +128,7 @@ export default function Medicines() {
                         onModalClose={() => setShowNewMedicines(false)}
                     />
                     <View>
-                        <ListInteractableItem
+                        <ListMedicineItem
                             text="Nome: "
                             isButton={false}
                             inputType="TEXT"
@@ -166,7 +137,7 @@ export default function Medicines() {
                             onChangeText={handleMedicineNameChange}
                             inputValue={medicineName}
                         />
-                        <ListInteractableItem
+                        <ListMedicineItem
                             text="Horário:"
                             isButton={false}
                             inputType="TIME"
@@ -174,7 +145,7 @@ export default function Medicines() {
                             onChangeText={handleMedicineTimeChange}
                             inputValue={medicineTime}
                         />
-                        <ListInteractableItem
+                        <ListMedicineItem
                             text="Período:"
                             isButton={false}
                             inputType="NUMBER"
@@ -182,7 +153,7 @@ export default function Medicines() {
                             onChangeText={handleMedicinePeriodChange}
                             inputValue={medicinePeriod}
                         />
-                        <ListInteractableItem
+                        <ListMedicineItem
                             text="Quantidade:"
                             isButton={false}
                             inputType="NUMBER"
@@ -190,7 +161,7 @@ export default function Medicines() {
                             onChangeText={handleMedicineQuantityChange}
                             inputValue={medicineQuantity}
                         />
-                        <ListInteractableItem
+                        <ListMedicineItem
                             text="Dosagem:"
                             isButton={false}
                             inputType="TEXT"
@@ -222,7 +193,7 @@ export default function Medicines() {
                         onModalClose={() => setShowMedicineData(false)}
                     />
                     <View>
-                        <ListInteractableItem
+                        <ListMedicineItem
                             text="Nome: "
                             text2={
                                 medicines[
@@ -230,11 +201,11 @@ export default function Medicines() {
                                         (value) =>
                                             value.id === showMedicineDataIndex
                                     )
-                                ].name
+                                    ].name
                             }
                             isButton={false}
                         />
-                        <ListInteractableItem
+                        <ListMedicineItem
                             text="Horário:"
                             text2={
                                 medicines[
@@ -242,11 +213,11 @@ export default function Medicines() {
                                         (value) =>
                                             value.id === showMedicineDataIndex
                                     )
-                                ].time
+                                    ].time
                             }
                             isButton={false}
                         />
-                        <ListInteractableItem
+                        <ListMedicineItem
                             text="Período:"
                             text2={
                                 medicines[
@@ -254,7 +225,7 @@ export default function Medicines() {
                                         (value) =>
                                             value.id === showMedicineDataIndex
                                     )
-                                ].period +
+                                    ].period +
                                 ` ${
                                     medicines[
                                         medicines.findIndex(
@@ -262,14 +233,14 @@ export default function Medicines() {
                                                 value.id ===
                                                 showMedicineDataIndex
                                         )
-                                    ].period === 1
+                                        ].period === 1
                                         ? " dia"
                                         : " dias"
                                 }`
                             }
                             isButton={false}
                         />
-                        <ListInteractableItem
+                        <ListMedicineItem
                             text="Dosagem:"
                             text2={
                                 medicines[
@@ -277,11 +248,11 @@ export default function Medicines() {
                                         (value) =>
                                             value.id === showMedicineDataIndex
                                     )
-                                ].dosage
+                                    ].dosage
                             }
                             isButton={false}
                         />
-                        <ListInteractableItem
+                        <ListMedicineItem
                             text="Quantidade:"
                             text2={
                                 medicines[
@@ -289,7 +260,7 @@ export default function Medicines() {
                                         (value) =>
                                             value.id === showMedicineDataIndex
                                     )
-                                ].quantity +
+                                    ].quantity +
                                 (showMedicineDataIndex === 1 ? " mg" : " mgs")
                             }
                             isButton={false}
@@ -305,6 +276,6 @@ export default function Medicines() {
             ) : (
                 <></>
             )}
-        </>
+        </MedicineContextProvider>
     );
 }

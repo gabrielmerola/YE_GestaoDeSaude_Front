@@ -19,10 +19,10 @@ const defaultMedicineContext: MedicineContextType = {
         return await medicineRepository.getAllMedicines();
     },
     getMedicineByID: async (id: number) => {
-        return {};
+        return await medicineRepository.getMedicineByID(id);
     },
     createMedicine: async (data: object) => {
-        return undefined;
+        return await medicineRepository.createMedicine(data);
     },
     deleteMedicineByID: async (id: number) => {
         return await medicineRepository.deleteMedicineByID(id);
