@@ -4,11 +4,15 @@ import { PopUpAddButton } from "@components/PopUpAddButton";
 import { Table } from "@components/Table";
 import {
     View,
-    ButtonContainer,
+    Button,
     ModalContainer,
-    FlatListStyled
+    FlatListStyled,
+    ButtonContainer,
+    AddIconStyled,
+    ButtonText
 } from "@screens/ExamsHistory/styles";
 import React, { useState } from "react";
+import { TouchableOpacity } from "react-native";
 import Collapsible from "react-native-collapsible";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 
@@ -22,7 +26,7 @@ type Row = {
 };
 
 // TODO: fazer o map que acabe com os códigos repetidos
-export default function ExamsHistory() {
+export default function ExamsHistory({ navigation }: any) {
     const [showExamsDetected, setShowExamsDetected] = useState(false);
 
     type ItemName = "glucose" | "hemogram" | "cholesterol" | "ast" | "alt";
@@ -215,23 +219,16 @@ export default function ExamsHistory() {
                         }}
                     />
                 </Collapsible>
-            </View>
-            <ButtonContainer>
-                <PopUpAddButton
-                    onOpen={() => {
-                        setShowExamsDetected(true);
-                        setCollapsedItems({
-                            glucose: true,
-                            hemogram: true,
-                            cholesterol: true,
-                            ast: true,
-                            alt: true
-                        });
-                    }}
-                />
-            </ButtonContainer>
 
-            {showExamsDetected ? (
+                <Button onPress={() => navigation.navigate("ExamCamera")}>
+                    <ButtonContainer>
+                        <AddIconStyled />
+                        <ButtonText>Adicionar</ButtonText>
+                    </ButtonContainer>
+                </Button>
+            </View>
+
+            {/* {showExamsDetected ? (
                 <ModalContainer>
                     <Header
                         text="Exames Detectados"
@@ -435,7 +432,7 @@ export default function ExamsHistory() {
                 </ModalContainer>
             ) : (
                 <></>
-            )}
+            )} */}
         </>
     );
 }

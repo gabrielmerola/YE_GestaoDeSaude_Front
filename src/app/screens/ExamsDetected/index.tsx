@@ -1,4 +1,3 @@
-import CancelAndSaveButton from "@components/CancelAndSaveButton";
 import { Header } from "@components/Header";
 import { View } from "@screens/ExamsDetected/styles";
 import React from "react";
@@ -11,7 +10,6 @@ export default function ExamsDetected({ navigation }: any) {
             <View>
                 <ListInteractableItem text="Hemograma" isButton={false} />
             </View>
-            <CancelAndSaveButton onPress={navigation.goBack()} />
         </>
     );
 }
