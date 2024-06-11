@@ -19,12 +19,13 @@ import {
     ViewContainer
 } from "@screens/ConsultationsHeld/styles";
 import { FlatList } from "native-base";
-import { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import MaskInput from "react-native-mask-input";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 import { ConsultationReponsiveType } from "@api/repositories/consultation_repository_http";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AxiosError } from "axios";
 
 interface Consultation {
     id: number;
@@ -61,6 +62,7 @@ export default function ConsultationsHeld({ navigation }: any) {
     const [getAllConst, setGetAllConst] = useState<ConsultationReponsiveType[]>(
         []
     );
+    const [showNewMedicines, setShowNewMedicines] = useState(false);
     const [getByIdConst, setGetByIdConst] = useState<any>({});
     const [postConst, setPostConst] = useState({});
 
@@ -74,10 +76,34 @@ export default function ConsultationsHeld({ navigation }: any) {
     async function getAll() {
         const response = await getAllConsultation();
         // console.log("response", response);
-        if (response !== undefined) {
+        if (response == "") {
+            setGetAllConst([]);
+        } else {
             setGetAllConst(response);
         }
     }
+
+    // const fetchConsultations = async () => {
+    //     try {
+    //         const response = await getAllConsultation();
+    //         if (response && Array.isArray(response)) {
+    //             const parsedConsultations = response.map((med: any) => ({
+    //                 id: data.id,
+    //                 especialty: data.especialty,
+    //                 date: data.date,
+    //                 hour: data.hour,
+    //                 resume: data.resume,
+    //                 return: data.return,
+    //                 reminder: data.reminder,
+    //             }));
+    //             setGetAllConst(parsedConsultations);
+    //         }
+    //     } catch (error: AxiosError | any) {
+    //         return console.log(
+    //             "Erro ao buscar medicamentos: " + error.response
+    //         );
+    //     }
+    // };
 
     async function getById(id: number) {
         const response = await getConsultationById(id);
@@ -115,6 +141,12 @@ export default function ConsultationsHeld({ navigation }: any) {
             setData(json);
         }, [])
     );
+
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         fetchConsultations();
+    //     }, [showNewMedicines])
+    // );
 
     return (
         <>

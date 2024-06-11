@@ -35,7 +35,7 @@ const CancelAndSaveButton = ({
 
     const handleSave = async () => {
         try {
-            navigation.goBack();
+            navigation.navigate("Medicines");
             return await createMedicine(medicineData);
         } catch (error) {
             console.log("Error creating medication: ", error);
@@ -62,10 +62,10 @@ const CancelAndSaveButton = ({
         <>
             {!isDelete && (
                 <Container>
-                    {/* <Button onPress={handleSave}>
+                    <Button onPress={() => navigation.goBack()}>
                         <ButtonText>Cancelar</ButtonText>
-                    </Button> */}
-                    <Button onPress={handleSave}>
+                    </Button>
+                    <Button onPress={onPress}>
                         <ButtonText>Salvar</ButtonText>
                     </Button>
                 </Container>
