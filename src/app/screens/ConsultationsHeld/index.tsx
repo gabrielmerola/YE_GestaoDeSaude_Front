@@ -116,12 +116,6 @@ export default function ConsultationsHeld({ navigation }: any) {
         }, [])
     );
 
-    // useEffect(() => {
-    //     const token = AsyncStorage.getItem("token");
-    //     if (!token) console.log("Token não encontrado");
-    //     getAll();
-    // }, []);
-
     return (
         <>
             <Header text="Consultas" isBackPress />

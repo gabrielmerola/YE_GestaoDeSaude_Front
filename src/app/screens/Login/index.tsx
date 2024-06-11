@@ -1,5 +1,4 @@
 // web 345087403908-m5c9l6bvrfd765o8vudebat8jb9pipnf.apps.googleusercontent.com
-// 
 
 import { Button } from "@components/Button";
 import { Footer } from "@components/Footer";
@@ -107,11 +106,16 @@ export default function Login({ navigation }: any) {
                     </TouchableOpacity>
                 </Box>
                 <Box alignItems="center">
-                    <TouchableOpacity>          
-                        <Image source={google} alt="Google" height={50} width={50} marginTop={10}/>
-                    </TouchableOpacity> 
-                    <Text fontSize={12} marginTop={5}>Conecte-se usando outra plataforma !</Text>
-                </Box> 
+                    <TouchableOpacity>
+                        <Image
+                            source={google}
+                            alt="Google"
+                            height={50}
+                            width={50}
+                            marginTop={10}
+                        />
+                    </TouchableOpacity>
+                </Box>
             </VStack>
             <Footer navigation={navigation} />
         </>
