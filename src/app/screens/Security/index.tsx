@@ -1,7 +1,8 @@
 import { Header } from "@components/Header";
 import { Input, VStack, useToast } from "native-base";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TouchableOpacity } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
     Text,
@@ -28,12 +29,23 @@ export default function Security() {
     const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
         useState(false);
     const toast = useToast();
+    const [storedEmail, setStoredEmail] = useState('');
     const restricion = [
         { id: "1", text: "No mínimo 6 caracteres" },
         { id: "2", text: "Ao menos uma letra maiúscula" },
         { id: "3", text: "Ao menos uma letra minúscula" },
         { id: "4", text: "Ao menos um caractere especial." }
     ];
+
+    useEffect(() => {
+        const getEmail = async () => {
+            const email = await AsyncStorage.getItem('userEmail');
+            if (email) {
+                setStoredEmail(email);
+            }
+        };
+        getEmail();
+    }, []);
 
     const validateInput = () => {
         const emailRegex = /\S+@\S+\.\S+/;
@@ -47,6 +59,16 @@ export default function Security() {
             return;
         }
 
+        if (email !== storedEmail) {
+            toast.show({
+                title: "Erro",
+                description: "O email inserido não corresponde ao email cadastrado.",
+                duration: 4000,
+                placement: "top"
+            });
+            return;
+        }
+        
         setIsValidationPassed(true);
         toast.show({
             title: "Sucesso",

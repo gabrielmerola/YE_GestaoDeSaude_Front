@@ -1,4 +1,4 @@
-// web 345087403908-m5c9l6bvrfd765o8vudebat8jb9pipnf.apps.googleusercontent.com
+
 
 import { Button } from "@components/Button";
 import { Footer } from "@components/Footer";
@@ -47,6 +47,7 @@ export default function Login({ navigation }: any) {
         if (result.token) {
             const { token } = result;
             await AsyncStorage.setItem("token", token);
+            await AsyncStorage.setItem("userEmail", email);
             // console.log(token);
             navigation.navigate("StackRoutes");
             toast.show({
