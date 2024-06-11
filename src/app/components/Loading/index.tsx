@@ -1,9 +1,21 @@
+import React from "react";
+
 import { Container, LoadIndicator } from "./styles";
 
-export function Loading() {
+type Props = {
+    app?: boolean;
+};
+
+export function Loading({ app }: Props) {
     return (
-        <Container>
-            <LoadIndicator color="red" />
-        </Container>
+        <>
+            {app ? (
+                <Container>
+                    <LoadIndicator />
+                </Container>
+            ) : (
+                <LoadIndicator />
+            )}
+        </>
     );
 }

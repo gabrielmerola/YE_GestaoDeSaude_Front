@@ -25,12 +25,12 @@ interface CancelAndSaveButtonProps {
 
 const CancelAndSaveButton = ({
     onPress,
-    medicineData,
     isDelete,
+    medicineData,
     idMedicine
 }: CancelAndSaveButtonProps) => {
     const [openModal, setOpenModal] = useState(false);
-    const { createMedicine, deleteMedicineByID } = useContext(MedicineContext);
+    const { deleteMedicineByID, createMedicine } = useContext(MedicineContext);
     const navigation = useNavigation();
 
     const handleSave = async () => {
