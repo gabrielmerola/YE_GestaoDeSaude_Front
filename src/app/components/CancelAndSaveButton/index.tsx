@@ -26,13 +26,21 @@ interface CancelAndSaveButtonProps {
 const CancelAndSaveButton = ({
     onPress,
     isDelete,
+    medicineData,
     idMedicine
 }: CancelAndSaveButtonProps) => {
     const [openModal, setOpenModal] = useState(false);
-    const { deleteMedicineByID } = useContext(MedicineContext);
+    const { deleteMedicineByID, createMedicine } = useContext(MedicineContext);
     const navigation = useNavigation();
 
-
+    const handleSave = async () => {
+        try {
+            navigation.goBack();
+            return await createMedicine(medicineData);
+        } catch (error) {
+            console.log("Error creating medication: ", error);
+        }
+    };
 
     const deleteMedicine = async (id: number | undefined) => {
         if (id === undefined) {
@@ -57,7 +65,7 @@ const CancelAndSaveButton = ({
                     {/* <Button onPress={handleSave}>
                         <ButtonText>Cancelar</ButtonText>
                     </Button> */}
-                    <Button onPress={onPress}>
+                    <Button onPress={handleSave}>
                         <ButtonText>Salvar</ButtonText>
                     </Button>
                 </Container>
