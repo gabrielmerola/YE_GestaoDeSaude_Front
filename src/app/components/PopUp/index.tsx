@@ -13,7 +13,6 @@ import {
 } from "@components/PopUp/styles";
 import { useToast } from "native-base";
 import { useState } from "react";
-import styled from "styled-components";
 
 export type popUpType = "PRESSURE" | "GLUCOSE" | "IMC";
 
