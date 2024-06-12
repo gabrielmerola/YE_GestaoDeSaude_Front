@@ -10,7 +10,7 @@ export const Container = styled.View`
 `;
 
 export const SubTitle = styled.Text`
-    margin-top: 50px;
+    margin-top: 32px;
     text-align: center;
     color: ${({ theme }) => theme.COLORS.WHITE};
     font-size: 32px;

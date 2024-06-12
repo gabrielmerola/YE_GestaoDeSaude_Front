@@ -1,12 +1,13 @@
 import React from "react";
 
-import { Container, LoadIndicator } from "./styles";
+import {Container, LoadIndicator, LoadIndicatorWhite} from "./styles";
 
 type Props = {
     app?: boolean;
+    card?: boolean;
 };
 
-export function Loading({ app }: Props) {
+export function Loading({ app, card}: Props) {
     return (
         <>
             {app ? (
@@ -14,7 +15,10 @@ export function Loading({ app }: Props) {
                     <LoadIndicator />
                 </Container>
             ) : (
-                <LoadIndicator />
+                card ?
+                <LoadIndicatorWhite />
+                    :
+                    <LoadIndicator/>
             )}
         </>
     );

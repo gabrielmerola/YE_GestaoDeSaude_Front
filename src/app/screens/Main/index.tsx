@@ -22,24 +22,35 @@ export default function Main({ navigation }: any) {
     const { getLatestImc } = useContext(ImcContext);
     const [imc, setImc] = useState({} as any);
 
+    const [isLoadingPressure, setIsLoadingPressure] = useState(true);
+    const [isLoadingGlucose, setIsLoadingGlucose] = useState(true);
+    const [isLoadingIMC, setIsLoadingIMC] = useState(true);
+
+
     async function getImc() {
+        setIsLoadingIMC(true);
         const response = await getLatestImc();
         if (response !== undefined) {
             setImc(response);
+            setIsLoadingIMC(false);
         }
     }
 
     async function getGlucose() {
+        setIsLoadingGlucose(true);
         const repsonse = await getGlucoseLatest();
         if (repsonse !== undefined) {
             setGlucose(repsonse);
+            setIsLoadingGlucose(false);
         }
     }
 
     async function getPressure() {
+        setIsLoadingPressure(true);
         const response = await getBloodPressureLatest();
         if (response !== undefined) {
             setPressure(response);
+            setIsLoadingPressure(false);
         }
     }
 
@@ -62,8 +73,9 @@ export default function Main({ navigation }: any) {
                         description="Gerencie as suas aferições de pressão"
                         subTitle="Ultima medida"
                         secDescription={pressure.measure ?? "Nenhuma medida"}
-                        subDescription={pressure.level ?? "- - - -"}
+                        subDescription={pressure.level ?? ""}
                         color="red"
+                        isLoading={isLoadingPressure}
                     />
                 </TouchableOpacity>
 
@@ -75,8 +87,9 @@ export default function Main({ navigation }: any) {
                         description="Gerencie as suas aferições de glicemia"
                         subTitle="Ultima medida"
                         secDescription={glucose.measure ?? "Nenhuma medida"}
-                        subDescription={glucose.level ?? "- - - -"}
+                        subDescription={glucose.level ?? ""}
                         color="blue"
+                        isLoading={isLoadingGlucose}
                     />
                 </TouchableOpacity>
 
@@ -86,8 +99,9 @@ export default function Main({ navigation }: any) {
                         description="Verifique seu IMC com base na sua altura e peso"
                         subTitle="Ultima medida"
                         secDescription={imc.imc ?? "Nenhuma medida"}
-                        subDescription={imc.level ?? "- - - -"}
+                        subDescription={imc.level ?? ""}
                         color="green"
+                        isLoading={isLoadingIMC}
                     />
                 </TouchableOpacity>
             </Container>

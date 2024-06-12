@@ -13,3 +13,9 @@ export const LoadIndicator = styled.ActivityIndicator.attrs(({ theme }) => ({
 }))`
     margin-top: 32px;
 `;
+
+export const LoadIndicatorWhite = styled.ActivityIndicator.attrs(({ theme }) => ({
+    color: theme.COLORS.WHITE,
+    size: "large"
+}))`
+`;

@@ -7,14 +7,12 @@ import { MedicineContext } from "@context/medicine_context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ButtonOut, ButtonTextWhiteOut } from "@screens/Perfil/styles";
 import { VStack, Text, ScrollView, Divider } from "native-base";
-import { useCallback, useContext, useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import {  useContext, useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import Avatar from "../Camera/Avatar";
 import UploadModal from "../Camera/UploadModal";
-import axios from "axios";
-import { useFocusEffect } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
+import {Loading} from "@components/Loading";
 
 // for uploading image to backend
 // const FormData = global.FormData;
@@ -26,6 +24,7 @@ export default function Perfil({ navigation }: any) {
     const { getAllMedicines } = useContext(MedicineContext);
     const [modalVisible, setModalVisible] = useState(false);
     const [image, setImage] = useState();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         // get data from API
@@ -92,10 +91,12 @@ export default function Perfil({ navigation }: any) {
     }
 
     async function getAll() {
+        setIsLoading(true);
         const response = await getAllMedicines();
         if (response) {
             setMedicines(response);
         }
+        setIsLoading(false);
     }
 
     useEffect(() => {
@@ -140,45 +141,51 @@ export default function Perfil({ navigation }: any) {
             <Toast />
             <VStack flex={1} alignItems="center">
                 <Header text="Seu Perfil" isBackPress />
-                <Avatar
-                    onButtonPress={() => setModalVisible(true)}
-                    uri={image}
-                />
+                {isLoading ? (
+                    <Loading/>
+                ) : (
+                    <>
+                        <Avatar
+                            onButtonPress={() => setModalVisible(true)}
+                            uri={image}
+                        />
 
-                <UploadModal
-                    modalVisible={modalVisible}
-                    onBackPress={() => {
-                        setModalVisible(false);
-                    }}
-                    onCameraPress={() => uploadImage("")}
-                    onGalleryPress={() => uploadImage("gallery")}
-                    onRemovePress={() => removeImage()}
-                />
+                        <UploadModal
+                            modalVisible={modalVisible}
+                            onBackPress={() => {
+                                setModalVisible(false);
+                            }}
+                            onCameraPress={() => uploadImage("")}
+                            onGalleryPress={() => uploadImage("gallery")}
+                            onRemovePress={() => removeImage()}
+                        />
 
-                <Title mt={10}>Informações Pessoais</Title>
-                <Text fontSize="lg" mt={5} mb={1}>
-                    {data.name}
-                </Text>
-                <Text fontSize="lg" mb={1}>
-                    {data.email}
-                </Text>
-                <Text fontSize="lg">{formatPhone(data?.phone)}</Text>
+                        <Title mt={10}>Informações Pessoais</Title>
+                        <Text fontSize="lg" mt={5} mb={1}>
+                            {data.name}
+                        </Text>
+                        <Text fontSize="lg" mb={1}>
+                            {data.email}
+                        </Text>
+                        <Text fontSize="lg">{formatPhone(data?.phone)}</Text>
 
-                <Divider mt={7} />
+                        <Divider mt={7} />
 
-                <Title mt={7} mb={5}>
-                    Medicamentos
-                </Title>
-                {med.map((item: any) => {
-                    return <Text fontSize="md">{item.name}</Text>;
-                })}
-                <Divider mt={7} mb={7} />
+                        <Title mt={7} mb={5}>
+                            Medicamentos
+                        </Title>
+                        {med.map((item: any) => {
+                            return <Text fontSize="md">{item.name}</Text>;
+                        })}
+                        <Divider mt={7} mb={7} />
 
-                <Modal />
+                        <Modal />
 
-                <ButtonOut onPress={logout}>
-                    <ButtonTextWhiteOut>Sair</ButtonTextWhiteOut>
-                </ButtonOut>
+                        <ButtonOut onPress={logout}>
+                            <ButtonTextWhiteOut>Sair</ButtonTextWhiteOut>
+                        </ButtonOut>
+                    </>
+                )}
             </VStack>
         </ScrollView>
     );
