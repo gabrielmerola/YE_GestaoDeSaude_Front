@@ -104,13 +104,13 @@ export default function Register({ navigation }: any) {
                             label={input.label}
                             placeholder={input.placeholder}
                             key={input.id}
-                            secureTextEntry={input.secureTextEntry || false}
                             onChangeText={(text) =>
                                 updateData(input.name, text)
                             }
                             value={
                                 data[input.name as keyof FormDataProps] || ""
                             }
+                            view={input.secureTextEntry}
                         />
                     ))}
                     <View mt={3}>
