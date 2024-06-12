@@ -1,7 +1,7 @@
 import { InputField } from "@components/InputField";
 import styled from "styled-components/native";
 
-export type sizeType = "LARGE" | "SMALL";
+export type sizeType = "LARGE" | "SMALL" | "DATE";
 
 type InputProps = {
     sizeType: sizeType | undefined;
@@ -44,7 +44,8 @@ export const ButtonView = styled.View`
 `;
 
 export const InputView = styled.View<InputProps>`
-    width: ${({ sizeType }) => (sizeType === "LARGE" ? "75%" : "60%")};
+    width: ${({ sizeType }) => (sizeType === "LARGE" ? "75%" : sizeType === "SMALL" ? "60%" : "40%"
+    )};
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
