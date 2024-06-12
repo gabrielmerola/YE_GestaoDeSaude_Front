@@ -83,7 +83,7 @@ export default function Login({ navigation }: any) {
                         placeholder="Insira sua senha"
                         value={password}
                         onChangeText={setPassword}
-                        secureTextEntry
+                        view
                     />
                 </Box>
 
