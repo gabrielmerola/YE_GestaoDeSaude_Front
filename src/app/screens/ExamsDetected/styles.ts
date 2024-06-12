@@ -5,3 +5,7 @@ export const View = styled.View`
     padding: 16px;
     background-color: white;
 `;
+
+export const FlatListStyled = styled.FlatList`
+    max-height: 256px;
+`;

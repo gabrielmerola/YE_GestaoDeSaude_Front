@@ -1,15 +1,15 @@
 import { Header } from "@components/Header";
+import {Loading} from "@components/Loading";
 import { PopUpAddButton } from "@components/PopUpAddButton";
 import { Table } from "@components/Table";
 import {
     BloodPressureContext,
     PressureType
 } from "@context/blood-pressure-context";
+import { Container, TextContainer, Txt } from "@screens/Pressure/styles";
 import { FlatList } from "native-base";
 import React, { useContext, useEffect, useState } from "react";
 import PopUp from "src/app/components/PopUp";
-import {Loading} from "@components/Loading";
-import {Container, TextContainer, Txt} from "@screens/Pressure/styles";
 import {Image} from "react-native";
 import Logo from "../../../../assets/logo-verde.png";
 
