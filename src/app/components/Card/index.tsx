@@ -8,6 +8,7 @@ import {
     Txt,
     TxtSubTitle
 } from "./styles";
+import {Loading} from "@components/Loading";
 
 interface CardProps {
     title: string;
@@ -16,6 +17,7 @@ interface CardProps {
     secDescription: string;
     subDescription: string;
     color: string;
+    isLoading: boolean;
 }
 
 export function Card({
@@ -24,7 +26,8 @@ export function Card({
     subTitle,
     secDescription,
     subDescription,
-    color
+    color,
+                         isLoading
 }: CardProps) {
     return (
         <Container $color={color}>
@@ -34,9 +37,15 @@ export function Card({
             </SecContainer>
             <ThirdContainer>
                 <TxtSubTitle>{subTitle}</TxtSubTitle>
+
                 <View>
-                    <BoldText>{secDescription}</BoldText>
-                    <BoldText>{subDescription}</BoldText>
+                    {isLoading ?
+                        <Loading card={true}/> :
+                        <>
+                            <BoldText>{secDescription}</BoldText>
+                            <BoldText>{subDescription}</BoldText>
+                        </>
+                    }
                 </View>
             </ThirdContainer>
         </Container>
