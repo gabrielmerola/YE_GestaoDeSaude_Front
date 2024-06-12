@@ -18,6 +18,7 @@ import React, { useContext, useState } from "react";
 import { ActivityIndicator } from "react-native";
 import Toast from "react-native-toast-message";
 import ListMedicineItem from "src/app/components/ListMedicineItem";
+import {Loading} from "@components/Loading";
 
 export default function Medicines() {
     const [showNewMedicines, setShowNewMedicines] = useState(false);
@@ -44,6 +45,7 @@ export default function Medicines() {
     };
 
     const fetchMedicines = async () => {
+        setIsLoading(true);
         try {
             const response = await getAllMedicines();
             if (response && Array.isArray(response)) {
@@ -110,7 +112,7 @@ export default function Medicines() {
             <Header text="Medicamentos" isBackPress />
             <View>
                 {isLoading && (
-                    <ActivityIndicator size="large" color="#0000ff" />
+                    <Loading/>
                 )}
                 <FlatList
                     data={medicines}
