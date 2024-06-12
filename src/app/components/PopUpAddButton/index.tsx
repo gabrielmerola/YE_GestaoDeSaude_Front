@@ -11,7 +11,7 @@ import {
 import { TouchableOpacity } from "react-native";
 
 type Props = {
-    onOpen: () => void;
+    onOpen?: () => void;
     onDelete?: () => void;
 };
 

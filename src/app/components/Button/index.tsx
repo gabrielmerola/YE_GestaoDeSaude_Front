@@ -5,16 +5,18 @@ interface ButtonProps {
     autoSize?: boolean;
     color?: string;
     onPress?: () => void;
+    style?: any;
 }
 
 export function Button({
     children,
     autoSize = false,
     color,
+    style,
     ...rest
 }: ButtonProps) {
     return (
-        <StyledButton autoSize={autoSize} color={color} {...rest}>
+        <StyledButton style={style} autoSize={autoSize} color={color} {...rest}>
             <ButtonText>{children}</ButtonText>
         </StyledButton>
     );

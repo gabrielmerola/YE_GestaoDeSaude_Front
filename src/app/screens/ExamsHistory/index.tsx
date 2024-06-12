@@ -1,14 +1,14 @@
-import CancelAndSaveButton from "@components/CancelAndSaveButton";
 import { Header } from "@components/Header";
-import { PopUpAddButton } from "@components/PopUpAddButton";
 import { Table } from "@components/Table";
 import {
-    View,
+    Button,
     ButtonContainer,
-    ModalContainer,
+    AddIconStyled,
+    ButtonText,
     FlatListStyled
 } from "@screens/ExamsHistory/styles";
-import React, { useState } from "react";
+import { useState } from "react";
+import { FlatList, View } from "react-native";
 import Collapsible from "react-native-collapsible";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
 
@@ -21,10 +21,7 @@ type Row = {
     [key: string]: string;
 };
 
-// TODO: fazer o map que acabe com os códigos repetidos
-export default function ExamsHistory() {
-    const [showExamsDetected, setShowExamsDetected] = useState(false);
-
+export default function ExamsHistory({ navigation }: any) {
     type ItemName = "glucose" | "hemogram" | "cholesterol" | "ast" | "alt";
 
     const [collapsedItems, setCollapsedItems] = useState({
@@ -57,385 +54,181 @@ export default function ExamsHistory() {
                     })
                 }
             />
-            <View>
-                <ListInteractableItem
-                    text="Hemograma"
-                    downChevron
-                    changeIcon={collapsedItems.hemogram}
-                    isButton
-                    modalFunction={() => toggleCollapsible("hemogram")}
-                />
+            <View style={{justifyContent: 'space-between'}}>
+                <FlatList
+                    style={{height: '45%'}}
+                    data={[1]}
+                    renderItem={() => {
+                        return (
+                            <>
+                            <ListInteractableItem
+                                text="Hemograma"
+                                downChevron
+                                changeIcon={collapsedItems.hemogram}
+                                isButton
+                                modalFunction={() => toggleCollapsible("hemogram")}
+                                />
+                            <Collapsible collapsed={collapsedItems.hemogram} align="center">
+                                <FlatListStyled
+                                    data={[
+                                        {
+                                            date: "17/02/2023",
+                                            especiality: "4.500.000/mm³"
+                                        }
+                                    ]}
+                                    keyExtractor={(item) => {
+                                        const examItem = item as Exams;
+                                        return examItem.date;
+                                    }}
+                                    renderItem={({ item }) => {
+                                        const examItem = item as Exams;
+                                        const row: Row = {
+                                            date: examItem.date,
+                                            especiality: examItem.especiality
+                                        };
+                                        return <Table rows={[row]} />;
+                                    }}
+                                />
+                            </Collapsible>
+                            <ListInteractableItem
+                                text="Colesterol Total"
+                                downChevron
+                                changeIcon={collapsedItems.cholesterol}
+                                isButton
+                                modalFunction={() => toggleCollapsible("cholesterol")}
+                            />
 
-                <Collapsible collapsed={collapsedItems.hemogram} align="center">
-                    <FlatListStyled
-                        data={[
-                            {
-                                date: "17/02/2023",
-                                especiality: "4.500.000/mm³"
-                            }
-                        ]}
-                        keyExtractor={(item) => {
-                            const examItem = item as Exams;
-                            return examItem.date;
-                        }}
-                        renderItem={({ item }) => {
-                            const examItem = item as Exams;
-                            const row: Row = {
-                                date: examItem.date,
-                                especiality: examItem.especiality
-                            };
-                            return <Table rows={[row]} />;
-                        }}
-                    />
-                </Collapsible>
+                            <Collapsible
+                                collapsed={collapsedItems.cholesterol}
+                                align="center"
+                            >
+                                <FlatListStyled
+                                    data={[
+                                        {
+                                            date: "17/02/2023",
+                                            especiality: "25 U/L"
+                                        }
+                                    ]}
+                                    keyExtractor={(item) => {
+                                        const examItem = item as Exams;
+                                        return examItem.date;
+                                    }}
+                                    renderItem={({ item }) => {
+                                        const examItem = item as Exams;
+                                        const row: Row = {
+                                            date: examItem.date,
+                                            especiality: examItem.especiality
+                                        };
+                                        return <Table rows={[row]} />;
+                                    }}
+                                />
+                            </Collapsible>
 
-                <ListInteractableItem
-                    text="Colesterol Total"
-                    downChevron
-                    changeIcon={collapsedItems.cholesterol}
-                    isButton
-                    modalFunction={() => toggleCollapsible("cholesterol")}
-                />
+                            <ListInteractableItem
+                                text="Glicose"
+                                downChevron
+                                changeIcon={collapsedItems.glucose}
+                                isButton
+                                modalFunction={() => toggleCollapsible("glucose")}
+                            />
 
-                <Collapsible
-                    collapsed={collapsedItems.cholesterol}
-                    align="center"
-                >
-                    <FlatListStyled
-                        data={[
-                            {
-                                date: "17/02/2023",
-                                especiality: "25 U/L"
-                            }
-                        ]}
-                        keyExtractor={(item) => {
-                            const examItem = item as Exams;
-                            return examItem.date;
-                        }}
-                        renderItem={({ item }) => {
-                            const examItem = item as Exams;
-                            const row: Row = {
-                                date: examItem.date,
-                                especiality: examItem.especiality
-                            };
-                            return <Table rows={[row]} />;
-                        }}
-                    />
-                </Collapsible>
+                            <Collapsible collapsed={collapsedItems.glucose} align="center">
+                                <FlatListStyled
+                                    data={[
+                                        {
+                                            date: "17/02/2023",
+                                            especiality: "79 mg/dl"
+                                        }
+                                    ]}
+                                    keyExtractor={(item) => {
+                                        const examItem = item as Exams;
+                                        return examItem.date;
+                                    }}
+                                    renderItem={({ item }) => {
+                                        const examItem = item as Exams;
+                                        const row: Row = {
+                                            date: examItem.date,
+                                            especiality: examItem.especiality
+                                        };
+                                        return <Table rows={[row]} />;
+                                    }}
+                                />
+                            </Collapsible>
 
-                <ListInteractableItem
-                    text="Glicose"
-                    downChevron
-                    changeIcon={collapsedItems.glucose}
-                    isButton
-                    modalFunction={() => toggleCollapsible("glucose")}
-                />
+                            <ListInteractableItem
+                                text="TGO"
+                                downChevron
+                                changeIcon={collapsedItems.ast}
+                                isButton
+                                modalFunction={() => toggleCollapsible("ast")}
+                            />
 
-                <Collapsible collapsed={collapsedItems.glucose} align="center">
-                    <FlatListStyled
-                        data={[
-                            {
-                                date: "17/02/2023",
-                                especiality: "79 mg/dl"
-                            }
-                        ]}
-                        keyExtractor={(item) => {
-                            const examItem = item as Exams;
-                            return examItem.date;
-                        }}
-                        renderItem={({ item }) => {
-                            const examItem = item as Exams;
-                            const row: Row = {
-                                date: examItem.date,
-                                especiality: examItem.especiality
-                            };
-                            return <Table rows={[row]} />;
-                        }}
-                    />
-                </Collapsible>
+                            <Collapsible collapsed={collapsedItems.ast} align="center">
+                                <FlatListStyled
+                                    data={[
+                                        {
+                                            date: "17/02/2023",
+                                            especiality: "25 U/L"
+                                        }
+                                    ]}
+                                    keyExtractor={(item) => {
+                                        const examItem = item as Exams;
+                                        return examItem.date;
+                                    }}
+                                    renderItem={({ item }) => {
+                                        const examItem = item as Exams;
+                                        const row: Row = {
+                                            date: examItem.date,
+                                            especiality: examItem.especiality
+                                        };
+                                        return <Table rows={[row]} />;
+                                    }}
+                                />
+                            </Collapsible>
 
-                <ListInteractableItem
-                    text="TGO"
-                    downChevron
-                    changeIcon={collapsedItems.ast}
-                    isButton
-                    modalFunction={() => toggleCollapsible("ast")}
-                />
+                            <ListInteractableItem
+                                text="TGP"
+                                downChevron
+                                changeIcon={collapsedItems.alt}
+                                isButton
+                                modalFunction={() => toggleCollapsible("alt")}
+                            />
 
-                <Collapsible collapsed={collapsedItems.ast} align="center">
-                    <FlatListStyled
-                        data={[
-                            {
-                                date: "17/02/2023",
-                                especiality: "25 U/L"
-                            }
-                        ]}
-                        keyExtractor={(item) => {
-                            const examItem = item as Exams;
-                            return examItem.date;
-                        }}
-                        renderItem={({ item }) => {
-                            const examItem = item as Exams;
-                            const row: Row = {
-                                date: examItem.date,
-                                especiality: examItem.especiality
-                            };
-                            return <Table rows={[row]} />;
-                        }}
-                    />
-                </Collapsible>
-
-                <ListInteractableItem
-                    text="TGP"
-                    downChevron
-                    changeIcon={collapsedItems.alt}
-                    isButton
-                    modalFunction={() => toggleCollapsible("alt")}
-                />
-
-                <Collapsible collapsed={collapsedItems.alt} align="center">
-                    <FlatListStyled
-                        data={[
-                            {
-                                date: "17/02/2023",
-                                especiality: "28 U/L"
-                            }
-                        ]}
-                        keyExtractor={(item) => {
-                            const examItem = item as Exams;
-                            return examItem.date;
-                        }}
-                        renderItem={({ item }) => {
-                            const examItem = item as Exams;
-                            const row: Row = {
-                                date: examItem.date,
-                                especiality: examItem.especiality
-                            };
-                            return <Table rows={[row]} />;
-                        }}
-                    />
-                </Collapsible>
-            </View>
-            <ButtonContainer>
-                <PopUpAddButton
-                    onOpen={() => {
-                        setShowExamsDetected(true);
-                        setCollapsedItems({
-                            glucose: true,
-                            hemogram: true,
-                            cholesterol: true,
-                            ast: true,
-                            alt: true
-                        });
+                            <Collapsible collapsed={collapsedItems.alt} align="center">
+                                <FlatListStyled
+                                    data={[
+                                        {
+                                            date: "17/02/2023",
+                                            especiality: "28 U/L"
+                                        }
+                                    ]}
+                                    keyExtractor={(item) => {
+                                        const examItem = item as Exams;
+                                        return examItem.date;
+                                    }}
+                                    renderItem={({ item }) => {
+                                        const examItem = item as Exams;
+                                        const row: Row = {
+                                            date: examItem.date,
+                                            especiality: examItem.especiality
+                                        };
+                                        return <Table rows={[row]} />;
+                                    }}
+                                />
+                            </Collapsible>
+                            </>
+                        );
+                    
                     }}
                 />
-            </ButtonContainer>
-
-            {showExamsDetected ? (
-                <ModalContainer>
-                    <Header
-                        text="Exames Detectados"
-                        isModal
-                        onModalClose={() => {
-                            setShowExamsDetected(false);
-                            setCollapsedItems({
-                                glucose: true,
-                                hemogram: true,
-                                cholesterol: true,
-                                ast: true,
-                                alt: true
-                            });
-                        }}
-                    />
-                    <View>
-                        <ListInteractableItem
-                            text="Hemograma"
-                            downChevron
-                            changeIcon={collapsedItems.hemogram}
-                            isButton
-                            modalFunction={() => toggleCollapsible("hemogram")}
-                        />
-
-                        <Collapsible
-                            collapsed={collapsedItems.hemogram}
-                            align="center"
-                        >
-                            <FlatListStyled
-                                data={[
-                                    {
-                                        date: "17/02/2023",
-                                        especiality: "4.500.000/mm³"
-                                    }
-                                ]}
-                                keyExtractor={(item) => {
-                                    const examItem = item as Exams;
-                                    return examItem.date;
-                                }}
-                                renderItem={({ item }) => {
-                                    const examItem = item as Exams;
-                                    const row: Row = {
-                                        date: examItem.date,
-                                        especiality: examItem.especiality
-                                    };
-                                    return <Table rows={[row]} />;
-                                }}
-                            />
-                        </Collapsible>
-
-                        <ListInteractableItem
-                            text="Colesterol Total"
-                            downChevron
-                            changeIcon={collapsedItems.cholesterol}
-                            isButton
-                            modalFunction={() =>
-                                toggleCollapsible("cholesterol")
-                            }
-                        />
-
-                        <Collapsible
-                            collapsed={collapsedItems.cholesterol}
-                            align="center"
-                        >
-                            <FlatListStyled
-                                data={[
-                                    {
-                                        date: "17/02/2023",
-                                        especiality: "25 U/L"
-                                    }
-                                ]}
-                                keyExtractor={(item) => {
-                                    const examItem = item as Exams;
-                                    return examItem.date;
-                                }}
-                                renderItem={({ item }) => {
-                                    const examItem = item as Exams;
-                                    const row: Row = {
-                                        date: examItem.date,
-                                        especiality: examItem.especiality
-                                    };
-                                    return <Table rows={[row]} />;
-                                }}
-                            />
-                        </Collapsible>
-
-                        <ListInteractableItem
-                            text="Glicose"
-                            downChevron
-                            changeIcon={collapsedItems.glucose}
-                            isButton
-                            modalFunction={() => toggleCollapsible("glucose")}
-                        />
-
-                        <Collapsible
-                            collapsed={collapsedItems.glucose}
-                            align="center"
-                        >
-                            <FlatListStyled
-                                data={[
-                                    {
-                                        date: "17/02/2023",
-                                        especiality: "79 mg/dl"
-                                    }
-                                ]}
-                                keyExtractor={(item) => {
-                                    const examItem = item as Exams;
-                                    return examItem.date;
-                                }}
-                                renderItem={({ item }) => {
-                                    const examItem = item as Exams;
-                                    const row: Row = {
-                                        date: examItem.date,
-                                        especiality: examItem.especiality
-                                    };
-                                    return <Table rows={[row]} />;
-                                }}
-                            />
-                        </Collapsible>
-
-                        <ListInteractableItem
-                            text="TGO"
-                            downChevron
-                            changeIcon={collapsedItems.ast}
-                            isButton
-                            modalFunction={() => toggleCollapsible("ast")}
-                        />
-
-                        <Collapsible
-                            collapsed={collapsedItems.ast}
-                            align="center"
-                        >
-                            <FlatListStyled
-                                data={[
-                                    {
-                                        date: "17/02/2023",
-                                        especiality: "25 U/L"
-                                    }
-                                ]}
-                                keyExtractor={(item) => {
-                                    const examItem = item as Exams;
-                                    return examItem.date;
-                                }}
-                                renderItem={({ item }) => {
-                                    const examItem = item as Exams;
-                                    const row: Row = {
-                                        date: examItem.date,
-                                        especiality: examItem.especiality
-                                    };
-                                    return <Table rows={[row]} />;
-                                }}
-                            />
-                        </Collapsible>
-
-                        <ListInteractableItem
-                            text="TGP"
-                            downChevron
-                            changeIcon={collapsedItems.alt}
-                            isButton
-                            modalFunction={() => toggleCollapsible("alt")}
-                        />
-
-                        <Collapsible
-                            collapsed={collapsedItems.alt}
-                            align="center"
-                        >
-                            <FlatListStyled
-                                data={[
-                                    {
-                                        date: "17/02/2023",
-                                        especiality: "28 U/L"
-                                    }
-                                ]}
-                                keyExtractor={(item) => {
-                                    const examItem = item as Exams;
-                                    return examItem.date;
-                                }}
-                                renderItem={({ item }) => {
-                                    const examItem = item as Exams;
-                                    const row: Row = {
-                                        date: examItem.date,
-                                        especiality: examItem.especiality
-                                    };
-                                    return <Table rows={[row]} />;
-                                }}
-                            />
-                        </Collapsible>
-                    </View>
-                    <CancelAndSaveButton
-                        onPress={() => {
-                            setShowExamsDetected(false);
-                            setCollapsedItems({
-                                glucose: true,
-                                hemogram: true,
-                                cholesterol: true,
-                                ast: true,
-                                alt: true
-                            });
-                        }}
-                    />
-                </ModalContainer>
-            ) : (
-                <></>
-            )}
+                
+                <Button onPress={() => navigation.navigate("ExamCamera")}>
+                    <ButtonContainer>
+                        <AddIconStyled />
+                        <ButtonText>Adicionar</ButtonText>
+                    </ButtonContainer>
+                </Button>
+            </View>
         </>
     );
 }

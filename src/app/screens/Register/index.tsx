@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import MaskInput from "react-native-mask-input";
 import { FormDataProps } from "src/app/api/repositories/auth_repository_http";
 import { AuthContext } from "src/app/context/auth_context";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Logo from "../../../../assets/logo.png";
 
