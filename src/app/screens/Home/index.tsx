@@ -14,7 +14,7 @@ export default function Home({ navigation }: any) {
             // AsyncStorage.removeItem("token");
             navigation.navigate("StackRoutes");
         } else {
-            navigation.navigate("Login");
+            navigation.navigate("Home");
         }
     }
 
@@ -33,7 +33,7 @@ export default function Home({ navigation }: any) {
                 lembretes personalizados para seus medicamentos!
             </Txt>
 
-            <Button onPress={handleGoToLogin}>
+            <Button onPress={() => navigation.navigate("Login")}>
                 <ButtonText>Login</ButtonText>
             </Button>
 

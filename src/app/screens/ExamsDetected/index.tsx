@@ -1,6 +1,12 @@
 import { Header } from "@components/Header";
 import { Table } from "@components/Table";
-import { FlatListStyled, View } from "@screens/ExamsDetected/styles";
+import {
+    Button,
+    ButtonContainer,
+    ButtonText,
+    FlatListStyled,
+    View
+} from "@screens/ExamsDetected/styles";
 import React, { useState } from "react";
 import Collapsible from "react-native-collapsible";
 import ListInteractableItem from "src/app/components/ListInteractableItem";
@@ -97,6 +103,11 @@ export default function ExamsDetected({ navigation }: any) {
                         }}
                     />
                 </Collapsible>
+                <Button onPress={() => navigation.navigate("ExamsHistory")}>
+                    <ButtonContainer>
+                        <ButtonText>Salvar</ButtonText>
+                    </ButtonContainer>
+                </Button>
             </View>
         </>
     );
