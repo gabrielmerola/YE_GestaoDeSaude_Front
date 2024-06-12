@@ -13,7 +13,6 @@ export function Title({ children, ...rest }: TitleProps) {
             fontWeight="bold"
             color={theme.COLORS.GREEN_700}
             textAlign="center"
-            marginTop={5}
             {...rest}
         >
             {children}
