@@ -6,9 +6,10 @@ import { InputField } from "@components/InputField";
 import { Title } from "@components/Title/Title";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { validateToken } from "@utils/validation";
-import { VStack, Image, Text, Box, Link, useToast } from "native-base";
+import { VStack, Text, Box, Link, useToast, Image } from "native-base";
 import { useContext, useEffect, useState } from "react";
-import { TouchableOpacity } from "react-native";
+import { Pressable, TouchableOpacity } from "react-native";
+import { ImageVisability, BoxPassword } from "./styles";
 import { AuthContext } from "src/app/context/auth_context";
 
 import Logo from "../../../../assets/logo.png";
@@ -18,7 +19,9 @@ export default function Login({ navigation }: any) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const toast = useToast();
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const { login } = useContext(AuthContext);
+    const [show, setShow] = useState(false);
 
     useEffect(() => {
         async function loginVerify() {
@@ -78,13 +81,16 @@ export default function Login({ navigation }: any) {
                         value={email}
                         onChangeText={setEmail}
                     />
-                    <InputField
-                        label="Senha"
-                        placeholder="Insira sua senha"
-                        value={password}
-                        onChangeText={setPassword}
-                        secureTextEntry
-                    />
+                    <BoxPassword>
+                        <InputField
+                            label="Senha"
+                            placeholder="Insira sua senha"
+                            value={password}
+                            onChangeText={setPassword}
+                            secureTextEntry={!isPasswordVisible}
+                            view
+                        />
+                    </BoxPassword>
                 </Box>
 
                 <Button onPress={SignIn}>Entrar</Button>
