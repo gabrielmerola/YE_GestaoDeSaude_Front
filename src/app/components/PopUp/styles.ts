@@ -28,7 +28,7 @@ export const ModalContainer = styled.View`
     background-color: rgba(0, 0, 0, 0.5);
 `;
 export const PopUpContainer = styled.View`
-    height: 47%;
+    height: 400px;
     background-color: ${({ theme }) => theme.COLORS.GRAY_300};
     border-radius: 8px;
     padding: 20px 16px;
